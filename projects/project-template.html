@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Pursuit of Happyness — Angela Valenti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+
+    /* ── PROJECT NAV ── */
+    .nav-back {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mid); transition: color 0.2s;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-back:hover { color: var(--black); }
+    .nav-back::before {
+      content: '←';
+      font-size: 0.9rem; font-family: var(--font-body);
+      transition: transform 0.2s;
+    }
+    .nav-back:hover::before { transform: translateX(-3px); }
+
+    /* ── PROJECT HERO ── */
+    .project-hero {
+      background: #0e0e0e;
+      padding: 7rem 3rem 5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .project-hero-inner { max-width: 900px; margin: 0 auto; }
+    .project-hero-tag {
+      display: inline-block;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+      border: 1px solid rgba(27,107,107,0.3);
+      padding: 0.25rem 0.7rem;
+      margin-bottom: 2.5rem;
+    }
+    .project-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 9vw, 9rem);
+      font-weight: 300; line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+    }
+    .project-hero-title em {
+      font-style: italic;
+      color: rgba(248,248,244,0.45);
+    }
+    .project-hero-desc {
+      font-size: 1rem; color: rgba(255,255,255,0.4);
+      line-height: 1.75; max-width: 520px;
+      font-weight: 300;
+    }
+
+    /* ── STAT BAR ── */
+    .project-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-stat {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid var(--rule);
+      background: var(--white);
+    }
+    .project-stat:last-child { border-right: none; background: var(--accent); }
+    .project-stat-val {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--black); line-height: 1.1; margin-bottom: 0.4rem;
+    }
+    .project-stat-label {
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mid);
+    }
+    .project-stat:last-child .project-stat-label { color: rgba(0,0,0,0.5); }
+
+    /* ── CONTENT SECTIONS ── */
+    .project-section {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-section-inner {
+      max-width: 840px; margin: 0 auto;
+      display: grid; grid-template-columns: 160px 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .project-kicker {
+      font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent-dark); font-weight: 600; line-height: 1.7;
+      padding-top: 0.2rem;
+      position: sticky; top: calc(var(--nav-h) + 2rem);
+    }
+    .project-body {
+      font-size: 0.92rem; color: var(--mid);
+      line-height: 1.9;
+    }
+    .project-body p + p { margin-top: 1.25rem; }
+
+    /* ── TECH GRID ── */
+    .project-tech-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .project-tech-item {}
+    .project-tech-val {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 400;
+      color: var(--black); margin-bottom: 0.25rem;
+    }
+    .project-tech-label {
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mid);
+    }
+    .project-tech-divider {
+      grid-column: 1 / -1;
+      height: 1px; background: var(--rule);
+      margin: 0.5rem 0;
+    }
+
+    /* ── LAUNCH CTA ── */
+    .project-launch-section {
+      padding: 6rem 3rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-launch-note {
+      font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 0.5rem;
+    }
+    .project-launch-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 1.4rem 4rem;
+      background: var(--accent); color: var(--black);
+      font-family: var(--font-body);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .project-launch-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .project-hero { padding: 5rem 1.5rem 3.5rem; }
+
+      .project-stats { grid-template-columns: repeat(2, 1fr); }
+      .project-stat { border-bottom: 1px solid var(--rule); }
+      .project-stat:nth-child(2) { border-right: none; }
+      .project-stat:nth-child(4) { border-right: none; }
+      .project-stat:nth-child(3),
+      .project-stat:nth-child(4) { border-bottom: none; }
+
+      .project-section { padding: 3rem 1.5rem; }
+      .project-section-inner { grid-template-columns: 1fr; gap: 1rem; }
+      .project-kicker { position: static; }
+
+      .project-tech-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .project-launch-section { padding: 4rem 1.5rem; }
+      .project-launch-btn { padding: 1.2rem 2.5rem; width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 600px) {
+      .project-tech-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <a class="nav-back" href="../index.html#portfolio">Back to Portfolio</a>
+    <a class="nav-logo" href="../index.html">Angela <em>Valenti</em></a>
+  </nav>
+
+  <main>
+
+    <!-- ══ HERO ══ -->
+    <section class="project-hero">
+      <div class="project-hero-inner">
+        <span class="project-hero-tag">E-Learning · ESL</span>
+        <h1 class="project-hero-title">The Pursuit<br><em>of Happyness</em></h1>
+        <p class="project-hero-desc">A differentiated interactive lesson for secondary ELLs, built across three WIDA-aligned proficiency tiers.</p>
+        <a class="project-launch-btn" href="lessons/pursuit-of-happyness.html" target="_blank" rel="noopener noreferrer" style="margin-top: 2.5rem;">Launch Course →</a>
+      </div>
+    </section>
+
+    <!-- ══ STAT BAR ══ -->
+    <div class="project-stats">
+      <div class="project-stat">
+        <div class="project-stat-val">HTML/CSS/JS</div>
+        <div class="project-stat-label">Format</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">Browser-based</div>
+        <div class="project-stat-label">Delivery</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">3 WIDA Tiers</div>
+        <div class="project-stat-label">Levels</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">45–60 min</div>
+        <div class="project-stat-label">Duration</div>
+      </div>
+    </div>
+
+    <!-- ══ OVERVIEW ══ -->
+    <section class="project-section">
+      <div class="project-section-inner">
+        <div class="project-kicker">Overview</div>
+        <div class="project-body">
+          <p>The Pursuit of Happyness is a fully coded interactive ESL lesson for middle and high school English Language Learners. Drawing on Will Smith's 2006 biographical film as its thematic anchor, the lesson builds academic vocabulary, reading comprehension, and critical thinking — scaffolded across three WIDA proficiency tiers so every student works with the same high-quality content at their appropriate entry point.</p>
+          <p>The lesson runs entirely in the browser, requires no LMS or login, and was designed to be as visually intentional as it is pedagogically sound. The film's themes of perseverance, dignity, and deferred hope give the lesson emotional weight that motivates genuine engagement — language acquisition follows more readily when the content actually matters to the learner.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ THE CHALLENGE ══ -->
+    <section class="project-section">
+      <div class="project-section-inner">
+        <div class="project-kicker">The Challenge</div>
+        <div class="project-body">
+          <p>In a typical secondary ESL pull-out or push-in class, students span four or five WIDA proficiency levels simultaneously — newcomers still acquiring basic vocabulary sharing space with advanced learners nearly ready for mainstream instruction. Whole-class, one-version instruction consistently underserves someone. Traditional differentiation — separate worksheets, separate pacing plans — often signals to lower-level students that they are receiving less.</p>
+          <p>The challenge was to build one experience with multiple entry points. A student at Level 1–2 and a student at Level 4–5 should both feel the lesson was designed for them — different scaffolding, same content dignity, same cognitive demand, same high expectations for what they're capable of producing with support.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ APPROACH ══ -->
+    <section class="project-section">
+      <div class="project-section-inner">
+        <div class="project-kicker">Approach</div>
+        <div class="project-body">
+          <p>Design began with the WIDA Can-Do Descriptors, not with the HTML. Each tier was mapped against what students at that level should be able to produce with support — then scaffolds were embedded where they'd naturally occur in the task flow, not bolted on afterward. Vocabulary banks, sentence frames, and visual anchors appear at Levels 1–2 and taper off progressively by Levels 4–5.</p>
+          <p>The visual language holds constant across all tiers: same typography, same layout logic, same film imagery. A student does not experience differentiation as a lesser version — they experience a lesson calibrated for them. The interaction model across every tier follows the same arc: encounter the language in context, process it actively, produce something with it. Code was written only after every instructional decision was made. HTML and CSS enforce the visual consistency; JavaScript handles the level-selection and branching logic without frameworks or dependencies.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ TECHNICAL DETAILS ══ -->
+    <section class="project-section">
+      <div class="project-section-inner">
+        <div class="project-kicker">Technical Details</div>
+        <div class="project-tech-grid">
+          <div class="project-tech-item">
+            <div class="project-tech-val">HTML / CSS / JS</div>
+            <div class="project-tech-label">Languages</div>
+          </div>
+          <div class="project-tech-item">
+            <div class="project-tech-val">Browser-based</div>
+            <div class="project-tech-label">Delivery</div>
+          </div>
+          <div class="project-tech-item">
+            <div class="project-tech-val">No LMS Required</div>
+            <div class="project-tech-label">Dependencies</div>
+          </div>
+          <div class="project-tech-divider"></div>
+          <div class="project-tech-item">
+            <div class="project-tech-val">WIDA 1–2, 3, 4–5</div>
+            <div class="project-tech-label">Proficiency Levels</div>
+          </div>
+          <div class="project-tech-item">
+            <div class="project-tech-val">VS Code · GitHub Pages</div>
+            <div class="project-tech-label">Tools &amp; Hosting</div>
+          </div>
+          <div class="project-tech-item">
+            <div class="project-tech-val">Secondary ELLs</div>
+            <div class="project-tech-label">Audience</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ LAUNCH CTA ══ -->
+    <section class="project-launch-section">
+      <p class="project-launch-note">Interactive Lesson</p>
+      <a class="project-launch-btn" href="lessons/pursuit-of-happyness.html" target="_blank" rel="noopener noreferrer">Launch Course →</a>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">Angela <em>Valenti</em></div>
+    <div class="footer-links">
+      <a href="../index.html">Portfolio</a>
+      <a href="../index.html">About</a>
+      <a href="../index.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 Angela Valenti</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
+</body>
+</html>

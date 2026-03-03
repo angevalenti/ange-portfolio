@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Next? — Discover Your Path After High School</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --builders:  #FF6B35;
+  --creators:  #C084FC;
+  --health:    #FB7185;
+  --tech:      #22D3EE;
+  --green:     #4ADE80;
+  --business:  #FCD34D;
+  --dark:      #080810;
+  --surface:   #0F0F1A;
+  --card:      #161625;
+  --card2:     #1E1E30;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.13);
+  --text:      #EEEEF8;
+  --muted:     #7777A0;
+  --faint:     #3A3A58;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--text)}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:5;opacity:.5}
+
+/* ── SCREENS — each fills full viewport, fades in/out ── */
+.screen{
+  position:fixed;inset:0;
+  overflow-y:auto;overflow-x:hidden;
+  background:var(--dark);
+  opacity:0;pointer-events:none;
+  transition:opacity .35s ease;
+  z-index:1;
+}
+.screen.active{opacity:1;pointer-events:all;z-index:10}
+#s1{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+#s2{display:flex;flex-direction:column}
+#s-complete{display:flex;align-items:center;justify-content:center;text-align:center}
+
+/* ══════════════════════════════
+   PROGRESS STEPPER
+══════════════════════════════ */
+.stepper{position:fixed;top:0;left:0;right:0;z-index:600;background:rgba(8,8,16,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem}
+.stepper-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;color:var(--text);white-space:nowrap;letter-spacing:-.01em}
+.stepper-logo span{background:linear-gradient(90deg,#C084FC,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stepper-steps{display:flex;align-items:center;gap:0;flex:1;justify-content:center}
+.step-item{display:flex;align-items:center;gap:0}
+.step-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--faint);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.6rem;font-weight:700;color:var(--muted);transition:all .3s;cursor:pointer;flex-shrink:0}
+.step-dot.active{border-color:var(--text);color:var(--text);background:rgba(255,255,255,.08)}
+.step-dot.done{border-color:var(--green);background:var(--green);color:#000}
+.step-line{width:clamp(20px,4vw,60px);height:2px;background:var(--faint);transition:background .3s}
+.step-line.done{background:var(--green)}
+.step-label{display:none}
+@media(min-width:700px){.step-label{display:block;font-size:.6rem;color:var(--muted);text-align:center;margin-top:.25rem;white-space:nowrap}}
+.step-wrap{display:flex;flex-direction:column;align-items:center}
+
+/* ── SHARED ── */
+.container{max-width:860px;margin:0 auto;padding:0 1.5rem}
+.section-tag{display:inline-block;font-family:'Syne',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border2);border-radius:100px;padding:.3rem .9rem;margin-bottom:1rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.05;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--muted);line-height:1.7;font-weight:300;max-width:560px}
+.grad-purple{background:linear-gradient(135deg,#C084FC,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-green{background:linear-gradient(135deg,#4ADE80,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-warm{background:linear-gradient(135deg,#FCD34D,#FB7185);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.btn{display:inline-flex;align-items:center;gap:.6rem;border:none;border-radius:100px;padding:.85rem 2rem;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none}
+.btn-glow{background:linear-gradient(135deg,#C084FC,#22D3EE);color:#000;box-shadow:0 0 40px rgba(192,132,252,.25)}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(192,132,252,.4)}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--border2);color:var(--text);background:rgba(255,255,255,.04)}
+.btn-green{background:linear-gradient(135deg,#4ADE80,#22D3EE);color:#000}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(74,222,128,.3)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes slideR{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fadeUp{animation:fadeUp .5s ease both}
+.popIn{animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both}
+
+/* ══════════════════════════════
+   S1 — HERO
+══════════════════════════════ */
+#s1{padding-top:56px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% -10%,rgba(192,132,252,.15) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 90% 80%,rgba(34,211,238,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 10% 70%,rgba(74,222,128,.06) 0%,transparent 60%),var(--dark)}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-orb-1{width:500px;height:500px;background:rgba(192,132,252,.12);top:-100px;left:-100px;animation:pulse 6s ease infinite}
+.hero-orb-2{width:400px;height:400px;background:rgba(34,211,238,.08);bottom:-80px;right:-80px;animation:pulse 8s ease 2s infinite}
+.hero-inner{position:relative;z-index:2;padding:2rem}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:100px;padding:.4rem 1.1rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;animation:fadeUp .6s ease both}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(3.5rem,10vw,8rem);font-weight:800;line-height:.9;margin-bottom:1.5rem;animation:fadeUp .6s ease .1s both}
+.hero-sub{font-size:clamp(.95rem,2.5vw,1.15rem);color:var(--muted);max-width:480px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;animation:fadeUp .6s ease .2s both}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-bottom:3rem;animation:fadeUp .6s ease .3s both}
+.hero-pill{display:flex;align-items:center;gap:.5rem;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:.4rem 1rem;font-size:.78rem;color:var(--muted)}
+.pill-c{width:7px;height:7px;border-radius:50%}
+.hero-cta{animation:fadeUp .6s ease .4s both;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.hero-note{margin-top:1.5rem;font-size:.75rem;color:var(--faint);animation:fadeUp .6s ease .5s both}
+
+/* ══════════════════════════════
+   S2 — QUIZ
+══════════════════════════════ */
+#s2{padding-top:56px;min-height:100vh;display:flex;flex-direction:column}
+.quiz-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem 5rem;max-width:700px;margin:0 auto;width:100%}
+.progress-row{width:100%;display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
+.progress-track{flex:1;height:5px;background:var(--card2);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#C084FC,#22D3EE);transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.progress-txt{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;color:var(--muted);white-space:nowrap;min-width:44px;text-align:right}
+.q-number{font-family:'Syne',sans-serif;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;text-align:center}
+.q-text{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,3vw,1.55rem);font-weight:700;text-align:center;margin-bottom:2.5rem;line-height:1.3;min-height:60px;transition:opacity .25s}
+.answers-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;width:100%;margin-bottom:2rem}
+@media(max-width:540px){.answers-grid{grid-template-columns:1fr}}
+.ans-btn{display:flex;align-items:center;gap:.9rem;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:.9rem 1.1rem;text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--text);font-weight:400;transition:all .2s;line-height:1.4;position:relative;overflow:hidden}
+.ans-btn::before{content:'';position:absolute;inset:0;background:var(--ac,transparent);opacity:0;transition:opacity .2s}
+.ans-btn:hover{border-color:var(--ac);transform:translateY(-1px)}
+.ans-btn:hover::before{opacity:.06}
+.ans-btn.selected{border-color:var(--ac);background:var(--card2)}
+.ans-btn.selected::before{opacity:.1}
+.ans-letter{width:26px;height:26px;min-width:26px;border-radius:50%;border:1.5px solid var(--ac);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;color:var(--ac);transition:all .2s;flex-shrink:0}
+.ans-btn.selected .ans-letter{background:var(--ac);color:#000}
+.quiz-nav{display:flex;gap:.75rem;justify-content:center}
+
+/* RESULT */
+.result-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem 5rem;text-align:center}
+.result-card{max-width:580px;width:100%;background:var(--card);border:1px solid var(--border);border-radius:28px;padding:3rem 2.5rem;position:relative;overflow:hidden;animation:popIn .6s cubic-bezier(.34,1.56,.64,1) both}
+.result-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:300px;height:300px;border-radius:50%;filter:blur(80px);background:var(--rc,#C084FC);opacity:.15;pointer-events:none}
+.result-emoji{font-size:3.5rem;margin-bottom:1rem;display:block}
+.result-you{font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.result-name{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,4vw,2rem);font-weight:800;line-height:1.1;margin-bottom:1.25rem;color:var(--rc)}
+.result-desc{font-size:.95rem;line-height:1.75;color:var(--muted);margin-bottom:2rem}
+.result-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* ══════════════════════════════
+   S3 — CLUSTER EXPLORER
+══════════════════════════════ */
+#s3{padding-top:80px;padding-bottom:6rem}
+.clusters-intro{text-align:center;margin-bottom:3.5rem}
+.clusters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;max-width:860px;margin:0 auto 3rem}
+.cl-card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:1.6rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;user-select:none}
+.cl-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--cc);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.cl-card:hover{transform:translateY(-3px);border-color:var(--cc)}
+.cl-card:hover::before,.cl-card.open::before{transform:scaleX(1)}
+.cl-card.open{border-color:var(--cc);background:var(--card2)}
+.cl-emoji{font-size:2rem;margin-bottom:.7rem}
+.cl-name{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--cc);margin-bottom:.4rem}
+.cl-tag{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:1rem}
+
+.cl-toggle-hint{display:inline-flex;align-items:center;gap:.35rem;font-size:.75rem;font-weight:600;color:var(--cc);margin-top:.5rem;transition:gap .2s}
+.cl-card:hover .cl-toggle-hint{gap:.55rem}
+.cl-card.open .cl-toggle-hint{display:none}
+.cl-close-hint{font-size:.72rem;color:var(--muted);margin-top:1rem;text-align:center;opacity:.6}
+.cl-details{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s;opacity:0}
+.cl-card.open .cl-details{max-height:600px;opacity:1}
+.cl-dl{font-family:'Syne',sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cc);margin:1rem 0 .35rem}
+.cl-jobs{font-size:.82rem;color:var(--muted);line-height:1.6}
+.cl-edu{list-style:none;padding:0}
+.cl-edu li{font-size:.82rem;color:var(--muted);padding:.2rem 0;display:flex;align-items:flex-start;gap:.5rem}
+.cl-edu li::before{content:'→';color:var(--cc);flex-shrink:0;margin-top:1px}
+.cl-fact{margin-top:1rem;padding:.7rem .9rem;background:rgba(255,255,255,.04);border-radius:10px;border-left:3px solid var(--cc);font-size:.8rem;color:var(--muted);line-height:1.55;font-style:italic}
+.clusters-foot{text-align:center}
+
+/* ══════════════════════════════
+   S4 — KNOWLEDGE CHECK
+══════════════════════════════ */
+#s4{padding-top:80px;padding-bottom:6rem;background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(74,222,128,.06),transparent 60%),var(--dark)}
+.check-intro{text-align:center;margin-bottom:3rem}
+.match-arena{max-width:820px;margin:0 auto}
+.match-instructions{text-align:center;font-size:.88rem;color:var(--muted);margin-bottom:2rem;padding:.75rem 1rem;background:var(--card);border-radius:12px;border:1px solid var(--border)}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+@media(max-width:580px){.match-cols{grid-template-columns:1fr}}
+.match-col-head{font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;text-align:center}
+.match-chip{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:.8rem 1rem;font-size:.85rem;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:.6rem;user-select:none}
+.match-chip:hover:not(.mc-done):not(.mc-wrong){border-color:rgba(255,255,255,.2);transform:translateX(2px)}
+.match-chip.mc-sel{border-color:var(--tech);background:rgba(34,211,238,.08);color:var(--tech)}
+.match-chip.mc-done{border-color:var(--green);background:rgba(74,222,128,.08);color:var(--green);cursor:default;pointer-events:none}
+.match-chip.mc-wrong{border-color:#F87171;background:rgba(248,113,113,.08);color:#F87171}
+.match-chip.mc-dim{opacity:.3;pointer-events:none}
+.match-fb{text-align:center;font-size:.9rem;min-height:1.5rem;margin-bottom:1.5rem;transition:all .3s;padding:.5rem}
+.check-score-wrap{text-align:center;margin-bottom:2rem}
+.score-big{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:var(--green)}
+.score-lbl{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.check-foot{text-align:center;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* ══════════════════════════════
+   S5 — ACTION PLAN
+══════════════════════════════ */
+#s5{padding-top:80px;padding-bottom:6rem;background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(252,211,77,.05),transparent 60%),var(--dark)}
+.plan-intro{text-align:center;margin-bottom:3rem}
+.plan-body{max-width:680px;margin:0 auto}
+.plan-step-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.75rem;margin-bottom:1.1rem}
+.plan-step-num{font-family:'Syne',sans-serif;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.plan-step-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--business);margin-bottom:1.25rem}
+.plan-lbl{display:block;font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:.4rem;margin-top:.85rem}
+.plan-lbl:first-of-type{margin-top:0}
+.plan-input,.plan-sel,.plan-ta{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:.7rem 1rem;font-size:.9rem;color:var(--text);font-family:'Outfit',sans-serif;transition:border-color .2s}
+.plan-input:focus,.plan-sel:focus,.plan-ta:focus{outline:none;border-color:var(--business)}
+.plan-ta{resize:vertical;min-height:76px}
+.plan-sel option{background:var(--card)}
+.plan-checks{display:flex;flex-direction:column;gap:.4rem;margin-top:.4rem}
+.plan-ck-lbl{display:flex;align-items:center;gap:.7rem;font-size:.86rem;cursor:pointer;padding:.4rem .6rem;border-radius:8px;transition:background .15s}
+.plan-ck-lbl:hover{background:rgba(255,255,255,.04)}
+.plan-ck-lbl input{accent-color:var(--business);width:15px;height:15px}
+.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.4rem}
+@media(max-width:460px){.path-grid{grid-template-columns:1fr}}
+.path-opt{display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:10px;padding:.6rem .85rem;font-size:.82rem;cursor:pointer;transition:all .15s;font-family:'Outfit',sans-serif;color:var(--text)}
+.path-opt:hover{border-color:rgba(255,255,255,.18)}
+.path-opt.sel{border-color:var(--business);background:rgba(252,211,77,.08);color:var(--business)}
+.path-opt input{display:none}
+.plan-foot{text-align:center;padding-top:1.5rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* ══════════════════════════════
+   COMPLETE
+══════════════════════════════ */
+#s-complete{padding-top:56px;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(74,222,128,.12),transparent 65%),var(--dark)}
+.complete-inner{max-width:520px;padding:2rem;animation:popIn .7s cubic-bezier(.34,1.56,.64,1) both}
+.complete-icon{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#4ADE80,#22D3EE);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 2rem;box-shadow:0 0 80px rgba(74,222,128,.35)}
+.complete-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,6vw,3.2rem);font-weight:800;line-height:1.05;margin-bottom:1rem}
+.complete-sub{font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:2.5rem}
+.confetti-piece{position:fixed;pointer-events:none;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:0}}
+
+/* ══════════════════════════════
+   PRINT / DOWNLOAD REPORT
+══════════════════════════════ */
+#print-report{display:none}
+@media print{
+  body > *:not(#print-report){display:none!important}
+  #print-report{display:block!important;font-family:'Outfit',sans-serif;color:#111;background:#fff;padding:40px;max-width:750px;margin:0 auto}
+  .pr-header{border-bottom:3px solid #C084FC;padding-bottom:16px;margin-bottom:24px}
+  .pr-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#111;margin-bottom:4px}
+  .pr-sub{font-size:13px;color:#666}
+  .pr-section{margin-bottom:20px;padding:16px;border:1px solid #E5E5F0;border-radius:12px;background:#FAFAFF}
+  .pr-section-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#C084FC;margin-bottom:12px}
+  .pr-row{margin-bottom:10px}
+  .pr-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+  .pr-val{font-size:13px;color:#333;line-height:1.5}
+  .pr-cluster-badge{display:inline-flex;align-items:center;gap:6px;background:#F0E8FF;border-radius:8px;padding:6px 12px;font-weight:600;font-size:13px;color:#7C3AED;margin-bottom:8px}
+  .pr-footer{margin-top:32px;padding-top:16px;border-top:1px solid #E5E5F0;font-size:11px;color:#AAA;text-align:center}
+  .pr-checks{list-style:none;padding:0}
+  .pr-checks li{font-size:13px;padding:3px 0;color:#333}
+  .pr-checks li::before{content:'✓ ';color:#7C3AED;font-weight:700}
+}
+
+/* scrollbar */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--faint);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- PRINT REPORT (hidden until print) -->
+<div id="print-report">
+  <div class="pr-header">
+    <div class="pr-title">What's Next? — My Action Plan</div>
+    <div class="pr-sub">Personal Career Exploration Report · <span id="pr-date"></span></div>
+  </div>
+  <div class="pr-section">
+    <div class="pr-section-title">My Career Cluster Result</div>
+    <div class="pr-cluster-badge" id="pr-cluster-badge"></div>
+    <div class="pr-row"><div class="pr-label">What this means for me</div><div class="pr-val" id="pr-cluster-desc"></div></div>
+  </div>
+  <div class="pr-section">
+    <div class="pr-section-title">Step 1 — What I Discovered</div>
+    <div class="pr-row"><div class="pr-label">My top interest cluster</div><div class="pr-val" id="pr-s1-cluster"></div></div>
+    <div class="pr-row"><div class="pr-label">Something that surprised me</div><div class="pr-val" id="pr-s1-surprise"></div></div>
+  </div>
+  <div class="pr-section">
+    <div class="pr-section-title">Step 2 — Careers I Want to Explore</div>
+    <div class="pr-row"><div class="pr-label">Job title that caught my attention</div><div class="pr-val" id="pr-s2-job"></div></div>
+    <div class="pr-row"><div class="pr-label">I want to learn more about</div><ul class="pr-checks" id="pr-s2-checks"></ul></div>
+  </div>
+  <div class="pr-section">
+    <div class="pr-section-title">Step 3 — My Path After High School</div>
+    <div class="pr-row"><div class="pr-label">My plan after graduation</div><div class="pr-val" id="pr-s3-path"></div></div>
+    <div class="pr-row"><div class="pr-label">What excites me about my future</div><div class="pr-val" id="pr-s3-excited"></div></div>
+  </div>
+  <div class="pr-section">
+    <div class="pr-section-title">Step 4 — My Next Steps</div>
+    <div class="pr-row"><div class="pr-label">One thing I can do to prepare</div><div class="pr-val" id="pr-s4-action"></div></div>
+    <div class="pr-row"><div class="pr-label">Person I can talk to</div><div class="pr-val" id="pr-s4-person"></div></div>
+  </div>
+  <div class="pr-footer">Generated by "What's Next?" Career Exploration Module · Every journey starts with a single step. ✨</div>
+</div>
+
+<!-- STEPPER -->
+<nav class="stepper" id="stepper">
+  <div class="stepper-logo">What's <span>Next?</span></div>
+  <div class="stepper-steps" id="stepperSteps">
+    <!-- built by JS -->
+  </div>
+</nav>
+
+<!-- ══════════════ S1: HERO ══════════════ -->
+<section class="screen active" id="s1">
+  <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">✦ Career Exploration Module · Class of 2025–2026</div>
+    <h1 class="hero-title">What's<br><span class="grad-purple">Next?</span></h1>
+    <p class="hero-sub">High school doesn't last forever. Discover which career path lights you up — and take your first real step toward the future you want.</p>
+    <div class="hero-pills">
+      <div class="hero-pill"><div class="pill-c" style="background:var(--creators)"></div>Personality Quiz</div>
+      <div class="hero-pill"><div class="pill-c" style="background:var(--tech)"></div>6 Career Clusters</div>
+      <div class="hero-pill"><div class="pill-c" style="background:var(--green)"></div>Knowledge Check</div>
+      <div class="hero-pill"><div class="pill-c" style="background:var(--business)"></div>Action Plan</div>
+      <div class="hero-pill"><div class="pill-c" style="background:var(--health)"></div>Downloadable Report</div>
+    </div>
+    <div class="hero-cta">
+      <button class="btn btn-glow" onclick="startModule()">Begin Your Journey →</button>
+    </div>
+    <p class="hero-note">About 20–25 minutes · No wrong answers · 100% yours</p>
+  </div>
+</section>
+
+<!-- ══════════════ S2: QUIZ ══════════════ -->
+<section class="screen" id="s2">
+  <div id="quiz-view" style="flex:1;display:flex;flex-direction:column">
+    <div class="quiz-wrap">
+      <div class="progress-row">
+        <div class="progress-track"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+        <div class="progress-txt" id="progTxt">1 / 8</div>
+      </div>
+      <div class="q-number" id="qNum">Question 1 of 8</div>
+      <div class="q-text" id="qText"></div>
+      <div class="answers-grid" id="ansGrid"></div>
+      <div class="quiz-nav">
+        <button class="btn btn-ghost" id="qPrev" onclick="prevQ()" style="display:none">← Back</button>
+        <button class="btn btn-glow" id="qNext" onclick="nextQ()" style="display:none">Next →</button>
+      </div>
+    </div>
+  </div>
+  <div id="result-view" style="display:none;flex:1;flex-direction:column">
+    <div class="result-wrap">
+      <div style="font-family:'Syne',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem">✦ Your Result</div>
+      <div class="result-card" id="resultCard">
+        <div class="result-glow" id="resultGlow"></div>
+        <span class="result-emoji" id="rEmoji"></span>
+        <div class="result-you">You are a</div>
+        <div class="result-name" id="rName"></div>
+        <div class="result-desc" id="rDesc"></div>
+        <div class="result-actions">
+          <button class="btn btn-glow" onclick="goTo('s3')">Explore All Clusters →</button>
+          <button class="btn btn-ghost" onclick="retakeQuiz()">↺ Retake Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S3: CLUSTERS ══════════════ -->
+<section class="screen" id="s3">
+  <div class="container">
+    <div class="clusters-intro">
+      <div class="section-tag">Career Cluster Explorer</div>
+      <h2 class="section-title">Find Your <span class="grad-green">World</span></h2>
+      <p class="section-sub" style="margin:0 auto">Tap any cluster to explore real jobs, education paths, and what makes each one exciting. Which one calls your name?</p>
+    </div>
+    <div class="clusters-grid" id="clustersGrid"></div>
+    <div class="clusters-foot">
+      <button class="btn btn-glow" onclick="goTo('s4')">Take the Knowledge Check →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S4: KNOWLEDGE CHECK ══════════════ -->
+<section class="screen" id="s4">
+  <div class="container">
+    <div class="check-intro">
+      <div class="section-tag">Knowledge Check</div>
+      <h2 class="section-title">Do You Know <span class="grad-green">Your Paths?</span></h2>
+      <p class="section-sub" style="margin:0 auto">You've explored the clusters — now let's see what stuck! Match each education or training path to its career cluster.</p>
+    </div>
+    <div class="match-arena">
+      <div class="match-instructions" id="matchInstr">Select an education path on the left, then select its matching career cluster on the right.</div>
+      <div class="match-cols">
+        <div>
+          <div class="match-col-head">Education &amp; Training Path</div>
+          <div id="matchPaths"></div>
+        </div>
+        <div>
+          <div class="match-col-head">Career Cluster</div>
+          <div id="matchClusters"></div>
+        </div>
+      </div>
+      <div class="match-fb" id="matchFb"></div>
+      <div class="check-score-wrap" id="checkScoreWrap" style="display:none">
+        <div class="score-big" id="scoreBig">0/6</div>
+        <div class="score-lbl">Correct Matches</div>
+      </div>
+      <div class="check-foot" id="checkFoot" style="display:none">
+        <button class="btn btn-green" onclick="goTo('s5')">Build My Action Plan →</button>
+        <button class="btn btn-ghost" onclick="resetCheck()">↺ Try Again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S5: ACTION PLAN ══════════════ -->
+<section class="screen" id="s5">
+  <div class="container">
+    <div class="plan-intro">
+      <div class="section-tag">My Action Plan</div>
+      <h2 class="section-title">My What's <span class="grad-warm">Next Plan</span></h2>
+      <p class="section-sub" style="margin:0 auto">No wrong answers here. This plan is 100% yours — use what you discovered today to take your first real step forward.</p>
+    </div>
+    <div class="plan-body">
+
+      <div class="plan-step-card">
+        <div class="plan-step-num">Step 1</div>
+        <div class="plan-step-title">What I Discovered About Myself</div>
+        <label class="plan-lbl">My top interest cluster is:</label>
+        <select class="plan-sel" id="p1Cluster">
+          <option value="">Choose your cluster...</option>
+          <option>🔧 Builders &amp; Makers</option>
+          <option>🎨 Creators &amp; Designers</option>
+          <option>💊 Health &amp; Human Services</option>
+          <option>🤖 Tech, AI &amp; Data</option>
+          <option>🌱 Green &amp; Life Sciences</option>
+          <option>🤝 Business, Service &amp; Leadership</option>
+        </select>
+        <label class="plan-lbl">One thing I learned about myself that surprised me:</label>
+        <textarea class="plan-ta" id="p1Surprise" placeholder="Write anything that came to mind..."></textarea>
+      </div>
+
+      <div class="plan-step-card">
+        <div class="plan-step-num">Step 2</div>
+        <div class="plan-step-title">Careers I Want to Explore</div>
+        <label class="plan-lbl">A job title that caught my attention:</label>
+        <input class="plan-input" id="p2Job" type="text" placeholder="e.g. UX Designer, Solar Technician, Trauma Nurse...">
+        <label class="plan-lbl">I want to know more about: (check all that apply)</label>
+        <div class="plan-checks">
+          <label class="plan-ck-lbl"><input type="checkbox" class="p2check" value="What a typical workday looks like"> What a typical workday looks like</label>
+          <label class="plan-ck-lbl"><input type="checkbox" class="p2check" value="How much it pays"> How much it pays</label>
+          <label class="plan-ck-lbl"><input type="checkbox" class="p2check" value="What education or training I need"> What education or training I need</label>
+          <label class="plan-ck-lbl"><input type="checkbox" class="p2check" value="Whether I can job shadow or intern somewhere"> Whether I can job shadow or intern somewhere</label>
+          <label class="plan-ck-lbl"><input type="checkbox" class="p2check" value="If I can start building skills right now"> If I can start building skills right now</label>
+        </div>
+      </div>
+
+      <div class="plan-step-card">
+        <div class="plan-step-num">Step 3</div>
+        <div class="plan-step-title">My Path After High School</div>
+        <label class="plan-lbl">Right now, my plan after graduation is:</label>
+        <div class="path-grid" id="pathGrid">
+          <label class="path-opt"><input type="radio" name="path" value="4-year college or university"> 4-year college</label>
+          <label class="path-opt"><input type="radio" name="path" value="Community college (2-year)"> Community college</label>
+          <label class="path-opt"><input type="radio" name="path" value="Trade or vocational school"> Trade / vocational school</label>
+          <label class="path-opt"><input type="radio" name="path" value="Military"> Military</label>
+          <label class="path-opt"><input type="radio" name="path" value="Enter the workforce directly"> Enter the workforce</label>
+          <label class="path-opt"><input type="radio" name="path" value="Start my own business"> Start my own business</label>
+          <label class="path-opt" style="grid-column:1/-1"><input type="radio" name="path" value="Not sure yet — and that's okay!"> Not sure yet — and that's okay!</label>
+        </div>
+        <label class="plan-lbl" style="margin-top:1rem">One thing I'm excited about when I think about my future:</label>
+        <textarea class="plan-ta" id="p3Excited" placeholder="Dream big here..."></textarea>
+      </div>
+
+      <div class="plan-step-card">
+        <div class="plan-step-num">Step 4</div>
+        <div class="plan-step-title">My Next Step — This Year</div>
+        <label class="plan-lbl">One thing I can do in the next few months to prepare:</label>
+        <textarea class="plan-ta" id="p4Action" placeholder="e.g. Research trade programs, talk to my counselor, attend a job fair..."></textarea>
+        <label class="plan-lbl">One person I can talk to about my future goals:</label>
+        <input class="plan-input" id="p4Person" type="text" placeholder="e.g. My teacher Ms. Johnson, my uncle who works in IT...">
+      </div>
+
+      <div class="plan-foot">
+        <button class="btn btn-green" onclick="completePlan()">Complete My Plan ✨</button>
+        <button class="btn btn-ghost" onclick="previewPlan()">Preview &amp; Download Report ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ COMPLETE ══════════════ -->
+<section class="screen" id="s-complete">
+  <div class="complete-inner">
+    <div class="complete-icon">🌟</div>
+    <h2 class="complete-title">You Did It!</h2>
+    <p class="complete-sub">Every big journey starts with a single step.<br>You just took yours.<br><br>Keep exploring, keep asking questions — your path doesn't have to look like anyone else's.<br><br><strong style="color:var(--text)">The future is yours to design. ✨</strong></p>
+    <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-green" onclick="downloadReport()">↓ Download My Action Plan</button>
+      <button class="btn btn-ghost" onclick="previewPlan()">Preview Report</button>
+      <button class="btn btn-ghost" onclick="goTo('s1')">← Start Over</button>
+    </div>
+  </div>
+</section>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const CLUSTERS = [
+  { id:'a', emoji:'🔧', name:'Builders & Makers', color:'#FF6B35',
+    tagline:'If you like creating things with your hands and your mind, this is your world.',
+    jobs:'Electrician, HVAC Technician, EV Mechanic, Welder, Semiconductor Technician, Construction Manager, Solar Panel Installer',
+    edu:['Trade/vocational school (1–2 years)','Apprenticeship programs','Some roles: 2-year associate degree'],
+    fact:'Skilled trades workers are in massive demand — many earn $60K–$90K+ without a 4-year degree.',
+    result:"You're the kind of person who sees a problem and immediately thinks — I can fix that. You love working with your hands, figuring out how things work, and creating something real and tangible. The world needs people like you more than ever — from building the electric vehicles of tomorrow to powering homes with clean energy, Builders & Makers are shaping the future one project at a time."
+  },
+  { id:'b', emoji:'🎨', name:'Creators & Designers', color:'#C084FC',
+    tagline:"If you think visually and love making things look, sound, or feel amazing — this is your path.",
+    jobs:'Graphic Designer, UX/UI Designer, Video Game Designer, Animator, Content Creator, Fashion Designer, Film/Media Producer',
+    edu:['Portfolio-based programs (design schools, art programs)','Self-taught + certifications','2 or 4-year degree in design, media, or fine arts'],
+    fact:'UX Designers have one of the highest job satisfaction rates AND starting salaries in the creative world.',
+    result:"You see the world differently — and that's your superpower. Whether it's art, design, storytelling, or building experiences that move people, you're driven by imagination and expression. In a world that's more visual and digital than ever, Creators & Designers are in high demand — and the best part? Your career can look as unique as you are."
+  },
+  { id:'c', emoji:'💊', name:'Health & Human Services', color:'#FB7185',
+    tagline:"If you want to make a real difference in people's lives every single day — healthcare needs you.",
+    jobs:'Nurse, Physical Therapist, Home Health Aide, Medical Coder, Counselor, Social Worker, Dental Hygienist',
+    edu:['Certifications (CNA, EMT — can start right after high school)','2-year associate degree (nursing, dental hygiene)','4-year degree for advanced roles'],
+    fact:'Healthcare is the #1 fastest-growing sector in the U.S. — projected to add millions of jobs this decade.',
+    result:"People are your passion. You're the one who notices when someone's struggling, who shows up, and who genuinely wants to make things better. Careers in health and human services put that empathy to work every single day — and with millions of new jobs opening up, the world is ready for exactly what you have to offer."
+  },
+  { id:'d', emoji:'🤖', name:'Tech, AI & Data', color:'#22D3EE',
+    tagline:"If you love solving problems and figuring out how things work behind the scenes — tech wants you.",
+    jobs:'Software Developer, Cybersecurity Analyst, AI/ML Specialist, Data Scientist, Cloud Engineer, IT Support, Fintech Specialist',
+    edu:['Coding bootcamps (3–6 months)','Certifications (Google, CompTIA, AWS)','2 or 4-year degree in computer science or IT'],
+    fact:"Tech jobs are growing twice as fast as overall employment — and many don't require a traditional 4-year degree.",
+    result:"Your brain loves a good puzzle. You're curious about how things work under the hood — software, systems, data, and the technology shaping everything around us. Tech is the fastest-evolving field on the planet right now, and people who can think critically and understand AI and data are among the most sought-after in the workforce. That's you."
+  },
+  { id:'e', emoji:'🌱', name:'Green & Life Sciences', color:'#4ADE80',
+    tagline:"If you care about the planet, animals, or unlocking the mysteries of science — this is calling your name.",
+    jobs:'Environmental Scientist, Wildlife Biologist, Forensic Technician, Solar Energy Technician, EV Battery Engineer, Agricultural Scientist, Lab Technician',
+    edu:['2-year technical programs (environmental tech, lab science)','4-year degree for research and engineering roles','Apprenticeships in energy trades'],
+    fact:'Clean energy is one of the fastest-growing industries in the country — and it needs scientists, engineers, AND skilled tradespeople.',
+    result:"You're curious about the world — the natural one and the scientific one. Whether it's protecting ecosystems, developing clean energy, or unlocking discoveries in a lab, you're motivated by something bigger than a paycheck. Green and life science careers are exploding right now as the world races to address climate, energy, and health challenges. Your curiosity could change everything."
+  },
+  { id:'f', emoji:'🤝', name:'Business, Service & Leadership', color:'#FCD34D',
+    tagline:"If you love connecting with people, running things, or building something from the ground up — this is your world.",
+    jobs:'Entrepreneur, Marketing Manager, Financial Analyst, Restaurant Manager, Hotel & Events Manager, Human Resources Specialist, Real Estate Agent',
+    edu:['On-the-job training and entry-level management tracks','2-year business degree or certifications','4-year degree in business, finance, or hospitality'],
+    fact:"Entrepreneurship is at an all-time high — and many of today's most successful business owners started with just an idea and a plan.",
+    result:"You're a natural when it comes to people, ideas, and making things happen. Whether you're drawn to entrepreneurship, management, finance, or creating amazing experiences for others — you thrive when you're leading the charge. Business and service careers offer some of the most diverse paths out there, and with your drive and people skills, the ceiling is as high as you set it."
+  }
+];
+
+const QUESTIONS = [
+  { text:"On a Saturday with nothing planned, you'd most likely be…", answers:[
+    {l:'A',t:'Taking something apart to see how it works',c:'a'},
+    {l:'B',t:'Drawing, designing, or making something creative',c:'b'},
+    {l:'C',t:'Hanging out with friends or helping a family member',c:'c'},
+    {l:'D',t:"Gaming, coding, or going down a tech rabbit hole",c:'d'},
+    {l:'E',t:'Outside — hiking, gardening, or watching a nature doc',c:'e'},
+    {l:'F',t:'Planning something, organizing people, or hustling on a side project',c:'f'}
+  ]},
+  { text:"Your dream school project would be…", answers:[
+    {l:'A',t:'Building an actual working model or prototype',c:'a'},
+    {l:'B',t:'Designing a poster, video, or creative presentation',c:'b'},
+    {l:'C',t:'Researching how to help people in your community',c:'c'},
+    {l:'D',t:'Creating an app, website, or data visualization',c:'d'},
+    {l:'E',t:'Investigating an environmental issue or science experiment',c:'e'},
+    {l:'F',t:'Running a mock business, campaign, or event',c:'f'}
+  ]},
+  { text:"Which superpower would you choose?", answers:[
+    {l:'A',t:'The ability to build or fix anything instantly',c:'a'},
+    {l:'B',t:'Creating art or music that moves people to tears',c:'b'},
+    {l:'C',t:'The power to heal anyone of any illness',c:'c'},
+    {l:'D',t:'Downloading any skill or knowledge directly to your brain',c:'d'},
+    {l:'E',t:'Controlling the weather or communicating with animals',c:'e'},
+    {l:'F',t:'Convincing anyone to believe in your idea',c:'f'}
+  ]},
+  { text:"A friend is struggling — your instinct is to…", answers:[
+    {l:'A',t:'Help them fix the practical problem causing the stress',c:'a'},
+    {l:'B',t:'Make them something meaningful — a playlist, a card, art',c:'b'},
+    {l:'C',t:'Just listen and be there for them emotionally',c:'c'},
+    {l:'D',t:'Research the best solution and send them resources',c:'d'},
+    {l:'E',t:'Take them outside for a walk to clear their head',c:'e'},
+    {l:'F',t:'Rally other people to help and come up with a plan',c:'f'}
+  ]},
+  { text:"Which class do you actually enjoy (or would enjoy)?", answers:[
+    {l:'A',t:'Shop class, engineering, or auto mechanics',c:'a'},
+    {l:'B',t:'Art, photography, film, or graphic design',c:'b'},
+    {l:'C',t:'Health, psychology, or child development',c:'c'},
+    {l:'D',t:'Computer science, coding, or statistics',c:'d'},
+    {l:'E',t:'Biology, environmental science, or agriculture',c:'e'},
+    {l:'F',t:'Business, economics, marketing, or leadership',c:'f'}
+  ]},
+  { text:"Which of these sounds like the most satisfying workday?", answers:[
+    {l:'A',t:'You built or repaired something tangible — you can see the result',c:'a'},
+    {l:'B',t:"You created something from scratch that didn't exist before",c:'b'},
+    {l:'C',t:'Someone told you that you made their day better',c:'c'},
+    {l:'D',t:'You solved a complex problem no one else could crack',c:'d'},
+    {l:'E',t:'You worked outside or learned something new about the natural world',c:'e'},
+    {l:'F',t:'You led a meeting, closed a deal, or launched something new',c:'f'}
+  ]},
+  { text:"Pick the job title that sounds coolest to you:", answers:[
+    {l:'A',t:'EV Systems Technician',c:'a'},
+    {l:'B',t:'UX Designer or Creative Director',c:'b'},
+    {l:'C',t:'Trauma Nurse or School Counselor',c:'c'},
+    {l:'D',t:'AI Engineer or Cybersecurity Analyst',c:'d'},
+    {l:'E',t:'Wildlife Biologist or Solar Energy Specialist',c:'e'},
+    {l:'F',t:'Entrepreneur or Marketing Director',c:'f'}
+  ]},
+  { text:"Your friends would describe you as…", answers:[
+    {l:'A',t:'The one who can fix anything',c:'a'},
+    {l:'B',t:'The creative one with a unique style',c:'b'},
+    {l:'C',t:"The one people come to when they need support",c:'c'},
+    {l:'D',t:'The one who always knows how things work',c:'d'},
+    {l:'E',t:'The one who loves animals, nature, or the outdoors',c:'e'},
+    {l:'F',t:'The natural leader who gets things done',c:'f'}
+  ]}
+];
+
+const MATCH_PAIRS = [
+  {path:'Apprenticeship or trade school (1–2 years)', cluster:'Builders & Makers'},
+  {path:'Portfolio + design school or self-taught certifications', cluster:'Creators & Designers'},
+  {path:'CNA or EMT certification right out of high school', cluster:'Health & Human Services'},
+  {path:'Coding bootcamp or Google / CompTIA certification', cluster:'Tech, AI & Data'},
+  {path:'2-year environmental tech or lab science program', cluster:'Green & Life Sciences'},
+  {path:'Entry-level management track or 2-year business degree', cluster:'Business, Service & Leadership'}
+];
+
+const STEPS = ['s1','s2','s3','s4','s5'];
+const STEP_LABELS = ['Intro','Quiz','Clusters','Check','Plan'];
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let curScreen = 's1';
+let curQ = 0;
+let qAnswers = {};
+let resultCluster = null;
+let matchSelPath = null;
+let matchSelCluster = null;
+let matchScore = 0;
+let matchDone = {};
+
+// ══════════════════════════════════════════
+// STEPPER
+// ══════════════════════════════════════════
+function buildStepper() {
+  const el = document.getElementById('stepperSteps');
+  el.innerHTML = '';
+  STEPS.forEach((s, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'step-wrap';
+    const dot = document.createElement('div');
+    dot.className = 'step-dot';
+    dot.id = 'sdot-' + s;
+    dot.textContent = i + 1;
+    dot.onclick = () => { if(completedSteps.has(s) || s === curScreen) goTo(s); };
+    const lbl = document.createElement('div');
+    lbl.className = 'step-label';
+    lbl.textContent = STEP_LABELS[i];
+    wrap.appendChild(dot);
+    wrap.appendChild(lbl);
+    el.appendChild(wrap);
+    if (i < STEPS.length - 1) {
+      const line = document.createElement('div');
+      line.className = 'step-line';
+      line.id = 'sline-' + i;
+      el.appendChild(line);
+    }
+  });
+}
+
+const completedSteps = new Set();
+
+function updateStepper() {
+  STEPS.forEach((s, i) => {
+    const dot = document.getElementById('sdot-' + s);
+    if (!dot) return;
+    dot.classList.remove('active','done');
+    if (s === curScreen) dot.classList.add('active');
+    else if (completedSteps.has(s)) dot.classList.add('done');
+    if (i < STEPS.length - 1) {
+      const line = document.getElementById('sline-' + i);
+      if (line) line.classList.toggle('done', completedSteps.has(s));
+    }
+  });
+}
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  target.classList.add('active');
+  target.scrollTop = 0;
+  curScreen = id;
+  updateStepper();
+  if (id === 's3') buildClusters();
+  if (id === 's4') buildCheck();
+}
+
+function startModule() {
+  completedSteps.add('s1');
+  goTo('s2');
+  renderQ();
+}
+
+// ══════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════
+function retakeQuiz() {
+  curQ = 0; qAnswers = {}; resultCluster = null;
+  document.getElementById('quiz-view').style.display = 'flex';
+  document.getElementById('result-view').style.display = 'none';
+  goTo('s2');
+  renderQ();
+}
+
+function renderQ() {
+  const q = QUESTIONS[curQ];
+  const total = QUESTIONS.length;
+  const pct = (curQ / total) * 100;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progTxt').textContent = `${curQ + 1} / ${total}`;
+  document.getElementById('qNum').textContent = `Question ${curQ + 1} of ${total}`;
+  const qt = document.getElementById('qText');
+  qt.style.opacity = '0';
+  setTimeout(() => { qt.textContent = q.text; qt.style.opacity = '1'; }, 150);
+
+  const grid = document.getElementById('ansGrid');
+  grid.innerHTML = '';
+  const colors = {a:'#FF6B35',b:'#C084FC',c:'#FB7185',d:'#22D3EE',e:'#4ADE80',f:'#FCD34D'};
+  q.answers.forEach((a, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'ans-btn';
+    btn.style.setProperty('--ac', colors[a.c]);
+    btn.style.animationDelay = (i * 0.055) + 's';
+    btn.classList.add('fadeUp');
+    if (qAnswers[curQ] === a.c) btn.classList.add('selected');
+    btn.innerHTML = `<span class="ans-letter">${a.l}</span><span>${a.t}</span>`;
+    btn.onclick = () => pickAnswer(a.c, btn);
+    grid.appendChild(btn);
+  });
+
+  document.getElementById('qPrev').style.display = curQ > 0 ? 'inline-flex' : 'none';
+  const nxt = document.getElementById('qNext');
+  nxt.style.display = qAnswers[curQ] ? 'inline-flex' : 'none';
+  nxt.textContent = curQ === total - 1 ? 'See My Result →' : 'Next →';
+}
+
+function pickAnswer(cluster, btn) {
+  qAnswers[curQ] = cluster;
+  document.querySelectorAll('.ans-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const nxt = document.getElementById('qNext');
+  nxt.style.display = 'inline-flex';
+  nxt.textContent = curQ === QUESTIONS.length - 1 ? 'See My Result →' : 'Next →';
+}
+
+function nextQ() {
+  if (!qAnswers[curQ]) return;
+  if (curQ < QUESTIONS.length - 1) { curQ++; renderQ(); }
+  else showResult();
+}
+
+function prevQ() { if (curQ > 0) { curQ--; renderQ(); } }
+
+function showResult() {
+  document.getElementById('progFill').style.width = '100%';
+  const tally = {a:0,b:0,c:0,d:0,e:0,f:0};
+  Object.values(qAnswers).forEach(c => tally[c]++);
+  const winner = Object.entries(tally).sort((x,y) => y[1]-x[1])[0][0];
+  resultCluster = CLUSTERS.find(c => c.id === winner);
+
+  document.getElementById('rEmoji').textContent = resultCluster.emoji;
+  document.getElementById('rName').textContent = resultCluster.name + '!';
+  document.getElementById('rDesc').textContent = resultCluster.result;
+  document.getElementById('resultGlow').style.background = resultCluster.color;
+  document.getElementById('rName').style.color = resultCluster.color;
+
+  document.getElementById('quiz-view').style.display = 'none';
+  document.getElementById('result-view').style.display = 'flex';
+  completedSteps.add('s2');
+  updateStepper();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════
+// CLUSTER EXPLORER
+// ══════════════════════════════════════════
+let clustersBuilt = false;
+function buildClusters() {
+  if (clustersBuilt) return;
+  clustersBuilt = true;
+  const grid = document.getElementById('clustersGrid');
+  CLUSTERS.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'cl-card';
+    card.style.setProperty('--cc', c.color);
+    card.innerHTML = `
+      <div class="cl-emoji">${c.emoji}</div>
+      <div class="cl-name">${c.name}</div>
+      <div class="cl-tag">${c.tagline}</div>
+      <div class="cl-toggle-hint">Tap to explore <span>→</span></div>
+      <div class="cl-details">
+        <div class="cl-dl">Example Jobs</div>
+        <div class="cl-jobs">${c.jobs}</div>
+        <div class="cl-dl">Education Paths</div>
+        <ul class="cl-edu">${c.edu.map(e=>`<li>${e}</li>`).join('')}</ul>
+        <div class="cl-fact">✦ ${c.fact}</div>
+        <div class="cl-close-hint">Tap to close ↑</div>
+      </div>`;
+    card.onclick = () => toggleCl(card);
+    grid.appendChild(card);
+  });
+}
+
+function toggleCl(card) {
+  const open = card.classList.contains('open');
+  document.querySelectorAll('.cl-card').forEach(c => c.classList.remove('open'));
+  if (!open) { card.classList.add('open'); card.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+}
+
+// ══════════════════════════════════════════
+// KNOWLEDGE CHECK
+// ══════════════════════════════════════════
+function buildCheck() {
+  matchSelPath = null; matchSelCluster = null; matchScore = 0; matchDone = {};
+  document.getElementById('checkScoreWrap').style.display = 'none';
+  document.getElementById('checkFoot').style.display = 'none';
+  document.getElementById('matchFb').textContent = '';
+  document.getElementById('matchInstr').textContent = 'Select an education path on the left, then select its matching career cluster on the right.';
+
+  const pathsEl = document.getElementById('matchPaths');
+  const clustersEl = document.getElementById('matchClusters');
+  pathsEl.innerHTML = ''; clustersEl.innerHTML = '';
+
+  const shuffled = [...MATCH_PAIRS.map(p => p.cluster)].sort(() => Math.random() - 0.5);
+
+  MATCH_PAIRS.forEach(pair => {
+    const el = document.createElement('div');
+    el.className = 'match-chip';
+    el.dataset.path = pair.path;
+    el.dataset.correct = pair.cluster;
+    el.textContent = pair.path;
+    el.onclick = () => pickPath(el);
+    pathsEl.appendChild(el);
+  });
+
+  shuffled.forEach(cl => {
+    const el = document.createElement('div');
+    el.className = 'match-chip';
+    el.dataset.cluster = cl;
+    el.textContent = cl;
+    el.onclick = () => pickCluster(el);
+    clustersEl.appendChild(el);
+  });
+}
+
+function pickPath(el) {
+  if (el.classList.contains('mc-done') || el.classList.contains('mc-dim')) return;
+  document.querySelectorAll('#matchPaths .match-chip').forEach(e => e.classList.remove('mc-sel'));
+  el.classList.add('mc-sel');
+  matchSelPath = el;
+  setFb('Now select the matching career cluster →', '');
+  if (matchSelCluster) doMatch();
+}
+
+function pickCluster(el) {
+  if (el.classList.contains('mc-done') || el.classList.contains('mc-dim')) return;
+  document.querySelectorAll('#matchClusters .match-chip').forEach(e => e.classList.remove('mc-sel'));
+  el.classList.add('mc-sel');
+  matchSelCluster = el;
+  if (matchSelPath) doMatch();
+}
+
+function doMatch() {
+  const p = matchSelPath, cl = matchSelCluster;
+  if (cl.dataset.cluster === p.dataset.correct) {
+    p.classList.remove('mc-sel'); p.classList.add('mc-done');
+    cl.classList.remove('mc-sel'); cl.classList.add('mc-done');
+    matchScore++;
+    setFb('✅ Nice work! Knowing your path is the first step to planning your future.', 'var(--green)');
+  } else {
+    p.classList.add('mc-wrong'); cl.classList.add('mc-wrong');
+    setFb('❌ Not quite — take another look at the cluster explorer and try again!', '#F87171');
+    setTimeout(() => {
+      p.classList.remove('mc-wrong','mc-sel');
+      cl.classList.remove('mc-wrong','mc-sel');
+      setFb('Select an education path, then select its matching career cluster.', '');
+    }, 1500);
+  }
+  matchSelPath = null; matchSelCluster = null;
+  if (document.querySelectorAll('#matchPaths .mc-done').length === MATCH_PAIRS.length) finishCheck();
+}
+
+function setFb(msg, color) {
+  const fb = document.getElementById('matchFb');
+  fb.textContent = msg;
+  fb.style.color = color || 'var(--muted)';
+}
+
+function finishCheck() {
+  completedSteps.add('s4');
+  document.getElementById('checkScoreWrap').style.display = 'block';
+  document.getElementById('scoreBig').textContent = `${matchScore}/${MATCH_PAIRS.length}`;
+  document.getElementById('checkFoot').style.display = 'flex';
+  setFb(matchScore === MATCH_PAIRS.length
+    ? "🎉 Perfect! You're already thinking like someone who knows where they're headed!"
+    : `Great effort! You matched ${matchScore} out of ${MATCH_PAIRS.length} correctly.`, 'var(--green)');
+  updateStepper();
+}
+
+function resetCheck() { buildCheck(); }
+
+// ══════════════════════════════════════════
+// PATH OPTIONS
+// ══════════════════════════════════════════
+document.addEventListener('click', e => {
+  const opt = e.target.closest('.path-opt');
+  if (!opt) return;
+  document.querySelectorAll('.path-opt').forEach(o => o.classList.remove('sel'));
+  opt.classList.add('sel');
+});
+
+// ══════════════════════════════════════════
+// ACTION PLAN & REPORT
+// ══════════════════════════════════════════
+function gatherPlan() {
+  const checks = [...document.querySelectorAll('.p2check:checked')].map(c => c.value);
+  const path = document.querySelector('.path-opt.sel')?.querySelector('input')?.value || '(not selected)';
+  return {
+    cluster: document.getElementById('p1Cluster').value || '(not selected)',
+    surprise: document.getElementById('p1Surprise').value || '(not filled in)',
+    job: document.getElementById('p2Job').value || '(not filled in)',
+    checks: checks.length ? checks : ['(none selected)'],
+    path,
+    excited: document.getElementById('p3Excited').value || '(not filled in)',
+    action: document.getElementById('p4Action').value || '(not filled in)',
+    person: document.getElementById('p4Person').value || '(not filled in)',
+  };
+}
+
+function populatePrintReport(plan) {
+  document.getElementById('pr-date').textContent = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+  const rc = resultCluster || CLUSTERS[0];
+  document.getElementById('pr-cluster-badge').textContent = rc.emoji + '  ' + rc.name;
+  document.getElementById('pr-cluster-desc').textContent = rc.result;
+  document.getElementById('pr-s1-cluster').textContent = plan.cluster;
+  document.getElementById('pr-s1-surprise').textContent = plan.surprise;
+  document.getElementById('pr-s2-job').textContent = plan.job;
+  const checksList = document.getElementById('pr-s2-checks');
+  checksList.innerHTML = plan.checks.map(c => `<li>${c}</li>`).join('');
+  document.getElementById('pr-s3-path').textContent = plan.path;
+  document.getElementById('pr-s3-excited').textContent = plan.excited;
+  document.getElementById('pr-s4-action').textContent = plan.action;
+  document.getElementById('pr-s4-person').textContent = plan.person;
+}
+
+function buildReportHTML(plan) {
+  const rc = resultCluster || CLUSTERS[0];
+  const date = new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+  const checkItems = plan.checks.map(c => `<li>${c}</li>`).join('');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My What's Next Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Outfit',sans-serif;background:#FAFAFF;color:#1A1A2E;padding:48px 40px;max-width:780px;margin:0 auto}
+  .header{border-bottom:4px solid #C084FC;padding-bottom:20px;margin-bottom:32px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+  .header-left h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#1A1A2E;margin-bottom:4px}
+  .header-left p{font-size:13px;color:#888}
+  .header-right{font-size:12px;color:#AAA;text-align:right}
+  .cluster-hero{background:linear-gradient(135deg,#F3E8FF,#E0F7FF);border-radius:16px;padding:24px;margin-bottom:24px;display:flex;align-items:center;gap:16px}
+  .cluster-emoji{font-size:3rem}
+  .cluster-you{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#9333EA;margin-bottom:4px}
+  .cluster-name{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#1A1A2E;margin-bottom:8px}
+  .cluster-desc{font-size:13px;color:#555;line-height:1.7}
+  .section{background:#fff;border:1px solid #E8E8F4;border-radius:14px;padding:20px 24px;margin-bottom:16px}
+  .section-title{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#C084FC;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #F0E8FF}
+  .row{margin-bottom:14px}
+  .row:last-child{margin-bottom:0}
+  .lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#AAA;margin-bottom:4px}
+  .val{font-size:13px;color:#333;line-height:1.6}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:#F3E8FF;border-radius:8px;padding:5px 12px;font-weight:600;font-size:13px;color:#7C3AED}
+  ul.checks{list-style:none;padding:0}
+  ul.checks li{font-size:13px;padding:3px 0;color:#333;display:flex;align-items:flex-start;gap:6px}
+  ul.checks li::before{content:'✓';color:#7C3AED;font-weight:700;flex-shrink:0}
+  .footer{margin-top:32px;padding-top:16px;border-top:1px solid #E8E8F4;font-size:11px;color:#CCC;text-align:center}
+  @media print{body{padding:24px;background:#fff}.section{break-inside:avoid}}
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <h1>What's Next? — My Action Plan</h1>
+      <p>Personal Career Exploration Report</p>
+    </div>
+    <div class="header-right">${date}</div>
+  </div>
+
+  <div class="cluster-hero">
+    <div class="cluster-emoji">${rc.emoji}</div>
+    <div>
+      <div class="cluster-you">Your Result</div>
+      <div class="cluster-name">${rc.name}</div>
+      <div class="cluster-desc">${rc.result}</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Step 1 — What I Discovered About Myself</div>
+    <div class="row"><div class="lbl">My top interest cluster</div><div class="val"><span class="badge">${plan.cluster}</span></div></div>
+    <div class="row"><div class="lbl">Something that surprised me</div><div class="val">${plan.surprise}</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Step 2 — Careers I Want to Explore</div>
+    <div class="row"><div class="lbl">Job title that caught my attention</div><div class="val">${plan.job}</div></div>
+    <div class="row"><div class="lbl">I want to learn more about</div><ul class="checks">${checkItems}</ul></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Step 3 — My Path After High School</div>
+    <div class="row"><div class="lbl">My plan after graduation</div><div class="val">${plan.path}</div></div>
+    <div class="row"><div class="lbl">What excites me about my future</div><div class="val">${plan.excited}</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Step 4 — My Next Steps This Year</div>
+    <div class="row"><div class="lbl">One thing I can do to prepare</div><div class="val">${plan.action}</div></div>
+    <div class="row"><div class="lbl">Person I can talk to</div><div class="val">${plan.person}</div></div>
+  </div>
+
+  <div class="footer">Generated by "What's Next?" Career Exploration Module · Every journey starts with a single step. ✨</div>
+</body>
+</html>`;
+}
+
+function previewPlan() {
+  const plan = gatherPlan();
+  const html = buildReportHTML(plan);
+  // open in a modal overlay
+  let modal = document.getElementById('report-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'report-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;padding:1.5rem;overflow-y:auto';
+    modal.innerHTML = `
+      <div style="width:100%;max-width:780px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem">
+        <span style="font-family:'Syne',sans-serif;font-size:.8rem;color:#AAA;letter-spacing:.1em;text-transform:uppercase">Report Preview</span>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+          <button onclick="downloadReport()" style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#4ADE80,#22D3EE);border:none;border-radius:100px;padding:.65rem 1.4rem;font-size:.88rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;color:#000">↓ Download as PDF</button>
+          <button onclick="document.getElementById('report-modal').remove()" style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:.65rem 1.4rem;font-size:.88rem;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;color:#AAA">✕ Close</button>
+        </div>
+      </div>
+      <iframe id="report-frame" style="width:100%;max-width:780px;flex:1;min-height:80vh;border:none;border-radius:16px;background:#fff"></iframe>`;
+    document.body.appendChild(modal);
+  }
+  modal.style.display = 'flex';
+  const frame = document.getElementById('report-frame');
+  frame.srcdoc = html;
+}
+
+function downloadReport() {
+  const plan = gatherPlan();
+  const html = buildReportHTML(plan);
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = "whats-next-my-action-plan.html";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function completePlan() {
+  completedSteps.add('s5');
+  updateStepper();
+  const plan = gatherPlan();
+  launchConfetti();
+  goTo('s-complete');
+}
+
+// ══════════════════════════════════════════
+// CONFETTI
+// ══════════════════════════════════════════
+function launchConfetti() {
+  const colors = ['#FF6B35','#C084FC','#FB7185','#22D3EE','#4ADE80','#FCD34D','#ffffff'];
+  for (let i = 0; i < 90; i++) {
+    const d = document.createElement('div');
+    d.className = 'confetti-piece';
+    const size = 5 + Math.random() * 9;
+    d.style.cssText = `left:${Math.random()*100}vw;top:-15px;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${1.5+Math.random()*2.5}s;animation-delay:${Math.random()*.8}s`;
+    document.body.appendChild(d);
+    d.addEventListener('animationend', () => d.remove());
+  }
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+buildStepper();
+updateStepper();
+</script>
+</body>
+</html>

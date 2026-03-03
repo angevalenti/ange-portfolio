@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angela Valenti — Instructional Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <div class="nav-logo">Angela <em>Valenti</em></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" class="active" onclick="showPage('home',this);return false;">Home</a></li>
+      <li><a href="#" onclick="showPage('portfolio',this);return false;">Portfolio</a></li>
+      <li><a href="#" onclick="showPage('about',this);return false;">About</a></li>
+
+      <li><a href="#" onclick="showPage('contact',this);return false;">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main>
+
+    <!-- ══ HOME ══ -->
+    <div id="page-home" class="page active">
+
+      <div class="hero">
+
+        <div class="hero-inner">
+
+          <!-- Top: kicker -->
+          <div class="hero-kicker">
+            <span class="hero-kicker-line"></span>
+            Instructional Designer &amp; Educator
+            <span class="hero-kicker-line"></span>
+          </div>
+
+          <!-- Center: name -->
+          <h1 class="hero-name">Angela<br><em>Valenti.</em></h1>
+
+          <!-- Photo + tagline row -->
+          <div class="hero-mid">
+            <div class="hero-tagline-left">"Educator by training,<br>designer by nature."</div>
+            <div class="hero-photo-wrap">
+              <img src="assets/images/IMG_9140.jpg" class="hero-photo" alt="Angela Valenti" />
+              <div class="hero-photo-lime"></div>
+            </div>
+            <div class="hero-tagline-right">
+              <p class="hero-desc">I design learning experiences that are educationally grounded and visually intentional.</p>
+              <div class="hero-ctas">
+                <button class="btn btn-primary" onclick="showPage('portfolio',null)">View Work →</button>
+                <button class="btn btn-ghost" onclick="showPage('contact',null)">Get in Touch</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats row -->
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-num">K–12</div>
+              <div class="hero-stat-label">Certified Educator</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">3</div>
+              <div class="hero-stat-label">Teaching Credentials</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">ESL</div>
+              <div class="hero-stat-label">Language Specialist</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">BA</div>
+              <div class="hero-stat-label">Graphic Design</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Color block strip -->
+      <div class="color-strip">
+        <span class="strip-label">Philosophy</span>
+        <p class="strip-text">"Aesthetics aren't separate from learning. They're part of it."</p>
+        <div class="strip-accent"></div>
+      </div>
+
+    </div>
+
+    <!-- ══ PORTFOLIO ══ -->
+    <div id="page-portfolio" class="page">
+      <div class="portfolio-section">
+        <div class="portfolio-header">
+          <h1 class="portfolio-title">Portfolio</h1>
+          <div class="filter-row">
+            <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
+            <button class="filter-btn" onclick="filterCards('elearning',this)">E-Learning</button>
+            <button class="filter-btn" onclick="filterCards('curriculum',this)">Curriculum</button>
+            <button class="filter-btn" onclick="filterCards('design',this)">Design</button>
+          </div>
+        </div>
+        <div class="portfolio-grid" id="pgrid">
+          <div class="p-card" data-cat="elearning">
+            <div class="p-card-thumb">
+              <span class="p-card-tag">E-Learning</span>
+              <div class="p-card-num">01</div>
+            </div>
+            <div class="p-card-body">
+              <a href="projects/project-template.html" class="p-card-title">The Pursuit of Happyness</a>
+              <div class="p-card-desc">Interactive ESL lesson differentiated across three WIDA-aligned proficiency levels. Fully coded in HTML/CSS/JS.</div>
+              <a href="projects/project-template.html" class="p-card-link">View Project →</a>
+            </div>
+          </div>
+          <div class="p-card" data-cat="elearning">
+            <div class="p-card-thumb">
+              <span class="p-card-tag">E-Learning</span>
+              <div class="p-card-num">02</div>
+            </div>
+            <div class="p-card-body">
+              <a href="projects/whats-next.html" class="p-card-title">Career Exploration</a>
+              <div class="p-card-desc">An interactive career exploration module guiding high school students from self-discovery to action planning</div>
+              <a href="projects/whats-next.html" class="p-card-link">View Project →</a>
+            </div>
+          </div>
+          <div class="p-card" data-cat="curriculum">
+            <div class="p-card-thumb">
+              <span class="p-card-tag">Curriculum</span>
+              <div class="p-card-num">03</div>
+            </div>
+            <div class="p-card-body">
+              <a href="projects/esl-lesson.html" class="p-card-title">ESL Lesson Template</a>
+              <div class="p-card-desc">Multi-week unit plan with differentiated instruction, scaffolded objectives, and formative assessment.</div>
+              <a href="projects/esl-lesson.html" class="p-card-link">View Project →</a>
+            </div>
+          </div>
+          <div class="p-card" data-cat="curriculum">
+            <div class="p-card-thumb">
+              <span class="p-card-tag">Curriculum</span>
+              <div class="p-card-num">04</div>
+            </div>
+            <div class="p-card-body">
+              <div class="p-card-title">Visual Arts Curriculum</div>
+              <div class="p-card-desc">K–12 arts curriculum with cross-curricular connections, standards alignment, and project-based learning.</div>
+              <a href="#" class="p-card-link">View Project →</a>
+            </div>
+          </div>
+          <div class="p-card" data-cat="design">
+            <div class="p-card-thumb">
+              <span class="p-card-tag">Visual Design</span>
+              <div class="p-card-num">05</div>
+            </div>
+            <div class="p-card-body">
+              <div class="p-card-title">Instructional Media</div>
+              <div class="p-card-desc">Infographics, visual aids, and instructional graphics combining design clarity with educational content.</div>
+              <a href="#" class="p-card-link">View Project →</a>
+            </div>
+          </div>
+          <div class="p-card" data-cat="design">
+            <div class="p-card-thumb">
+              <span class="p-card-tag">Visual Design</span>
+              <div class="p-card-num">06</div>
+            </div>
+            <div class="p-card-body">
+              <div class="p-card-title">Graphic Design Portfolio</div>
+              <div class="p-card-desc">Design and art direction from Penn Foster Group and All About Dance, Inc. — Adobe Creative Suite and Figma.</div>
+              <a href="#" class="p-card-link">View Project →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ABOUT ══ -->
+    <div id="page-about" class="page">
+      <div class="about-section">
+        <div class="about-left">
+          <div class="about-num">AV</div>
+          <div class="about-photo-wrap">
+            <img class="about-photo" src="assets/images/IMG_9140.jpg" id="aboutPhoto" alt="Angela Valenti" style="display:block" />
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="about-kicker">Who I Am</div>
+          <h1 class="about-headline">Educator by training,<br><em>designer by nature.</em></h1>
+          <div class="about-body">
+            <p>I'm a certified K–12 educator with credentials in ESL, Art, and Special Education, and a background in graphic design. For years I worked in classrooms — developing curriculum, supporting diverse learners, and building instructional materials from scratch.</p>
+            <p>That foundation, combined with professional design experience at Penn Foster Group and All About Dance, Inc., puts me in a position most instructional designers don't have: I understand both sides of the table. The pedagogical rigor and the visual craft.</p>
+          </div>
+          <div class="about-tags">
+            <span class="about-tag featured">ESL Specialist</span>
+            <span class="about-tag featured">Instructional Design</span>
+            <span class="about-tag">K–12 Certified</span>
+            <span class="about-tag">Special Education</span>
+            <span class="about-tag">Visual Art</span>
+            <span class="about-tag">BA Graphic Design</span>
+            <span class="about-tag">Adobe Creative Suite</span>
+            <span class="about-tag">Figma</span>
+            <span class="about-tag">Canva</span>
+            <span class="about-tag">HTML / CSS</span>
+            <span class="about-tag">WIDA Standards</span>
+            <span class="about-tag">UDL</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;">
+
+            <div style="display:flex;justify-content:space-between;padding:0.75rem 0;border-top:1px solid var(--rule);font-size:0.82rem;">
+              <span style="color:var(--mid);">Open to</span>
+              <span>Full-time · Freelance · Contract</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:0.75rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:0.82rem;">
+              <span style="color:var(--mid);">LinkedIn</span>
+              <a href="https://linkedin.com/in/angelavalenti" style="color:var(--black);text-decoration:underline;text-underline-offset:3px;">angelavalenti →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONTACT ══ -->
+    <div id="page-contact" class="page">
+      <div class="contact-section">
+        <div class="contact-left">
+          <div class="contact-big">Let's<br><em>work<br>together.</em></div>
+          <div class="contact-info">
+
+            <div class="contact-info-item"><strong>Available For</strong>Full-time · Freelance · Contract</div>
+            <div class="contact-info-item"><strong>Focus</strong>E-Learning · Instructional Design · Curriculum</div>
+            <div class="contact-info-item"><strong>LinkedIn</strong><a href="https://linkedin.com/in/angelavalenti" style="color:var(--black);text-decoration:underline;text-underline-offset:3px;">angelavalenti</a></div>
+          </div>
+        </div>
+        <div class="contact-right">
+          <div class="contact-reach-kicker">Get in Touch</div>
+          <h2 class="contact-reach-head">Start a<br><em>conversation.</em></h2>
+          <div class="contact-links">
+            <div class="contact-link-row">
+              <span class="contact-link-label">Email</span>
+              <a class="contact-link-val"
+                 href="#"
+                 data-u="ange.valenti"
+                 data-d="gmail.com"
+                 onclick="this.href='mailto:'+this.dataset.u+'@'+this.dataset.d">ange.valenti&#64;gmail.com</a>
+            </div>
+            <div class="contact-link-row">
+              <span class="contact-link-label">LinkedIn</span>
+              <a class="contact-link-val"
+                 href="https://www.linkedin.com/in/angelavalenti/"
+                 target="_blank"
+                 rel="noopener noreferrer">angelavalenti →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-logo">Angela <em>Valenti</em></div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('portfolio',null);return false;">Portfolio</a>
+      <a href="#" onclick="showPage('about',null);return false;">About</a>
+      <a href="#" onclick="showPage('contact',null);return false;">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 Angela Valenti</p>
+  </footer>
+
+  <script>
+    // Nav scroll shadow
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Page switching
+    function showPage(id, linkEl) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      if (linkEl) linkEl.classList.add('active');
+      else {
+        document.querySelectorAll('.nav-links a').forEach(a => {
+          if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'" + id + "'")) a.classList.add('active');
+        });
+      }
+      window.scrollTo(0, 0);
+      document.getElementById('navLinks').classList.remove('open');
+    }
+
+    // Deep-link: show portfolio section if URL contains #portfolio
+    if (location.hash === '#portfolio') showPage('portfolio', null);
+
+    // Portfolio filter
+    function filterCards(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#pgrid .p-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+
+  </script>
+</body>
+</html>
