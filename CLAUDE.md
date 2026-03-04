@@ -21,6 +21,16 @@ toggles a `.active` class on `<div class="page">` containers — no routing libr
 
 ---
 
+## Deployment & Dev
+
+| | |
+|---|---|
+| GitHub repo | https://github.com/angevalenti/ange-portfolio.git |
+| GitHub Pages URL | https://angevalenti.github.io/ange-portfolio/ |
+| Local dev server | `python3 -m http.server 8000` → http://localhost:8000 |
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
