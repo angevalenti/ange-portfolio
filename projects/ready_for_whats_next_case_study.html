@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ready for What's Next — Angela Valenti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+
+    /* ── NAV BACK ── */
+    .nav-back {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mid); transition: color 0.2s;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-back:hover { color: var(--black); }
+    .nav-back::before {
+      content: '←'; font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+    .nav-back:hover::before { transform: translateX(-3px); }
+
+    /* ── HERO ── */
+    .project-hero {
+      background: #0e0e0e;
+      padding: 7rem 3rem 5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      text-align: center;
+    }
+    .project-hero-inner { max-width: 900px; margin: 0 auto; }
+    .project-hero-tag {
+      display: inline-block;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #1B6B6B; font-weight: 500;
+      border: 1px solid rgba(27,107,107,0.3);
+      padding: 0.25rem 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .project-hero-title {
+      font-family: var(--font-body);
+      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.75rem;
+    }
+    .project-hero-desc {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3rem);
+      font-weight: 300; line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: #f8f8f4;
+      max-width: 700px; margin: 0 auto;
+    }
+
+    /* ── LAUNCH BUTTON ── */
+    .project-launch-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 1.1rem 3rem;
+      background: #1B6B6B; color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .project-launch-btn:hover {
+      background: #145252;
+      transform: translateY(-2px);
+    }
+
+    /* ── STAT BAR ── */
+    .project-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-stat {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid var(--rule);
+      background: var(--white);
+    }
+    .project-stat:last-child { border-right: none; background: #1B6B6B; }
+    .project-stat-val {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--black); line-height: 1.1; margin-bottom: 0.4rem;
+    }
+    .project-stat-label {
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mid);
+    }
+    .project-stat:last-child .project-stat-val { color: #fff; }
+    .project-stat:last-child .project-stat-label { color: rgba(255,255,255,0.6); }
+
+    /* ── CONTENT SECTIONS ── */
+    .ps-section { padding: 6rem 3rem; }
+    .ps-section--light { background: #F8F4F4; }
+    .ps-section--dark  { background: #1a1a1a; }
+    .ps-section-inner  { max-width: 820px; margin: 0 auto; }
+
+    .ps-eyebrow {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 1rem;
+    }
+    .ps-section--light .ps-eyebrow { color: #1B6B6B; }
+    .ps-section--dark  .ps-eyebrow { color: #4DAAAA; }
+
+    .ps-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 300; line-height: 1.02;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.75rem;
+    }
+    .ps-section--light .ps-heading { color: #0e0e0e; }
+    .ps-section--dark  .ps-heading { color: #f8f8f4; }
+    .ps-heading em { font-style: italic; }
+
+    .ps-body {
+      font-family: var(--font-body);
+      font-size: 0.95rem; line-height: 1.85;
+      max-width: 580px;
+    }
+    .ps-section--light .ps-body { color: var(--mid); }
+    .ps-section--dark  .ps-body { color: rgba(248,248,244,0.5); }
+
+    /* ── TECH GRID ── */
+    .ps-tech-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border: 1px solid var(--rule);
+      margin-top: 1rem;
+    }
+    .ps-tech-item {
+      padding: 1.75rem 2rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .ps-tech-item:nth-child(3n) { border-right: none; }
+    .ps-tech-item:nth-last-child(-n+3) { border-bottom: none; }
+    .ps-tech-val {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 400;
+      color: var(--black); margin-bottom: 0.3rem;
+    }
+    .ps-tech-label {
+      font-size: 0.58rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mid);
+    }
+
+    /* ── BOTTOM CTA ── */
+    .ps-cta {
+      padding: 7rem 3rem;
+      background: #0e0e0e;
+      text-align: center;
+    }
+    .ps-cta-note {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 2rem; display: block;
+    }
+    .ps-cta .project-launch-btn {
+      padding: 1.4rem 4.5rem;
+      font-size: 0.75rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .project-hero { padding: 5rem 1.5rem 3.5rem; }
+      .project-stats { grid-template-columns: repeat(2, 1fr); }
+      .project-stat { border-bottom: 1px solid var(--rule); }
+      .project-stat:nth-child(2) { border-right: none; }
+      .project-stat:nth-child(4) { border-right: none; }
+      .project-stat:nth-child(3),
+      .project-stat:nth-child(4) { border-bottom: none; }
+      .ps-section { padding: 4rem 1.5rem; }
+      .ps-tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .ps-cta { padding: 5rem 1.5rem; }
+      .ps-cta .project-launch-btn { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .ps-tech-grid { grid-template-columns: 1fr; }
+      .ps-tech-item { border-right: none; border-bottom: 1px solid var(--rule); }
+      .ps-tech-item:last-child { border-bottom: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-back" href="../index.html#portfolio">Back to Portfolio</a>
+    <a class="nav-logo" href="../index.html">Angela <em>Valenti</em></a>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="project-hero">
+      <div class="project-hero-inner">
+        <span class="project-hero-tag">Instructional Design · ESL · Curriculum</span>
+        <h1 class="project-hero-title">Ready for What's Next</h1>
+        <p class="project-hero-desc">A 5-unit WIDA-differentiated digital literacy curriculum for high school ELLs — designed from pedagogy up, with a custom design system for every grade band.</p>
+      </div>
+    </section>
+
+    <!-- STAT BAR -->
+    <div class="project-stats">
+      <div class="project-stat">
+        <div class="project-stat-val">5 Units</div>
+        <div class="project-stat-label">Curriculum Scope</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">Grades 9–12</div>
+        <div class="project-stat-label">Audience</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">WIDA 1–5</div>
+        <div class="project-stat-label">Differentiation</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">Unit 1 ✓</div>
+        <div class="project-stat-label">Status</div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="ps-section ps-section--light">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">Overview</span>
+        <h2 class="ps-heading">Built for the classroom.<br><em>Designed for everyone.</em></h2>
+        <p class="ps-body">Ready for What's Next is a 5-unit high school ESL curriculum covering digital literacy, AI tools, financial basics, workplace communication, and college/career readiness. Every unit is WIDA-differentiated across all 5 proficiency levels — so every student in the room gets the same lesson, at the right entry point.</p>
+      </div>
+    </section>
+
+    <!-- THE CHALLENGE -->
+    <section class="ps-section ps-section--dark">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">The Challenge</span>
+        <h2 class="ps-heading">WIDA-aligned content<br><em>shouldn't mean five different lessons.</em></h2>
+        <p class="ps-body">High school ELL students are often handed worksheets while their peers use polished digital tools. The goal was to build something that felt like a real career resource — not a school handout — while meeting every learner where they are. One file. Five levels. No compromises on design.</p>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="ps-section ps-section--light">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">Approach</span>
+        <h2 class="ps-heading">Five levels.<br><em>One color system.</em></h2>
+        <p class="ps-body">Each WIDA proficiency level gets its own color — not arbitrarily, but grounded in the WIDA Can-Do Descriptors for Grades 9–12. Color isn't decoration here; it's a navigation system. Students and teachers can locate the right entry point at a glance, and every activity, scaffold, and prompt is coded to match. The result is a single lesson that holds five differentiated pathways without ever feeling fragmented.</p>
+      </div>
+    </section>
+
+    <!-- TECHNICAL DETAILS -->
+    <section class="ps-section ps-section--light" style="padding-top: 0;">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">Technical Details</span>
+        <div class="ps-tech-grid">
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">HTML / CSS / JS</div>
+            <div class="ps-tech-label">Languages</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">Browser-based</div>
+            <div class="ps-tech-label">Delivery</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">No LMS Required</div>
+            <div class="ps-tech-label">Dependencies</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">WIDA 1–5</div>
+            <div class="ps-tech-label">Proficiency Range</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">Python + ReportLab</div>
+            <div class="ps-tech-label">Printables</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">GitHub Pages</div>
+            <div class="ps-tech-label">Hosting</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM CTA -->
+    <section class="ps-cta">
+      <span class="ps-cta-note">Curriculum Documentation</span>
+      <a class="project-launch-btn" href="project_handoff.html">View Project Handoff →</a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Angela <em>Valenti</em></div>
+    <div class="footer-links">
+      <a href="../index.html">Portfolio</a>
+      <a href="../index.html">About</a>
+      <a href="../index.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 Angela Valenti</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
+</body>
+</html>
