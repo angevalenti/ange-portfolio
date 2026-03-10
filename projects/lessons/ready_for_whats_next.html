@@ -11,15 +11,42 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #0B0B12;
-      --card-bg:      #151520;
-      --border:       #2A2A3C;
-      --text-primary: #F0F0F5;
+      /* ── Base palette (dark mode default) ── */
+      --bg:             #0B0B12;
+      --card-bg:        #151520;
+      --border:         #2A2A3C;
+      --text-primary:   #F0F0F5;
       --text-secondary: #A0A0B2;
-      --text-muted:   #8888A0;
-      --kw:           #46ECD5;
-      --prog-from:    #06D6A0;
-      --prog-to:      #00D4FF;
+      --text-muted:     #8888A0;
+      --kw:             #46ECD5;
+      --prog-from:      #06D6A0;
+      --prog-to:        #00D4FF;
+      /* ── Derived surface tokens ── */
+      --acc-num-bg:     #1E1E2E;
+      --tooltip-bg:     #1E1E2E;
+      --tooltip-border: #3A3A4C;
+      --tooltip-text:   #F0F0F5;
+      --track-bg:       rgba(255,255,255,0.05);
+      --option-bg:      rgba(255,255,255,0.018);
+      --hover-bg:       rgba(255,255,255,0.025);
+      --subtle-bg:      rgba(255,255,255,0.05);
+      --wida-bg:        rgba(21,21,32,0.92);
+    }
+
+    html.light-mode {
+      --bg:             #F5F5F7;
+      --card-bg:        #FFFFFF;
+      --border:         rgba(0,0,0,0.10);
+      --text-primary:   #0B0B12;
+      --text-secondary: #555566;
+      --text-muted:     #888899;
+      --kw:             #0A7A6A;
+      --acc-num-bg:     #EEEEEF;
+      --track-bg:       #E0E0E5;
+      --option-bg:      rgba(0,0,0,0.02);
+      --hover-bg:       rgba(0,0,0,0.035);
+      --subtle-bg:      rgba(0,0,0,0.04);
+      --wida-bg:        rgba(245,245,247,0.95);
     }
 
     html {
@@ -40,8 +67,8 @@
       z-index: 1001;
       display: flex;
       gap: 2px;
-      background: #151520;
-      border: 1px solid #2A2A3C;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 999px;
       padding: 3px;
     }
@@ -81,7 +108,7 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      background: rgba(21, 21, 32, 0.92);
+      background: var(--wida-bg);
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 6px 13px 6px 10px;
@@ -160,7 +187,7 @@
     }
     .progress-track {
       height: 8px;
-      background: rgba(255,255,255,0.05);
+      background: var(--track-bg);
       border-radius: 99px;
       overflow: hidden;
     }
@@ -394,13 +421,13 @@
       cursor: pointer;
       text-align: left;
     }
-    .acc-trigger:hover { background: rgba(255,255,255,0.018); }
+    .acc-trigger:hover { background: var(--hover-bg); }
 
     .acc-num {
       width: 26px; height: 26px;
       flex-shrink: 0;
       border-radius: 6px;
-      background: #1E1E2E;
+      background: var(--acc-num-bg);
       color: var(--text-muted);
       font-size: 0.75rem;
       font-weight: 600;
@@ -450,9 +477,9 @@
       left: 50%;
       top: calc(100% + 6px);
       transform: translateX(-50%);
-      background: #1E1E2E;
-      border: 1px solid #3A3A4C;
-      color: #F0F0F5;
+      background: var(--tooltip-bg);
+      border: 1px solid var(--tooltip-border);
+      color: var(--tooltip-text);
       font-family: 'Outfit', sans-serif;
       font-size: 0.77rem;
       font-weight: 400;
@@ -495,7 +522,7 @@
       justify-content: center;
       width: 36px; height: 36px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.05);
+      background: var(--subtle-bg);
       font-size: 1.1rem;
       flex-shrink: 0;
     }
@@ -552,7 +579,7 @@
 
     .quiz-mini-track {
       height: 4px;
-      background: rgba(255,255,255,0.05);
+      background: var(--track-bg);
       border-radius: 99px;
       overflow: hidden;
       margin-bottom: 22px;
@@ -581,7 +608,7 @@
       padding: 13px 15px;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.018);
+      background: var(--option-bg);
       cursor: pointer;
       font-size: 0.94rem;
       color: var(--text-secondary);
@@ -730,9 +757,50 @@
       color: var(--text-muted);
       line-height: 1.6;
     }
+
+    /* ─── Light-mode overrides ─── */
+    html.light-mode .unit-card {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    html.light-mode .progress-fill {
+      box-shadow: none;
+    }
+    html.light-mode .acc-item.open .acc-panel {
+      background: #EEEEEF;
+    }
+
+    /* ─── Theme Toggle ─── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      left: 20px;
+      z-index: 1001;
+    }
+    #theme-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      line-height: 1;
+    }
+    #theme-btn:hover {
+      background: var(--hover-bg);
+    }
   </style>
 </head>
 <body>
+
+<!-- Theme Toggle -->
+<div id="theme-toggle">
+  <button id="theme-btn" onclick="toggleTheme()" aria-label="Switch to light mode">🌙</button>
+</div>
 
 <!-- Language Toggle -->
 <div id="lang-toggle" role="group" aria-label="Select language">
@@ -1380,6 +1448,13 @@ function switchLang(lang) {
   } else {
     renderDashboard();
   }
+}
+
+function toggleTheme() {
+  const isLight = document.documentElement.classList.toggle('light-mode');
+  const btn = document.getElementById('theme-btn');
+  btn.textContent = isLight ? '☀️' : '🌙';
+  btn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
 }
 
 /* ══════════════════════════════════════════════
