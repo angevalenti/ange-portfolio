@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raising Humans in the Age of Algorithms</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --text-base: #1A1A2E;
+  --text-secondary: #4A4A6A;
+  --bg: #FFFFFF;
+  --border-light: #e5e7eb;
+  --max-width: 860px;
+  --green-correct: #22C55E;
+  --red-incorrect: #EF4444;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: #FFFFFF;
+  color: var(--text-base);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+/* STICKY SCORE TRACKER */
+#score-tracker {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-light);
+  padding: 14px 24px;
+  text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-base);
+  letter-spacing: 0.01em;
+}
+
+/* WRAPPER */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* HERO */
+.hero {
+  padding: 80px 0 64px;
+}
+
+.hero-label {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text-base);
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 40px;
+  max-width: 680px;
+}
+
+/* STAT CALLOUT */
+.stat-callout {
+  background: rgba(204, 255, 0, 0.08);
+  border-left: 5px solid #CCFF00;
+  padding: 24px 28px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 56px;
+  font-size: 1.05rem;
+  color: var(--text-base);
+  line-height: 1.75;
+}
+
+/* UNIT NAV GRID */
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+.nav-card {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  border: 1px solid var(--border-light);
+}
+
+.nav-card:hover {
+  transform: translateY(-2px);
+}
+
+.nav-card-unit {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.nav-card-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text-base);
+  line-height: 1.3;
+}
+
+/* SECTION DIVIDER */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 0;
+}
+
+/* UNIT SECTION */
+.unit-section {
+  padding: 80px 0 64px;
+}
+
+.unit-section + .unit-section {
+  border-top: 1px solid var(--border-light);
+}
+
+/* UNIT HEADER */
+.unit-header {
+  margin-bottom: 36px;
+}
+
+.unit-label {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.unit-title-wrap {
+  border-left: 4px solid;
+  padding-left: 20px;
+}
+
+.unit-title-wrap h2 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  color: var(--text-base);
+  line-height: 1.2;
+}
+
+/* INTRO PARAGRAPH */
+.unit-intro {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  max-width: 800px;
+}
+
+/* PULL QUOTE */
+.pull-quote {
+  margin: 0 0 80px;
+  padding: 64px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pull-quote blockquote {
+  font-family: 'Manrope', sans-serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.4;
+  border-left: 5px solid;
+  padding-left: 28px;
+}
+
+/* ACCORDION */
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.accordion-item {
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+
+.accordion-trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-base);
+  gap: 16px;
+  border-left: 4px solid transparent;
+  transition: background 0.15s ease;
+}
+
+.accordion-trigger:hover {
+  background: rgba(0,0,0,0.02);
+}
+
+.accordion-trigger.open {
+  border-left-color: var(--unit-accent);
+}
+
+.accordion-chevron {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  display: inline-block;
+  transition: transform 0.25s ease;
+  color: var(--text-secondary);
+}
+
+.accordion-trigger.open .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  display: none;
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--border-light);
+}
+
+.accordion-body.open {
+  display: block;
+}
+
+.accordion-body p {
+  font-size: 0.975rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-top: 16px;
+}
+
+/* RESEARCH CALLOUT */
+.research-callout {
+  background: #FFFFFF;
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  margin-top: 20px;
+  border-left: 4px solid;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+.research-label {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.research-callout p {
+  font-size: 0.92rem !important;
+  margin-top: 0 !important;
+}
+
+/* QUIZ */
+.quiz-block {
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  padding: 32px 28px;
+  border-left: 4px solid;
+}
+
+.quiz-label {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.quiz-question {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-base);
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: #FFFFFF;
+  border: 2px solid;
+  border-radius: 6px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-base);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.quiz-btn:hover:not(:disabled) {
+  color: #FFFFFF;
+}
+
+.quiz-btn:disabled {
+  cursor: default;
+}
+
+.quiz-btn.correct {
+  background: #22C55E !important;
+  border-color: #22C55E !important;
+  color: #FFFFFF !important;
+}
+
+.quiz-btn.incorrect {
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+  color: #FFFFFF !important;
+}
+
+.quiz-feedback {
+  margin-top: 16px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: var(--text-base);
+  display: none;
+}
+
+.quiz-feedback.show {
+  display: block;
+}
+
+.quiz-feedback.is-correct {
+  color: #16a34a;
+}
+
+.quiz-feedback.is-incorrect {
+  color: #dc2626;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero { padding: 60px 0 48px; }
+  .unit-section { padding: 60px 0 48px; }
+  .pull-quote { padding: 48px 0; margin-bottom: 60px; }
+  .pull-quote blockquote { font-size: 1.3rem; }
+}
+
+@media (max-width: 480px) {
+  .nav-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 { font-size: 1.75rem; }
+  .quiz-block { padding: 24px 20px; }
+  .accordion-trigger { padding: 18px 20px; }
+  .accordion-body { padding: 0 20px 20px; }
+}
+
+/* UNIT COLOR CLASSES */
+.u1 { --unit-accent: #00F5FF; --unit-accent2: #CCFF00; }
+.u2 { --unit-accent: #FF2D78; --unit-accent2: #FF6B00; }
+.u3 { --unit-accent: #FFE600; --unit-accent2: #FF4D4D; }
+.u4 { --unit-accent: #39FF14; --unit-accent2: #0066FF; }
+.u5 { --unit-accent: #FF2D78; --unit-accent2: #FF6B00; }
+.u6 { --unit-accent: #00F5FF; --unit-accent2: #CCFF00; }
+.u7 { --unit-accent: #39FF14; --unit-accent2: #0066FF; }
+.u8 { --unit-accent: #FFE600; --unit-accent2: #FF4D4D; }
+
+/* ENHANCEMENT 1 — HERO BACKGROUND IMAGE */
+.hero-dark {
+  background-color: #08080F;
+  background-image: url('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1600');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.hero-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,8,15,0.7) 0%, rgba(8,8,15,0.95) 100%);
+  z-index: 0;
+}
+.hero-dark .container {
+  position: relative;
+  z-index: 1;
+}
+.hero-dark .hero-label { color: rgba(255,255,255,0.6); }
+.hero-dark .hero h1 { color: #FFFFFF; }
+.hero-dark .hero-subtitle { color: rgba(255,255,255,0.75); }
+.hero-dark .stat-callout {
+  background: rgba(204,255,0,0.1);
+  border-color: #CCFF00;
+  color: rgba(255,255,255,0.9);
+}
+.hero-dark .nav-card {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
+}
+.hero-dark .nav-card-title { color: #FFFFFF; }
+.hero-dark .section-divider { border-color: rgba(255,255,255,0.12); }
+
+/* ENHANCEMENT 2 — CONTEXTUAL SECTION IMAGES */
+.unit-hero-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+  margin-bottom: 0;
+}
+.unit-hero-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.unit-hero-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 85%);
+}
+
+/* ENHANCEMENT 3 — INTERSTITIAL BANDS */
+.interstitial-band {
+  background: #0D0D0D;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  padding: 64px 40px;
+  text-align: center;
+}
+.interstitial-band p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 2.2rem;
+  line-height: 1.35;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .interstitial-band p { font-size: 1.5rem; }
+  .interstitial-band { padding: 48px 24px; }
+}
+
+/* ENHANCEMENT 4 — OPENER BLOCKS */
+.opener-block {
+  position: relative;
+  width: 100%;
+  padding: 48px 40px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+.opener-block-heading {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.45;
+  position: relative;
+  z-index: 1;
+}
+.opener-block-deco {
+  position: absolute;
+  right: -0.1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 10rem;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+/* ENHANCEMENT 5/6 — INFOGRAPHIC CONTAINERS */
+.infographic-container { position: relative; }
+
+@media (max-width: 600px) {
+  .brain-timeline-desktop { display: none !important; }
+  .brain-timeline-mobile { display: block !important; }
+  .infographic-container [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY SCORE TRACKER -->
+<div id="score-tracker">Quiz Score: <span id="score-display">0</span> / 8</div>
+
+<div class="hero-dark">
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-label">An E-Learning Module for Parents</p>
+    <h1>Raising Humans in the Age of Algorithms</h1>
+    <p class="hero-subtitle">What every parent needs to know about technology, screens, and the developing mind — no sugarcoating.</p>
+
+    <div class="stat-callout">
+      The average child in the US receives their first smartphone at age 10. The average teen spends 7+ hours per day on screens — not counting school. This course is about what that actually means.
+    </div>
+
+    <!-- UNIT NAV GRID -->
+    <nav class="nav-grid" aria-label="Course units">
+
+      <a class="nav-card" href="#unit-1" style="border-left: 4px solid #00F5FF;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(0,245,255,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#00F5FF;">Unit 1</div>
+        <div class="nav-card-title">The Developing Brain &amp; Screens</div>
+      </a>
+
+      <a class="nav-card" href="#unit-2" style="border-left: 4px solid #FF2D78;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(255,45,120,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#FF2D78;">Unit 2</div>
+        <div class="nav-card-title">The Early Years (Ages 0–5)</div>
+      </a>
+
+      <a class="nav-card" href="#unit-3" style="border-left: 4px solid #FFE600;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(255,230,0,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#b8a000;">Unit 3</div>
+        <div class="nav-card-title">The Elementary Years (Ages 6–11)</div>
+      </a>
+
+      <a class="nav-card" href="#unit-4" style="border-left: 4px solid #39FF14;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(57,255,20,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#22a800;">Unit 4</div>
+        <div class="nav-card-title">The Middle School Danger Zone (Ages 11–14)</div>
+      </a>
+
+      <a class="nav-card" href="#unit-5" style="border-left: 4px solid #FF2D78;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(255,45,120,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#FF2D78;">Unit 5</div>
+        <div class="nav-card-title">AI in School: What Parents Need to Know</div>
+      </a>
+
+      <a class="nav-card" href="#unit-6" style="border-left: 4px solid #00F5FF;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(0,245,255,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#00F5FF;">Unit 6</div>
+        <div class="nav-card-title">Online Safety Fundamentals</div>
+      </a>
+
+      <a class="nav-card" href="#unit-7" style="border-left: 4px solid #39FF14;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(57,255,20,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#22a800;">Unit 7</div>
+        <div class="nav-card-title">Building Healthy Tech Habits</div>
+      </a>
+
+      <a class="nav-card" href="#unit-8" style="border-left: 4px solid #FFE600;"
+         onmouseover="this.style.boxShadow='0 4px 24px rgba(255,230,0,0.35)'"
+         onmouseout="this.style.boxShadow=''">
+        <div class="nav-card-unit" style="color:#b8a000;">Unit 8</div>
+        <div class="nav-card-title">Resources &amp; Next Steps</div>
+      </a>
+
+    </nav>
+  </section>
+
+</div><!-- /container -->
+</div><!-- /hero-dark -->
+
+<hr class="section-divider">
+
+<!-- ===================== UNIT 1 ===================== -->
+<div class="container">
+<section class="unit-section u1" id="unit-1">
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 1</p>
+    <div class="unit-title-wrap" style="border-color: #00F5FF;">
+      <h2>The Developing Brain &amp; Screens</h2>
+    </div>
+  </div>
+
+  <!-- Enhancement 4 — Opener Block Unit 1 -->
+  <div class="opener-block" style="background: rgba(0,245,255,0.08); border-left: 6px solid #00F5FF; box-shadow: inset 4px 0 20px rgba(0,245,255,0.1);">
+    <div class="opener-block-heading" style="color: #1A1A2E;">The brain your child has today is still under construction — and its environment is the contractor.</div>
+    <div class="opener-block-deco" style="color: rgba(0,245,255,0.05);">1</div>
+  </div>
+
+  <p class="unit-intro">Before we talk about screen time rules or app restrictions, we need to talk about the brain — because without understanding how a child's brain actually develops, none of the other advice makes sense. The developing brain is not a smaller adult brain. It is a fundamentally different organ at a different stage of construction — and it is exquisitely sensitive to its environment.</p>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 1.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        How the brain builds itself
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The human brain is not fully developed until approximately age 25. From birth through adolescence, the brain undergoes dramatic structural changes: forming <strong style="color:#00F5FF;">synaptic connections</strong> at extraordinary speed in early childhood, then pruning and refining those connections throughout adolescence. The <strong style="color:#00F5FF;">prefrontal cortex</strong> — responsible for <strong style="color:#00F5FF;">impulse control</strong>, decision-making, risk assessment, and long-term thinking — is the last region to mature. This means children and teenagers are literally not neurologically equipped to <strong style="color:#00F5FF;">self-regulate</strong> technology use the way adults can. The environment children are immersed in during these years shapes the brain's wiring in lasting ways. The process of synaptic <strong style="color:#00F5FF;">pruning</strong> — where the brain eliminates unused connections — means that what children practice and experience during this window literally shapes which neural pathways are preserved.</p>
+        <div class="research-callout" style="border-color:#00F5FF; background:rgba(0,245,255,0.05);">
+          <div class="research-label" style="color:#00F5FF;">Research Says:</div>
+          <p>A landmark 2018 NIH study (the ABCD Study — Adolescent Brain Cognitive Development) found that children who spent more than 2 hours per day on screens scored lower on thinking and language tests. Brain scans showed differences in cortical thickness in children with higher screen time — changes in the very structure of the developing brain.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhancement 5 — Infographic 1: Brain Development Timeline -->
+    <div class="infographic-container" style="margin: 40px 0; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.07); border-radius: 12px; padding: 32px; position: relative; overflow: hidden;">
+      <div style="font-family: 'Manrope', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #00F5FF; margin-bottom: 12px;">[ INFOGRAPHIC ]</div>
+      <div style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #1A1A2E; font-weight: 700; margin-bottom: 32px;">The Brain Under Construction: Birth to Age 25</div>
+
+      <!-- Desktop horizontal timeline -->
+      <div class="brain-timeline-desktop" style="position: relative; padding: 60px 0 80px;">
+        <!-- Horizontal line -->
+        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 3px; background: #00F5FF; box-shadow: 0 0 10px #00F5FF; transform: translateY(-50%);"></div>
+
+        <!-- Danger zone band (approx 10-18, so roughly 40%-72% of the timeline width) -->
+        <div style="position: absolute; top: calc(50% - 20px); left: 40%; width: 32%; height: 40px; background: rgba(0,245,255,0.1); transform: translateY(-50%);"></div>
+        <div style="position: absolute; top: calc(50% + 20px); left: 40%; font-size: 0.65rem; color: #00F5FF; white-space: nowrap; font-family: 'IBM Plex Sans', sans-serif; transform: translateY(4px);">▲ Highest vulnerability to digital environment</div>
+
+        <!-- Birth: 0% -->
+        <div style="position: absolute; left: 0%; top: 50%; transform: translate(-50%, -50%);">
+          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 10px #00F5FF; margin: 0 auto;"></div>
+          <div style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-bottom: 8px; white-space: nowrap;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.75rem;">Birth</div>
+          </div>
+          <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-top: 8px; white-space: nowrap;">
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; color: #4A4A6A; max-width: 90px; white-space: normal; text-align: center;">1M neural connections/sec</div>
+          </div>
+        </div>
+
+        <!-- Age 2: 20% -->
+        <div style="position: absolute; left: 20%; top: 50%; transform: translate(-50%, -50%);">
+          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 10px #00F5FF; margin: 0 auto;"></div>
+          <div style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-bottom: 8px; white-space: nowrap;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.75rem;">Age 2</div>
+          </div>
+          <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-top: 8px;">
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; color: #4A4A6A; max-width: 90px; white-space: normal; text-align: center;">Peak synaptic density</div>
+          </div>
+        </div>
+
+        <!-- Age 6: 40% -->
+        <div style="position: absolute; left: 40%; top: 50%; transform: translate(-50%, -50%);">
+          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 10px #00F5FF; margin: 0 auto;"></div>
+          <div style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-bottom: 8px; white-space: nowrap;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.75rem;">Age 6</div>
+          </div>
+          <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-top: 8px;">
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; color: #4A4A6A; max-width: 90px; white-space: normal; text-align: center;">Pruning accelerates</div>
+          </div>
+        </div>
+
+        <!-- Age 12: 56% -->
+        <div style="position: absolute; left: 56%; top: 50%; transform: translate(-50%, -50%);">
+          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 10px #00F5FF; margin: 0 auto;"></div>
+          <div style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-bottom: 8px; white-space: nowrap;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.75rem;">Age 12</div>
+          </div>
+          <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-top: 8px;">
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; color: #4A4A6A; max-width: 90px; white-space: normal; text-align: center;">Puberty reshapes reward circuits</div>
+          </div>
+        </div>
+
+        <!-- Age 18: 78% -->
+        <div style="position: absolute; left: 78%; top: 50%; transform: translate(-50%, -50%);">
+          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 10px #00F5FF; margin: 0 auto;"></div>
+          <div style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-bottom: 8px; white-space: nowrap;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.75rem;">Age 18</div>
+          </div>
+          <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-top: 8px;">
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; color: #4A4A6A; max-width: 90px; white-space: normal; text-align: center;">Still 7 years from full development</div>
+          </div>
+        </div>
+
+        <!-- Age 25: 100% -->
+        <div style="position: absolute; left: 100%; top: 50%; transform: translate(-50%, -50%);">
+          <div style="width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 10px #00F5FF; margin: 0 auto;"></div>
+          <div style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-bottom: 8px; white-space: nowrap;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.75rem;">Age 25</div>
+          </div>
+          <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); text-align: center; padding-top: 8px;">
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; color: #4A4A6A; max-width: 90px; white-space: normal; text-align: center;">Prefrontal cortex complete</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile vertical timeline (shown below 600px) -->
+      <div class="brain-timeline-mobile" style="display: none;">
+        <div style="position: relative; padding-left: 40px; border-left: 3px solid #00F5FF; box-shadow: -2px 0 10px rgba(0,245,255,0.3);">
+          <div style="margin-bottom: 28px; position: relative;">
+            <div style="position: absolute; left: -48px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 8px #00F5FF;"></div>
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.85rem;">Birth</div>
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">1M neural connections/sec</div>
+          </div>
+          <div style="margin-bottom: 28px; position: relative;">
+            <div style="position: absolute; left: -48px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 8px #00F5FF;"></div>
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.85rem;">Age 2</div>
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">Peak synaptic density</div>
+          </div>
+          <div style="margin-bottom: 28px; position: relative;">
+            <div style="position: absolute; left: -48px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 8px #00F5FF;"></div>
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.85rem;">Age 6</div>
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">Pruning accelerates</div>
+          </div>
+          <div style="margin-bottom: 28px; position: relative; background: rgba(0,245,255,0.07); padding: 8px; border-radius: 4px; margin-left: -8px;">
+            <div style="position: absolute; left: -48px; top: 10px; width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 8px #00F5FF;"></div>
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.85rem;">Age 12</div>
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">Puberty reshapes reward circuits</div>
+            <div style="font-size: 0.65rem; color: #00F5FF; margin-top: 4px;">▲ High vulnerability window begins</div>
+          </div>
+          <div style="margin-bottom: 28px; position: relative; background: rgba(0,245,255,0.07); padding: 8px; border-radius: 4px; margin-left: -8px;">
+            <div style="position: absolute; left: -48px; top: 10px; width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 8px #00F5FF;"></div>
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.85rem;">Age 18</div>
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">Still 7 years from full development</div>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -48px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #00F5FF; box-shadow: 0 0 8px #00F5FF;"></div>
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #00F5FF; font-size: 0.85rem;">Age 25</div>
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">Prefrontal cortex complete</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 1.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        The dopamine system and digital design
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><strong style="color:#00F5FF;">Dopamine</strong> is a neurotransmitter associated with <strong style="color:#00F5FF;">reward system</strong> activation, motivation, and learning. Every notification, like, and <strong style="color:#00F5FF;">autoplay</strong> video is engineered to trigger a small dopamine release — enough to reinforce the behavior and make the child want more. This is not accidental. The designers of these platforms have studied <strong style="color:#00F5FF;">behavioral design</strong> and apply it deliberately. For a child whose dopamine system is still developing, this creates a particularly powerful pull. Repeated dopamine spikes from fast-reward digital experiences can recalibrate the brain's baseline expectations for <strong style="color:#00F5FF;">stimulation threshold</strong> — making slower rewards like reading, conversation, or creative play feel less satisfying by comparison. The <strong style="color:#00F5FF;">reinforcement</strong> schedule used by social media platforms — variable rewards delivered unpredictably — is the same pattern that produces compulsive slot machine behavior.</p>
+        <div class="research-callout" style="border-color:#00F5FF; background:rgba(0,245,255,0.05);">
+          <div class="research-label" style="color:#00F5FF;">Research Says:</div>
+          <p>Former Google design ethicist Tristan Harris has described these techniques as "a race to the bottom of the brain stem" — deliberately exploiting the most primitive reward circuits.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 1.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        Attention, deep focus, and what screens disrupt
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><strong style="color:#00F5FF;">Sustained attention</strong> — the ability to focus on a single demanding task for an extended period — is a learned <strong style="color:#00F5FF;">cognitive skill</strong> that the developing brain must practice to build. Research from Microsoft and multiple academic sources has documented declining attention spans in populations with high digital media use. More significantly, the constant <strong style="color:#00F5FF;">task-switching</strong> demanded by notifications, feeds, and multi-tab browsing trains the brain toward shallow, <strong style="color:#00F5FF;">fragmented attention</strong> — the opposite of what academic learning, creative work, and complex problem-solving require. <strong style="color:#00F5FF;">Deep focus</strong> is not a trait — it is a skill that must be developed through practice, and it is precisely this practice that digital distraction interrupts. Dr. Gloria Mark at UC Irvine found it takes an average of 23 minutes to fully regain deep focus after an interruption. For children checking phones repeatedly throughout a homework session, meaningful deep learning may not be occurring at all.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 1.4 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        Sleep, screens, and the brain at night
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The brain consolidates memory, clears metabolic waste, and regulates emotion during sleep — particularly during deep slow-wave and <strong style="color:#00F5FF;">REM sleep</strong> cycles. <strong style="color:#00F5FF;">Blue light</strong> emitted by screens suppresses <strong style="color:#00F5FF;">melatonin</strong> production, delaying sleep onset and reducing sleep quality. Beyond blue light, the emotional stimulation from social media — comparison, conflict, excitement — elevates <strong style="color:#00F5FF;">cortisol</strong> and keeps the nervous system aroused long after the device is put down. The process of <strong style="color:#00F5FF;">sleep consolidation</strong> — where the brain encodes new information into long-term memory — is disrupted when sleep is shortened or fragmented. The American Academy of Pediatrics and the American Academy of Sleep Medicine both recommend no screens for at least one hour before bedtime. <strong style="color:#00F5FF;">Emotional regulation</strong> — a core skill adolescents need — is significantly impaired by sleep deprivation, creating a feedback loop where screen use disrupts sleep, poor sleep impairs regulation, and poor regulation drives more screen use as a coping mechanism.</p>
+        <div class="research-callout" style="border-color:#00F5FF; background:rgba(0,245,255,0.05);">
+          <div class="research-label" style="color:#00F5FF;">Research Says:</div>
+          <p>A 2023 study in JAMA Pediatrics found that adolescents who used screens after 9 PM had significantly higher rates of depressive symptoms and anxiety — independent of total screen time.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- Enhancement 6 — Infographic 2: Screen Time Stats -->
+  <div class="infographic-container" style="margin: 40px 0; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.07); border-radius: 12px; padding: 32px;">
+    <div style="font-family: 'Manrope', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #00F5FF; margin-bottom: 12px;">[ INFOGRAPHIC ]</div>
+    <div style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #1A1A2E; font-weight: 700; margin-bottom: 32px;">How Children Actually Spend Their Time</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+      <!-- Left: Bar chart -->
+      <div>
+        <div style="font-family: 'Manrope', sans-serif; font-size: 0.85rem; color: #4A4A6A; margin-bottom: 20px;">Average daily hours — US child aged 8–12</div>
+
+        <div style="margin-bottom: 16px;" class="bar-row">
+          <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #1A1A2E; margin-bottom: 5px;">
+            <span>Screen time</span><span style="color: #00F5FF; font-weight: 600;">7.5 hrs</span>
+          </div>
+          <div style="background: #f0f0f0; border-radius: 4px; height: 10px; overflow: hidden;">
+            <div class="bar-fill" data-width="75" style="width: 0%; height: 100%; background: #00F5FF; border-radius: 4px; box-shadow: 0 0 8px rgba(0,245,255,0.5); transition: width 1.2s ease;"></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;" class="bar-row">
+          <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #1A1A2E; margin-bottom: 5px;">
+            <span>Sleep</span><span style="color: #39FF14; font-weight: 600;">9 hrs</span>
+          </div>
+          <div style="background: #f0f0f0; border-radius: 4px; height: 10px; overflow: hidden;">
+            <div class="bar-fill" data-width="90" style="width: 0%; height: 100%; background: #39FF14; border-radius: 4px; box-shadow: 0 0 8px rgba(57,255,20,0.4); transition: width 1.2s ease 0.2s;"></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;" class="bar-row">
+          <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #1A1A2E; margin-bottom: 5px;">
+            <span>School</span><span style="color: #A855F7; font-weight: 600;">6.5 hrs</span>
+          </div>
+          <div style="background: #f0f0f0; border-radius: 4px; height: 10px; overflow: hidden;">
+            <div class="bar-fill" data-width="65" style="width: 0%; height: 100%; background: #A855F7; border-radius: 4px; box-shadow: 0 0 8px rgba(168,85,247,0.4); transition: width 1.2s ease 0.4s;"></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;" class="bar-row">
+          <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #1A1A2E; margin-bottom: 5px;">
+            <span>Outdoor free play</span><span style="color: #FF2D78; font-weight: 600;">~7 min</span>
+          </div>
+          <div style="background: #f0f0f0; border-radius: 4px; height: 10px; overflow: hidden;">
+            <div class="bar-fill" data-width="1" style="width: 0%; height: 100%; background: #FF2D78; border-radius: 4px; box-shadow: 0 0 8px rgba(255,45,120,0.4); transition: width 1.2s ease 0.6s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Donut chart (SVG) -->
+      <div style="text-align: center;">
+        <div style="font-family: 'Manrope', sans-serif; font-size: 0.85rem; color: #4A4A6A; margin-bottom: 16px;">Teen Screen Time Breakdown</div>
+        <div style="position: relative; display: inline-block;">
+          <svg width="180" height="180" viewBox="0 0 180 180" style="transform: rotate(-90deg);">
+            <circle cx="90" cy="90" r="70" fill="none" stroke="#FF2D78" stroke-width="30"
+              stroke-dasharray="153.9 439.8" stroke-dashoffset="0"/>
+            <circle cx="90" cy="90" r="70" fill="none" stroke="#A855F7" stroke-width="30"
+              stroke-dasharray="123.1 439.8" stroke-dashoffset="-153.9"/>
+            <circle cx="90" cy="90" r="70" fill="none" stroke="#00F5FF" stroke-width="30"
+              stroke-dasharray="87.96 439.8" stroke-dashoffset="-277"/>
+            <circle cx="90" cy="90" r="70" fill="none" stroke="#FFE600" stroke-width="30"
+              stroke-dasharray="74.8 439.8" stroke-dashoffset="-364.96"/>
+          </svg>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.3rem; color: #00F5FF;">7+</div>
+            <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.65rem; color: #4A4A6A;">hrs/day</div>
+          </div>
+        </div>
+        <div style="margin-top: 16px; text-align: left; display: inline-block;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; color: #4A4A6A;">
+            <div style="width: 12px; height: 12px; border-radius: 2px; background: #FF2D78; flex-shrink: 0;"></div> Social Media — 35%
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; color: #4A4A6A;">
+            <div style="width: 12px; height: 12px; border-radius: 2px; background: #A855F7; flex-shrink: 0;"></div> Video / YouTube — 28%
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; color: #4A4A6A;">
+            <div style="width: 12px; height: 12px; border-radius: 2px; background: #00F5FF; flex-shrink: 0;"></div> Gaming — 20%
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.78rem; color: #4A4A6A;">
+            <div style="width: 12px; height: 12px; border-radius: 2px; background: #FFE600; flex-shrink: 0;"></div> Other — 17%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 1 -->
+  <div class="quiz-block" style="border-color:#00F5FF;">
+    <div class="quiz-label" style="color:#00F5FF;">Unit 1 Quiz</div>
+    <p class="quiz-question">Which part of the brain responsible for impulse control and decision-making is the LAST to fully develop?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#00F5FF;"
+        onmouseover="if(!this.disabled)this.style.background='#00F5FF',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 1, 'Prefrontal cortex')">Amygdala</button>
+      <button class="quiz-btn" style="border-color:#00F5FF;"
+        onmouseover="if(!this.disabled)this.style.background='#00F5FF',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 1, 'Prefrontal cortex')">Prefrontal cortex</button>
+      <button class="quiz-btn" style="border-color:#00F5FF;"
+        onmouseover="if(!this.disabled)this.style.background='#00F5FF',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 1, 'Prefrontal cortex')">Hippocampus</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-1"></div>
+  </div>
+
+</section>
+</div>
+
+<hr class="section-divider">
+
+<!-- ===================== UNIT 2 ===================== -->
+<div class="container">
+<section class="unit-section u2" id="unit-2">
+
+  <!-- Enhancement 2 — Contextual Image Unit 2 -->
+  <div class="unit-hero-img-wrap">
+    <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1200" alt="" loading="lazy">
+    <div class="unit-hero-img-overlay"></div>
+  </div>
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 2</p>
+    <div class="unit-title-wrap" style="border-color: #FF2D78;">
+      <h2>The Early Years (Ages 0–5)</h2>
+    </div>
+  </div>
+
+  <p class="unit-intro">The first five years of life are the most critical window of brain development in a human lifespan. Language acquisition, attachment, emotional regulation, and foundational cognitive wiring are all being built during this period — and they are built through one primary mechanism: human interaction. Understanding what screens replace during this window is more important than any screen time number.</p>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 2.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        What zero to three actually means
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Between birth and age three, the brain forms approximately one million new <strong style="color:#FF2D78;">neural connections</strong> per second. These connections are built through <strong style="color:#FF2D78;">serve-and-return</strong> interaction — the back-and-forth of eye contact, facial expression, vocalization, and responsive touch between a child and a caregiver. <strong style="color:#FF2D78;">Language acquisition</strong> is not learned from video or audio alone at this age — it requires a live, <strong style="color:#FF2D78;">contingent interaction</strong> with a responsive human. The famous <strong style="color:#FF2D78;">video deficit effect</strong>, documented extensively in research, shows that children under 3 learn significantly less from screens — even educational content — than from identical live human interaction. This is not about screen time being harmful per se — it is about screens being an inefficient substitute for what the developing brain actually needs. The implication is not guilt — it is clarity about what the window requires.</p>
+        <div class="research-callout" style="border-color:#FF2D78; background:rgba(255,45,120,0.05);">
+          <div class="research-label" style="color:#FF2D78;">Research Says:</div>
+          <p>A 2016 study in JAMA Pediatrics found that each additional 30 minutes of daily handheld screen time in toddlers was associated with a 49% increased risk of expressive speech delay.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 2.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        The AAP guidelines — and what they actually mean
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The <strong style="color:#FF2D78;">AAP guidelines</strong> recommend: no screen time for children under 18–24 months (except video chat); limited, high-quality programming only for ages 2–5, <strong style="color:#FF2D78;">co-viewing</strong> with a parent; and consistent limits with screen-free time for ages 6 and up. These are not arbitrary rules. They are calibrated to <strong style="color:#FF2D78;">developmental windows</strong> — periods where displacement of human interaction carries measurable cost. <strong style="color:#FF2D78;">Video chat</strong> (FaceTime, Zoom) is specifically exempted because it maintains the contingent human interaction the brain needs. <strong style="color:#FF2D78;">Passive consumption</strong> — YouTube, streaming — does not. The co-viewing recommendation is significant: a parent who watches and talks about content with a child transforms a passive experience into an interactive one — partially compensating for the deficit, though not eliminating it.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 2.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        Attachment, distraction, and the divided parent
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Research on technology's impact on early childhood increasingly focuses not only on children's direct screen use — but on the distracted parent. A 2014 study published in Pediatrics observed playground interactions and found that parents absorbed in smartphones were less responsive to their children's <strong style="color:#FF2D78;">bids for connection</strong>, and children escalated risky behavior to recapture <strong style="color:#FF2D78;">parental responsiveness</strong>. The <strong style="color:#FF2D78;">still face experiment</strong> — a landmark developmental psychology study by Dr. Ed Tronick — demonstrates that even brief, unresponsive parental behavior causes measurable distress in infants. The smartphone is, in effect, a sophisticated still face machine for the modern parent. Understanding this is not about blame — it is about awareness. The phone creates a pattern of <strong style="color:#FF2D78;">attachment</strong> disruption that is invisible in the moment but cumulative in effect. Parents who understand this dynamic are better equipped to choose when to be fully present.</p>
+        <div class="research-callout" style="border-color:#FF2D78; background:rgba(255,45,120,0.05);">
+          <div class="research-label" style="color:#FF2D78;">Research Says:</div>
+          <p>A 2023 report from the Surgeon General cited evidence that parental smartphone use during key interaction windows can disrupt the serve-and-return process critical to infant brain development.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 2.4 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        Screens and language development
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><strong style="color:#FF2D78;">Vocabulary</strong>, grammar, and communication skills develop through rich, varied, back-and-forth conversation — what researchers call <strong style="color:#FF2D78;">language nutrition</strong>. Children who are talked to more, read to more, and engaged conversationally develop measurably larger vocabularies and stronger <strong style="color:#FF2D78;">literacy</strong> foundations. Background television — even when a child is not watching — reduces adult-child <strong style="color:#FF2D78;">conversational turns</strong> significantly. Studies show that for every hour of <strong style="color:#FF2D78;">background television</strong>, children hear approximately 770 fewer words from caregivers. The implications for language development compound over years — a child who hears significantly fewer words each day during the critical language window enters school with a measurably smaller vocabulary, and that gap is difficult to close. The solution is not complicated: talk, read, sing, and narrate. These are the inputs the developing language system is built for.</p>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- QUIZ 2 -->
+  <div class="quiz-block" style="border-color:#FF2D78;">
+    <div class="quiz-label" style="color:#FF2D78;">Unit 2 Quiz</div>
+    <p class="quiz-question">According to research, which type of screen activity is specifically EXEMPT from early childhood screen time restrictions because it preserves contingent human interaction?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#FF2D78;"
+        onmouseover="if(!this.disabled)this.style.background='#FF2D78',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 2, 'Video chat')">Educational YouTube videos</button>
+      <button class="quiz-btn" style="border-color:#FF2D78;"
+        onmouseover="if(!this.disabled)this.style.background='#FF2D78',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 2, 'Video chat')">Video chat</button>
+      <button class="quiz-btn" style="border-color:#FF2D78;"
+        onmouseover="if(!this.disabled)this.style.background='#FF2D78',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 2, 'Video chat')">Interactive learning apps</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-2"></div>
+  </div>
+
+</section>
+</div>
+
+<!-- Enhancement 3 — Interstitial Band: Between Units 2 and 3 -->
+<div class="container">
+  <div class="interstitial-band">
+    <p style="color: #FFE600;">The average child spends 4–7 minutes per day in unstructured outdoor play.</p>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ===================== UNIT 3 ===================== -->
+<div class="container">
+<section class="unit-section u3" id="unit-3">
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 3</p>
+    <div class="unit-title-wrap" style="border-color: #FFE600;">
+      <h2>The Elementary Years (Ages 6–11)</h2>
+    </div>
+  </div>
+
+  <p class="unit-intro">Elementary-age children are building identity, social skills, and the cognitive habits they'll carry into adulthood. This is the window when children learn how to learn — and it's increasingly being competed for by the gaming industry, YouTube's algorithm, and a device in every pocket. This is not about banning screens — it's about understanding what unstructured, creative, and social offline time is building, and what its absence costs.</p>
+
+  <!-- Enhancement 7 — Infographic 3: Age-by-Age Comparison Table -->
+  <div class="infographic-container" style="margin: 40px 0; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.07); border-radius: 12px; padding: 32px; overflow: hidden;">
+    <div style="font-family: 'Manrope', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #FFE600; margin-bottom: 12px;">[ INFOGRAPHIC ]</div>
+    <div style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #1A1A2E; font-weight: 700; margin-bottom: 24px;">What Children Are Doing Online by Age</div>
+
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.82rem; min-width: 560px;">
+        <thead>
+          <tr style="background: #0D0D0D;">
+            <th style="padding: 12px 14px; text-align: left; color: #FFE600; font-family: 'Manrope', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Age</th>
+            <th style="padding: 12px 14px; text-align: left; color: #FFE600; font-family: 'Manrope', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Primary Platform</th>
+            <th style="padding: 12px 14px; text-align: left; color: #FFE600; font-family: 'Manrope', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Avg Daily Time</th>
+            <th style="padding: 12px 14px; text-align: left; color: #FFE600; font-family: 'Manrope', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Top Risk</th>
+            <th style="padding: 12px 14px; text-align: left; color: #FFE600; font-family: 'Manrope', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Parent Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #fff; border-left: 4px solid #22C55E;">
+            <td style="padding: 12px 14px; font-weight: 600; color: #1A1A2E;">0–5</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">YouTube / streaming</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">2.5 hrs</td>
+            <td style="padding: 12px 14px;"><span style="background: rgba(34,197,94,0.15); color: #16a34a; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap;">Video deficit, language delay</span></td>
+            <td style="padding: 12px 14px; color: #4A4A6A; font-size: 0.78rem;">Co-view everything</td>
+          </tr>
+          <tr style="background: #F8F8FC; border-left: 4px solid #84CC16;">
+            <td style="padding: 12px 14px; font-weight: 600; color: #1A1A2E;">6–8</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">YouTube / gaming</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">3.5 hrs</td>
+            <td style="padding: 12px 14px;"><span style="background: rgba(132,204,22,0.15); color: #4d7c0f; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap;">Unfiltered content, gaming habits</span></td>
+            <td style="padding: 12px 14px; color: #4A4A6A; font-size: 0.78rem;">Content filters, time limits</td>
+          </tr>
+          <tr style="background: #fff; border-left: 4px solid #F59E0B;">
+            <td style="padding: 12px 14px; font-weight: 600; color: #1A1A2E;">9–11</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">Gaming / YouTube</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">5 hrs</td>
+            <td style="padding: 12px 14px;"><span style="background: rgba(245,158,11,0.15); color: #b45309; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap;">Algorithm escalation, social pressure</span></td>
+            <td style="padding: 12px 14px; color: #4A4A6A; font-size: 0.78rem;">Monitor platforms, protect sleep</td>
+          </tr>
+          <tr style="background: #F8F8FC; border-left: 4px solid #EF4444;">
+            <td style="padding: 12px 14px; font-weight: 600; color: #1A1A2E;">12–14</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">Instagram / TikTok / Discord</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">7 hrs</td>
+            <td style="padding: 12px 14px;"><span style="background: rgba(239,68,68,0.15); color: #b91c1c; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap;">Mental health, cyberbullying, grooming</span></td>
+            <td style="padding: 12px 14px; color: #4A4A6A; font-size: 0.78rem;">Open conversations, device-free bedroom</td>
+          </tr>
+          <tr style="background: #fff; border-left: 4px solid #991B1B;">
+            <td style="padding: 12px 14px; font-weight: 600; color: #1A1A2E;">15–18</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">All platforms</td>
+            <td style="padding: 12px 14px; color: #4A4A6A;">8+ hrs</td>
+            <td style="padding: 12px 14px;"><span style="background: rgba(153,27,27,0.15); color: #7f1d1d; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; white-space: nowrap;">Identity, AI misuse, image-based abuse</span></td>
+            <td style="padding: 12px 14px; color: #4A4A6A; font-size: 0.78rem;">Trust-based monitoring, media literacy</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 3.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FFE600;">
+        Gaming — what the research actually says
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Gaming is not uniformly harmful — <strong style="color:#b8a000;">cooperative play</strong>, problem-solving games, and age-appropriate titles have documented cognitive benefits including spatial reasoning, planning, and social bonding. The problems emerge with specific game types and use patterns: games engineered with <strong style="color:#b8a000;">variable reward</strong> schedules (like <strong style="color:#b8a000;">loot boxes</strong>), online multiplayer games with social pressure to stay connected, and gaming as a primary mode of stress regulation. The World Health Organization formally recognized <strong style="color:#b8a000;">Gaming Disorder</strong> — their <strong style="color:#b8a000;">WHO classification</strong> — as a diagnosable condition in 2019. Risk factors include more than 2–3 hours of daily gaming, gaming as the primary social outlet, and emotional dysregulation when gaming is limited. The distinction between gaming as one activity among many versus gaming as the organizing center of a child's social and emotional life is critical.</p>
+        <div class="research-callout" style="border-color:#FFE600; background:rgba(255,230,0,0.08);">
+          <div class="research-label" style="color:#b8a000;">Research Says:</div>
+          <p>A 2022 study in JAMA Network Open found that children who played video games for 3+ hours per day performed significantly better on cognitive tasks related to memory and impulse control — but also showed increased risk of depression when gaming was used to cope with negative emotions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 3.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FFE600;">
+        YouTube and the algorithm problem
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>YouTube's <strong style="color:#b8a000;">recommendation algorithm</strong> is optimized for one thing: <strong style="color:#b8a000;">watch time</strong>. It does not optimize for age-appropriateness, accuracy, or developmental benefit. For children, this creates a well-documented phenomenon: content progressively <strong style="color:#b8a000;">escalation</strong> — intensifying in stimulation and extremity — because extreme content holds attention longer. A child searching for Minecraft videos can, within minutes, arrive at content involving violence, conspiracy, or adult themes — without clicking a single inappropriate link. YouTube Kids exists, but its <strong style="color:#b8a000;">filter failure</strong> is widely documented and criticized. <strong style="color:#b8a000;">Autoplay</strong> is the most dangerous feature for children: it removes the friction of active choice and replaces it with passive drift. The solution is not just filters — it is the development of a child's own capacity to recognize when content has shifted and to choose to stop. That capacity must be explicitly taught.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 3.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FFE600;">
+        Unstructured play and what it builds
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The research on <strong style="color:#b8a000;">unstructured play</strong>, child-directed and free, is unambiguous and extensive. It builds <strong style="color:#b8a000;">executive function</strong>, <strong style="color:#b8a000;">emotional regulation</strong>, creativity, social negotiation, frustration tolerance, and <strong style="color:#b8a000;">resilience</strong>. Dr. Stuart Brown, founder of the National Institute for Play, describes play as "the most significant factor in determining success and happiness across a lifespan." As screen time has increased over the past two decades, outdoor free play has declined by approximately 50% in the United States. Children today spend an average of 4–7 minutes per day in unstructured outdoor play. The <strong style="color:#b8a000;">displacement effect</strong> is real: time spent on screens is time not spent building these foundational skills. None of these skills — frustration tolerance, conflict resolution, creative problem-solving — are built by watching. They are built by doing, failing, and trying again.</p>
+        <div class="research-callout" style="border-color:#FFE600; background:rgba(255,230,0,0.08);">
+          <div class="research-label" style="color:#b8a000;">Research Says:</div>
+          <p>A 2023 analysis by the American Psychological Association linked the decline in free play directly to rising rates of anxiety and depression in children aged 6–12, calling it "one of the most significant and under-discussed public health shifts of our generation."</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- Enhancement 8 — Infographic 4: Algorithm Escalation Funnel -->
+  <div class="infographic-container" style="margin: 40px 0; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.07); border-radius: 12px; padding: 32px; overflow: hidden;">
+    <div style="font-family: 'Manrope', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #FFE600; margin-bottom: 12px;">[ INFOGRAPHIC ]</div>
+    <div style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #1A1A2E; font-weight: 700; margin-bottom: 24px;">How the Algorithm Pulls Children Deeper</div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+
+      <div style="background: #F0FFF0; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; margin: 0 0%;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #22C55E; font-size: 0.8rem; min-width: 60px;">Stage 1</span>
+          <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; color: #1A1A2E;">Age-appropriate content — Minecraft, cooking videos, sports</span>
+        </div>
+        <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.75rem; color: #4A4A6A; white-space: nowrap; margin-left: 16px;">Entry</span>
+      </div>
+
+      <div style="text-align: center; color: #FF6B00; font-size: 1.1rem; line-height: 1;">▼</div>
+
+      <div style="background: #E0F0FF; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; margin: 0 3%;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #0066FF; font-size: 0.8rem; min-width: 60px;">Stage 2</span>
+          <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; color: #1A1A2E;">Slightly edgier — reaction videos, gaming drama, pranks</span>
+        </div>
+        <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.75rem; color: #4A4A6A; white-space: nowrap; margin-left: 16px;">~4 min</span>
+      </div>
+
+      <div style="text-align: center; color: #FF6B00; font-size: 1.1rem; line-height: 1;">▼</div>
+
+      <div style="background: #FFE8CC; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; margin: 0 6%;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #FF6B00; font-size: 0.8rem; min-width: 60px;">Stage 3</span>
+          <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; color: #1A1A2E;">Emotionally provocative — arguments, fails, shocking moments</span>
+        </div>
+        <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.75rem; color: #4A4A6A; white-space: nowrap; margin-left: 16px;">~9 min</span>
+      </div>
+
+      <div style="text-align: center; color: #FF6B00; font-size: 1.1rem; line-height: 1;">▼</div>
+
+      <div style="background: #FFD0D0; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; margin: 0 9%;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #EF4444; font-size: 0.8rem; min-width: 60px;">Stage 4</span>
+          <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; color: #1A1A2E;">Extreme content — conspiracy, violence, adult themes</span>
+        </div>
+        <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.75rem; color: #4A4A6A; white-space: nowrap; margin-left: 16px;">~14 min</span>
+      </div>
+
+      <div style="text-align: center; color: #FF6B00; font-size: 1.1rem; line-height: 1;">▼</div>
+
+      <div style="background: #1A0A0A; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; margin: 0 12%;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'Manrope', sans-serif; font-weight: 700; color: #FF4D4D; font-size: 0.8rem; min-width: 60px;">Stage 5</span>
+          <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.88rem; color: #FF4D4D;">Radicalization / exploitation risk</span>
+        </div>
+        <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 0.75rem; color: #FF4D4D; white-space: nowrap; margin-left: 16px;">~22 min</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center; font-family: 'Manrope', sans-serif; font-style: italic; color: #FF4D4D; font-size: 0.9rem;">
+      No single click required. Autoplay does the work.
+    </div>
+  </div>
+
+  <!-- QUIZ 3 -->
+  <div class="quiz-block" style="border-color:#FFE600;">
+    <div class="quiz-label" style="color:#b8a000;">Unit 3 Quiz</div>
+    <p class="quiz-question">What is the term for the phenomenon where YouTube's algorithm gradually escalates content toward more extreme material to maximize watch time?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#FFE600;"
+        onmouseover="if(!this.disabled)this.style.background='#FFE600',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 3, 'Escalation')">Filter failure</button>
+      <button class="quiz-btn" style="border-color:#FFE600;"
+        onmouseover="if(!this.disabled)this.style.background='#FFE600',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 3, 'Escalation')">Escalation</button>
+      <button class="quiz-btn" style="border-color:#FFE600;"
+        onmouseover="if(!this.disabled)this.style.background='#FFE600',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 3, 'Escalation')">Autoplay drift</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-3"></div>
+  </div>
+
+</section>
+</div>
+
+<hr class="section-divider">
+
+<!-- PULL QUOTE — Before Unit 4 -->
+<div class="container">
+  <div class="pull-quote u4">
+    <blockquote style="border-color:#39FF14; background:rgba(57,255,20,0.07); padding:28px 28px 28px 32px; border-radius: 0 8px 8px 0;">
+      "Logged In, Checked Out"
+    </blockquote>
+  </div>
+</div>
+
+<!-- ===================== UNIT 4 ===================== -->
+<div class="container">
+<section class="unit-section u4" id="unit-4">
+
+  <!-- Enhancement 2 — Contextual Image Unit 4 -->
+  <div class="unit-hero-img-wrap">
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200" alt="" loading="lazy">
+    <div class="unit-hero-img-overlay"></div>
+  </div>
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 4</p>
+    <div class="unit-title-wrap" style="border-color: #39FF14;">
+      <h2>The Middle School Danger Zone (Ages 11–14)</h2>
+    </div>
+  </div>
+
+  <!-- Enhancement 4 — Opener Block Unit 4 -->
+  <div class="opener-block" style="background: rgba(57,255,20,0.08); border-left: 6px solid #39FF14; box-shadow: inset 4px 0 20px rgba(57,255,20,0.1);">
+    <div class="opener-block-heading" style="color: #1A1A2E;">No previous generation of adolescents has faced what today's 11-year-olds face on day one of social media.</div>
+    <div class="opener-block-deco" style="color: rgba(57,255,20,0.05);">4</div>
+  </div>
+
+  <p class="unit-intro">If there is a single window in childhood that demands the most parental vigilance around technology, it is ages 11 to 14. This is the period when social media typically enters a child's life — and it arrives precisely when the adolescent brain is most identity-vulnerable, most socially sensitive, and least equipped for the psychological demands these platforms impose.</p>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 4.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        What happens to the brain at puberty
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Puberty triggers a dramatic restructuring of the brain's reward and social circuitry. The sensitivity of the <strong style="color:#22a800;">social pain network</strong> spikes — rejection, exclusion, and humiliation register more intensely during early adolescence than at any other developmental window. <strong style="color:#22a800;">Peer evaluation</strong> becomes the brain's primary preoccupation. <strong style="color:#22a800;">Social comparison</strong> — always present — becomes hyperactivated. Into this neurological environment, social media introduces a quantified, public, permanent social ledger: likes, follower counts, comment threads, and comparison at a scale no previous generation has faced. The adolescent brain's <strong style="color:#22a800;">reward circuitry</strong> is particularly sensitive to peer approval — which means social media metrics become neurologically significant in a way they simply are not for adults. <strong style="color:#22a800;">Identity formation</strong> — the central developmental task of adolescence — is happening in real time, in public, on a platform designed to maximize engagement at the cost of wellbeing.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 4.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        Social media and mental health — the data
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The correlation between social media adoption and <strong style="color:#22a800;">adolescent mental health</strong> decline is among the most extensively studied questions in contemporary developmental psychology. Dr. <strong style="color:#22a800;">Jean Twenge</strong> (San Diego State University) documented sharp increases in <strong style="color:#22a800;">depression</strong>, <strong style="color:#22a800;">anxiety</strong>, loneliness, and suicidal ideation beginning precisely in 2012 — the year smartphone ownership became ubiquitous among adolescents. Dr. <strong style="color:#22a800;">Jonathan Haidt</strong> (NYU Stern) and colleagues have assembled the most comprehensive review of the literature to date, concluding that social media is a primary causal contributor to the adolescent mental health crisis — particularly for girls. <strong style="color:#22a800;">Instagram</strong> has been shown in internal Facebook research (leaked in 2021) to worsen <strong style="color:#22a800;">body image</strong> in 32% of teen girls who already felt bad about their bodies. The evidence has moved beyond correlation — the timing, the demographics, and the dose-response relationship all point toward causation.</p>
+        <div class="research-callout" style="border-color:#39FF14; background:rgba(57,255,20,0.07);">
+          <div class="research-label" style="color:#22a800;">Research Says:</div>
+          <p>The U.S. Surgeon General issued an advisory in 2023 stating that social media use poses a "profound risk of harm to the mental health and well-being of children and adolescents." He called for warning labels comparable to those on alcohol and tobacco.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 4.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        Cyberbullying — scope and impact
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><strong style="color:#22a800;">Cyberbullying</strong> differs from traditional bullying in critical ways: it is available 24/7 with no geographic boundary, it can be <strong style="color:#22a800;">anonymity</strong>-protected, it is often <strong style="color:#22a800;">permanence</strong>-enforced and publicly visible, and it can spread instantly to an entire <strong style="color:#22a800;">peer group</strong>. The Cyberbullying Research Center estimates that approximately 27% of students experience cyberbullying. For <strong style="color:#22a800;">LGBTQ+</strong> youth, the rates are significantly higher. The <strong style="color:#22a800;">psychological impact</strong> is severe: cyberbullying victims show significantly elevated rates of depression, anxiety, self-harm, and suicidal ideation compared to both non-bullied peers and victims of traditional in-person bullying. The 24/7 nature of cyberbullying is particularly important — traditional bullying ended when the school day did. Cyberbullying follows the child home, into their bedroom, and into the night. There is no refuge.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 4.4 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        The comparison trap and curated reality
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Social media feeds present a <strong style="color:#22a800;">curated reality</strong> — a filtered, performed presentation of life, not life itself. For adolescents still forming their <strong style="color:#22a800;">identity</strong> and <strong style="color:#22a800;">self-worth</strong>, constant comparison to these curated presentations is psychologically corrosive. Studies using <strong style="color:#22a800;">passive use</strong> (scrolling without posting) consistently show the strongest association with depression and low self-esteem. <strong style="color:#22a800;">Active use</strong> (posting, connecting, direct messaging) shows weaker and sometimes positive associations. The mechanism is clear: passive consumption of others' highlight reels triggers <strong style="color:#22a800;">upward social comparison</strong> — a known driver of dissatisfaction and diminished self-worth across all age groups, but especially in adolescents. Teaching children to recognize that what they are seeing is a performance — not a life — is one of the most important conversations a parent can have about social media.</p>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- Enhancement 9 — Infographic 5: Social Media vs Mental Health Trend Line -->
+  <div class="infographic-container chart-container" style="margin: 40px 0; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.07); border-radius: 12px; padding: 32px; overflow: hidden;">
+    <div style="font-family: 'Manrope', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: #39FF14; margin-bottom: 12px;">[ INFOGRAPHIC ]</div>
+    <div style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #1A1A2E; font-weight: 700; margin-bottom: 8px;">The Moment Everything Changed</div>
+
+    <svg width="100%" viewBox="0 0 720 320" style="overflow: visible; margin-bottom: 8px;">
+      <!-- Grid lines -->
+      <line x1="70" y1="260" x2="650" y2="260" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="70" y1="220" x2="650" y2="220" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="70" y1="180" x2="650" y2="180" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="70" y1="140" x2="650" y2="140" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="70" y1="100" x2="650" y2="100" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="70" y1="60" x2="650" y2="60" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="70" y1="20" x2="650" y2="20" stroke="#e5e7eb" stroke-width="1"/>
+
+      <!-- Y axis left labels (depression %) -->
+      <text x="60" y="264" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="end">8%</text>
+      <text x="60" y="224" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="end">11%</text>
+      <text x="60" y="184" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="end">14%</text>
+      <text x="60" y="144" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="end">17%</text>
+      <text x="60" y="104" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="end">20%</text>
+      <text x="60" y="64" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="end">23%</text>
+      <text x="60" y="24" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="end">26%</text>
+
+      <!-- Y axis left label -->
+      <text x="14" y="140" font-family="Manrope,sans-serif" font-size="9" fill="#FF2D78" text-anchor="middle" transform="rotate(-90,14,140)">Teen Depression Rate</text>
+
+      <!-- Y axis right labels (smartphone %) -->
+      <text x="660" y="264" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0">0%</text>
+      <text x="660" y="196" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0">30%</text>
+      <text x="660" y="130" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0">60%</text>
+      <text x="660" y="64" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0">90%</text>
+
+      <!-- Y axis right label -->
+      <text x="706" y="140" font-family="Manrope,sans-serif" font-size="9" fill="#0066FF" text-anchor="middle" transform="rotate(90,706,140)">Smartphone Ownership</text>
+
+      <!-- X axis labels -->
+      <text x="70" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2008</text>
+      <text x="153" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2010</text>
+      <text x="236" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2012</text>
+      <text x="319" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2014</text>
+      <text x="402" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2016</text>
+      <text x="484" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2018</text>
+      <text x="567" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2020</text>
+      <text x="650" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#9090A0" text-anchor="middle">2022</text>
+
+      <!-- 2012 vertical dashed line -->
+      <line x1="236" y1="20" x2="236" y2="265" stroke="#CCFF00" stroke-width="1.5" stroke-dasharray="5,4"/>
+      <text x="236" y="14" font-family="Manrope,sans-serif" font-size="9" fill="#CCFF00" text-anchor="middle">2012 — The Inflection Point</text>
+
+      <!-- Smartphone ownership line (blue) -->
+      <polyline class="chart-line-smartphone"
+        points="70,247 153,228 236,161 319,105 402,65 484,44 567,33 650,24"
+        fill="none" stroke="#0066FF" stroke-width="2.5" stroke-linejoin="round"
+        stroke-dasharray="1200" stroke-dashoffset="1200"/>
+
+      <!-- Depression line (pink) -->
+      <polyline class="chart-line-depression"
+        points="70,260 153,253 236,233 319,193 402,153 484,113 567,60 650,27"
+        fill="none" stroke="#FF2D78" stroke-width="2.5" stroke-linejoin="round"
+        stroke-dasharray="1200" stroke-dashoffset="1200"/>
+
+      <!-- Data point dots - depression -->
+      <circle cx="70" cy="260" r="4" fill="#FF2D78"/>
+      <circle cx="153" cy="253" r="4" fill="#FF2D78"/>
+      <circle cx="236" cy="233" r="4" fill="#FF2D78"/>
+      <circle cx="319" cy="193" r="4" fill="#FF2D78"/>
+      <circle cx="402" cy="153" r="4" fill="#FF2D78"/>
+      <circle cx="484" cy="113" r="4" fill="#FF2D78"/>
+      <circle cx="567" cy="60" r="4" fill="#FF2D78"/>
+      <circle cx="650" cy="27" r="4" fill="#FF2D78"/>
+
+      <!-- Data point dots - smartphone -->
+      <circle cx="70" cy="247" r="4" fill="#0066FF"/>
+      <circle cx="153" cy="228" r="4" fill="#0066FF"/>
+      <circle cx="236" cy="161" r="4" fill="#0066FF"/>
+      <circle cx="319" cy="105" r="4" fill="#0066FF"/>
+      <circle cx="402" cy="65" r="4" fill="#0066FF"/>
+      <circle cx="484" cy="44" r="4" fill="#0066FF"/>
+      <circle cx="567" cy="33" r="4" fill="#0066FF"/>
+      <circle cx="650" cy="24" r="4" fill="#0066FF"/>
+    </svg>
+
+    <!-- Legend -->
+    <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-top: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">
+        <div style="width: 24px; height: 3px; background: #FF2D78; border-radius: 2px;"></div> Teen Depression Rate (CDC YRBSS)
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.8rem; color: #4A4A6A;">
+        <div style="width: 24px; height: 3px; background: #0066FF; border-radius: 2px;"></div> Teen Smartphone Ownership (Pew Research)
+      </div>
+    </div>
+    <div style="margin-top: 10px; font-family: 'IBM Plex Sans', sans-serif; font-size: 0.72rem; color: #9090A0;">Sources: CDC Youth Risk Behavior Survey; Pew Research Center</div>
+  </div>
+
+  <!-- QUIZ 4 -->
+  <div class="quiz-block" style="border-color:#39FF14;">
+    <div class="quiz-label" style="color:#22a800;">Unit 4 Quiz</div>
+    <p class="quiz-question">Which year did researchers first identify a sharp inflection point in adolescent depression and anxiety rates, coinciding with the mass adoption of smartphones?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#39FF14;"
+        onmouseover="if(!this.disabled)this.style.background='#39FF14',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 4, '2012')">2008</button>
+      <button class="quiz-btn" style="border-color:#39FF14;"
+        onmouseover="if(!this.disabled)this.style.background='#39FF14',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 4, '2012')">2012</button>
+      <button class="quiz-btn" style="border-color:#39FF14;"
+        onmouseover="if(!this.disabled)this.style.background='#39FF14',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 4, '2012')">2016</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-4"></div>
+  </div>
+
+</section>
+</div>
+
+<hr class="section-divider">
+
+<!-- ===================== UNIT 5 ===================== -->
+<div class="container">
+<section class="unit-section u5" id="unit-5">
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 5</p>
+    <div class="unit-title-wrap" style="border-color: #FF2D78;">
+      <h2>AI in School: What Parents Need to Know</h2>
+    </div>
+  </div>
+
+  <p class="unit-intro">Artificial intelligence tools — particularly large language models like ChatGPT, Google Gemini, and Claude — entered classrooms and homework routines almost overnight, with almost no preparation for students, parents, or most educators. Understanding what these tools are, how children are using them, and what cognitive skills their misuse undermines is now a baseline parenting competency.</p>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 5.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        What AI tools actually are — and aren't
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><strong style="color:#FF2D78;">Large language model</strong> systems are sophisticated statistical systems trained on vast text data. They generate plausible-sounding text by <strong style="color:#FF2D78;">statistical prediction</strong> — predicting what words and sentences are likely to follow each other — they do not understand, reason, or retrieve verified facts. They <strong style="color:#FF2D78;">hallucinate</strong> — confidently stating false information with no signal of uncertainty. For children using AI to complete homework, these <strong style="color:#FF2D78;">AI limitations</strong> are critical: AI-generated responses may be fluent, well-structured, and wrong. Children who do not have sufficient subject knowledge for <strong style="color:#FF2D78;">critical evaluation</strong> of AI output are particularly vulnerable to accepting and submitting inaccurate information. The confidence of the output is not correlated with its accuracy — and children must be explicitly taught this. An AI that sounds authoritative is not an authority.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 5.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        How students are using AI — honestly
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>A 2023 Stanford study found that over 60% of high school students had used AI to complete or assist with assignments. A Common Sense Media survey found that 50% of teens used AI for homework weekly. The range of use spans the spectrum: from legitimate use as a thinking partner or editor, to full <strong style="color:#FF2D78;">cognitive outsourcing</strong> of writing, research, and problem sets. The most concerning pattern is not the tool use itself — it is the displacement of the cognitive struggle that produces <strong style="color:#FF2D78;">learning process</strong>. Writing a draft, making mistakes, and revising is how writing skill is built. Having an AI produce the draft removes the very process that creates <strong style="color:#FF2D78;">competence building</strong>. The issue is not <strong style="color:#FF2D78;">academic integrity</strong> in the narrow sense — it is about what the student is actually developing, and what they are trading away for a cleaner submission. <strong style="color:#FF2D78;">AI use in school</strong> that bypasses struggle is not a shortcut to learning — it is a bypass around it.</p>
+        <div class="research-callout" style="border-color:#FF2D78; background:rgba(255,45,120,0.05);">
+          <div class="research-label" style="color:#FF2D78;">Research Says:</div>
+          <p>A 2024 MIT study found that students who used AI to write essays showed short-term performance gains but significantly weaker writing ability when tested independently — suggesting AI use was displacing rather than augmenting skill development.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 5.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        Critical thinking — the skill AI cannot replace
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The most important thing education can build in the age of AI is the capacity for <strong style="color:#FF2D78;">critical thinking</strong>: to evaluate information, construct arguments, recognize <strong style="color:#FF2D78;">logical reasoning</strong> failures, and think <strong style="color:#FF2D78;">independently</strong>. These skills are built through practice — through struggling with hard problems, writing and rewriting, debating and being wrong. Children who use AI as a shortcut are not just avoiding work — they are avoiding the practice that builds the <strong style="color:#FF2D78;">cognitive architecture</strong> AI cannot replicate. The capacity for <strong style="color:#FF2D78;">evaluation</strong> — to read a claim and assess its credibility, to encounter an argument and identify its weaknesses — is precisely what makes a human being more than a prompt-input machine. Parents need to understand this not to police AI use, but to have honest conversations with their children about what they are trading away when they outsource thinking.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 5.4 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FF2D78;">
+        How to talk to your child about AI
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The goal is not to ban AI use — it is to develop <strong style="color:#FF2D78;">AI literacy</strong>. Children should understand what AI is, how it works at a basic level, and when its <strong style="color:#FF2D78;">tool use</strong> helps vs. hurts their own development. Helpful questions parents can ask: "Did you use AI on this? What did it help with? What did you do yourself?" This <strong style="color:#FF2D78;">transparency</strong> conversation normalizes honesty and opens dialogue rather than driving use underground. Framing AI as a tool — like a calculator — helps: useful for certain tasks, but a substitute that creates dependency when used to bypass foundational skill-building. <strong style="color:#FF2D78;">School policy</strong> on AI use is evolving rapidly; parents should ask their child's school directly what its current policy is and how it is being enforced. The conversation about <strong style="color:#FF2D78;">academic integrity</strong> in the AI era is one that parents, educators, and students need to have openly — before the habit of outsourcing becomes default.</p>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- QUIZ 5 -->
+  <div class="quiz-block" style="border-color:#FF2D78;">
+    <div class="quiz-label" style="color:#FF2D78;">Unit 5 Quiz</div>
+    <p class="quiz-question">What is the term for AI-generated content that is fluent and confident but factually incorrect?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#FF2D78;"
+        onmouseover="if(!this.disabled)this.style.background='#FF2D78',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 5, 'Hallucination')">Bias</button>
+      <button class="quiz-btn" style="border-color:#FF2D78;"
+        onmouseover="if(!this.disabled)this.style.background='#FF2D78',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 5, 'Hallucination')">Hallucination</button>
+      <button class="quiz-btn" style="border-color:#FF2D78;"
+        onmouseover="if(!this.disabled)this.style.background='#FF2D78',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 5, 'Hallucination')">Deepfake</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-5"></div>
+  </div>
+
+</section>
+</div>
+
+<hr class="section-divider">
+
+<!-- PULL QUOTE — Before Unit 6 -->
+<div class="container">
+  <div class="pull-quote u6">
+    <blockquote style="border-color:#00F5FF; background:rgba(0,245,255,0.07); padding:28px 28px 28px 32px; border-radius: 0 8px 8px 0;">
+      "What the Screen Isn't Telling You"
+    </blockquote>
+  </div>
+</div>
+
+<!-- ===================== UNIT 6 ===================== -->
+<div class="container">
+<section class="unit-section u6" id="unit-6">
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 6</p>
+    <div class="unit-title-wrap" style="border-color: #00F5FF;">
+      <h2>Online Safety Fundamentals</h2>
+    </div>
+  </div>
+
+  <p class="unit-intro">Online safety is often reduced to "don't talk to strangers" — a framework that was never adequate and is even less so now. Today's risks are more varied, more sophisticated, and more likely to arrive through a child's own social network than through a stranger. This unit covers what parents actually need to know.</p>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 6.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        Digital footprints — what children share without realizing it
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Every search, post, like, location tag, and account registration creates a permanent <strong style="color:#00F5FF;">digital footprint</strong>. Children routinely share their school name, neighborhood, sports team, and daily schedule through public social media without understanding that this information can be aggregated by anyone to locate them physically. Photos contain <strong style="color:#00F5FF;">EXIF metadata</strong> including GPS coordinates unless stripped. Platform <strong style="color:#00F5FF;">privacy settings</strong> are deliberately confusing and default to maximum <strong style="color:#00F5FF;">data collection</strong>. A 2022 study found that the average child's data is sold to a median of 72 third-party <strong style="color:#00F5FF;">data brokers</strong> before age 13. Teaching children about their digital footprint is not about paranoia — it is about informed decision-making. Every piece of shared information is a choice — and children deserve to make that choice with full understanding of its implications.</p>
+        <div class="research-callout" style="border-color:#00F5FF; background:rgba(0,245,255,0.05);">
+          <div class="research-label" style="color:#00F5FF;">Research Says:</div>
+          <p>The Children's Online Privacy Protection Act (COPPA) prohibits platforms from collecting data on children under 13 — but platform age verification relies almost entirely on self-reporting, and 40% of children under 13 have active social media accounts.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 6.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        Predatory behavior online — the real picture
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>The <strong style="color:#00F5FF;">NCMEC</strong> (National Center for Missing and Exploited Children) received 32 million reports of suspected child sexual <strong style="color:#00F5FF;">exploitation</strong> online in 2022 — up from 18.4 million in 2018. Online <strong style="color:#00F5FF;">grooming</strong> — the process by which an adult builds <strong style="color:#00F5FF;">trust building</strong> with a child over time to facilitate exploitation — typically begins not with explicit requests but with friendship, attention, flattery, and the establishment of secrets. Grooming increasingly occurs through <strong style="color:#00F5FF;">gaming platforms</strong> and <strong style="color:#00F5FF;">direct messaging</strong>, not just social media. Children are often not aware they are being groomed — and the shame associated with the process means they are unlikely to self-report without active, non-judgmental parental communication. The most protective factor is not surveillance — it is a child's certainty that they can tell a trusted adult without fear of losing their device or being blamed.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 6.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        Sexting, image-based abuse, and what the law says
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Research from the Journal of Adolescent Health found that approximately 15% of adolescents have sent a sexual image of themselves, and 27% have received one. In most US states, sending or possessing sexual images of minors — even between minors — constitutes a criminal offense under child pornography statutes. These <strong style="color:#00F5FF;">legal consequences</strong> are not hypothetical — adolescents have been prosecuted and placed on sex offender registries for <strong style="color:#00F5FF;">sexting</strong>. <strong style="color:#00F5FF;">Non-consensual sharing</strong> of intimate images — <strong style="color:#00F5FF;">image-based abuse</strong> — is a documented source of severe psychological harm in adolescent victims, including depression, PTSD, and suicidal ideation. Children need to understand that an image sent privately can become permanent and public instantly, and that no relationship — romantic or otherwise — guarantees an image will remain private. The phrase "once it's sent, it's theirs" is a framework every adolescent needs to hear before they face the pressure to send.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 6.4 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#00F5FF;">
+        Misinformation, radicalization, and rabbit holes
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Children encounter <strong style="color:#00F5FF;">misinformation</strong> online constantly — from health misinformation to historical distortion to political extremism. The <strong style="color:#00F5FF;">algorithmic amplification</strong> architecture of social media and video platforms is specifically optimized to push content that generates emotional engagement — and misinformation, outrage, and extremism generate more engagement than factual, moderate content. Research on <strong style="color:#00F5FF;">radicalization</strong> pathways documents a consistent pattern: gradual escalation from mainstream content toward increasingly extreme viewpoints, driven by platform recommendations rather than active seeking. <strong style="color:#00F5FF;">Media literacy</strong> — the ability to evaluate sources, recognize manipulation, and think critically about online content — is now a foundational safety skill. It is not enough to teach children what to avoid; they must be taught how to evaluate what they encounter. The question "how do we know this is true?" is one of the most important habits a parent can build in a child. <strong style="color:#00F5FF;">Source evaluation</strong> is not an academic skill — it is a safety skill.</p>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- QUIZ 6 -->
+  <div class="quiz-block" style="border-color:#00F5FF;">
+    <div class="quiz-label" style="color:#00F5FF;">Unit 6 Quiz</div>
+    <p class="quiz-question">Online grooming typically begins with which of the following?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#00F5FF;"
+        onmouseover="if(!this.disabled)this.style.background='#00F5FF',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 6, 'Friendship, flattery, and building secrets')">Explicit requests for images</button>
+      <button class="quiz-btn" style="border-color:#00F5FF;"
+        onmouseover="if(!this.disabled)this.style.background='#00F5FF',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 6, 'Friendship, flattery, and building secrets')">Friendship, flattery, and building secrets</button>
+      <button class="quiz-btn" style="border-color:#00F5FF;"
+        onmouseover="if(!this.disabled)this.style.background='#00F5FF',this.style.color='#fff'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 6, 'Friendship, flattery, and building secrets')">Threats and intimidation</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-6"></div>
+  </div>
+
+</section>
+</div>
+
+<hr class="section-divider">
+
+<!-- ===================== UNIT 7 ===================== -->
+<div class="container">
+<section class="unit-section u7" id="unit-7">
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 7</p>
+    <div class="unit-title-wrap" style="border-color: #39FF14;">
+      <h2>Building Healthy Tech Habits</h2>
+    </div>
+  </div>
+
+  <p class="unit-intro">The goal is not to raise children who are afraid of technology or who lack digital skills. The goal is to raise children with agency over their attention, clarity about technology's effects, and a rich offline life that screens supplement rather than replace. This unit is about practical, evidence-informed strategies that work.</p>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 7.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        Family media agreements — what actually works
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Research on parental mediation of technology consistently shows that reactive restriction (banning, confiscating) is less effective than proactive engagement — talking with children about technology, co-using it, setting boundaries together, and building shared family agreements. The American Academy of Pediatrics <strong style="color:#22a800;">Family Media Plan</strong> tool allows families to create individualized agreements covering <strong style="color:#22a800;">screen-free zones</strong>, screen-free times, content standards, and device management. The most important elements: screens out of bedrooms at night, no devices during meals, and consistent <strong style="color:#22a800;">modeling</strong> by parents of the behavior expected from children. <strong style="color:#22a800;">Proactive mediation</strong> works because it builds children's own capacity to self-regulate — rather than simply creating an external constraint that disappears when the parent is not present. <strong style="color:#22a800;">Co-viewing</strong> and discussion of media content is consistently associated with better outcomes than either unrestricted access or pure prohibition.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 7.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        The importance of protecting sleep
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Given the weight of evidence on screens and <strong style="color:#22a800;">adolescent sleep</strong> disruption, the single most evidence-supported intervention available to parents is: charge all devices outside the <strong style="color:#22a800;">bedroom ban</strong>, overnight, every night, starting now. This one change has been associated in multiple studies with improved sleep duration, reduced depression symptoms, better academic performance, and reduced morning irritability. The <strong style="color:#22a800;">device charging</strong> protocol — devices plugged in outside the bedroom before the child goes to sleep — addresses both blue light exposure and the social anxiety of overnight notifications. <strong style="color:#22a800;">Sleep hygiene</strong> is not a soft intervention. It is among the most evidence-based recommendations in adolescent health. The resistance children and adolescents show to this change is itself a signal — and a reason, not an exception. The strength of the resistance is proportional to the depth of the habit.</p>
+        <div class="research-callout" style="border-color:#39FF14; background:rgba(57,255,20,0.07);">
+          <div class="research-label" style="color:#22a800;">Research Says:</div>
+          <p>A 2019 JAMA Pediatrics study of over 4,500 adolescents found that bedroom smartphone access at night was independently associated with depression and anxiety — even controlling for total screen time.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion 7.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        Conversation strategies that open doors
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Children who feel they can come to parents without judgment when something goes wrong online are significantly safer than children who feel they must hide their online lives. Building this requires consistent, <strong style="color:#22a800;">non-reactive communication</strong> about technology before problems arise. Effective approaches: ask <strong style="color:#22a800;">open questions</strong> about what your child is doing online rather than interrogating; name that you know online life can be complicated; establish in advance that if something bad happens online, your first response will be to help, not punish. <strong style="color:#22a800;">Psychological safety</strong> — the child's certainty that they can disclose without catastrophic consequence — is the most protective factor in online safety research. When children know the phone will not be taken away as punishment for <strong style="color:#22a800;">reporting</strong> a problem, they are far more likely to report problems. Building <strong style="color:#22a800;">trust</strong> requires consistency over time — it cannot be established in a single conversation, but it can be destroyed by a single reactive response.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 7.4 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#39FF14;">
+        Age-appropriate boundaries — a practical framework
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>Ages 0–5: no independent screen use; all screen time parent-supervised and co-viewed. Ages 6–9: limited daily time (1–1.5 hours), no social media, no unsupervised YouTube, no devices in bedrooms. Ages 10–12: introduce <strong style="color:#22a800;">media literacy</strong> conversations; devices stay in common areas; no personal social media accounts; gaming with time limits and game-type awareness. Ages 13–15: social media may be introduced with <strong style="color:#22a800;">transparent monitoring</strong>, ongoing conversation, and clear family agreements; privacy is earned through demonstrated responsibility. Ages 16+: increasing <strong style="color:#22a800;">autonomy</strong> with continued open communication. These are <strong style="color:#22a800;">age-appropriate</strong> frameworks, not rigid rules — individual children vary, and the relationship is always the most important factor. The <strong style="color:#22a800;">developmental framework</strong> is a scaffold: the goal is a child who can eventually manage technology well on their own, not one who is perpetually managed by external controls.</p>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- QUIZ 7 -->
+  <div class="quiz-block" style="border-color:#39FF14;">
+    <div class="quiz-label" style="color:#22a800;">Unit 7 Quiz</div>
+    <p class="quiz-question">According to research, which single intervention has the strongest evidence for improving adolescent sleep and reducing depression symptoms related to screens?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#39FF14;"
+        onmouseover="if(!this.disabled)this.style.background='#39FF14',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 7, 'Charging devices outside the bedroom at night')">Screen time apps and timers</button>
+      <button class="quiz-btn" style="border-color:#39FF14;"
+        onmouseover="if(!this.disabled)this.style.background='#39FF14',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 7, 'Charging devices outside the bedroom at night')">Charging devices outside the bedroom at night</button>
+      <button class="quiz-btn" style="border-color:#39FF14;"
+        onmouseover="if(!this.disabled)this.style.background='#39FF14',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 7, 'Charging devices outside the bedroom at night')">Social media content filters</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-7"></div>
+  </div>
+
+</section>
+</div>
+
+<hr class="section-divider">
+
+<!-- PULL QUOTE — Before Unit 8 -->
+<div class="container">
+  <div class="pull-quote u8">
+    <blockquote style="border-color:#FFE600; background:rgba(255,230,0,0.08); padding:28px 28px 28px 32px; border-radius: 0 8px 8px 0;">
+      "The Cost of Connected"
+    </blockquote>
+  </div>
+</div>
+
+<!-- ===================== UNIT 8 ===================== -->
+<div class="container">
+<section class="unit-section u8" id="unit-8">
+
+  <div class="unit-header">
+    <p class="unit-label">Unit 8</p>
+    <div class="unit-title-wrap" style="border-color: #FFE600;">
+      <h2>Resources &amp; Next Steps</h2>
+    </div>
+  </div>
+
+  <p class="unit-intro">You've made it through the full course — and you now know more than most parents, most teachers, and most school administrators about these issues. What matters now is not perfection — it's forward motion. Below are the most credible, practical resources available on every topic covered in this course.</p>
+
+  <div class="accordion-list">
+
+    <!-- Accordion 8.1 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FFE600;">
+        Organizations &amp; advocacy
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><strong style="color:#b8a000;">Common Sense Media</strong> (commonsensemedia.org) — the most comprehensive independent resource for reviews of apps, games, shows, and research on children and technology. Center on Media and Child Health at Boston Children's Hospital (cmch.tv) — research-based, clinician-developed resources. <strong style="color:#b8a000;">NCMEC</strong> — National Center for Missing &amp; Exploited Children (missingkids.org) — CyberTipline, NetSmartz online safety curriculum for kids. The Social Dilemma / <strong style="color:#b8a000;">Center for Humane Technology</strong> (humanetech.com) — <strong style="color:#b8a000;">advocacy</strong> and resources for reforming platform design. Fairplay (fairplayforkids.org) — campaigns against predatory marketing and data collection targeting children. Each of these organizations maintains freely available resources for parents — guides, research summaries, conversation starters, and policy updates. <strong style="color:#b8a000;">Media literacy</strong> resources from Common Sense Media are particularly useful for parents who want ready-made tools to use with children of all ages.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 8.2 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FFE600;">
+        Books every parent should read
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><em>The Anxious Generation</em> — <strong style="color:#b8a000;">Jonathan Haidt</strong> (2024): the most comprehensive examination of social media's role in the adolescent mental health crisis. <em>iGen</em> — <strong style="color:#b8a000;">Jean Twenge</strong> (2017): data-driven analysis of how smartphone culture has reshaped Generation Z. <em>Stolen Focus</em> — Johann Hari (2022): how attention has been deliberately fragmented and what to do about it. <em>The Art of Screen Time</em> — Anya Kamenetz (2018): a balanced, evidence-based guide for parents navigating technology decisions. <em>Glow Kids</em> — Nicholas Kardaras (2016): a neuroscientist's argument that screen technology functions similarly to addiction in the developing brain. All of these are <strong style="color:#b8a000;">research-backed</strong> and written for a general audience — they are genuinely accessible to parents without a background in neuroscience or developmental psychology, and each offers a meaningfully different perspective and emphasis.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 8.3 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FFE600;">
+        Tools for families
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p>AAP <strong style="color:#b8a000;">Family Media Plan</strong> (healthychildren.org/MediaUsePlan) — build a customized family agreement in minutes. Google Family Link — <strong style="color:#b8a000;">parental controls</strong> and screen time management for Android and Chromebook. <strong style="color:#b8a000;">Apple Screen Time</strong> — built-in iOS parental controls for iPhone and iPad. Circle Home Plus — device-level content filtering and screen time management for all home network devices. <strong style="color:#b8a000;">Bark</strong> — <strong style="color:#b8a000;">monitoring tools</strong> that alerts parents to potential safety concerns without reading full message content — balances safety with adolescent privacy. The Bark model is particularly worth noting: rather than full message surveillance, it uses pattern detection to flag concerning content — preserving more of the adolescent's reasonable expectation of privacy while still providing safety oversight. This approach tends to preserve the relationship better than full monitoring, which adolescents often experience as a fundamental breach of trust. <strong style="color:#b8a000;">Circle</strong> offers network-level controls that apply to all devices in the home.</p>
+      </div>
+    </div>
+
+    <!-- Accordion 8.4 -->
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" style="--unit-accent:#FFE600;">
+        Emergency resources
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <p><strong style="color:#b8a000;">CyberTipline</strong> (cybertipline.org): report suspected child exploitation online — operated by the National Center for Missing &amp; Exploited Children, available 24/7. Crisis Text Line: text HOME to 741741 for free, 24/7 crisis counseling — accessible to adolescents who may not be ready to speak out loud. National Suicide Prevention Lifeline: <strong style="color:#b8a000;">988</strong> — call or text. SAMHSA National Helpline: 1-800-662-4357 (mental health and substance use). Internet Crimes Against Children Task Force (icactaskforce.org): law enforcement resources for online crimes against children. These <strong style="color:#b8a000;">crisis resources</strong> and <strong style="color:#b8a000;">emergency reporting</strong> tools should be saved, known, and discussed with children before they are needed. Knowing these resources exist — and knowing a child knows they exist — is part of building the safety net that makes online risk manageable.</p>
+      </div>
+    </div>
+
+  </div><!-- /accordion-list -->
+
+  <!-- QUIZ 8 -->
+  <div class="quiz-block" style="border-color:#FFE600;">
+    <div class="quiz-label" style="color:#b8a000;">Unit 8 Quiz</div>
+    <p class="quiz-question">Which organization created the most widely used independent review system for apps, games, and media content for children?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" style="border-color:#FFE600;"
+        onmouseover="if(!this.disabled)this.style.background='#FFE600',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 8, 'Common Sense Media')">American Academy of Pediatrics</button>
+      <button class="quiz-btn" style="border-color:#FFE600;"
+        onmouseover="if(!this.disabled)this.style.background='#FFE600',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, true, 8, 'Common Sense Media')">Common Sense Media</button>
+      <button class="quiz-btn" style="border-color:#FFE600;"
+        onmouseover="if(!this.disabled)this.style.background='#FFE600',this.style.color='#1A1A2E'"
+        onmouseout="if(!this.disabled&&!this.classList.contains('correct')&&!this.classList.contains('incorrect'))this.style.background='',this.style.color=''"
+        onclick="handleQuiz(this, false, 8, 'Common Sense Media')">Center for Humane Technology</button>
+    </div>
+    <div class="quiz-feedback" id="feedback-8"></div>
+  </div>
+
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid #e5e7eb; padding:48px 0; margin-top:0; text-align:center;">
+  <div class="container">
+    <p style="font-family:'Manrope',sans-serif; font-weight:800; font-size:1.1rem; color:#1A1A2E; margin-bottom:8px;">Raising Humans in the Age of Algorithms</p>
+    <p style="font-size:0.875rem; color:#4A4A6A;">An evidence-based e-learning module for parents. Content compiled from peer-reviewed research, clinical guidelines, and expert consensus. Not a substitute for professional guidance.</p>
+  </div>
+</footer>
+
+<script>
+// ---- SCORE TRACKER ----
+let score = 0;
+const answeredUnits = new Set();
+
+function updateScore() {
+  document.getElementById('score-display').textContent = score;
+}
+
+// ---- BAR CHART ANIMATION ----
+const barObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.bar-fill').forEach(function(bar) {
+        bar.style.width = bar.dataset.width + '%';
+      });
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.infographic-container').forEach(function(el) {
+  if (el.querySelector('.bar-fill')) barObserver.observe(el);
+});
+
+// ---- SVG LINE CHART ANIMATION ----
+const chartObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var depression = entry.target.querySelector('.chart-line-depression');
+      var smartphone = entry.target.querySelector('.chart-line-smartphone');
+      if (depression) {
+        depression.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+        depression.style.strokeDashoffset = '0';
+      }
+      if (smartphone) {
+        smartphone.style.transition = 'stroke-dashoffset 1.5s ease-in-out 0.3s';
+        smartphone.style.strokeDashoffset = '0';
+      }
+      chartObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.chart-container').forEach(function(el) {
+  chartObserver.observe(el);
+});
+
+// ---- ACCORDION ----
+function toggleAccordion(trigger) {
+  const body = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+
+  if (isOpen) {
+    trigger.classList.remove('open');
+    body.classList.remove('open');
+  } else {
+    trigger.classList.add('open');
+    body.classList.add('open');
+  }
+}
+
+// ---- QUIZ ----
+function handleQuiz(btn, isCorrect, unitNum, correctAnswer) {
+  if (answeredUnits.has(unitNum)) return;
+  answeredUnits.add(unitNum);
+
+  const quizBlock = btn.closest('.quiz-block');
+  const allBtns = quizBlock.querySelectorAll('.quiz-btn');
+  const feedback = document.getElementById('feedback-' + unitNum);
+
+  // Disable all buttons
+  allBtns.forEach(function(b) {
+    b.disabled = true;
+    b.style.background = '';
+    b.style.color = '';
+    // Remove hover listeners by disabling
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    feedback.textContent = '✓ That\'s right.';
+    feedback.className = 'quiz-feedback show is-correct';
+    score++;
+    updateScore();
+  } else {
+    btn.classList.add('incorrect');
+    // Find and highlight the correct button
+    allBtns.forEach(function(b) {
+      if (b.textContent.trim() === correctAnswer || b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) {
+        // Find the correct answer button by checking onclick attribute
+      }
+    });
+    // Highlight correct button
+    allBtns.forEach(function(b) {
+      const onclickAttr = b.getAttribute('onclick') || '';
+      if (onclickAttr.includes(', true,')) {
+        b.classList.add('correct');
+      }
+    });
+    feedback.textContent = '✗ Not quite — the correct answer was ' + correctAnswer + '.';
+    feedback.className = 'quiz-feedback show is-incorrect';
+  }
+}
+</script>
+
+</body>
+</html>
