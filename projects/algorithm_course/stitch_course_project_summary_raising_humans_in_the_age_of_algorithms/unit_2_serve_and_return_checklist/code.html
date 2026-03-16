@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF2D78",
+                        "accent-orange": "#FF6B00",
+                        "background-light": "#ffffff",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .premium-gradient {
+            background: linear-gradient(135deg, #FF2D78 0%, #FF6B00 100%);
+        }
+        .checkbox-custom:checked {
+            background-color: #FF2D78;
+            border-color: #FF2D78;
+        }
+    </style>
+</head>
+<body class="bg-background-light font-display text-slate-900 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-white">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-100 px-6 lg:px-20 py-4">
+<div class="flex items-center gap-4 text-slate-900">
+<div class="size-8 premium-gradient rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">child_care</span>
+</div>
+<h2 class="text-slate-900 text-xl font-extrabold leading-tight tracking-tight uppercase italic">Raising Humans</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 hover:text-primary text-sm font-semibold transition-colors" href="#">Courses</a>
+<a class="text-slate-600 hover:text-primary text-sm font-semibold transition-colors" href="#">Resources</a>
+<a class="text-slate-600 hover:text-primary text-sm font-semibold transition-colors" href="#">Community</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all border border-slate-200">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-slate-50 text-slate-700 hover:bg-slate-100 transition-all border border-slate-200">
+<span class="material-symbols-outlined text-[20px]">print</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col max-w-4xl mx-auto w-full px-6 py-12">
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-l-4 border-primary pl-6">
+<div class="flex flex-col gap-2">
+<span class="text-primary font-bold tracking-widest text-xs uppercase">Interactive Resource</span>
+<h1 class="text-slate-900 text-5xl font-black leading-tight tracking-tight">The Serve-and-Return Checklist</h1>
+<p class="text-slate-500 text-lg font-medium">Unit 2: Building Brain Architecture Through Interaction</p>
+</div>
+<div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+<div class="size-12 rounded-full premium-gradient p-0.5">
+<div class="w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Instructor portrait smiling at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEj2jmP8uRW__NBxVjuYZ_yTVXkDsFGvIEIx5UatAv4GFEIqOWZs1QcJFq-4ka6TMzKXugbUIN3zppcirVtmTqF0E1BjwRhiM5lTjq_2sCkFmN8w4BzfGxdThndfKnDV4vRhBX9HgJ63kdS_L2Rhz2CRmu2XPDBLVYJbxJ-Od_VNJV8EYYnLLuFPaP-Ntp_VnLhzl0OLftVP5UN7rkqtMTiH0jTTVS5UKNfUVZxEXPezEjH4Ixmphs4j_VbSxt5yQb4ds3eQnP5LKh"/>
+</div>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-wider font-bold text-slate-400">Instructor</p>
+<p class="text-sm font-bold text-slate-800">Dr. Sarah Chen</p>
+</div>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden mb-8">
+<div class="premium-gradient p-6">
+<h2 class="text-white text-2xl font-bold flex items-center gap-3">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+                            5 Steps of Serve-and-Return
+                        </h2>
+</div>
+<div class="p-8 flex flex-col gap-2">
+<label class="group flex items-start gap-4 p-5 rounded-xl hover:bg-slate-50 transition-all cursor-pointer border border-transparent hover:border-slate-100">
+<div class="pt-1">
+<input class="checkbox-custom h-6 w-6 rounded-lg border-2 border-slate-300 bg-white text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 text-lg font-bold group-hover:text-primary transition-colors">1. Notice the serve</span>
+<p class="text-slate-500 text-base leading-relaxed mt-1">Share the child's focus of attention. Is the child looking at something, making a sound, or moving their arms and legs?</p>
+</div>
+</label>
+<div class="h-px bg-slate-100 mx-5"></div>
+<label class="group flex items-start gap-4 p-5 rounded-xl hover:bg-slate-50 transition-all cursor-pointer border border-transparent hover:border-slate-100">
+<div class="pt-1">
+<input class="checkbox-custom h-6 w-6 rounded-lg border-2 border-slate-300 bg-white text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 text-lg font-bold group-hover:text-primary transition-colors">2. Return the serve</span>
+<p class="text-slate-500 text-base leading-relaxed mt-1">Support and encourage. Give the child a nod, a smile, or a word to let them know you noticed.</p>
+</div>
+</label>
+<div class="h-px bg-slate-100 mx-5"></div>
+<label class="group flex items-start gap-4 p-5 rounded-xl hover:bg-slate-50 transition-all cursor-pointer border border-transparent hover:border-slate-100">
+<div class="pt-1">
+<input class="checkbox-custom h-6 w-6 rounded-lg border-2 border-slate-300 bg-white text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 text-lg font-bold group-hover:text-primary transition-colors">3. Give it a name!</span>
+<p class="text-slate-500 text-base leading-relaxed mt-1">Name what the child is seeing, doing, or feeling. This builds language connections in their brain.</p>
+</div>
+</label>
+<div class="h-px bg-slate-100 mx-5"></div>
+<label class="group flex items-start gap-4 p-5 rounded-xl hover:bg-slate-50 transition-all cursor-pointer border border-transparent hover:border-slate-100">
+<div class="pt-1">
+<input class="checkbox-custom h-6 w-6 rounded-lg border-2 border-slate-300 bg-white text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 text-lg font-bold group-hover:text-primary transition-colors">4. Take turns back and forth</span>
+<p class="text-slate-500 text-base leading-relaxed mt-1">Wait for the child to respond. Giving them time to process is key to building neural pathways.</p>
+</div>
+</label>
+<div class="h-px bg-slate-100 mx-5"></div>
+<label class="group flex items-start gap-4 p-5 rounded-xl hover:bg-slate-50 transition-all cursor-pointer border border-transparent hover:border-slate-100">
+<div class="pt-1">
+<input class="checkbox-custom h-6 w-6 rounded-lg border-2 border-slate-300 bg-white text-primary focus:ring-primary/20 transition-all" type="checkbox"/>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-900 text-lg font-bold group-hover:text-primary transition-colors">5. Practice endings and beginnings</span>
+<p class="text-slate-500 text-base leading-relaxed mt-1">Let the child take the lead. When they move on to something else, you follow their lead to the next interaction.</p>
+</div>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+<div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+<h4 class="text-primary font-bold text-sm mb-3 uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">lightbulb</span>
+                            Pro-Tip
+                        </h4>
+<p class="text-slate-600 text-sm leading-relaxed italic">
+                            "The most important thing is to be present. You don't need fancy toys—just your attention and a willingness to follow their lead."
+                        </p>
+</div>
+<div class="p-6 bg-accent-orange/10 rounded-2xl border border-accent-orange/20">
+<h4 class="text-accent-orange font-bold text-sm mb-3 uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">event</span>
+                            Next Milestone
+                        </h4>
+<p class="text-slate-700 text-sm font-bold">
+                            Unit 3: The Impact of Toxic Stress
+                        </p>
+<p class="text-slate-500 text-xs mt-1">Unlock next Tuesday at 9:00 AM</p>
+</div>
+</div>
+</main>
+<footer class="mt-20 border-t border-slate-100 py-10 bg-slate-50/50">
+<div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="size-6 premium-gradient rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xs">child_care</span>
+</div>
+<span class="text-slate-400 text-xs font-bold uppercase tracking-widest">Raising Humans Academy © 2024</span>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-400 hover:text-primary text-xs font-semibold transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-400 hover:text-primary text-xs font-semibold transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-400 hover:text-primary text-xs font-semibold transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

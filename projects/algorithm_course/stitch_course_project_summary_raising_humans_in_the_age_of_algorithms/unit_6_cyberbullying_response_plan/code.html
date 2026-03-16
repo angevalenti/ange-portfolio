@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF2D78",
+                        "secondary": "#FF6B00",
+                        "background-light": "#fefefe",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .gradient-text {
+            background: linear-gradient(90deg, #FF2D78, #FF6B00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #FF2D78, #FF6B00);
+        }
+    </style>
+</head>
+<body class="bg-background-light font-body text-slate-900">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-100 px-6 md:px-20 py-4 bg-white sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-10 flex items-center justify-center rounded-xl gradient-bg text-white">
+<span class="material-symbols-outlined text-2xl">family_restroom</span>
+</div>
+<div>
+<h2 class="font-display text-[#111518] text-lg font-extrabold leading-tight tracking-tight uppercase">Raising Humans</h2>
+<p class="text-[10px] font-bold text-primary tracking-widest uppercase">Age of Algorithms</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-slate-100 text-slate-700 hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-slate-100 text-slate-700 hover:bg-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary p-0.5">
+<div class="w-full h-full rounded-full bg-center bg-cover" data-alt="Portrait of a modern parent mentor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuADTTlE4Q8RyNWpjezCBy4X3Dt-QJJaCDeaxiiV9QHgfvnJnUgYCYRr6czPJt0F8Q9233nChRDrIXj6S6-Z-2THPROuJqLt2gg6atd2NULkwefKcg8TWDZV9hAnVFJ6ZRwaSrm4Ox9j34BCNFjbAxueL8E5EYgqV49Lt93PYh1dhB5qFViY10yB76ysjxWI0gBIUJ3HvwEXM6bnVzzPWf6q27B-2aVSentazrVobDQjE8qX55XegqHMt13TSao2JHafCdZW4op81QRH")'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center py-8 px-4 md:px-0">
+<div class="w-full max-w-[960px] flex flex-col gap-8">
+<!-- Breadcrumb & Intro -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-slate-500 text-sm font-semibold uppercase tracking-wider">
+<span>Unit 6: Online Safety</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary">Masterclass Guide</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-l-4 border-primary pl-6 py-2">
+<div class="max-w-2xl">
+<h1 class="font-display text-4xl md:text-5xl font-black text-slate-900 leading-none tracking-tighter mb-4">
+                                Cyberbullying <br/><span class="gradient-text">Response Plan</span>
+</h1>
+<p class="text-slate-600 text-lg leading-relaxed">
+                                An authoritative, step-by-step framework designed to help you protect your child's digital wellbeing and mental health with confidence.
+                            </p>
+</div>
+<div class="bg-slate-50 p-4 rounded-xl border border-slate-100 min-w-[200px]">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Unit 6 Completion</p>
+<div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full gradient-bg w-full"></div>
+</div>
+<p class="text-xs font-bold text-slate-700 mt-2">100% Certified Guide</p>
+</div>
+</div>
+</div>
+<!-- Main Flowchart Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+<!-- Step 1 -->
+<div class="relative bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group hover:shadow-md transition-shadow">
+<div class="absolute -top-4 -left-4 w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-display font-black text-xl shadow-lg">1</div>
+<div class="flex flex-col gap-4">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">photo_camera</span>
+</div>
+<h3 class="font-display text-xl font-bold text-slate-900">Document Everything</h3>
+<p class="text-slate-600 leading-relaxed">Immediately take clear screenshots of all offensive messages, posts, comments, and timestamps. Do not delete evidence, even if it is painful to look at.</p>
+<ul class="text-sm text-slate-500 space-y-2 italic">
+<li>• Save to a secure, password-protected folder</li>
+<li>• Include usernames and profile URLs</li>
+</ul>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group hover:shadow-md transition-shadow">
+<div class="absolute -top-4 -left-4 w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-display font-black text-xl shadow-lg">2</div>
+<div class="flex flex-col gap-4">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">do_not_disturb_on</span>
+</div>
+<h3 class="font-display text-xl font-bold text-slate-900">Do Not Retaliate</h3>
+<p class="text-slate-600 leading-relaxed">Engagement is oxygen for harassers. Instruct your child not to respond. Responding can often make the victim look like a co-aggressor in the eyes of platforms.</p>
+<ul class="text-sm text-slate-500 space-y-2 italic">
+<li>• Close the app or put away the device</li>
+<li>• Remind your child: "This is not your fault."</li>
+</ul>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group hover:shadow-md transition-shadow">
+<div class="absolute -top-4 -left-4 w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-display font-black text-xl shadow-lg">3</div>
+<div class="flex flex-col gap-4">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">shield_person</span>
+</div>
+<h3 class="font-display text-xl font-bold text-slate-900">Block &amp; Report</h3>
+<p class="text-slate-600 leading-relaxed">Use the platform's native tools to restrict access. Report the specific content for harassment to ensure the algorithm flag's the attacker's behavior.</p>
+<ul class="text-sm text-slate-500 space-y-2 italic">
+<li>• Use "Mute" for subtle distancing</li>
+<li>• Use "Block" for total severance</li>
+</ul>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative bg-white p-8 rounded-2xl shadow-sm border border-slate-100 group hover:shadow-md transition-shadow">
+<div class="absolute -top-4 -left-4 w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-display font-black text-xl shadow-lg">4</div>
+<div class="flex flex-col gap-4">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">gavel</span>
+</div>
+<h3 class="font-display text-xl font-bold text-slate-900">Escalation</h3>
+<p class="text-slate-600 leading-relaxed">If the harasser is a schoolmate, contact school administrators. If there are threats of physical harm, involve local law enforcement immediately.</p>
+<ul class="text-sm text-slate-500 space-y-2 italic">
+<li>• Bring your documented evidence</li>
+<li>• Request a written summary of the meeting</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Callout Box -->
+<div class="bg-slate-900 text-white p-8 rounded-3xl overflow-hidden relative">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full translate-x-10 -translate-y-10"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+<div class="flex-shrink-0 size-20 rounded-2xl gradient-bg flex items-center justify-center shadow-2xl rotate-3">
+<span class="material-symbols-outlined text-4xl text-white">lightbulb</span>
+</div>
+<div>
+<span class="text-secondary font-display font-extrabold text-sm uppercase tracking-[0.2em] mb-2 block">Parent Pro-Tip</span>
+<h4 class="text-2xl font-bold mb-3 font-display">The "Digital Sunset" Strategy</h4>
+<p class="text-slate-300 leading-relaxed max-w-2xl">
+                                Research shows that cyberbullying feels 4x more intense at night. If an incident occurs, implement a "Digital Sunset" where all devices are kept in a common area overnight. This physical distance provides the psychological safety needed to process the situation calmly.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Footer CTA -->
+<div class="flex flex-col md:flex-row justify-between items-center py-10 border-t border-slate-200 gap-6">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-slate-100 rounded-lg">
+<span class="material-symbols-outlined text-slate-600">file_download</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900">Cyberbullying_Response_Checklist.pdf</p>
+<p class="text-xs text-slate-500">2.4 MB • High Resolution Infographic</p>
+</div>
+</div>
+<button class="gradient-bg px-8 py-4 rounded-xl text-white font-display font-extrabold text-lg flex items-center gap-3 hover:scale-105 transition-transform shadow-lg shadow-primary/25">
+                        Download Full PDF Guide
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Small footer branding -->
+<footer class="py-8 bg-slate-50 flex justify-center">
+<div class="flex flex-col items-center gap-2">
+<p class="text-xs text-slate-400 font-medium">© 2024 Raising Humans in the Age of Algorithms. All Rights Reserved.</p>
+<div class="flex gap-4 text-slate-300">
+<span class="material-symbols-outlined text-lg">social_leaderboard</span>
+<span class="material-symbols-outlined text-lg">public</span>
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

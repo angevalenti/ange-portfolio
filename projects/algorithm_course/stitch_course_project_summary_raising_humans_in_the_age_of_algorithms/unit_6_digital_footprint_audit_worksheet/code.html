@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Footprint Audit Worksheet | Raising Humans</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF2D78", // Hot Pink
+                        "secondary": "#FF6B00", // Electric Orange
+                        "background-light": "#fdfdfd",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "sans": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'IBM Plex Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Manrope', sans-serif; }
+        .accent-gradient {
+            background: linear-gradient(135deg, #FF2D78 0%, #FF6B00 100%);
+        }
+        .border-gradient {
+            border-image: linear-gradient(to right, #FF2D78, #FF6B00) 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header Section -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 px-6 md:px-20 py-6 bg-white">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 accent-gradient rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">family_history</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-slate-900 text-xl font-extrabold leading-tight tracking-tight uppercase">Raising Humans</h2>
+<span class="text-[10px] font-bold tracking-[0.2em] text-secondary">MASTERCLASS SERIES</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 bg-slate-100 text-slate-700 hover:bg-primary hover:text-white transition-colors gap-2 text-sm font-bold px-4">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>Download PDF</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 bg-slate-100 text-slate-700 hover:bg-secondary hover:text-white transition-colors gap-2 text-sm font-bold px-4">
+<span class="material-symbols-outlined text-lg">share</span>
+<span>Share</span>
+</button>
+</div>
+</header>
+<main class="max-w-4xl mx-auto w-full px-6 py-10">
+<!-- Breadcrumbs -->
+<nav class="flex flex-wrap gap-2 mb-6">
+<a class="text-slate-500 text-sm font-medium hover:text-primary transition-colors" href="#">Unit 6: Online Safety Fundamentals</a>
+<span class="text-slate-400 text-sm">/</span>
+<span class="text-primary text-sm font-bold">Digital Footprint Audit</span>
+</nav>
+<!-- Title Section -->
+<div class="mb-12 border-l-4 border-primary pl-6">
+<h1 class="text-slate-900 text-5xl font-extrabold leading-tight tracking-tight mb-2">Digital Footprint Audit Worksheet</h1>
+<p class="text-slate-600 text-lg font-medium">An interactive guide for parents and children to reclaim their digital narrative.</p>
+</div>
+<!-- Section 1: Search Yourself -->
+<section class="bg-white rounded-xl border border-slate-200 shadow-sm p-8 mb-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-3xl text-primary">search_check</span>
+<h2 class="text-2xl font-bold text-slate-900">1. Search Yourself (The Google Audit)</h2>
+</div>
+<p class="text-slate-600 mb-6 italic">Incognito mode recommended. Search full names, nicknames, and addresses. Check the first 3 pages of results.</p>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Found Assets (Social Profiles, Mentions, News)</label>
+<div class="border-b-2 border-slate-100 focus-within:border-primary transition-colors py-2">
+<input class="w-full border-none focus:ring-0 bg-transparent text-slate-800 placeholder-slate-300" placeholder="e.g., LinkedIn Profile, 2018 Soccer News..." type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Unexpected Discoveries (Old blogs, tagged photos)</label>
+<div class="border-b-2 border-slate-100 focus-within:border-primary transition-colors py-2">
+<input class="w-full border-none focus:ring-0 bg-transparent text-slate-800 placeholder-slate-300" placeholder="List any surprises here..." type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+<div class="p-4 bg-primary/5 rounded-lg border border-primary/10">
+<p class="text-sm font-bold text-primary mb-1">Action Needed?</p>
+<div class="flex items-center gap-4 mt-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm">Delete Account</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm">Request Removal</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: App Inventory -->
+<section class="bg-white rounded-xl border border-slate-200 shadow-sm p-8 mb-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-3xl text-secondary">apps</span>
+<h2 class="text-2xl font-bold text-slate-900">2. App Inventory &amp; Data Permissions</h2>
+</div>
+<p class="text-slate-600 mb-6">Check the "Privacy" settings on your family's most-used apps.</p>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b-2 border-slate-100">
+<th class="py-4 px-2 text-sm font-bold text-slate-400 uppercase">App Name</th>
+<th class="py-4 px-2 text-sm font-bold text-slate-400 uppercase">Location Access</th>
+<th class="py-4 px-2 text-sm font-bold text-slate-400 uppercase">Contact Syncing</th>
+<th class="py-4 px-2 text-sm font-bold text-slate-400 uppercase">Ad Tracking</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr>
+<td class="py-4 px-2 font-medium"><input class="w-full border-none focus:ring-0 p-0 text-slate-800" placeholder="e.g., TikTok" type="text"/></td>
+<td class="py-4 px-2">
+<select class="text-sm border-slate-200 rounded focus:border-secondary focus:ring-secondary">
+<option>Always</option>
+<option>While Using</option>
+<option>Never</option>
+</select>
+</td>
+<td class="py-4 px-2">
+<input class="rounded text-secondary focus:ring-secondary size-5" type="checkbox"/>
+</td>
+<td class="py-4 px-2">
+<input class="rounded text-secondary focus:ring-secondary size-5" type="checkbox"/>
+</td>
+</tr>
+<tr>
+<td class="py-4 px-2 font-medium"><input class="w-full border-none focus:ring-0 p-0 text-slate-800" placeholder="e.g., Roblox" type="text"/></td>
+<td class="py-4 px-2">
+<select class="text-sm border-slate-200 rounded focus:border-secondary focus:ring-secondary">
+<option>Always</option>
+<option>While Using</option>
+<option>Never</option>
+</select>
+</td>
+<td class="py-4 px-2">
+<input class="rounded text-secondary focus:ring-secondary size-5" type="checkbox"/>
+</td>
+<td class="py-4 px-2">
+<input class="rounded text-secondary focus:ring-secondary size-5" type="checkbox"/>
+</td>
+</tr>
+<tr>
+<td class="py-4 px-2 font-medium"><input class="w-full border-none focus:ring-0 p-0 text-slate-800" placeholder="e.g., Instagram" type="text"/></td>
+<td class="py-4 px-2">
+<select class="text-sm border-slate-200 rounded focus:border-secondary focus:ring-secondary">
+<option>Always</option>
+<option>While Using</option>
+<option>Never</option>
+</select>
+</td>
+<td class="py-4 px-2">
+<input class="rounded text-secondary focus:ring-secondary size-5" type="checkbox"/>
+</td>
+<td class="py-4 px-2">
+<input class="rounded text-secondary focus:ring-secondary size-5" type="checkbox"/>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Section 3: Photo Archive Review -->
+<section class="bg-white rounded-xl border border-slate-200 shadow-sm p-8 mb-12">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-3xl text-primary">photo_library</span>
+<h2 class="text-2xl font-bold text-slate-900">3. Photo Archive Review</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<p class="text-slate-600 mb-4 font-medium">Review your last 20 public photos. Do they reveal:</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-3">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-slate-700">Home or school locations?</span>
+</li>
+<li class="flex items-center gap-3">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-slate-700">Work IDs or sensitive documents?</span>
+</li>
+<li class="flex items-center gap-3">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-slate-700">Friends who haven't given consent?</span>
+</li>
+<li class="flex items-center gap-3">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-slate-700">Habits (where you are every Tuesday)?</span>
+</li>
+</ul>
+</div>
+<div class="bg-slate-50 p-6 rounded-xl border border-dashed border-slate-300">
+<h4 class="text-sm font-bold text-slate-900 mb-3 uppercase tracking-wider">The "Archive" List</h4>
+<p class="text-xs text-slate-500 mb-4 italic">List 3 photos you've decided to archive or set to private today:</p>
+<div class="space-y-4">
+<div class="h-8 border-b border-slate-200"></div>
+<div class="h-8 border-b border-slate-200"></div>
+<div class="h-8 border-b border-slate-200"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Summary -->
+<footer class="bg-slate-900 rounded-2xl p-10 text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 accent-gradient opacity-20 rounded-full -mr-20 -mt-20"></div>
+<div class="relative z-10">
+<h3 class="text-2xl font-bold mb-4">Masterclass Goal: Conscious Curation</h3>
+<p class="text-slate-300 mb-8 max-w-2xl">A digital footprint isn't just about deleting the past; it's about being intentional with the legacy you and your children are building today.</p>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-slate-800">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-full overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="Portrait of the course instructor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi4ltgoc9zbuQ0hGWZfNNis7WFWjQJWtBcolVysn_j6I87SnqlCLD5j641epou9J5k7WyYG_O6RHvYNxI_DCXRLEfCnxUhUptNYEUoMnkOTfOwIl9IgxfrRkWvYTnVOGbxavLchsNiTMMo7DW_UpCv6_qiZ9uxzn4Fxkt8_10bZEKx5yuTc35MNu_dgGlGEpT5Z8-5dCxlGG5vytEG5I-CvyFkfDktmnrRnRqiR6OKaDUdjaYxNNPC9-UM5dFBppBAJ-FF7QH1iZHh"/>
+</div>
+<div>
+<p class="font-bold text-sm">Instructor</p>
+<p class="text-slate-400 text-sm">Jordan Rivera</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold tracking-widest text-secondary uppercase mb-1">Module Completion</p>
+<div class="w-48 h-2 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</main>
+<!-- Bottom Note -->
+<div class="py-8 text-center text-slate-400 text-xs">
+                © 2024 Raising Humans in the Age of Algorithms. All rights reserved. Professional Use Only.
+            </div>
+</div>
+</div>
+</body></html>

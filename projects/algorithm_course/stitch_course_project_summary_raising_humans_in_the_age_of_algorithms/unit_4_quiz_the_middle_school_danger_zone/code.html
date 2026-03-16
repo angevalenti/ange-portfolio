@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066FF",
+                        "accent-neon": "#39FF14",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Quiz: The Middle School Danger Zone</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-80 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col shrink-0">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800">
+<h1 class="text-primary dark:text-blue-400 text-lg font-extrabold tracking-tight">Raising Humans</h1>
+<p class="text-slate-500 text-xs font-semibold uppercase tracking-widest mt-1">Age of Algorithms</p>
+</div>
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-xl">foundation</span>
+<span class="text-sm font-medium">Unit 1: Digital Foundations</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-xl">visibility</span>
+<span class="text-sm font-medium">Unit 2: Attention Economy</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-xl">groups</span>
+<span class="text-sm font-medium">Unit 3: Social Dynamics</span>
+</div>
+<!-- Active Unit -->
+<div class="flex flex-col gap-1 mt-4">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary border-l-4 border-accent-neon shadow-sm">
+<span class="material-symbols-outlined text-xl font-fill">warning</span>
+<span class="text-sm font-bold">Unit 4: The Danger Zone</span>
+</div>
+<div class="ml-9 border-l-2 border-slate-200 dark:border-slate-800 pl-4 py-2 space-y-3">
+<div class="flex items-center gap-2 text-xs text-slate-500">
+<span class="material-symbols-outlined text-xs text-accent-neon">check_circle</span>
+<span>The Rabbit Hole Effect</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-primary font-bold">
+<span class="material-symbols-outlined text-xs">radio_button_checked</span>
+<span>Quiz: Assessment</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-400">
+<span class="material-symbols-outlined text-xs">lock</span>
+<span>Unit Summary</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-400 rounded-lg cursor-not-allowed mt-4">
+<span class="material-symbols-outlined text-xl">explore</span>
+<span class="text-sm font-medium">Unit 5: Navigating Future</span>
+</div>
+</nav>
+<div class="p-6 border-t border-slate-200 dark:border-slate-800">
+<div class="mb-4">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold">Total Progress</span>
+<span class="text-primary font-bold">68%</span>
+</div>
+<div class="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 68%"></div>
+</div>
+</div>
+<button class="w-full py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold rounded-lg hover:opacity-90 transition-opacity">
+                    Dashboard
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden bg-background-light dark:bg-background-dark">
+<!-- Top Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-8 flex items-center justify-between z-10">
+<div class="flex items-center gap-4">
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Course Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Unit 4</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100">Quiz: Assessment</span>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-4 text-sm font-semibold">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="#">Resources</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="#">Glossary</a>
+</div>
+<div class="h-8 w-8 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary font-bold text-xs" data-alt="User avatar placeholder profile image">
+                        JD
+                    </div>
+</div>
+</header>
+<!-- Quiz Content Container -->
+<div class="flex-1 overflow-y-auto">
+<div class="max-w-4xl mx-auto px-8 py-12">
+<!-- Progress Bar Section -->
+<div class="mb-10">
+<div class="flex justify-between items-end mb-3">
+<div>
+<h2 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Question 3 of 10</h2>
+<p class="text-slate-500 text-sm mt-1">Assessment Section: Algorithmic Logic</p>
+</div>
+<div class="text-right">
+<span class="text-3xl font-black text-primary">30%</span>
+<p class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Completed</p>
+</div>
+</div>
+<div class="relative h-3 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden shadow-inner">
+<div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-accent-neon rounded-full" style="width: 30%"></div>
+</div>
+</div>
+<!-- Question Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 md:p-12 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-accent-neon/5 rounded-full -ml-16 -mb-16 blur-3xl"></div>
+<div class="relative z-10">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-6">
+<span class="w-2 h-2 rounded-full bg-accent-neon mr-2"></span>
+                                Core Concept
+                            </div>
+<h3 class="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-snug mb-10">
+                                How do recommendation algorithms typically lead users toward "The Danger Zone" of extreme content?
+                            </h3>
+<!-- Options -->
+<div class="space-y-4">
+<!-- Option A -->
+<label class="group flex items-start p-5 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary/50 dark:hover:border-primary/50 cursor-pointer transition-all bg-slate-50/50 dark:bg-slate-800/30">
+<input class="mt-1 h-5 w-5 text-primary border-slate-300 focus:ring-primary" name="quiz-option" type="radio"/>
+<div class="ml-4">
+<span class="block text-xs font-bold text-slate-400 mb-1">Option A</span>
+<span class="text-slate-700 dark:text-slate-300 font-medium">By intentionally promoting high-quality educational material.</span>
+</div>
+</label>
+<!-- Option B - Selected Example Style -->
+<label class="group flex items-start p-5 rounded-xl border-2 border-primary bg-primary/5 dark:bg-primary/10 cursor-pointer transition-all shadow-md">
+<input checked="" class="mt-1 h-5 w-5 text-primary border-slate-300 focus:ring-primary" name="quiz-option" type="radio"/>
+<div class="ml-4">
+<span class="block text-xs font-bold text-primary mb-1">Option B</span>
+<span class="text-slate-900 dark:text-white font-bold">By optimizing for engagement and time-on-platform over safety or truth.</span>
+</div>
+</label>
+<!-- Option C -->
+<label class="group flex items-start p-5 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary/50 dark:hover:border-primary/50 cursor-pointer transition-all bg-slate-50/50 dark:bg-slate-800/30">
+<input class="mt-1 h-5 w-5 text-primary border-slate-300 focus:ring-primary" name="quiz-option" type="radio"/>
+<div class="ml-4">
+<span class="block text-xs font-bold text-slate-400 mb-1">Option C</span>
+<span class="text-slate-700 dark:text-slate-300 font-medium">By requiring manual approval from platform moderators for every video.</span>
+</div>
+</label>
+<!-- Option D -->
+<label class="group flex items-start p-5 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary/50 dark:hover:border-primary/50 cursor-pointer transition-all bg-slate-50/50 dark:bg-slate-800/30">
+<input class="mt-1 h-5 w-5 text-primary border-slate-300 focus:ring-primary" name="quiz-option" type="radio"/>
+<div class="ml-4">
+<span class="block text-xs font-bold text-slate-400 mb-1">Option D</span>
+<span class="text-slate-700 dark:text-slate-300 font-medium">By only showing content that has been verified by independent experts.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Navigation Controls -->
+<div class="mt-8 flex items-center justify-between">
+<button class="flex items-center gap-2 px-6 py-3 text-slate-600 dark:text-slate-400 font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Previous
+                        </button>
+<div class="flex gap-4">
+<button class="px-6 py-3 text-slate-500 font-bold hover:text-slate-700 transition-colors">
+                                Skip
+                            </button>
+<button class="group relative flex items-center gap-2 px-10 py-3 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+<span class="relative">Confirm Answer</span>
+<span class="material-symbols-outlined relative text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Footer Info -->
+<div class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row gap-6 justify-between items-center text-slate-400 text-xs font-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Research-backed content based on Digital Ethics 2024 Guidelines</span>
+</div>
+<div class="flex gap-4 uppercase tracking-widest">
+<a class="hover:text-primary" href="#">Help Center</a>
+<a class="hover:text-primary" href="#">Report Error</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

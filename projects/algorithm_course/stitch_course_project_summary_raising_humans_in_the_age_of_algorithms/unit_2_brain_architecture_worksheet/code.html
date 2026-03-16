@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Unit 2 Worksheet: Building Brain Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-pink": "#FF2D78",
+                        "accent-orange": "#FF6B00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        @media print {
+            .no-print { display: none; }
+            body { background-color: white !important; }
+            .print-border { border: 1px solid #e2e8f0 !important; }
+        }
+        .sketch-grid {
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light font-display text-slate-900 antialiased">
+<div class="max-w-[960px] mx-auto min-h-screen bg-white shadow-xl my-0 sm:my-8 print:my-0 print:shadow-none">
+<!-- Top Navigation / Header -->
+<header class="flex items-center justify-between border-b border-slate-100 px-8 py-6 no-print">
+<div class="flex items-center gap-3">
+<div class="size-8 text-accent-pink">
+<span class="material-symbols-outlined text-4xl">neurology</span>
+</div>
+<h2 class="text-slate-900 text-xl font-extrabold tracking-tight">Raising Humans</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 bg-slate-100 hover:bg-accent-pink hover:text-white transition-colors px-4 gap-2 text-sm font-bold" onclick="window.print()">
+<span class="material-symbols-outlined text-[20px]">print</span>
+                    Print Worksheet
+                </button>
+<button class="flex items-center justify-center rounded-lg h-10 bg-slate-100 hover:bg-accent-orange hover:text-white transition-colors px-4 gap-2 text-sm font-bold">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    PDF
+                </button>
+</div>
+</header>
+<!-- Main Content Section -->
+<main class="p-8 sm:p-12">
+<!-- Title Section -->
+<div class="flex flex-col gap-4 mb-12 border-l-4 border-accent-pink pl-6">
+<div class="flex items-center gap-2 text-accent-orange font-bold text-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">label</span>
+                    Unit 2: Developmental Neuroscience
+                </div>
+<h1 class="text-slate-900 text-5xl font-black leading-tight tracking-tight">Building Brain Architecture</h1>
+<p class="text-slate-500 text-lg max-w-2xl">A practical guide to mapping daily interactions and understanding the biological foundations of neuroplasticity.</p>
+</div>
+<!-- Key Takeaways Section -->
+<section class="mb-12">
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-accent-pink/10 p-2 rounded-lg text-accent-pink">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-900">Key Takeaways: Neuroplasticity</h2>
+</div>
+<div class="bg-slate-50 rounded-xl p-6 mb-8 border border-slate-100">
+<p class="text-slate-700 leading-relaxed italic border-l-2 border-slate-300 pl-4">
+                        {{DATA:TEXT:TEXT_29}}
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 hover:border-accent-pink/30 transition-colors bg-white">
+<div class="mt-1">
+<input class="h-5 w-5 rounded border-slate-300 text-accent-pink focus:ring-accent-pink cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<p class="font-bold text-slate-900">Synaptic Strengthening</p>
+<p class="text-sm text-slate-500">"Neurons that fire together, wire together." Repeated actions create permanent pathways.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 hover:border-accent-pink/30 transition-colors bg-white">
+<div class="mt-1">
+<input class="h-5 w-5 rounded border-slate-300 text-accent-pink focus:ring-accent-pink cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<p class="font-bold text-slate-900">Serve &amp; Return</p>
+<p class="text-sm text-slate-500">Consistent interaction builds strong foundations for future learning and behavior.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 hover:border-accent-pink/30 transition-colors bg-white">
+<div class="mt-1">
+<input class="h-5 w-5 rounded border-slate-300 text-accent-pink focus:ring-accent-pink cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<p class="font-bold text-slate-900">Early Windows</p>
+<p class="text-sm text-slate-500">Early experiences shape lifelong brain health. Architecture is built from the bottom up.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 hover:border-accent-pink/30 transition-colors bg-white">
+<div class="mt-1">
+<input class="h-5 w-5 rounded border-slate-300 text-accent-pink focus:ring-accent-pink cursor-pointer" type="checkbox"/>
+</div>
+<div>
+<p class="font-bold text-slate-900">Pruning Process</p>
+<p class="text-sm text-slate-500">Unused connections are eliminated to make the brain more efficient.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Sketch Area Section -->
+<section class="relative">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<div class="bg-accent-orange/10 p-2 rounded-lg text-accent-orange">
+<span class="material-symbols-outlined">draw</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-900">Interaction Map: Sketch Area</h2>
+</div>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Exercise 2.1</span>
+</div>
+<p class="text-slate-600 mb-6 text-sm">Use this space to visualize a typical daily routine. Identify "Serve" (child's action) and "Return" (your response) moments. Map out how these loops are strengthening specific brain pathways.</p>
+<div class="w-full aspect-[4/3] rounded-2xl border-2 border-dashed border-slate-200 sketch-grid relative overflow-hidden group">
+<div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity">
+<span class="material-symbols-outlined text-[120px] text-slate-400">add_circle</span>
+</div>
+<!-- Decorative Annotations -->
+<div class="absolute top-8 left-8 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-100 text-[10px] font-bold text-accent-pink uppercase tracking-tighter">
+                        Morning Routine
+                    </div>
+<div class="absolute bottom-8 right-8 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-100 text-[10px] font-bold text-accent-orange uppercase tracking-tighter">
+                        Bedtime Rituals
+                    </div>
+</div>
+<div class="mt-6 grid grid-cols-3 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-black text-slate-400 uppercase">Input / Trigger</label>
+<div class="h-px bg-slate-200 w-full"></div>
+<div class="h-px bg-slate-200 w-full mt-4"></div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-black text-slate-400 uppercase">Parental Return</label>
+<div class="h-px bg-slate-200 w-full"></div>
+<div class="h-px bg-slate-200 w-full mt-4"></div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-black text-slate-400 uppercase">Neural Outcome</label>
+<div class="h-px bg-slate-200 w-full"></div>
+<div class="h-px bg-slate-200 w-full mt-4"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer / Branding -->
+<footer class="mt-12 px-8 py-10 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Course Materials</span>
+<span class="text-sm font-bold text-slate-900">Raising Humans © 2024</span>
+</div>
+<div class="h-8 w-px bg-slate-200 hidden sm:block"></div>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Instructor</span>
+<span class="text-sm font-bold text-slate-900">Dr. Aris Thorne</span>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-1 bg-accent-pink rounded-full"></div>
+<div class="w-12 h-1 bg-accent-orange rounded-full"></div>
+<div class="w-12 h-1 bg-primary rounded-full"></div>
+</div>
+</footer>
+</div>
+<!-- Print-only watermark -->
+<div class="hidden print:block fixed bottom-4 right-8 opacity-20">
+<span class="text-[10px] font-bold text-slate-900">RH_UNIT2_WS_V1.2_BUILD_BRAIN_ARCH</span>
+</div>
+</body></html>

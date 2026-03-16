@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-yellow": "#FFE600",
+                        "accent-coral": "#FF4D4D",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'IBM Plex Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-white dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation & Progress -->
+<header class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-4xl mx-auto px-6 py-4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">school</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Raising Humans</h2>
+</div>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Unit 3: The Elementary Years</span>
+<span class="text-xs font-bold text-primary">Lesson 2 of 10</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-accent-yellow w-[20%] rounded-full"></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-4xl mx-auto w-full px-6 py-12">
+<!-- Hero Section -->
+<div class="mb-12">
+<div class="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-8 shadow-2xl">
+<img alt="Young child using tablet thoughtfully" class="w-full h-full object-cover" data-alt="Young child using tablet thoughtfully in a sunlit room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdqspAVrvpQ40SxlLxIlfV5Q373WPw_q4eubCg5M80C4fliNudqn1qK7DY57Fb-CdZthgZymsh07KeEF-kUdMsyW45Ahw8u-L0dP2geCYLWRDhT8yF-qP74XwnH5DrtUr1z8FYtWh46DUBP3dXZLx-dewWvrXEaeIwFS4G4ZYGjZuBX5QE5HRmh_eXAc1kAKHadEEp82xPipV7-dcbsxzN3GaYJUOvmGa6zUeZ6xADbjP5w4bW641iQsC0EzDx7bm1Ph_pz-LkR7Vi"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+</div>
+<div class="space-y-4">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-accent-coral/10 text-accent-coral text-xs font-bold uppercase tracking-wider">
+                        Core Module
+                    </div>
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                        Digital Literacy Foundations
+                    </h1>
+<p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-body">
+                        At age 10, children move from passive consumption to active exploration. Understanding the machinery behind the screen is their first line of defense.
+                    </p>
+</div>
+</div>
+<!-- Content Body -->
+<div class="prose prose-slate max-w-none dark:prose-invert font-body text-lg leading-relaxed text-slate-700 dark:text-slate-300 space-y-8">
+<section>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Evaluating Information</h3>
+<p>
+                        The elementary years are the "Golden Window" for critical thinking. As children start using search engines for school projects and curiosity, they must learn that being "first on Google" doesn't mean "most accurate."
+                    </p>
+</section>
+<!-- Key Concept Callout -->
+<div class="bg-accent-yellow/10 border-l-4 border-accent-yellow p-8 rounded-r-xl my-10">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-accent-yellow text-3xl">lightbulb</span>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white text-xl mb-2">Key Concept: The Algorithm Gap</h4>
+<p class="text-slate-700 dark:text-slate-300 italic">
+                                Algorithms aren't truth-seekers; they are attention-seekers. Teach your child that the internet shows them what it thinks they want to see, not necessarily what is objectively true.
+                            </p>
+</div>
+</div>
+</div>
+<section>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Safe Search Habits</h3>
+<p>
+                        Setting up technical guardrails is only step one. The real goal is "internalized safety"—the child's own ability to spot a red flag. This involves recognizing sponsored content, clickbait headlines, and suspicious redirects.
+                    </p>
+</section>
+<!-- Parent Tips Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+<div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-primary mb-4">search</span>
+<h4 class="font-bold text-slate-900 dark:text-white mb-2">Side-by-Side Search</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">Sit with them while they research. Ask: "Why do you think this result is at the top?"</p>
+</div>
+<div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-accent-coral mb-4">policy</span>
+<h4 class="font-bold text-slate-900 dark:text-white mb-2">The 'Silly' Check</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">Encourage them to check three different sources if something sounds too good (or too weird) to be true.</p>
+</div>
+</div>
+</div>
+<!-- Lesson Summary Card -->
+<div class="mt-16 p-8 bg-slate-900 text-white rounded-3xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-accent-coral/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+<div class="relative z-10">
+<h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+                        Lesson Summary
+                    </h3>
+<ul class="space-y-4 text-slate-300">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-yellow text-sm pt-1">check_circle</span>
+<span>Acknowledge the shift from curated apps to open-web exploration.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-yellow text-sm pt-1">check_circle</span>
+<span>Define "Algorithm" as a set of rules for engagement, not accuracy.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-yellow text-sm pt-1">check_circle</span>
+<span>Practice lateral reading—verifying information across multiple tabs.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<div class="mt-12 flex flex-col sm:flex-row gap-4 items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-8">
+<button class="w-full sm:w-auto px-8 py-3 rounded-xl border border-slate-200 dark:border-slate-800 font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Previous Lesson
+                </button>
+<button class="w-full sm:w-auto px-12 py-4 rounded-xl bg-primary text-white font-bold hover:brightness-110 shadow-lg shadow-primary/25 transition-all flex items-center justify-center gap-2">
+                    Mark as Complete
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</main>
+<footer class="py-12 px-6 border-t border-slate-100 dark:border-slate-900 mt-20">
+<div class="max-w-4xl mx-auto text-center">
+<p class="text-slate-400 text-sm">© 2024 Raising Humans in the Age of Algorithms. All rights reserved.</p>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

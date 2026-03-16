@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FFE600",
+                        "accent": "#FF4D4D",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                        "neutral-dark": "#1a1a1a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .print-shadow { box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col items-center">
+<!-- Top Navigation Bar -->
+<nav class="w-full bg-white dark:bg-neutral-dark border-b border-slate-200 dark:border-slate-800 px-6 py-4 mb-8">
+<div class="max-w-5xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-neutral-dark">settings_accessibility</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-extrabold tracking-tight">Raising Humans</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Unit 7</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Resources</a>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-full w-10 h-10 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-primary hover:text-neutral-dark transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+<button class="flex items-center justify-center rounded-full w-10 h-10 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-primary hover:text-neutral-dark transition-all">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="max-w-4xl w-full px-4 pb-20">
+<!-- Header Info -->
+<div class="mb-10 text-center md:text-left">
+<span class="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase tracking-widest rounded-full mb-3">Unit 7: Raising Humans in the Age of Algorithms</span>
+<h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-100 mb-4">Tech-Free Zone Signage</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl leading-relaxed">
+                Download and print this high-impact signage to reclaim physical spaces. Designate dining rooms, bedrooms, or play areas as zones for authentic human connection.
+            </p>
+</div>
+<!-- Printable Sign Mockup Container -->
+<div class="relative bg-white dark:bg-neutral-dark rounded-[2rem] p-8 md:p-16 print-shadow border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Accent Decorative Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-accent/10 rounded-full -ml-32 -mb-32 blur-3xl"></div>
+<!-- The Actual Sign Content -->
+<div class="relative z-10 border-[12px] border-neutral-dark dark:border-white p-8 md:p-12 flex flex-col items-center text-center h-full">
+<!-- Sign Header -->
+<div class="bg-primary text-neutral-dark px-8 py-4 mb-12 transform -rotate-1 shadow-lg">
+<h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter">Tech-Free Zone</h2>
+</div>
+<!-- Icons Section -->
+<div class="flex gap-8 md:gap-12 mb-12">
+<div class="relative">
+<span class="material-symbols-outlined text-7xl md:text-9xl text-slate-300 dark:text-slate-700">smartphone</span>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-full h-2 bg-accent rotate-45 rounded-full"></div>
+</div>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined text-7xl md:text-9xl text-slate-300 dark:text-slate-700">laptop</span>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-full h-2 bg-accent rotate-45 rounded-full"></div>
+</div>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined text-7xl md:text-9xl text-slate-300 dark:text-slate-700">videogame_asset</span>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-full h-2 bg-accent rotate-45 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Impact Message -->
+<div class="max-w-xl">
+<h3 class="text-2xl md:text-4xl font-extrabold text-neutral-dark dark:text-white mb-6 leading-tight">
+                        NO SCREENS BEYOND THIS POINT
+                    </h3>
+<div class="w-24 h-1 bg-primary mx-auto mb-8"></div>
+<p class="text-xl md:text-2xl font-medium text-slate-800 dark:text-slate-200 italic leading-snug">
+                        "This area is dedicated to real-world connection. Please leave your devices at the door and enjoy being fully present with your family."
+                    </p>
+</div>
+<!-- Sign Footer -->
+<div class="mt-16 flex items-center gap-4 text-neutral-dark dark:text-white/60">
+<span class="material-symbols-outlined">diversity_3</span>
+<span class="text-sm font-bold uppercase tracking-widest">Connect with Presence</span>
+</div>
+</div>
+</div>
+<!-- Download Action Section -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-neutral-dark text-white p-8 rounded-2xl flex flex-col justify-center">
+<h4 class="text-xl font-bold mb-2">Ready to Print?</h4>
+<p class="text-slate-400 mb-6">High-resolution PDF optimized for A4 and Letter sized paper. Best printed on heavy cardstock.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-neutral-dark px-8 py-3 rounded-xl font-extrabold flex items-center gap-2 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+                        Download Print PDF
+                    </button>
+<button class="border border-white/20 px-8 py-3 rounded-xl font-extrabold flex items-center gap-2 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">print</span>
+                        Print Directly
+                    </button>
+</div>
+</div>
+<div class="bg-accent p-8 rounded-2xl text-white flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-5xl mb-4">tips_and_updates</span>
+<h4 class="text-lg font-bold mb-2">Pro-Tip</h4>
+<p class="text-white/90 text-sm leading-relaxed">Place a wooden basket or "charging station" right below this sign to give devices a home while they're away.</p>
+</div>
+</div>
+<!-- Visual Example -->
+<div class="mt-20">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-8 px-4 border-l-4 border-primary">Implementation Inspiration</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="group relative overflow-hidden rounded-2xl aspect-[4/3]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Minimalist dining room with family sitting together" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB49r6jBIuTF2P328aCFduNy3oUJXwsfDw8wdOSdICnkGdFfQ_gREOCHVp2h0UkHAnx59uMCI71DZA1ViJLgg2HsMHHmWF-epZ35Iu4lobftCXilqwafq4oUZjY0c7xLxsvngjgbIHD0jkpZnUKCi85ZrO_bYfvSEeVfOhMpnSsTYepX7Z7IPKirCk651olytmjqU6q0R4H4Jcu7qOWDQmRLO0Gkc-GxpKi3QZb9D5v5ymFUqPg3Dvk1frOPNW1FWYu56StgpLTCv2i"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+<p class="text-white font-bold text-lg">Dining Room Zone</p>
+<p class="text-white/70 text-sm">Focus on flavor and conversation.</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-2xl aspect-[4/3]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Peaceful bedroom interior with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqX3MvL4ih2swy6DPAfXgftMiySbWoUV_SVtjeWBAiPesM5F-jZDJhuzXe4WF2isLCqxionwC8mm5sA4fk_h7Slhq21LAm2xzfCoUmScHk44SjMFEFmO-RlmZMswcskMsMdhoNdM0w_M9mhTyFyrggAuPOEhKIvkTr5rpUazjDwgGgI9a1dTGpZjbm_n5rFhOZbFa2OkbYM5YQsrXN1khRfLw1LoD3x_5SHnaYX08gqmN067c9-5LjapxmbixVXs0c9eOU29F1oK6s"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+<p class="text-white font-bold text-lg">Bedroom Sanctuary</p>
+<p class="text-white/70 text-sm">Better sleep, deeper rest.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-slate-900 py-12 px-6">
+<div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-neutral-dark text-sm">settings_accessibility</span>
+</div>
+<h2 class="text-white text-md font-extrabold tracking-tight">Raising Humans</h2>
+</div>
+<p class="text-slate-500 text-sm">© 2024 Unit 7 Resources. Part of the Age of Algorithms Series.</p>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Privacy</a>
+<a class="text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Support</a>
+<a class="text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Newsletter</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Masterclass: Digital Safety - Unit 4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-neon": "#39FF14",
+                        "accent-electric": "#0066FF",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .neon-glow { text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
+        .electric-border { border-left: 4px solid #0066FF; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-accent-electric p-2 rounded-lg">
+<span class="material-symbols-outlined text-white">shield_person</span>
+</div>
+<div>
+<h1 class="font-extrabold tracking-tight text-xl uppercase">Masterclass</h1>
+<p class="text-[10px] font-bold tracking-[0.2em] text-accent-electric uppercase">Digital Safety Series</p>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
+<a class="hover:text-accent-electric transition-colors" href="#">Curriculum</a>
+<a class="hover:text-accent-electric transition-colors" href="#">Resources</a>
+<a class="hover:text-accent-electric transition-colors" href="#">Community</a>
+<button class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Sign Out
+                </button>
+</nav>
+<button class="md:hidden p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-20 pb-32 px-6">
+<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 bg-accent-neon/10 border border-accent-neon/30 px-3 py-1 rounded-full">
+<span class="size-2 rounded-full bg-accent-neon animate-pulse"></span>
+<span class="text-xs font-bold text-accent-neon tracking-widest uppercase">Live Module</span>
+</div>
+<h2 class="text-6xl md:text-8xl font-black tracking-tighter leading-none">
+                        The Middle School <span class="text-accent-electric underline decoration-accent-neon">Danger Zone</span>
+</h2>
+<p class="text-xl text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
+                        Ages 11–14 | Navigating the peak of digital vulnerability, cognitive development vs. algorithmic manipulation.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-accent-electric hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition-all group">
+                            Resume Lesson
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex -space-x-3">
+<img alt="" class="size-12 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="User avatar profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxie3FryDh4w8KTkXeu5y9gTKuCVhrFbZ2rcS5MfSTiwYZZbN-Y5yXit6f81Phhrc9-qeSqELzQFvThX-0HAcEV8bsJB3dxk1gHFMLxmhz3OtbSRSflRzYpWS77WXhurZ4IWfCIB-ezNI4hKchKsIFB7UzJ-YRHm6Sf6IgGdreSNGJKvJ9dgPLQFCajt7HvbZEpMOuVnwE8Uz0Z9nc5P2nv559v1trWFd_xP-rs0Vc_jPXwl4bRROKZOdPEahMjufs2e5YefSnz4eV"/>
+<img alt="" class="size-12 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="User avatar profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFu4XwmJQftbdkZCTC0F3Tl19pEkKodwlM1iuNicRQJnk6Kyyn_Xr8J4jviNG_b2N_FRkMwyjRtOhqQ60eXh_AQETnUh95CSfK1lM9zoSZrpPkfaPMUPWp0R_a1OBJZbmB7a2KqG6mPs3fRlM5pCQhigkTOOb5Www1KPpYDQbHoZdqwldKQo7MjOt8WJIGrhFw1USBZY5kQFng8byBMa8bQaLbnN6yavgOIPv4KcKvraybaHgo0O07VBJluCFQ2_OCHVR9jpUoiSq4"/>
+<img alt="" class="size-12 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="User avatar profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3iTgp5TYmpp7xmJWWgJixXuGAzKMXQ5o7V-wYjaSyehRvMFHCI0ocyyOhdFWyIOlzG0NqAYRv4eKoiNwRNGoWK5dSUH2uwrgpC7PPTTbfjgyVaCzkylnkyltZEDSCe6Oc7Iwn-d-QgucpOpHyygjRpQaj_WonEYlsfTY6MbGUvTjplYq9R6Pt0VaV-6HptjIKdQBjy2Vstrfba0mjZLgKD_dzZDmXlJteD-ckxFD3JJQowTsb4LzO85sh8h1M5cg7SAtrsTSVP6Np"/>
+<div class="size-12 rounded-full border-4 border-background-light dark:border-background-dark bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold">+1.2k</div>
+</div>
+</div>
+</div>
+<!-- Live Quiz Tracker Widget -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-accent-neon/10 rounded-bl-[100px]"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest">Global Live Score</h3>
+<p class="text-4xl font-black mt-1">85.4<span class="text-accent-neon text-2xl">%</span></p>
+</div>
+<div class="bg-accent-neon/20 text-accent-neon px-3 py-1 rounded-lg text-xs font-bold">
+                                +5.2% session avg
+                            </div>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2 uppercase tracking-tighter">
+<span>Conceptual Understanding</span>
+<span class="text-accent-electric">92%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-accent-electric rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2 uppercase tracking-tighter">
+<span>Risk Assessment Speed</span>
+<span class="text-accent-neon">78%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-accent-neon rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-electric">groups</span>
+<span class="text-xs font-bold">482 Active Students</span>
+</div>
+<button class="text-accent-electric text-xs font-black uppercase tracking-widest hover:underline">View Leaderboard</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Emphasis Band -->
+<div class="bg-slate-900 py-12 overflow-hidden border-y-4 border-accent-neon">
+<div class="flex whitespace-nowrap animate-pulse">
+<div class="flex gap-12 items-center text-white font-black text-4xl uppercase tracking-tighter italic opacity-80">
+<span>Algorithm Awareness</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Digital Literacy</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Middle School Impact</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Algorithm Awareness</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Digital Literacy</span>
+</div>
+</div>
+</div>
+<!-- Infographic: Algorithm Escalation Funnel -->
+<section class="py-24 px-6 bg-slate-50 dark:bg-slate-950">
+<div class="max-w-5xl mx-auto text-center mb-16">
+<h2 class="text-4xl md:text-5xl font-black tracking-tight mb-6">The Algorithm <span class="text-accent-electric">Escalation Funnel</span></h2>
+<p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Understanding the four-phase feedback loop that drives engagement through curiosity and psychological triggers.</p>
+</div>
+<div class="max-w-4xl mx-auto space-y-4 relative">
+<!-- Vertical Line -->
+<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-electric via-accent-neon to-red-500 hidden md:block"></div>
+<!-- Phase 1 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:text-right">
+<h4 class="text-2xl font-bold mb-2">Curiosity Search</h4>
+<p class="text-slate-500">The initial seed. A simple question or trending hashtag that triggers the tracking mechanism.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="size-12 rounded-full bg-accent-electric flex items-center justify-center text-white font-black z-10 shadow-lg shadow-accent-electric/40">1</div>
+<span class="text-xs font-black uppercase tracking-widest text-accent-electric">Search Hook</span>
+</div>
+</div>
+<!-- Phase 2 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:order-last">
+<h4 class="text-2xl font-bold mb-2">Algorithmic Recommendation</h4>
+<p class="text-slate-500">AI recognizes patterns and serves "adjacent" content to test relevance and dwell time.</p>
+</div>
+<div class="flex items-center justify-end gap-6">
+<span class="text-xs font-black uppercase tracking-widest text-accent-neon">Pattern Match</span>
+<div class="size-12 rounded-full bg-accent-neon flex items-center justify-center text-slate-900 font-black z-10 shadow-lg shadow-accent-neon/40">2</div>
+</div>
+</div>
+<!-- Phase 3 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:text-right">
+<h4 class="text-2xl font-bold mb-2">Engagement Loop</h4>
+<p class="text-slate-500">The dopamine cycle begins. Endless scrolling and short-form video loops keep the user locked in.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="size-12 rounded-full bg-accent-electric flex items-center justify-center text-white font-black z-10 shadow-lg shadow-accent-electric/40">3</div>
+<span class="text-xs font-black uppercase tracking-widest text-accent-electric">Dopamine Hit</span>
+</div>
+</div>
+<!-- Phase 4 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:order-last">
+<h4 class="text-2xl font-bold mb-2">Extreme Exposure</h4>
+<p class="text-slate-500">The funnel narrows to polarizing or harmful content to maximize final retention metrics.</p>
+</div>
+<div class="flex items-center justify-end gap-6">
+<span class="text-xs font-black uppercase tracking-widest text-red-500">Danger Zone</span>
+<div class="size-12 rounded-full bg-red-500 flex items-center justify-center text-white font-black z-10 shadow-lg shadow-red-500/40">4</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Media vs Mental Health Section -->
+<section class="py-24 px-6 max-w-7xl mx-auto">
+<div class="grid lg:grid-cols-5 gap-12 items-center">
+<div class="lg:col-span-2 space-y-6">
+<h2 class="text-4xl font-black leading-tight italic">Social Media vs. <br/><span class="text-accent-electric">Mental Equilibrium</span></h2>
+<p class="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+                        The correlation between high engagement hours and adolescent anxiety levels has reached critical thresholds. In the "Middle School Danger Zone," the prefrontal cortex is still developing, making defensive digital habits essential.
+                    </p>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-accent-neon">psychology</span>
+<div>
+<p class="font-bold">Neural Plasticity</p>
+<p class="text-sm text-slate-500">Heightened vulnerability to social comparison.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-accent-electric">bedtime</span>
+<div>
+<p class="font-bold">Circadian Disruption</p>
+<p class="text-sm text-slate-500">Blue light impact on adolescent growth cycles.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="lg:col-span-3 aspect-[16/10] bg-slate-900 rounded-3xl p-8 relative overflow-hidden group">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute inset-0 bg-[radial-gradient(#39FF14_1px,transparent_1px)] [background-size:20px_20px]"></div>
+</div>
+<div class="relative h-full flex flex-col">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h3 class="text-white font-bold text-lg">Engagement Intensity vs. Anxiety</h3>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Aggregate Data 2020 - 2024</p>
+</div>
+<div class="flex gap-2">
+<div class="size-3 rounded-full bg-accent-electric"></div>
+<div class="size-3 rounded-full bg-accent-neon"></div>
+</div>
+</div>
+<!-- Visual representation of trend line -->
+<div class="flex-grow flex items-end gap-1 px-4 relative">
+<div class="absolute inset-x-0 bottom-12 h-px bg-slate-800"></div>
+<div class="absolute inset-x-0 bottom-24 h-px bg-slate-800"></div>
+<div class="absolute inset-x-0 bottom-36 h-px bg-slate-800"></div>
+<!-- Simple SVG Trend Line -->
+<svg class="absolute inset-0 w-full h-full p-8" preserveaspectratio="none" viewbox="0 0 400 200">
+<path d="M0 180 Q 100 170, 200 100 T 400 20" fill="none" stroke="#0066FF" stroke-width="4"></path>
+<path d="M0 190 Q 100 185, 200 150 T 400 80" fill="none" stroke="#39FF14" stroke-dasharray="5 5" stroke-width="2"></path>
+<circle cx="200" cy="100" fill="#0066FF" r="6"></circle>
+<circle cx="400" cy="20" fill="#0066FF" r="6"></circle>
+</svg>
+</div>
+<div class="mt-4 flex justify-between text-[10px] font-black uppercase text-slate-500 tracking-widest">
+<span>Entry</span>
+<span>Middle School Phase</span>
+<span>Peak Exposure</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dark Content Band -->
+<section class="bg-slate-900 text-white py-24 px-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+<div class="md:w-1/2">
+<div class="aspect-square rounded-3xl bg-slate-800 overflow-hidden border-2 border-slate-700 relative">
+<img alt="" class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 transition-all duration-700" data-alt="Teenager looking at a smartphone screen in low light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAySMl0YPs0u1ugbubyWTJtVgE4zrnHv9sZ7tpnHgEH7hLA_4C-buzws6lc5fSyZ95g-PXn1xYHsXz0MKKRcSLnLcM1SCqokVSn_lAHbsU0Xz12FpabWyuNy5b_9btGY8LLIFS5Ev-jnvj63W5puZFPmbiiCojVNnI7WQ8IaYaj9GI1E2EvoJVAtCO2W4LDuKntbpWNSq0ETuFiP895UhWJfoIcTlQMbedoAo4zFWZPrg1JFeQuOXCg0InKYmLk71ZMtrVidGQh_Sk6"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 p-6 bg-accent-electric/90 rounded-2xl backdrop-blur-sm">
+<p class="text-sm font-bold italic">"I didn't realize how much time I was losing until I saw the funnel in action. Now I have a plan."</p>
+<p class="text-[10px] font-black uppercase tracking-widest mt-2">— Marcus, 13</p>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 space-y-8">
+<h2 class="text-5xl font-black tracking-tighter">Your Tactical <br/><span class="text-accent-neon">Safety Protocol</span></h2>
+<ul class="space-y-6">
+<li class="flex gap-4">
+<div class="size-8 rounded-full bg-slate-800 border border-accent-neon flex items-center justify-center flex-shrink-0 text-accent-neon font-bold">1</div>
+<p class="text-slate-300"><strong class="text-white block">Disable Autoplay.</strong> Break the engagement loop by forcing intentional selection of content.</p>
+</li>
+<li class="flex gap-4">
+<div class="size-8 rounded-full bg-slate-800 border border-accent-neon flex items-center justify-center flex-shrink-0 text-accent-neon font-bold">2</div>
+<p class="text-slate-300"><strong class="text-white block">Keyword Scrubbing.</strong> Regularly clear your search history and 'Not Interested' specific tags.</p>
+</li>
+<li class="flex gap-4">
+<div class="size-8 rounded-full bg-slate-800 border border-accent-neon flex items-center justify-center flex-shrink-0 text-accent-neon font-bold">3</div>
+<p class="text-slate-300"><strong class="text-white block">Digital Sunset.</strong> Implement a device-free hour 60 minutes before bedtime.</p>
+</li>
+</ul>
+<button class="w-full bg-white text-slate-900 font-black py-4 rounded-xl hover:bg-accent-neon transition-colors">Download Cheat Sheet</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-background-light dark:bg-background-dark py-12 px-6 border-t border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 grayscale opacity-60">
+<div class="bg-slate-900 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-white text-sm">shield_person</span>
+</div>
+<h2 class="font-extrabold tracking-tight text-sm uppercase">Masterclass Series</h2>
+</div>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">© 2024 Digital Safety Institute. All Rights Reserved.</p>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-accent-electric transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-slate-400 hover:text-accent-electric transition-colors" href="#"><span class="material-symbols-outlined">help_center</span></a>
+<a class="text-slate-400 hover:text-accent-electric transition-colors" href="#"><span class="material-symbols-outlined">privacy_tip</span></a>
+</div>
+</div>
+</footer>
+</body></html>

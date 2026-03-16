@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Unit 3 Quiz Results - Raising Humans</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF4D4D",
+                        "secondary": "#FFE600",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .circular-progress {
+            background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+                        conic-gradient(#FF4D4D 90%, #f0f2f4 0);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation Header -->
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-4 lg:px-40">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">psychology_alt</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-lg font-extrabold leading-tight tracking-tight">Raising Humans</h2>
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-widest">Unit 3 Quiz Results</p>
+</div>
+</div>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<main class="mx-auto flex w-full max-w-[960px] flex-1 flex-col gap-8 px-6 py-10 lg:px-10">
+<!-- Hero Score Section -->
+<section class="flex flex-col items-center text-center gap-6 py-8">
+<div class="relative flex items-center justify-center">
+<div class="circular-progress h-48 w-48 rounded-full flex items-center justify-center shadow-xl">
+<div class="flex flex-col items-center">
+<span class="text-5xl font-black text-slate-900">90%</span>
+<span class="text-sm font-bold text-primary uppercase tracking-widest">Score</span>
+</div>
+</div>
+</div>
+<div class="max-w-md space-y-2">
+<h1 class="text-3xl font-black tracking-tight">Great job, Alex!</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg">You're mastering the elementary years and navigating algorithms with ease.</p>
+</div>
+</section>
+<!-- Stats Cards Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-wider">Correct</p>
+</div>
+<p class="text-3xl font-black">9/10</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-xl">cancel</span>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-wider">Incorrect</p>
+</div>
+<p class="text-3xl font-black">1</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-xl" style="color: #FFE600">timer</span>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-wider">Total Time</p>
+</div>
+<p class="text-3xl font-black">06:45</p>
+</div>
+</section>
+<!-- Performance Breakdown -->
+<section class="flex flex-col gap-6 rounded-xl bg-white dark:bg-slate-900 p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+<h2 class="text-xl font-extrabold tracking-tight">Topic Performance Breakdown</h2>
+<div class="space-y-6">
+<!-- Topic 1 -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history_edu</span>
+<p class="font-bold text-slate-800 dark:text-slate-200">Digital Literacy</p>
+</div>
+<p class="text-primary font-black">100%</p>
+</div>
+<div class="h-3 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<div class="h-full bg-primary" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Topic 2 -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="color: #FFE600">query_stats</span>
+<p class="font-bold text-slate-800 dark:text-slate-200">The Algorithm Gap</p>
+</div>
+<p class="text-slate-700 dark:text-slate-300 font-black">80%</p>
+</div>
+<div class="h-3 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<div class="h-full" style="width: 80%; background-color: #FFE600;"></div>
+</div>
+</div>
+<!-- Topic 3 -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">security</span>
+<p class="font-bold text-slate-800 dark:text-slate-200">Online Safety</p>
+</div>
+<p class="text-primary font-black">90%</p>
+</div>
+<div class="h-3 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<div class="h-full bg-primary" style="width: 90%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Buttons -->
+<section class="flex flex-col sm:flex-row gap-4 pt-4 pb-12">
+<button class="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-white font-bold py-4 px-8 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20">
+                        Continue to Unit 4
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="flex-1 inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold py-4 px-8 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">refresh</span>
+                        Review Unit 3
+                    </button>
+</section>
+<!-- Premium Footer -->
+<footer class="flex items-center justify-center gap-8 py-8 border-t border-slate-200 dark:border-slate-800 opacity-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span class="text-xs font-bold uppercase tracking-widest">Masterclass Certified</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">school</span>
+<span class="text-xs font-bold uppercase tracking-widest">Raising Humans Academy</span>
+</div>
+</footer>
+</main>
+</div>
+</div>
+</body></html>

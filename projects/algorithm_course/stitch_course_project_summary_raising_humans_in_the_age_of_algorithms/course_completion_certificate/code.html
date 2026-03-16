@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Certificate - Raising Humans in the Age of Algorithms</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-cyan": "#00f5ff",
+                        "accent-pink": "#ff007f",
+                        "accent-yellow": "#fff000",
+                        "accent-green": "#39ff14",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "sans": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .cert-border {
+            border: 20px solid transparent;
+            border-image: linear-gradient(to bottom right, #00f5ff, #ff007f, #fff000, #39ff14) 1;
+        }
+        .subtle-grid {
+            background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Parent Academy</h1>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-semibold">
+<span class="material-symbols-outlined text-lg">close</span>
+                    Exit
+                </button>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center justify-center p-4 md:p-12">
+<!-- Action Buttons Above Certificate -->
+<div class="w-full max-w-[1000px] flex flex-col sm:flex-row justify-end gap-3 mb-8">
+<button class="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined">download</span>
+                    Download PDF
+                </button>
+<button class="bg-[#0077b5] text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined">share</span>
+                    Share to LinkedIn
+                </button>
+</div>
+<!-- Certificate Container -->
+<div class="w-full max-w-[1000px] bg-white dark:bg-slate-900 shadow-2xl rounded-sm overflow-hidden relative border border-slate-200 dark:border-slate-800">
+<!-- Background Decoration -->
+<div class="absolute inset-0 subtle-grid opacity-20 pointer-events-none"></div>
+<!-- The Content Area -->
+<div class="relative m-8 border-[12px] border-slate-50 dark:border-slate-800 p-12 md:p-20 text-center flex flex-col items-center">
+<!-- Top Corner Accents -->
+<div class="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-accent-cyan to-accent-pink"></div>
+<div class="absolute top-0 left-0 w-1 h-24 bg-gradient-to-b from-accent-cyan to-accent-pink"></div>
+<div class="absolute bottom-0 right-0 w-24 h-1 bg-gradient-to-l from-accent-green to-accent-yellow"></div>
+<div class="absolute bottom-0 right-0 w-1 h-24 bg-gradient-to-t from-accent-green to-accent-yellow"></div>
+<!-- Seal/Icon -->
+<div class="mb-10 relative">
+<div class="size-20 bg-gradient-to-tr from-accent-cyan via-accent-pink to-accent-yellow p-1 rounded-full animate-pulse">
+<div class="w-full h-full bg-white dark:bg-slate-900 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-slate-800 dark:text-white">school</span>
+</div>
+</div>
+</div>
+<h2 class="text-slate-500 dark:text-slate-400 font-sans tracking-[0.3em] uppercase text-sm font-semibold mb-6">Certificate of Completion</h2>
+<p class="font-sans italic text-slate-600 dark:text-slate-400 text-lg mb-8">This is to certify that</p>
+<h3 class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8">
+                        Alex Morgan
+                    </h3>
+<div class="w-24 h-0.5 bg-slate-200 dark:bg-slate-700 mb-8"></div>
+<p class="font-sans text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-10">
+                        For successfully completing the comprehensive parent education course on technology, screens, and AI
+                    </p>
+<h4 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent-pink to-primary mb-16">
+                        Raising Humans in the Age of Algorithms
+                    </h4>
+<!-- Bottom Details Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full pt-10 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col items-center md:items-start">
+<span class="text-xs uppercase tracking-widest text-slate-400 mb-2">Completion Date</span>
+<span class="font-sans font-medium text-slate-800 dark:text-slate-200">October 24, 2023</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-xs uppercase tracking-widest text-slate-400 mb-2">Digital Signature</span>
+<div class="mt-1">
+<p class="font-serif italic text-2xl text-slate-800 dark:text-slate-200 leading-none">Aris Thorne</p>
+<div class="h-px w-32 bg-slate-300 dark:bg-slate-600 my-1"></div>
+<p class="text-[10px] text-slate-500 font-sans">Dr. Aris Thorne, Digital Ethicist</p>
+</div>
+</div>
+<div class="flex flex-col items-center md:items-end">
+<span class="text-xs uppercase tracking-widest text-slate-400 mb-2">Certificate ID</span>
+<span class="font-sans font-medium text-slate-800 dark:text-slate-200 uppercase tracking-tighter">RH-AOA-2023-8942-X</span>
+</div>
+</div>
+<!-- Modern Badge Elements -->
+<div class="mt-16 flex gap-4">
+<div class="size-3 rounded-full bg-accent-cyan"></div>
+<div class="size-3 rounded-full bg-accent-pink"></div>
+<div class="size-3 rounded-full bg-accent-yellow"></div>
+<div class="size-3 rounded-full bg-accent-green"></div>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<div class="mt-12 text-center text-slate-500 dark:text-slate-400 text-sm">
+<p>© 2023 Parent Academy Education Series. All rights reserved.</p>
+<p class="mt-1 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-sm">verified</span>
+                    Secure Blockchain Verified Credential
+                </p>
+</div>
+</main>
+</div>
+</body></html>

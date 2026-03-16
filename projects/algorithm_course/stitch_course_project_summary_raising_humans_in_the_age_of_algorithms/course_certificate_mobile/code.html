@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Completion Certificate - Parent Academy</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for Manrope and IBM Plex Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            manrope: ['Manrope', 'sans-serif'],
+            plex: ['IBM Plex Sans', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              cyan: '#22D3EE',
+              pink: '#F472B6',
+              yellow: '#FACC15',
+              green: '#4ADE80',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    /* Subtle background texture or gradient for the certificate card */
+    .certificate-container {
+      background: radial-gradient(circle at top right, rgba(255,255,255,1) 0%, rgba(248,250,252,1) 100%);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Accent border gradient */
+    .accent-gradient-border {
+      background: linear-gradient(to bottom right, #22D3EE, #F472B6, #FACC15, #4ADE80);
+      padding: 3px;
+    }
+
+    /* Decorative corner elements */
+    .corner-accent {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+    }
+    .corner-tl { top: 0; left: 0; border-left: 4px solid #22D3EE; border-top: 4px solid #22D3EE; }
+    .corner-tr { top: 0; right: 0; border-right: 4px solid #F472B6; border-top: 4px solid #F472B6; }
+    .corner-bl { bottom: 0; left: 0; border-left: 4px solid #4ADE80; border-bottom: 4px solid #4ADE80; }
+    .corner-br { bottom: 0; right: 0; border-right: 4px solid #FACC15; border-bottom: 4px solid #FACC15; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-4 font-plex antialiased">
+<!-- BEGIN: Certificate Card -->
+<main class="w-full max-w-md bg-white rounded-xl overflow-hidden accent-gradient-border relative shadow-2xl" data-purpose="certificate-viewer">
+<div class="bg-white p-8 sm:p-12 h-full relative flex flex-col items-center text-center">
+<!-- Decorative Corners -->
+<div class="corner-accent corner-tl"></div>
+<div class="corner-accent corner-tr"></div>
+<div class="corner-accent corner-bl"></div>
+<div class="corner-accent corner-br"></div>
+<!-- BEGIN: Header -->
+<header class="mb-8" data-purpose="certificate-header">
+<div class="flex items-center justify-center mb-4">
+<!-- Placeholder for Logo -->
+<div class="h-10 w-10 bg-slate-900 rounded-lg flex items-center justify-center text-white mr-2">
+<span class="font-manrope font-extrabold text-xl">PA</span>
+</div>
+<span class="font-manrope font-bold text-slate-800 text-lg tracking-tight">Parent Academy</span>
+</div>
+<h1 class="text-xs font-manrope font-bold uppercase tracking-[0.2em] text-slate-500 mb-2">Certificate of Completion</h1>
+<div class="w-12 h-0.5 bg-slate-300 mx-auto"></div>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Recipient Info -->
+<section class="mb-8 w-full" data-purpose="recipient-info">
+<p class="text-slate-500 italic text-sm mb-4">This is to certify that</p>
+<h2 class="font-manrope text-3xl font-extrabold text-slate-900 mb-2">Alex Morgan</h2>
+<p class="text-slate-600 text-sm max-w-[250px] mx-auto leading-relaxed">
+          Has successfully completed the masterclass course
+        </p>
+</section>
+<!-- END: Recipient Info -->
+<!-- BEGIN: Course Details -->
+<section class="mb-10 w-full" data-purpose="course-details">
+<h3 class="font-manrope text-xl font-bold text-slate-800 leading-tight mb-6">
+          Raising Humans in the <br/>Age of Algorithms
+        </h3>
+<div class="flex justify-between items-end border-t border-slate-100 pt-8 mt-4">
+<!-- Completion Date -->
+<div class="text-left">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Date</p>
+<p class="text-slate-800 font-semibold text-sm">October 24, 2023</p>
+</div>
+<!-- Signature Block -->
+<div class="text-right">
+<!-- Digital Signature Placeholder -->
+<div class="mb-1">
+<span class="font-serif italic text-2xl text-slate-700 opacity-80" style="font-family: 'Dancing Script', cursive; font-family: 'Times New Roman', serif;">Dr. Aris Thorne</span>
+</div>
+<div class="w-32 h-px bg-slate-300 ml-auto mb-1"></div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Dr. Aris Thorne</p>
+<p class="text-[9px] text-slate-400 uppercase">Lead Instructor</p>
+</div>
+</div>
+</section>
+<!-- END: Course Details -->
+<!-- BEGIN: Certificate Verification -->
+<footer class="mt-auto pt-4 w-full flex flex-col items-center" data-purpose="verification-footer">
+<div class="flex items-center space-x-1 mb-2">
+<!-- Mini accent dots representing the 4 units -->
+<span class="w-2 h-2 rounded-full bg-accent-cyan"></span>
+<span class="w-2 h-2 rounded-full bg-accent-pink"></span>
+<span class="w-2 h-2 rounded-full bg-accent-yellow"></span>
+<span class="w-2 h-2 rounded-full bg-accent-green"></span>
+</div>
+<p class="text-[10px] font-medium text-slate-400 font-mono tracking-tighter">
+          VERIFIED CERTIFICATE ID: PA-RHAA-2023-AM941
+        </p>
+</footer>
+<!-- END: Certificate Verification -->
+</div>
+</main>
+<!-- END: Certificate Card -->
+<!-- BEGIN: Action Buttons -->
+<nav class="w-full max-w-md mt-8 grid grid-cols-2 gap-4" data-purpose="action-buttons">
+<button class="flex items-center justify-center py-4 px-6 bg-slate-900 text-white rounded-xl font-manrope font-semibold text-sm transition active:scale-95 shadow-lg">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="浸4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+      Download PDF
+    </button>
+<button class="flex items-center justify-center py-4 px-6 bg-[#0077b5] text-white rounded-xl font-manrope font-semibold text-sm transition active:scale-95 shadow-lg">
+<svg class="w-4 h-4 mr-2" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+      Add to LinkedIn
+    </button>
+</nav>
+<!-- END: Action Buttons -->
+<p class="mt-6 text-slate-400 text-[11px] font-medium tracking-wide">SHARE YOUR ACHIEVEMENT</p>
+</body></html>

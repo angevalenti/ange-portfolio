@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF2D78",
+                        "accent-orange": "#FF6B00",
+                        "background-light": "#fefcfd",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        @media print {
+            .no-print { display: none; }
+            body { background-color: white !important; }
+            .print-border { border: 1px solid #e2e8f0 !important; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-[1000px] mx-auto bg-white dark:bg-slate-900 shadow-2xl my-0 sm:my-10 overflow-hidden print:shadow-none print:my-0">
+<!-- Top Navigation (Course Header) -->
+<header class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-8 py-6 no-print">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg text-white">
+<span class="material-symbols-outlined">child_care</span>
+</div>
+<div>
+<h2 class="text-xl font-extrabold tracking-tight">Raising Humans</h2>
+<p class="text-xs font-semibold uppercase tracking-widest text-primary">Unit 2: Sensory Play</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-bold hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>PDF</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:opacity-90 transition-opacity" onclick="window.print()">
+<span class="material-symbols-outlined text-lg">print</span>
+<span>Print Guide</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="p-8 sm:p-12">
+<!-- Hero Title Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b-4 border-accent-orange/20 pb-8">
+<div class="max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+<span class="material-symbols-outlined text-sm">verified</span>
+                        Premium Resource
+                    </div>
+<h1 class="text-5xl font-black text-slate-900 dark:text-white leading-tight">Sensory-Rich <span class="text-primary">Play Guide</span></h1>
+<p class="text-xl text-slate-500 mt-2">Ages 0-5 Tech-Free Development Activities</p>
+</div>
+<div class="hidden md:block text-right">
+<p class="text-sm font-bold text-slate-400">UNIT 2 EXCLUSIVE</p>
+<p class="text-lg font-bold text-accent-orange">Developmental Milestones</p>
+</div>
+</div>
+<!-- Activity Grid Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Category: 0-2 Years -->
+<div class="space-y-6">
+<div class="flex items-center gap-3 border-l-4 border-primary pl-4">
+<h3 class="text-2xl font-bold italic">Infants &amp; Toddlers <span class="text-slate-400 font-normal text-lg">(0-2 yrs)</span></h3>
+</div>
+<!-- Activity Card -->
+<div class="p-6 rounded-xl border border-slate-100 bg-slate-50/50 dark:bg-slate-800/50 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">texture</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Focus: Touch</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Textured Exploration Box</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Fill a shallow box with silk scarves, corrugated cardboard, and smooth stones. Encourage baby to reach and grasp different tactile surfaces.</p>
+</div>
+<!-- Activity Card -->
+<div class="p-6 rounded-xl border border-slate-100 bg-slate-50/50 dark:bg-slate-800/50 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-accent-orange/10 rounded-lg">
+<span class="material-symbols-outlined text-accent-orange">visibility</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Focus: Sight</span>
+</div>
+<h4 class="font-bold text-lg mb-2">High-Contrast Shadow Play</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Use a flashlight and simple cutouts to project shapes on the wall. Move them slowly to help baby develop visual tracking skills.</p>
+</div>
+<!-- Activity Card -->
+<div class="p-6 rounded-xl border border-slate-100 bg-slate-50/50 dark:bg-slate-800/50 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">hearing</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Focus: Sound</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Homemade Rhythm Shakers</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Fill sealed containers with rice, beans, or pasta. Explore different tempos and volumes together to build auditory discrimination.</p>
+</div>
+</div>
+<!-- Category: 3-5 Years -->
+<div class="space-y-6">
+<div class="flex items-center gap-3 border-l-4 border-accent-orange pl-4">
+<h3 class="text-2xl font-bold italic">Preschoolers <span class="text-slate-400 font-normal text-lg">(3-5 yrs)</span></h3>
+</div>
+<!-- Activity Card -->
+<div class="p-6 rounded-xl border border-slate-100 bg-slate-50/50 dark:bg-slate-800/50 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-accent-orange/10 rounded-lg">
+<span class="material-symbols-outlined text-accent-orange">palette</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Focus: Complex Touch</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Nature Dough Sculpting</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Combine homemade salt dough with twigs, leaves, and pinecones. Pressing patterns into dough builds fine motor strength and creativity.</p>
+</div>
+<!-- Activity Card -->
+<div class="p-6 rounded-xl border border-slate-100 bg-slate-50/50 dark:bg-slate-800/50 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">search</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Focus: Visual Search</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Color Hunt Scavenger</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Give your child a specific color card. They must find 5 items in the room or backyard that exactly match that hue. Enhances focus.</p>
+</div>
+<!-- Activity Card -->
+<div class="p-6 rounded-xl border border-slate-100 bg-slate-50/50 dark:bg-slate-800/50 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-accent-orange/10 rounded-lg">
+<span class="material-symbols-outlined text-accent-orange">music_note</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Focus: Sound Mapping</span>
+</div>
+<h4 class="font-bold text-lg mb-2">Sound Scape Drawing</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sit quietly for 2 minutes. Ask the child to draw the sounds they hear (birds, cars, wind). Great for mindfulness and listening.</p>
+</div>
+</div>
+</div>
+<!-- Parent Tip Box -->
+<div class="mt-12 bg-gradient-to-br from-primary to-accent-orange p-1 rounded-2xl overflow-hidden shadow-xl">
+<div class="bg-white dark:bg-slate-900 p-8 rounded-[0.9rem] flex flex-col md:flex-row items-center gap-6">
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl text-primary">lightbulb</span>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-2">The Golden Rule of Sensory Play</h4>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Follow your child's lead. Sensory stimulation should be engaging, not overwhelming. If they pull away or seem agitated, simplify the activity or move to a quieter space. The goal is joyful discovery, not a completed project.</p>
+</div>
+</div>
+</div>
+<!-- Footer for Printable -->
+<footer class="mt-12 pt-8 border-t border-slate-100 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"></path>
+</svg>
+</div>
+<span class="text-xs font-bold text-slate-400 tracking-widest uppercase">Raising Humans Academy © 2024</span>
+</div>
+<div class="text-[10px] text-slate-300 italic uppercase">
+                    Authorized for student use: Unit 2 - Tech-Free Living
+                </div>
+</footer>
+</div>
+</div>
+</body></html>

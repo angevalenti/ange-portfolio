@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF2D78",
+                        "secondary": "#FF6B00",
+                        "background-light": "#ffffff",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'IBM+Plex+Sans', sans-serif; }
+        .font-display { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-100 dark:border-slate-800 px-6 md:px-20 py-4 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3 text-slate-900">
+<div class="size-8 flex items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary text-white">
+<span class="material-symbols-outlined !text-xl">shield_person</span>
+</div>
+<h2 class="text-slate-900 font-display text-xl font-bold leading-tight tracking-tight">Raising Humans</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
+<nav class="hidden md:flex gap-6">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Curriculum</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Resources</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-primary/10 hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBhbb7yEXRsCkI8qwqehlmBGFaTHfCIw5-tkOtR_ItHHbV1u3A1Pu-TzQ2Vy81qCY_F2vgNRDMHKgH4IqIYCdkx0tLFc-UvW7FMYgdytlubxw9GYCkXzYomkyl9U6AhOpojBkjCjv8tGohG_pzpg-zBN5hVRkmGfG_-g43DC-nPhknuA8aoUWME3qBK8TgJL6oqpmzV1H7-KvuKY-sDJBMUHd72V6h4bnFq_StA-gmbKssoFFGN-9d94qYnVlhR_OUH1S5NK4ShJyQ4");'></div>
+</div>
+</div>
+</header>
+<main class="flex flex-col items-center w-full px-6 md:px-20 py-12 max-w-7xl mx-auto">
+<div class="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-12">
+<div class="space-y-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined !text-sm">auto_awesome</span>
+<span class="text-xs font-bold uppercase tracking-wider font-display">Current Module</span>
+</div>
+<h1 class="text-4xl md:text-6xl font-display font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+                            Unit 6: <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Online Safety Fundamentals</span>
+</h1>
+<p class="text-lg text-slate-500 font-body max-w-2xl">
+                            Part of <span class="font-semibold text-slate-700">Raising Humans in the Age of Algorithms</span> series. Empowering parents with the technical and psychological tools for the digital frontier.
+                        </p>
+</div>
+</div>
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+<div class="lg:col-span-8 relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl z-10"></div>
+<div class="absolute bottom-8 left-8 z-20 text-white">
+<div class="flex gap-6 items-center">
+<div class="flex flex-col">
+<span class="text-xs uppercase tracking-widest opacity-80 font-display">Duration</span>
+<span class="text-lg font-bold">45 Mins</span>
+</div>
+<div class="h-8 w-px bg-white/30"></div>
+<div class="flex flex-col">
+<span class="text-xs uppercase tracking-widest opacity-80 font-display">Lessons</span>
+<span class="text-lg font-bold">12 Videos</span>
+</div>
+<div class="h-8 w-px bg-white/30"></div>
+<div class="flex flex-col">
+<span class="text-xs uppercase tracking-widest opacity-80 font-display">Exercises</span>
+<span class="text-lg font-bold">3 Labs</span>
+</div>
+</div>
+</div>
+<div class="aspect-video w-full rounded-2xl overflow-hidden bg-slate-200">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern home office with technology and digital safety theme" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDZL4MBffSkD0lxLt4adHz2Q045mG5aF9PVlXqeCrzSvbZsNaCFzEzGhje9sEX_ioedg-0-h1F_f721J0S8lB5kQLe5RBbqqqPbFbJxwMPquidi523t8bqgnApeuXGFCRKQb1phT9yS-6W8YD34cdLAVM9Tavvfx7xzp31xJwddhR2RP592RWxZNRkquVnuXFnHO8idOqyW0IL9y7OkH0luPC8fy5YwdEO4Cl-tV69u5HLxGK2gv5GTDsdBUlGpMhqsTwSbmKvXqak4");'>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-6 justify-center">
+<div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 space-y-6">
+<h3 class="text-xl font-display font-bold text-slate-900">Module Overview</h3>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary">lock</span>
+<div>
+<p class="font-bold text-slate-800">Data Privacy</p>
+<p class="text-sm text-slate-500 font-body">Managing the digital footprint of minors.</p>
+</div>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-secondary">visibility</span>
+<div>
+<p class="font-bold text-slate-800">Grooming Patterns</p>
+<p class="text-sm text-slate-500 font-body">Identifying behavioral red flags in apps.</p>
+</div>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary">settings_suggest</span>
+<div>
+<p class="font-bold text-slate-800">Technical Safeguards</p>
+<p class="text-sm text-slate-500 font-body">Configuring OS-level parental controls.</p>
+</div>
+</li>
+</ul>
+<div class="pt-4 flex flex-col gap-3">
+<button class="w-full py-4 rounded-xl bg-primary text-white font-display font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+                                    Start Module <span class="material-symbols-outlined !text-sm">arrow_forward</span>
+</button>
+<button class="w-full py-4 rounded-xl border border-slate-200 text-slate-700 font-display font-bold hover:bg-slate-100 transition-all">
+                                    View Curriculum
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl transition-shadow">
+<span class="text-primary font-display text-4xl font-extrabold mb-2">3</span>
+<h4 class="text-lg font-bold text-slate-900 mb-1">Core Pillars</h4>
+<p class="text-slate-500 text-sm font-body">Foundational concepts of ethical digital parenting and child safety.</p>
+</div>
+<div class="flex flex-col p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl transition-shadow">
+<span class="text-secondary font-display text-4xl font-extrabold mb-2">6</span>
+<h4 class="text-lg font-bold text-slate-900 mb-1">Technical Safeguards</h4>
+<p class="text-slate-500 text-sm font-body">Step-by-step guides for routers, gaming consoles, and smartphones.</p>
+</div>
+<div class="flex flex-col p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl transition-shadow">
+<div class="flex items-baseline gap-1">
+<span class="text-primary font-display text-4xl font-extrabold mb-2">1.5M+</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 mb-1">Reports Annually</h4>
+<p class="text-slate-500 text-sm font-body">Understanding the scale of digital threats through global safety data.</p>
+</div>
+</div>
+<footer class="mt-24 pt-8 border-t border-slate-100 w-full flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-sm">
+<p>© 2024 Raising Humans in the Age of Algorithms</p>
+<div class="flex gap-6">
+<a class="hover:text-primary" href="#">Terms</a>
+<a class="hover:text-primary" href="#">Privacy</a>
+<a class="hover:text-primary" href="#">Support</a>
+</div>
+</footer>
+</main>
+</div>
+</div>
+</body></html>

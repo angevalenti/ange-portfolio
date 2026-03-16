@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF2D78",
+                        "accent-orange": "#FF6B00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .progress-gradient {
+            background: linear-gradient(90deg, #FF2D78 0%, #FF6B00 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<!-- Sticky Top Navigation -->
+<nav class="sticky top-0 z-50 w-full bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">shield_lock</span>
+</div>
+<div>
+<h1 class="text-sm font-bold uppercase tracking-wider text-primary">Unit 6</h1>
+<p class="text-xs text-slate-500 font-medium">Online Safety Fundamentals</p>
+</div>
+</div>
+<div class="hidden md:flex flex-1 max-w-md mx-12 flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold uppercase text-slate-400 tracking-widest">
+<span>Unit Progress</span>
+<span>15%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full progress-gradient" style="width: 15%;"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">search</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-accent-orange border-2 border-white shadow-sm" data-alt="User profile avatar gradient circle"></div>
+</div>
+</div>
+</nav>
+<main class="max-w-[1280px] mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12">
+<!-- Main Content Area -->
+<article class="flex-1 max-w-3xl">
+<header class="mb-10">
+<div class="flex items-center gap-2 text-primary font-bold text-sm mb-4">
+<span class="material-symbols-outlined text-lg">menu_book</span>
+<span>Lesson 1</span>
+</div>
+<h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
+                    Protecting the <span class="text-transparent bg-clip-text progress-gradient">Digital Footprint</span>
+</h2>
+<p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-light">
+                    In an age where data persistence is the norm, proactive safety measures are no longer optional. Building a secure foundation allows for confident exploration of the digital landscape.
+                </p>
+</header>
+<div class="relative w-full aspect-video rounded-2xl overflow-hidden mb-12 shadow-2xl border border-white/20">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<img alt="Secure Digital Environment" class="w-full h-full object-cover" data-alt="Hand holding a glowing holographic shield over a laptop and smartphone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ2hDxifhnw4QWGsLKCM5xOCDJZyMl281IUyEwORims2PGk1bPP_lsjWs2G_sPWj508oueIYJZJqQ8nOKUcRUX2aP0m-pw70A2OxU3JjCDTxt7s--QAq0KSE9a4LeX3HKn2hAzwkv8vlbX7WHvEoDZNuE5zAY9273hFHcxtStiP-XqZL-4UX439g01smj7H1AwefQ1F7uwhPL6c2lEMHFS4TXDmYZF_TTNlaju7HtQWrrTaPI2ilJFTA7LeKuBYEREdA9sWxFDkvix"/>
+<div class="absolute bottom-6 left-6 flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg border border-white/20">
+<span class="material-symbols-outlined text-white">verified_user</span>
+<span class="text-white text-sm font-semibold tracking-wide uppercase">Core Principle: Proactive Defense</span>
+</div>
+</div>
+<section class="space-y-12">
+<div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-3">
+<span class="h-8 w-1 bg-primary rounded-full"></span>
+                        The 3 Layers of Defense
+                    </h3>
+<div class="grid gap-6">
+<!-- Layer 1 -->
+<div class="group p-6 bg-white dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all">
+<div class="flex gap-5">
+<div class="h-12 w-12 shrink-0 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl font-bold">stay_current_portrait</span>
+</div>
+<div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">1. Device-Level Controls</h4>
+<p class="text-slate-600 dark:text-slate-400">Your first line of defense. Ensure Multi-Factor Authentication (MFA) and strong biometric or alphanumeric passcodes are active on every physical device.</p>
+</div>
+</div>
+</div>
+<!-- Layer 2 -->
+<div class="group p-6 bg-white dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-accent-orange/30 transition-all">
+<div class="flex gap-5">
+<div class="h-12 w-12 shrink-0 rounded-lg bg-accent-orange/10 flex items-center justify-center text-accent-orange">
+<span class="material-symbols-outlined text-2xl font-bold">router</span>
+</div>
+<div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">2. Network-Level Filters</h4>
+<p class="text-slate-600 dark:text-slate-400">Secure the gateway. Implement custom DNS filtering and router-level firewalls to block malicious traffic before it reaches your devices.</p>
+</div>
+</div>
+</div>
+<!-- Layer 3 -->
+<div class="group p-6 bg-white dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all">
+<div class="flex gap-5">
+<div class="h-12 w-12 shrink-0 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl font-bold">privacy_tip</span>
+</div>
+<div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">3. App-Specific Privacy</h4>
+<p class="text-slate-600 dark:text-slate-400">Control the flow of data. Perform monthly audits of application permissions—remove camera, microphone, and location access for non-essential apps.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<blockquote class="relative p-12 overflow-hidden bg-slate-900 rounded-3xl text-center">
+<div class="absolute top-0 left-0 w-full h-full opacity-10" data-alt="Subtle geometric dot pattern background" style="background-image: radial-gradient(#FF2D78 1px, transparent 1px); background-size: 20px 20px;"></div>
+<span class="material-symbols-outlined text-6xl text-primary/40 mb-4 block italic">format_quote</span>
+<p class="text-2xl md:text-3xl font-medium text-white leading-snug relative z-10">
+                        "Online safety isn't about blocking the world; it's about building a <span class="text-accent-orange">secure foundation</span> for exploration."
+                    </p>
+</blockquote>
+<div class="bg-primary/5 dark:bg-primary/10 border-l-4 border-primary p-8 rounded-r-2xl flex gap-6 items-start">
+<div class="h-12 w-12 shrink-0 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined fill-1">bolt</span>
+</div>
+<div>
+<h5 class="text-primary font-bold uppercase tracking-widest text-xs mb-2">Pro Tip</h5>
+<p class="text-slate-800 dark:text-slate-200 font-medium text-lg leading-relaxed">
+                            Stop reusing passwords! Use a dedicated Password Manager (like Bitwarden or 1Password) to generate unique, 16+ character strings for every service you use.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Navigation Footer -->
+<footer class="mt-20 pt-10 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-6">
+<button class="flex items-center gap-2 px-6 py-3 font-bold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Previous Lesson
+                </button>
+<button class="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/25 transition-all flex items-center justify-center gap-3">
+                    Mark as Complete
+                    <span class="material-symbols-outlined">check_circle</span>
+</button>
+</footer>
+</article>
+<!-- Sidebar Components -->
+<aside class="w-full lg:w-80 space-y-8">
+<!-- Safety Checklist Card -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800">
+<h3 class="text-lg font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">checklist</span>
+                    Safety Checklist
+                </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3 group cursor-pointer">
+<div class="mt-1 h-5 w-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Enable MFA everywhere</span>
+</li>
+<li class="flex items-start gap-3 group cursor-pointer">
+<div class="mt-1 h-5 w-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Audit App Permissions</span>
+</li>
+<li class="flex items-start gap-3 group cursor-pointer">
+<div class="mt-1 h-5 w-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Set Up Router Filters</span>
+</li>
+<li class="flex items-start gap-3 group cursor-pointer">
+<div class="mt-1 h-5 w-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Refresh Device Backups</span>
+</li>
+</ul>
+</div>
+<!-- Downloadable Resource Card -->
+<div class="bg-gradient-to-br from-primary to-accent-orange rounded-2xl p-6 text-white shadow-xl shadow-primary/20">
+<div class="h-12 w-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl">picture_as_pdf</span>
+</div>
+<h3 class="text-lg font-bold mb-2">Resource Pack</h3>
+<p class="text-white/80 text-sm mb-6 leading-relaxed">Download the "Family Online Safety Audit" PDF to secure your home network.</p>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Download PDF
+                </button>
+</div>
+<!-- Lesson Info Card -->
+<div class="px-2">
+<div class="flex items-center gap-4 py-4 border-b border-slate-100 dark:border-slate-800">
+<div class="text-slate-400"><span class="material-symbols-outlined">schedule</span></div>
+<div>
+<p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Estimated Time</p>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">12 Minutes</p>
+</div>
+</div>
+<div class="flex items-center gap-4 py-4 border-b border-slate-100 dark:border-slate-800">
+<div class="text-slate-400"><span class="material-symbols-outlined">grade</span></div>
+<div>
+<p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Difficulty</p>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Foundational</p>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer Space -->
+<div class="h-24"></div>
+</body></html>

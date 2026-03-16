@@ -1,0 +1,1596 @@
+<!-- Unit 1 Quiz Results -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5", // Original primary from instructions
+                        "cyan-accent": "#00F5FF",
+                        "acid-yellow": "#CCFF00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .premium-gradient {
+            background: linear-gradient(135deg, #00F5FF 0%, #CCFF00 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 md:px-20 py-4 bg-white dark:bg-slate-900">
+<div class="flex items-center gap-4 text-slate-900 dark:text-slate-100">
+<div class="size-8 flex items-center justify-center rounded-lg premium-gradient text-slate-900">
+<span class="material-symbols-outlined font-bold">psychology</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-extrabold leading-tight tracking-tight uppercase">Raising Humans</h2>
+<p class="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">Age of Algorithms</p>
+</div>
+</div>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</header>
+<main class="flex flex-1 justify-center py-10 px-4 md:px-0">
+<div class="layout-content-container flex flex-col max-w-[800px] flex-1">
+<!-- Hero Results Section -->
+<div class="flex flex-col items-center text-center space-y-6 mb-12">
+<div class="relative">
+<div class="size-48 md:size-64 rounded-full border-[12px] border-slate-100 dark:border-slate-800 flex items-center justify-center relative overflow-hidden">
+<!-- Progress Ring Simulated with Gradient -->
+<div class="absolute inset-0 premium-gradient opacity-10"></div>
+<div class="flex flex-col items-center z-10">
+<span class="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 dark:text-white">85<span class="text-3xl md:text-4xl">%</span></span>
+<span class="text-xs font-bold uppercase tracking-widest text-slate-500 mt-[-4px]">Mastery Score</span>
+</div>
+</div>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyan-accent text-slate-900 px-4 py-1 rounded-full text-xs font-black uppercase tracking-tighter shadow-lg">
+                                Quiz Passed
+                            </div>
+</div>
+<div class="space-y-2">
+<h1 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                                Incredible work, Alex.
+                            </h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-md mx-auto leading-relaxed">
+                                You have a solid understanding of how algorithms affect brain development and plasticity.
+                            </p>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+<div class="flex flex-col gap-2 rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 text-emerald-500 mb-1">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+<p class="text-xs font-bold uppercase tracking-wider">Correct</p>
+</div>
+<p class="text-slate-900 dark:text-white tracking-tight text-3xl font-black">17</p>
+<p class="text-slate-500 text-xs font-medium">Out of 20 questions</p>
+</div>
+<div class="flex flex-col gap-2 rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 text-rose-500 mb-1">
+<span class="material-symbols-outlined text-lg">cancel</span>
+<p class="text-xs font-bold uppercase tracking-wider">Incorrect</p>
+</div>
+<p class="text-slate-900 dark:text-white tracking-tight text-3xl font-black">03</p>
+<p class="text-slate-500 text-xs font-medium">Review recommended</p>
+</div>
+<div class="flex flex-col gap-2 rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 text-cyan-accent mb-1">
+<span class="material-symbols-outlined text-lg">timer</span>
+<p class="text-xs font-bold uppercase tracking-wider">Total Time</p>
+</div>
+<p class="text-slate-900 dark:text-white tracking-tight text-3xl font-black">12:45</p>
+<p class="text-slate-500 text-xs font-medium">Avg 38s per question</p>
+</div>
+</div>
+<!-- Performance Breakdown -->
+<div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 mb-12 shadow-sm">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Unit 1: Brain Plasticity</h3>
+<p class="text-slate-500 text-sm">Topic Performance Breakdown</p>
+</div>
+<div class="text-right">
+<span class="text-slate-900 dark:text-white text-2xl font-black">85%</span>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold uppercase tracking-tighter">
+<span class="text-slate-700 dark:text-slate-300">Neural Pathway Formation</span>
+<span class="text-slate-900 dark:text-white">100%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full premium-gradient" style="width: 100%;"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold uppercase tracking-tighter">
+<span class="text-slate-700 dark:text-slate-300">Dopamine Loops</span>
+<span class="text-slate-900 dark:text-white">75%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full premium-gradient" style="width: 75%;"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold uppercase tracking-tighter">
+<span class="text-slate-700 dark:text-slate-300">Cognitive Load Theory</span>
+<span class="text-slate-900 dark:text-white">80%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full premium-gradient" style="width: 80%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col md:flex-row gap-4 mb-20">
+<button class="flex-1 flex items-center justify-center gap-2 h-16 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl font-black text-lg hover:opacity-90 transition-all uppercase tracking-tight">
+                            Continue to Unit 2
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 h-16 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-700 rounded-2xl font-black text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all uppercase tracking-tight">
+<span class="material-symbols-outlined">refresh</span>
+                            Review Unit 1
+                        </button>
+</div>
+<!-- Branding Footer -->
+<div class="flex flex-col items-center space-y-4 opacity-50 pb-10">
+<div class="size-6">
+<svg class="text-slate-400" fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"></path>
+</svg>
+</div>
+<p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 text-center">Masterclass Series: Raising Humans</p>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>
+
+<!-- Unit 1: The Developing Brain -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "cyan-accent": "#00F5FF",
+                        "acid-yellow": "#CCFF00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .sticky-progress { position: sticky; top: 0; z-index: 50; }
+        .acid-gradient { background: linear-gradient(135deg, #CCFF00 0%, #00F5FF 100%); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Sticky Progress Bar -->
+<div class="sticky-progress w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 h-1.5 w-full bg-slate-100 dark:bg-slate-700">
+<div class="h-full bg-cyan-accent" style="width: 35%;"></div>
+</div>
+<div class="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
+<span class="text-xs font-bold uppercase tracking-widest text-slate-500">Current Progress: 35%</span>
+<span class="text-xs font-bold uppercase tracking-widest text-cyan-accent">Unit 1: Foundations</span>
+</div>
+</div>
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 px-10 py-4 bg-white dark:bg-background-dark">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-extrabold leading-tight tracking-tight">NeuroHub</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Curriculum</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Research Lab</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors" href="#">Global Network</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<label class="hidden sm:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800">
+<div class="text-slate-500 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full border-none bg-transparent focus:ring-0 text-sm px-3" placeholder="Search neural pathways..."/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-10 rounded-full border-2 border-cyan-accent overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar showing a professional researcher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKV21iEfnejZ8sYYEsPubrR6Gppk0yitLLmm81OHhtzdq7pl3qWZWMTGsK58ugFW1bJsjuJLHMz0aBr7gmxZKBVq2bnbBA3BAG8UCUvGXDmvHz7ltH5x9mt_2UE46FJyWVcmZWTJoPwCGRY_OCNLSeSLkOBGlDRoWcSvVYlo5XvIBuCWvZdLmxpLE_Zpcpy0-rZrhS6RgqTLUbcAWzuI1TCtWz2mJN9_c5Bh0l1mXaekj0CcDKvfOyY6l8H_ZtTjjQzf7aBKoY6qd5"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto w-full px-6 py-12">
+<!-- Hero Section -->
+<div class="mb-16">
+<div class="inline-block px-3 py-1 rounded-full bg-acid-yellow text-slate-900 text-xs font-bold uppercase mb-4 tracking-tighter">Module 01</div>
+<h1 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-slate-100 leading-none mb-6 tracking-tighter">
+                    The Developing Brain <br/><span class="text-cyan-accent">&amp; Digital Screens</span>
+</h1>
+<p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+                    How does early-life digital exposure reconfigure the architecture of the developing human mind? Exploring neural plasticity in the age of constant connectivity.
+                </p>
+</div>
+<!-- Stat Card Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl border-l-4 border-cyan-accent shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-cyan-accent">schedule</span>
+<span class="text-[10px] font-bold uppercase text-slate-400 tracking-widest">Global Avg</span>
+</div>
+<p class="text-3xl font-black mb-1">7.5 hrs</p>
+<p class="text-sm text-slate-500">Daily screen interaction for ages 8-12</p>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl border-l-4 border-acid-yellow shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-acid-yellow">blur_on</span>
+<span class="text-[10px] font-bold uppercase text-slate-400 tracking-widest">Synaptic Gap</span>
+</div>
+<p class="text-3xl font-black mb-1">-15%</p>
+<p class="text-sm text-slate-500">Lower white matter integrity in high-users</p>
+</div>
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl border-l-4 border-primary shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary">psychology_alt</span>
+<span class="text-[10px] font-bold uppercase text-slate-400 tracking-widest">Attention</span>
+</div>
+<p class="text-3xl font-black mb-1">-22%</p>
+<p class="text-sm text-slate-500">Reduction in sustained attention span</p>
+</div>
+<div class="bg-slate-900 text-white p-6 rounded-xl shadow-xl flex flex-col justify-center overflow-hidden relative">
+<div class="absolute -right-4 -bottom-4 opacity-20">
+<span class="material-symbols-outlined text-8xl">trending_down</span>
+</div>
+<p class="text-xs font-bold uppercase tracking-widest text-cyan-accent mb-2">Critical Alert</p>
+<p class="text-lg font-bold">Neural Pruning is accelerating in digital natives.</p>
+</div>
+</div>
+<!-- Two-Column Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Sidebar / Timeline -->
+<div class="lg:col-span-4 order-2 lg:order-1">
+<div class="bg-slate-50 dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-800">
+<h3 class="text-2xl font-extrabold mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">timeline</span>
+                            Brain Development
+                        </h3>
+<div class="space-y-12 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+<!-- Timeline Item 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-cyan-accent border-4 border-white dark:border-slate-900"></div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-slate-100">Infancy (0-2y)</h4>
+<p class="text-sm text-slate-500 mb-3">Rapid synaptogenesis. Peak sensory development.</p>
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg text-xs border border-slate-100 dark:border-slate-700">
+<span class="font-bold text-red-500">Screen Impact:</span> Disruption of serve-and-return interactions.
+                                </div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-acid-yellow border-4 border-white dark:border-slate-900"></div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-slate-100">Childhood (3-10y)</h4>
+<p class="text-sm text-slate-500 mb-3">Language acquisition and emotional regulation pathways.</p>
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg text-xs border border-slate-100 dark:border-slate-700">
+<span class="font-bold text-primary">Screen Impact:</span> Potential delays in executive function maturity.
+                                </div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-primary border-4 border-white dark:border-slate-900"></div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-slate-100">Adolescence (11-20y)</h4>
+<p class="text-sm text-slate-500 mb-3">Prefrontal cortex remodeling and dopamine system sensitivity.</p>
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg text-xs border border-slate-100 dark:border-slate-700">
+<span class="font-bold text-cyan-accent">Screen Impact:</span> Social reward loop reinforcement.
+                                </div>
+</div>
+</div>
+<button class="w-full mt-10 py-4 acid-gradient rounded-xl text-slate-900 font-black text-sm uppercase tracking-tighter hover:opacity-90 transition-opacity">
+                            View Deep-Dive Analysis
+                        </button>
+</div>
+</div>
+<!-- Main Content -->
+<div class="lg:col-span-8 order-1 lg:order-2 space-y-10">
+<section>
+<h2 class="text-3xl font-extrabold mb-6">The Neuro-Plasticity Paradox</h2>
+<div class="prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-400 space-y-4 leading-relaxed">
+<p>
+                                The human brain is at its most malleable during the first two decades of life. This <strong>neuroplasticity</strong> allows us to adapt to our environment with incredible efficiency. However, when that environment is dominated by high-speed, high-reward digital interfaces, the brain adapts to those specific stimuli, often at the cost of other critical cognitive functions.
+                            </p>
+<p>
+                                Research suggests that the constant "context switching" required by modern smartphones can lead to a thinning of the cortex in areas responsible for executive control. This isn't just a temporary change; it's a structural re-wiring of how the brain processes information.
+                            </p>
+</div>
+</section>
+<!-- Pull Quote Band -->
+<div class="bg-slate-900 text-white p-12 rounded-2xl relative overflow-hidden my-12">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-9xl">format_quote</span>
+</div>
+<p class="text-3xl font-extrabold leading-tight mb-6 relative z-10 italic">
+                            "We are currently conducting a massive, uncontrolled experiment on the next generation's neural architecture, without a control group."
+                        </p>
+<div class="flex items-center gap-4 relative z-10">
+<div class="size-12 rounded-full bg-cyan-accent/20 border border-cyan-accent/50"></div>
+<div>
+<p class="font-bold text-cyan-accent">Dr. Aris Thorne</p>
+<p class="text-sm text-slate-400">Lead Researcher, Center for Digital Minds</p>
+</div>
+</div>
+</div>
+<section>
+<h2 class="text-3xl font-extrabold mb-6">Synaptic Pruning &amp; Digital Habits</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="h-48 rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
+<img class="w-full h-full object-cover mix-blend-overlay opacity-50" data-alt="Microscopic view of neural connections glowing cyan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxZeNLZU5Bjmj-uQtwuGYgUKRhbASl39G48-H89apDls_kx-X8t1YVAgCpvDWJbjECKNa9eybN4uOHNoK0_A5NtbmTP-EHLDTNPHaaLOuwEi-Jx4806v_R3S2zJwe8BuwHbV8s-qQmSUh8zdQzYC07a_6d3_0yxHnnKS-D5Jn6akatV27wAa4bGcqK89kWhcZTWpb5XNM4DjxJxZdTDPdNQ1RJ0HvGI7r8Lu6wDwEziYMGz7WJizv5fMUvO0o5XW3uEIUYmBTpStiQ"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-cyan-accent text-5xl">biotech</span>
+</div>
+</div>
+<h4 class="font-bold text-xl">The 'Use It or Lose It' Principle</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">
+                                    Neural pathways that aren't regularly stimulated are pruned away. If deep reading and quiet contemplation are replaced by scrolling, the circuits for deep focus may never fully mature.
+                                </p>
+</div>
+<div class="space-y-4">
+<div class="h-48 rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
+<img class="w-full h-full object-cover mix-blend-overlay opacity-50" data-alt="Abstract digital data flowing in a dark space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArGRKPK0FgBJKFnCmSYJbdix7BQOKeQd2JuEfit2G-fp8clpSumOLJYhzhiJlrdJ3RgcfWAxAeqXYtpLp3XnRXZUDx5AUkSmlCvYUZOmPQ93KbbhA-MRDnZZoApQtguTLK2rOrf_-GLr5Lqr5AHdyoN8s637o68pzgM2XKdi6wgHYZaO19UYZqHpm6_a3iO5XS_OY4XS5dOWokxcrvae_rMt_9JLyn_VGcLxH9uqgv4MjaNvVsFSVfn03dRrdwvZUhV99vlTa9HqAy"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-acid-yellow text-5xl">dataset</span>
+</div>
+</div>
+<h4 class="font-bold text-xl">Dopamine Reward Loops</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">
+                                    Digital notifications trigger bursts of dopamine, creating a feedback loop that prioritizes short-term gratification over long-term cognitive goals.
+                                </p>
+</div>
+</div>
+</section>
+<!-- Footer Action -->
+<div class="flex flex-col sm:flex-row items-center justify-between p-8 bg-cyan-accent/10 border border-cyan-accent/20 rounded-2xl gap-6">
+<div>
+<h3 class="text-xl font-black mb-1">Ready for the Unit 1 Quiz?</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400">Test your knowledge on brain plasticity and digital impacts.</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-bold transition-all shadow-lg shadow-primary/20 whitespace-nowrap">
+                            Start Assessment
+                        </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-12 px-6 mt-12">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+<p class="text-slate-900 dark:text-slate-100 font-extrabold text-xl">NeuroScience Hub</p>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Ethics Board</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="text-slate-400 text-sm">
+                    © 2024 Digital Neural Research Initiative
+                </div>
+</div>
+</footer>
+</div>
+</body></html>
+
+<!-- Unit 1 Quiz: Brain Plasticity -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-cyan": "#00F5FF",
+                        "accent-yellow": "#CCFF00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Raising Humans - Unit 1 Quiz</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-body text-slate-900 dark:text-slate-100">
+<div class="min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-black dark:bg-white rounded-lg flex items-center justify-center text-white dark:text-black">
+<span class="material-symbols-outlined text-2xl">neurology</span>
+</div>
+<div>
+<h1 class="font-display font-extrabold text-xl tracking-tight">Raising Humans</h1>
+<p class="text-[10px] uppercase tracking-widest font-bold text-primary">NeuroHub Academy</p>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<div class="text-right">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-tighter">Current Course</p>
+<p class="text-sm font-semibold font-display">Unit 1: The Developing Brain</p>
+</div>
+<div class="h-10 w-px bg-slate-200 dark:bg-slate-700"></div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-xl">close</span>
+<span class="text-sm font-bold font-display">Exit Quiz</span>
+</button>
+<div class="size-10 rounded-full bg-accent-yellow border-2 border-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-900">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+<!-- Progress Section -->
+<div class="mb-12">
+<div class="flex items-end justify-between mb-4">
+<div>
+<span class="inline-block px-3 py-1 bg-accent-cyan/20 text-slate-900 text-[10px] font-bold uppercase tracking-widest rounded-full mb-2">Module Assessment</span>
+<h2 class="text-3xl font-display font-extrabold tracking-tight">Question 3 <span class="text-slate-400 font-light">of 10</span></h2>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Current Mastery</p>
+<p class="text-2xl font-display font-black text-primary">85%</p>
+</div>
+</div>
+<div class="h-3 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden flex">
+<div class="h-full bg-accent-cyan transition-all duration-500" style="width: 30%;"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Question Area -->
+<div class="lg:col-span-8 space-y-8">
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+<h3 class="text-2xl font-display font-bold leading-snug mb-8">
+                            How does excessive screen time specifically impact neural plasticity in children under five?
+                        </h3>
+<div class="space-y-4">
+<!-- Option 1 -->
+<label class="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-accent-cyan cursor-pointer transition-all bg-slate-50/30 dark:bg-slate-800/30">
+<input class="peer hidden" name="quiz-option" type="radio"/>
+<div class="size-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-accent-cyan peer-checked:bg-accent-cyan flex items-center justify-center transition-all">
+<div class="size-2 bg-white rounded-full scale-0 peer-checked:scale-100 transition-transform"></div>
+</div>
+<div class="flex-1">
+<p class="text-base font-medium leading-relaxed group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                                        It accelerates the pruning of synaptic connections in the prefrontal cortex prematurely.
+                                    </p>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-accent-cyan cursor-pointer transition-all bg-slate-50/30 dark:bg-slate-800/30">
+<input class="peer hidden" name="quiz-option" type="radio"/>
+<div class="size-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-accent-cyan peer-checked:bg-accent-cyan flex items-center justify-center transition-all">
+<div class="size-2 bg-white rounded-full scale-0 peer-checked:scale-100 transition-transform"></div>
+</div>
+<div class="flex-1">
+<p class="text-base font-medium leading-relaxed group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                                        It strengthens the myelination of sensory-motor pathways exclusively through rapid visual stimulus.
+                                    </p>
+</div>
+</label>
+<!-- Option 3 (Selected State Example) -->
+<label class="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-accent-cyan bg-accent-cyan/5 cursor-pointer transition-all">
+<input checked="" class="peer hidden" name="quiz-option" type="radio"/>
+<div class="size-6 rounded-full border-2 border-accent-cyan bg-accent-cyan flex items-center justify-center transition-all">
+<div class="size-2 bg-white rounded-full scale-100 transition-transform"></div>
+</div>
+<div class="flex-1">
+<p class="text-base font-bold leading-relaxed text-slate-900 dark:text-white transition-colors">
+                                        It may reduce the growth of white matter responsible for language, imagery, and executive literacy skills.
+                                    </p>
+</div>
+<span class="material-symbols-outlined text-accent-cyan">check_circle</span>
+</label>
+<!-- Option 4 -->
+<label class="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-accent-cyan cursor-pointer transition-all bg-slate-50/30 dark:bg-slate-800/30">
+<input class="peer hidden" name="quiz-option" type="radio"/>
+<div class="size-6 rounded-full border-2 border-slate-300 dark:border-slate-600 peer-checked:border-accent-cyan peer-checked:bg-accent-cyan flex items-center justify-center transition-all">
+<div class="size-2 bg-white rounded-full scale-0 peer-checked:scale-100 transition-transform"></div>
+</div>
+<div class="flex-1">
+<p class="text-base font-medium leading-relaxed group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                                        It has no measurable impact on the developing brain's architecture until after age seven.
+                                    </p>
+</div>
+</label>
+</div>
+<div class="mt-10 flex justify-between items-center">
+<button class="flex items-center gap-2 text-slate-500 font-bold hover:text-slate-900 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+<span>Previous Question</span>
+</button>
+<button class="bg-primary text-white px-10 py-4 rounded-xl font-display font-bold text-lg hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all flex items-center gap-3">
+<span>Confirm Answer</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sidebar / Status -->
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<h4 class="font-display font-bold text-sm uppercase tracking-wider text-slate-400 mb-6">Course Progress</h4>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-accent-yellow/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm font-bold text-slate-900">emoji_events</span>
+</div>
+<span class="text-sm font-semibold">Current Score</span>
+</div>
+<span class="text-xl font-black font-display text-slate-900 dark:text-white">85%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-accent-cyan/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm font-bold text-slate-900">timer</span>
+</div>
+<span class="text-sm font-semibold">Time Elapsed</span>
+</div>
+<span class="text-sm font-bold font-display">04:12</span>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 leading-relaxed italic">
+                                    "Neural plasticity is the brain's ability to reorganize itself by forming new neural connections throughout life."
+                                </p>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-xl bg-slate-900 text-white p-6 aspect-video flex flex-col justify-end">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent z-10"></div>
+<img alt="Brain scan visualization" class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="Digital visualization of neural networks in a human brain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB9SSswX6hrlt-Gusy6i1wOmotXBlVaZOW4CqKCc68PdSCT-qt0YCCwKC0CTeAXYiQ_MJ-QHCx8jnlMOs_fxHVqaSiGN-u0YMTWVpv6yLLKWemnBEE8b4JHhC-mynt-M8OC8ueV-fTqOumH5xwJlUuYlJ3k0G7XoRvTY8cAXKwFBW-th5qic_hZB8Vzc-MgntLgWJmdnVHHgdO8dy1-fB2MCzo-MN5Af7GKU-XbtgSFOACr0N-BvhSWyXuJT9CTrXUwIk_23GW76g4"/>
+<div class="relative z-20">
+<p class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan mb-1">Study Material</p>
+<h5 class="font-display font-bold text-lg leading-tight">Review Chapter 4: Synaptic Pruning</h5>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 p-4 rounded-xl bg-accent-yellow text-slate-900 font-display font-black text-sm uppercase tracking-widest hover:brightness-105 transition-all shadow-md">
+<span class="material-symbols-outlined">lightbulb</span>
+                        Get a Hint
+                    </button>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-8 px-6 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-xs text-slate-400 font-medium tracking-wide">
+                © 2024 RAISING HUMANS ACADEMY. ALL RIGHTS RESERVED. 
+                <span class="mx-2">|</span> 
+                DESIGNED FOR NEUROHUB PARTNERS.
+            </p>
+</footer>
+</div>
+</body></html>
+
+<!-- Unit 4: Middle School Danger Zone -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Masterclass: Digital Safety - Unit 4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-neon": "#39FF14",
+                        "accent-electric": "#0066FF",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .neon-glow { text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
+        .electric-border { border-left: 4px solid #0066FF; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-accent-electric p-2 rounded-lg">
+<span class="material-symbols-outlined text-white">shield_person</span>
+</div>
+<div>
+<h1 class="font-extrabold tracking-tight text-xl uppercase">Masterclass</h1>
+<p class="text-[10px] font-bold tracking-[0.2em] text-accent-electric uppercase">Digital Safety Series</p>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
+<a class="hover:text-accent-electric transition-colors" href="#">Curriculum</a>
+<a class="hover:text-accent-electric transition-colors" href="#">Resources</a>
+<a class="hover:text-accent-electric transition-colors" href="#">Community</a>
+<button class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Sign Out
+                </button>
+</nav>
+<button class="md:hidden p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-20 pb-32 px-6">
+<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 bg-accent-neon/10 border border-accent-neon/30 px-3 py-1 rounded-full">
+<span class="size-2 rounded-full bg-accent-neon animate-pulse"></span>
+<span class="text-xs font-bold text-accent-neon tracking-widest uppercase">Live Module</span>
+</div>
+<h2 class="text-6xl md:text-8xl font-black tracking-tighter leading-none">
+                        The Middle School <span class="text-accent-electric underline decoration-accent-neon">Danger Zone</span>
+</h2>
+<p class="text-xl text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
+                        Ages 11–14 | Navigating the peak of digital vulnerability, cognitive development vs. algorithmic manipulation.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-accent-electric hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition-all group">
+                            Resume Lesson
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex -space-x-3">
+<img alt="" class="size-12 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="User avatar profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxie3FryDh4w8KTkXeu5y9gTKuCVhrFbZ2rcS5MfSTiwYZZbN-Y5yXit6f81Phhrc9-qeSqELzQFvThX-0HAcEV8bsJB3dxk1gHFMLxmhz3OtbSRSflRzYpWS77WXhurZ4IWfCIB-ezNI4hKchKsIFB7UzJ-YRHm6Sf6IgGdreSNGJKvJ9dgPLQFCajt7HvbZEpMOuVnwE8Uz0Z9nc5P2nv559v1trWFd_xP-rs0Vc_jPXwl4bRROKZOdPEahMjufs2e5YefSnz4eV"/>
+<img alt="" class="size-12 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="User avatar profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFu4XwmJQftbdkZCTC0F3Tl19pEkKodwlM1iuNicRQJnk6Kyyn_Xr8J4jviNG_b2N_FRkMwyjRtOhqQ60eXh_AQETnUh95CSfK1lM9zoSZrpPkfaPMUPWp0R_a1OBJZbmB7a2KqG6mPs3fRlM5pCQhigkTOOb5Www1KPpYDQbHoZdqwldKQo7MjOt8WJIGrhFw1USBZY5kQFng8byBMa8bQaLbnN6yavgOIPv4KcKvraybaHgo0O07VBJluCFQ2_OCHVR9jpUoiSq4"/>
+<img alt="" class="size-12 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="User avatar profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3iTgp5TYmpp7xmJWWgJixXuGAzKMXQ5o7V-wYjaSyehRvMFHCI0ocyyOhdFWyIOlzG0NqAYRv4eKoiNwRNGoWK5dSUH2uwrgpC7PPTTbfjgyVaCzkylnkyltZEDSCe6Oc7Iwn-d-QgucpOpHyygjRpQaj_WonEYlsfTY6MbGUvTjplYq9R6Pt0VaV-6HptjIKdQBjy2Vstrfba0mjZLgKD_dzZDmXlJteD-ckxFD3JJQowTsb4LzO85sh8h1M5cg7SAtrsTSVP6Np"/>
+<div class="size-12 rounded-full border-4 border-background-light dark:border-background-dark bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold">+1.2k</div>
+</div>
+</div>
+</div>
+<!-- Live Quiz Tracker Widget -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-accent-neon/10 rounded-bl-[100px]"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest">Global Live Score</h3>
+<p class="text-4xl font-black mt-1">85.4<span class="text-accent-neon text-2xl">%</span></p>
+</div>
+<div class="bg-accent-neon/20 text-accent-neon px-3 py-1 rounded-lg text-xs font-bold">
+                                +5.2% session avg
+                            </div>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2 uppercase tracking-tighter">
+<span>Conceptual Understanding</span>
+<span class="text-accent-electric">92%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-accent-electric rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2 uppercase tracking-tighter">
+<span>Risk Assessment Speed</span>
+<span class="text-accent-neon">78%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-accent-neon rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-electric">groups</span>
+<span class="text-xs font-bold">482 Active Students</span>
+</div>
+<button class="text-accent-electric text-xs font-black uppercase tracking-widest hover:underline">View Leaderboard</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Emphasis Band -->
+<div class="bg-slate-900 py-12 overflow-hidden border-y-4 border-accent-neon">
+<div class="flex whitespace-nowrap animate-pulse">
+<div class="flex gap-12 items-center text-white font-black text-4xl uppercase tracking-tighter italic opacity-80">
+<span>Algorithm Awareness</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Digital Literacy</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Middle School Impact</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Algorithm Awareness</span>
+<span class="text-accent-neon text-5xl">⚡</span>
+<span>Digital Literacy</span>
+</div>
+</div>
+</div>
+<!-- Infographic: Algorithm Escalation Funnel -->
+<section class="py-24 px-6 bg-slate-50 dark:bg-slate-950">
+<div class="max-w-5xl mx-auto text-center mb-16">
+<h2 class="text-4xl md:text-5xl font-black tracking-tight mb-6">The Algorithm <span class="text-accent-electric">Escalation Funnel</span></h2>
+<p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Understanding the four-phase feedback loop that drives engagement through curiosity and psychological triggers.</p>
+</div>
+<div class="max-w-4xl mx-auto space-y-4 relative">
+<!-- Vertical Line -->
+<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-electric via-accent-neon to-red-500 hidden md:block"></div>
+<!-- Phase 1 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:text-right">
+<h4 class="text-2xl font-bold mb-2">Curiosity Search</h4>
+<p class="text-slate-500">The initial seed. A simple question or trending hashtag that triggers the tracking mechanism.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="size-12 rounded-full bg-accent-electric flex items-center justify-center text-white font-black z-10 shadow-lg shadow-accent-electric/40">1</div>
+<span class="text-xs font-black uppercase tracking-widest text-accent-electric">Search Hook</span>
+</div>
+</div>
+<!-- Phase 2 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:order-last">
+<h4 class="text-2xl font-bold mb-2">Algorithmic Recommendation</h4>
+<p class="text-slate-500">AI recognizes patterns and serves "adjacent" content to test relevance and dwell time.</p>
+</div>
+<div class="flex items-center justify-end gap-6">
+<span class="text-xs font-black uppercase tracking-widest text-accent-neon">Pattern Match</span>
+<div class="size-12 rounded-full bg-accent-neon flex items-center justify-center text-slate-900 font-black z-10 shadow-lg shadow-accent-neon/40">2</div>
+</div>
+</div>
+<!-- Phase 3 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:text-right">
+<h4 class="text-2xl font-bold mb-2">Engagement Loop</h4>
+<p class="text-slate-500">The dopamine cycle begins. Endless scrolling and short-form video loops keep the user locked in.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="size-12 rounded-full bg-accent-electric flex items-center justify-center text-white font-black z-10 shadow-lg shadow-accent-electric/40">3</div>
+<span class="text-xs font-black uppercase tracking-widest text-accent-electric">Dopamine Hit</span>
+</div>
+</div>
+<!-- Phase 4 -->
+<div class="relative grid md:grid-cols-2 gap-8 items-center group">
+<div class="md:order-last">
+<h4 class="text-2xl font-bold mb-2">Extreme Exposure</h4>
+<p class="text-slate-500">The funnel narrows to polarizing or harmful content to maximize final retention metrics.</p>
+</div>
+<div class="flex items-center justify-end gap-6">
+<span class="text-xs font-black uppercase tracking-widest text-red-500">Danger Zone</span>
+<div class="size-12 rounded-full bg-red-500 flex items-center justify-center text-white font-black z-10 shadow-lg shadow-red-500/40">4</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Media vs Mental Health Section -->
+<section class="py-24 px-6 max-w-7xl mx-auto">
+<div class="grid lg:grid-cols-5 gap-12 items-center">
+<div class="lg:col-span-2 space-y-6">
+<h2 class="text-4xl font-black leading-tight italic">Social Media vs. <br/><span class="text-accent-electric">Mental Equilibrium</span></h2>
+<p class="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+                        The correlation between high engagement hours and adolescent anxiety levels has reached critical thresholds. In the "Middle School Danger Zone," the prefrontal cortex is still developing, making defensive digital habits essential.
+                    </p>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-accent-neon">psychology</span>
+<div>
+<p class="font-bold">Neural Plasticity</p>
+<p class="text-sm text-slate-500">Heightened vulnerability to social comparison.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-accent-electric">bedtime</span>
+<div>
+<p class="font-bold">Circadian Disruption</p>
+<p class="text-sm text-slate-500">Blue light impact on adolescent growth cycles.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="lg:col-span-3 aspect-[16/10] bg-slate-900 rounded-3xl p-8 relative overflow-hidden group">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute inset-0 bg-[radial-gradient(#39FF14_1px,transparent_1px)] [background-size:20px_20px]"></div>
+</div>
+<div class="relative h-full flex flex-col">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h3 class="text-white font-bold text-lg">Engagement Intensity vs. Anxiety</h3>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Aggregate Data 2020 - 2024</p>
+</div>
+<div class="flex gap-2">
+<div class="size-3 rounded-full bg-accent-electric"></div>
+<div class="size-3 rounded-full bg-accent-neon"></div>
+</div>
+</div>
+<!-- Visual representation of trend line -->
+<div class="flex-grow flex items-end gap-1 px-4 relative">
+<div class="absolute inset-x-0 bottom-12 h-px bg-slate-800"></div>
+<div class="absolute inset-x-0 bottom-24 h-px bg-slate-800"></div>
+<div class="absolute inset-x-0 bottom-36 h-px bg-slate-800"></div>
+<!-- Simple SVG Trend Line -->
+<svg class="absolute inset-0 w-full h-full p-8" preserveaspectratio="none" viewbox="0 0 400 200">
+<path d="M0 180 Q 100 170, 200 100 T 400 20" fill="none" stroke="#0066FF" stroke-width="4"></path>
+<path d="M0 190 Q 100 185, 200 150 T 400 80" fill="none" stroke="#39FF14" stroke-dasharray="5 5" stroke-width="2"></path>
+<circle cx="200" cy="100" fill="#0066FF" r="6"></circle>
+<circle cx="400" cy="20" fill="#0066FF" r="6"></circle>
+</svg>
+</div>
+<div class="mt-4 flex justify-between text-[10px] font-black uppercase text-slate-500 tracking-widest">
+<span>Entry</span>
+<span>Middle School Phase</span>
+<span>Peak Exposure</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dark Content Band -->
+<section class="bg-slate-900 text-white py-24 px-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+<div class="md:w-1/2">
+<div class="aspect-square rounded-3xl bg-slate-800 overflow-hidden border-2 border-slate-700 relative">
+<img alt="" class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 transition-all duration-700" data-alt="Teenager looking at a smartphone screen in low light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAySMl0YPs0u1ugbubyWTJtVgE4zrnHv9sZ7tpnHgEH7hLA_4C-buzws6lc5fSyZ95g-PXn1xYHsXz0MKKRcSLnLcM1SCqokVSn_lAHbsU0Xz12FpabWyuNy5b_9btGY8LLIFS5Ev-jnvj63W5puZFPmbiiCojVNnI7WQ8IaYaj9GI1E2EvoJVAtCO2W4LDuKntbpWNSq0ETuFiP895UhWJfoIcTlQMbedoAo4zFWZPrg1JFeQuOXCg0InKYmLk71ZMtrVidGQh_Sk6"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 p-6 bg-accent-electric/90 rounded-2xl backdrop-blur-sm">
+<p class="text-sm font-bold italic">"I didn't realize how much time I was losing until I saw the funnel in action. Now I have a plan."</p>
+<p class="text-[10px] font-black uppercase tracking-widest mt-2">— Marcus, 13</p>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 space-y-8">
+<h2 class="text-5xl font-black tracking-tighter">Your Tactical <br/><span class="text-accent-neon">Safety Protocol</span></h2>
+<ul class="space-y-6">
+<li class="flex gap-4">
+<div class="size-8 rounded-full bg-slate-800 border border-accent-neon flex items-center justify-center flex-shrink-0 text-accent-neon font-bold">1</div>
+<p class="text-slate-300"><strong class="text-white block">Disable Autoplay.</strong> Break the engagement loop by forcing intentional selection of content.</p>
+</li>
+<li class="flex gap-4">
+<div class="size-8 rounded-full bg-slate-800 border border-accent-neon flex items-center justify-center flex-shrink-0 text-accent-neon font-bold">2</div>
+<p class="text-slate-300"><strong class="text-white block">Keyword Scrubbing.</strong> Regularly clear your search history and 'Not Interested' specific tags.</p>
+</li>
+<li class="flex gap-4">
+<div class="size-8 rounded-full bg-slate-800 border border-accent-neon flex items-center justify-center flex-shrink-0 text-accent-neon font-bold">3</div>
+<p class="text-slate-300"><strong class="text-white block">Digital Sunset.</strong> Implement a device-free hour 60 minutes before bedtime.</p>
+</li>
+</ul>
+<button class="w-full bg-white text-slate-900 font-black py-4 rounded-xl hover:bg-accent-neon transition-colors">Download Cheat Sheet</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-background-light dark:bg-background-dark py-12 px-6 border-t border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 grayscale opacity-60">
+<div class="bg-slate-900 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-white text-sm">shield_person</span>
+</div>
+<h2 class="font-extrabold tracking-tight text-sm uppercase">Masterclass Series</h2>
+</div>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">© 2024 Digital Safety Institute. All Rights Reserved.</p>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-accent-electric transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-slate-400 hover:text-accent-electric transition-colors" href="#"><span class="material-symbols-outlined">help_center</span></a>
+<a class="text-slate-400 hover:text-accent-electric transition-colors" href="#"><span class="material-symbols-outlined">privacy_tip</span></a>
+</div>
+</div>
+</footer>
+</body></html>
+
+<!-- Unit 1: Brain Development Cheat Sheet -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brain Development &amp; Screens: The Critical Windows</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-cyan": "#00F5FF",
+                        "accent-acid": "#CCFF00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'IBM Plex Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .timeline-line {
+            background: linear-gradient(to bottom, #00F5FF 0%, #107dd5 50%, #CCFF00 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col bg-white dark:bg-background-dark overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header / Top Bar -->
+<header class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-6 md:px-20 py-4 bg-white dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">neurology</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-extrabold leading-tight tracking-tight uppercase">Raising Humans</h2>
+<p class="text-[10px] text-slate-500 font-bold tracking-[0.2em] uppercase">Age of Algorithms</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">share</span>
+                        Share
+                    </button>
+<button class="flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-white rounded-full font-bold text-sm tracking-wide hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl">download</span>
+<span>DOWNLOAD PDF</span>
+</button>
+</div>
+</header>
+<main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 md:py-20">
+<!-- Hero Section -->
+<div class="mb-16 border-l-8 border-accent-cyan pl-8">
+<p class="text-primary font-bold tracking-[0.15em] uppercase text-sm mb-2">Unit 1: The Developing Brain &amp; Screens</p>
+<h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-6">
+                        Brain Development &amp; Screens: <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-cyan">The Critical Windows</span>
+</h1>
+<p class="max-w-2xl text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Understanding how digital architecture interacts with biological architecture at every stage of growth. A masterclass cheat sheet for the modern parent.
+                    </p>
+</div>
+<!-- Timeline Section -->
+<div class="relative">
+<!-- Vertical Line -->
+<div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 md:-ml-0.5 timeline-line rounded-full opacity-30"></div>
+<!-- Milestone 1 -->
+<div class="relative grid md:grid-cols-2 gap-8 mb-24 items-start">
+<div class="md:text-right md:pr-16 order-2 md:order-1">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">0-5 Years: Neural Foundations</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                This period is defined by explosive <span class="text-primary font-semibold">neuroplasticity</span>. Synaptic pruning is active, and the brain is hard-wiring based on sensory input.
+                            </p>
+<div class="bg-accent-cyan/10 border-r-4 border-accent-cyan p-4 rounded-lg inline-block text-left">
+<span class="font-bold text-slate-800 block text-xs uppercase tracking-widest mb-1">The Screen Impact</span>
+<p class="text-sm text-slate-700">Disrupts sensory-motor integration and slows language acquisition through "technoference."</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 -ml-3 md:-ml-4 size-8 md:size-10 bg-white dark:bg-slate-900 border-4 border-accent-cyan rounded-full z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-accent-cyan text-sm md:text-base">child_care</span>
+</div>
+<div class="pl-12 md:pl-16 order-1 md:order-2">
+<span class="inline-block px-3 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold text-xs uppercase tracking-widest mb-3">Infancy &amp; Preschool</span>
+<div class="h-40 w-full rounded-xl bg-slate-100 overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close up of a child playing with wooden blocks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Fg-3viAYmHutIkWkZES1rshG2gcQT8vRVY5dsk4tojRdr1U6XRFbIllgM1Ye4DKbOLXAsIT7SJYUptxXwhLNSrWHztuKnMHvwK-AHRF3OESPl27b1naSvwwy3ll9HHak_gXB0Nrd1aNYYlCD0cGKnJkG1jWYNw9UR2rTB2F8nVF8rbgsWHaMip5jppDK5mHLNR03ClqhJlR5-pwHAzVHO98UUdLWZ06RkU-k1cFnhkhaxcM03YeUgjkH7bNL3J7DLuQS4IyoT3X5"/>
+<div class="absolute inset-0 bg-accent-cyan/20 mix-blend-multiply group-hover:bg-transparent transition-colors"></div>
+</div>
+</div>
+</div>
+<!-- Milestone 2 -->
+<div class="relative grid md:grid-cols-2 gap-8 mb-24 items-start">
+<div class="pl-12 md:pl-0 md:pr-16 order-2">
+<span class="inline-block px-3 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold text-xs uppercase tracking-widest mb-3">Elementary Years</span>
+<div class="h-40 w-full rounded-xl bg-slate-100 overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Children playing together in a group" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiqs7Xz0-okvgnwlf4tbQhnkW9k6L_Pfj4NXXRI7ktDDnGTme3m4EjRHwGQvcJDG9RhGgj3AlWwy_kbE1MwJhIOX1L5MUng5l4H9E7eXbNzczKcTDNmrdnNNk0R8bmG-A733Q7P7BAGBycuoUGxLkv-IJpc6NVULoOd5t9S799YL7vvY8cJQSZ3eK9TrCEFA2cDWY7jROgYOMjCJ656iVXM7nGu6_PIGPPih2vHJ7CgGMZ6X0F9j5CKpeDKAl_Cb8Cxyp8Mrh9sIwn"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply group-hover:bg-transparent transition-colors"></div>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 -ml-3 md:-ml-4 size-8 md:size-10 bg-white dark:bg-slate-900 border-4 border-primary rounded-full z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm md:text-base">groups</span>
+</div>
+<div class="pl-12 md:pl-16 order-3">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">6-12 Years: The Social Brain</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                Shift toward peer-validation. The reward system (striatum) becomes highly sensitive. This is the dawn of <span class="text-primary font-semibold">dopamine loops</span>.
+                            </p>
+<div class="bg-primary/10 border-l-4 border-primary p-4 rounded-lg inline-block text-left">
+<span class="font-bold text-slate-800 block text-xs uppercase tracking-widest mb-1">The Screen Impact</span>
+<p class="text-sm text-slate-700">Gamified rewards (streaks, likes) can hijack natural motivation and social development.</p>
+</div>
+</div>
+</div>
+<!-- Milestone 3 -->
+<div class="relative grid md:grid-cols-2 gap-8 mb-24 items-start">
+<div class="md:text-right md:pr-16 order-2 md:order-1">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">13-18 Years: Executive Function</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                The Prefrontal Cortex (PFC) is undergoing major renovation. <span class="text-primary font-semibold">Executive function</span>—impulse control and planning—is still offline.
+                            </p>
+<div class="bg-accent-acid/20 border-r-4 border-accent-acid p-4 rounded-lg inline-block text-left">
+<span class="font-bold text-slate-800 block text-xs uppercase tracking-widest mb-1">The Screen Impact</span>
+<p class="text-sm text-slate-700">Blue light suppresses melatonin, impacting deep sleep necessary for PFC maturation and emotional regulation.</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 -ml-3 md:-ml-4 size-8 md:size-10 bg-white dark:bg-slate-900 border-4 border-accent-acid rounded-full z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-800 text-sm md:text-base">psychology</span>
+</div>
+<div class="pl-12 md:pl-16 order-1 md:order-2">
+<span class="inline-block px-3 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold text-xs uppercase tracking-widest mb-3">Adolescence</span>
+<div class="h-40 w-full rounded-xl bg-slate-100 overflow-hidden relative group">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Teenager looking thoughtfully out of a window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1ZlIcam3lGyExAdCSlhlDlZYXXLUcPEdwzub_EPWz3cXzGkGAvHjqTQLlQI_qO1SvefWxY85-ZHwH0aGYocCarioJDdDADB1ZjJBK-QvqHhCwLyfJ27Z4JiAUNuJxHqa-ytYxXH4KpqvEcpYHAGJDVoYpClswrmDSMO5cFTSbdazvXq6zSuHbq2_JD4c0eUpZgXveCrcyON4wVcMv2Q-VWiwkkAtG_giibZU7giKZA7ZK2mMkvib_J6PXBg0edWmNQC-YG7J4WgfP"/>
+<div class="absolute inset-0 bg-accent-acid/20 mix-blend-multiply group-hover:bg-transparent transition-colors"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Summary / Action -->
+<div class="mt-20 p-10 bg-slate-900 text-white rounded-3xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-accent-cyan">verified</span>
+<span class="text-xs font-bold tracking-widest uppercase text-accent-cyan">Unit 1 Takeaway</span>
+</div>
+<h2 class="text-3xl font-bold mb-6">Mastering the Digital Environment</h2>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="space-y-2">
+<p class="text-primary font-bold text-sm">PROTECT</p>
+<p class="text-slate-400 text-sm leading-relaxed">Protect sleep and physical movement as non-negotiable foundations for neural growth.</p>
+</div>
+<div class="space-y-2">
+<p class="text-accent-cyan font-bold text-sm">SCAFFOLD</p>
+<p class="text-slate-400 text-sm leading-relaxed">Build digital autonomy slowly. Don't hand over a Ferrari to someone who hasn't learned to bike.</p>
+</div>
+<div class="space-y-2">
+<p class="text-accent-acid font-bold text-sm">MODEL</p>
+<p class="text-slate-400 text-sm leading-relaxed">Your own digital habits are the strongest neural blueprint your child will follow.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<p class="text-slate-400 text-xs font-medium tracking-wide">
+                        © 2024 RAISING HUMANS IN THE AGE OF ALGORITHMS • UNIT 1 CORE ASSET
+                    </p>
+</div>
+</main>
+</div>
+</div>
+</body></html>
+
+<!-- Unit 1: Tech-Free Transitions Guide -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Raising Humans | Tech-Free Transitions Guide</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "accent-cyan": "#00F5FF",
+                        "accent-yellow": "#CCFF00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-border-cyan { border-color: #00F5FF; }
+        .custom-bg-cyan { background-color: #00F5FF; }
+        .custom-bg-yellow { background-color: #CCFF00; }
+        .text-acid { color: #CCFF00; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header / Nav -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 lg:px-40 py-4 bg-white dark:bg-slate-900">
+<div class="flex items-center gap-3 text-slate-900 dark:text-white">
+<div class="size-8 flex items-center justify-center rounded bg-primary text-white">
+<span class="material-symbols-outlined">child_care</span>
+</div>
+<h2 class="text-lg font-extrabold leading-tight tracking-tight">Raising Humans</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 px-4 text-sm font-bold transition-all hover:bg-accent-cyan hover:text-slate-900">
+<span class="material-symbols-outlined mr-2 text-xl">download</span>
+                    Download PDF
+                </button>
+</div>
+</header>
+<!-- Main Content Wrapper -->
+<main class="flex-1 px-6 lg:px-40 py-12 max-w-[1200px] mx-auto w-full">
+<!-- Hero Section -->
+<div class="mb-12">
+<div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
+                    Unit 1: Digital Wellness
+                </div>
+<h1 class="text-4xl lg:text-6xl font-black leading-[1.1] tracking-tight mb-6">
+                    Smooth Transitions: Ending <span class="text-primary">Screen Time</span> Without the Meltdown
+                </h1>
+<div class="h-2 w-24 custom-bg-cyan rounded-full mb-8"></div>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
+                    A research-backed framework designed to help parents navigate the toughest part of the digital day. This printable guide provides the exact steps to bridge the gap between pixels and reality.
+                </p>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Left Column: The Framework -->
+<div class="lg:col-span-2 space-y-10">
+<section>
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-3xl text-primary">auto_awesome_motion</span>
+<h2 class="text-2xl font-bold">The 3-Step Framework</h2>
+</div>
+<div class="space-y-6">
+<!-- Step 1 -->
+<div class="flex gap-6 p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all hover:shadow-xl hover:border-accent-cyan/50">
+<div class="flex-shrink-0 size-12 rounded-full custom-bg-cyan flex items-center justify-center text-slate-900 font-bold text-xl">1</div>
+<div>
+<h3 class="text-xl font-bold mb-2">The Warning</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        Set expectations with clear, time-bound alerts. Instead of shouting from another room, get on their eye level. Use "When/Then" statements: "When this episode is over, then we are going to set the table."
+                                    </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex gap-6 p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all hover:shadow-xl hover:border-accent-cyan/50">
+<div class="flex-shrink-0 size-12 rounded-full custom-bg-yellow flex items-center justify-center text-slate-900 font-bold text-xl">2</div>
+<div>
+<h3 class="text-xl font-bold mb-2">The Bridge</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        Create a mental shift from digital to physical. Ask a question about what they just watched: "Who was your favorite character in that level?" This pulls them out of the "flow state" gently before the device is turned off.
+                                    </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex gap-6 p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all hover:shadow-xl hover:border-accent-cyan/50">
+<div class="flex-shrink-0 size-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">3</div>
+<div>
+<h3 class="text-xl font-bold mb-2">The New Activity</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        Immediate engagement in a high-interest task. Don't leave a vacuum. Have the next activity ready to go—whether it's a snack, a favorite toy, or a physical challenge like "race you to the kitchen!"
+                                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Pull Quote -->
+<div class="relative p-10 rounded-2xl bg-slate-900 text-white overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-8xl">format_quote</span>
+</div>
+<p class="text-2xl font-light italic leading-relaxed relative z-10">
+                            "The goal isn't just to stop the screen, it's to start the connection. Transitions are the bridge between their digital world and your real-world presence."
+                        </p>
+<div class="mt-6 flex items-center gap-3">
+<div class="h-[1px] w-8 custom-bg-cyan"></div>
+<span class="text-accent-cyan font-bold uppercase tracking-widest text-xs">Dr. Sarah Jenkins, Founder</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar / Tools -->
+<div class="space-y-8">
+<div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">checklist</span>
+<h3 class="text-xl font-bold">Transition Tools</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-cyan">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">Visual Timers (Hourglass or Digital)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-cyan">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">Auditory Cues (Chimes or Bells)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-cyan">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">The "One More Minute" Token</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-cyan">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">Physical Check-ins (Hand on shoulder)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-cyan">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">The Transition Routine Chart</span>
+</li>
+</ul>
+<div class="mt-8 p-4 rounded-lg bg-accent-yellow/10 border border-accent-yellow/20">
+<p class="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase mb-2">Pro Tip</p>
+<p class="text-sm text-slate-600 dark:text-slate-400 italic">Always announce the transition 5 minutes, 2 minutes, and 1 minute prior to the end.</p>
+</div>
+</div>
+<div class="p-1 bg-gradient-to-br from-accent-cyan to-primary rounded-2xl">
+<div class="p-8 bg-white dark:bg-slate-900 rounded-[calc(1rem-4px)] text-center">
+<h4 class="text-lg font-bold mb-4">Ready to implement?</h4>
+<p class="text-sm text-slate-500 mb-6">Take this guide with you. Print it out and keep it on your fridge as a daily reminder.</p>
+<button class="w-full py-3 rounded-lg bg-primary text-white font-bold transition-transform active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">download_for_offline</span>
+                                Download Guide
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 text-white px-6 lg:px-40 py-16 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 border-b border-white/10 pb-12">
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="size-8 flex items-center justify-center rounded bg-primary text-white">
+<span class="material-symbols-outlined">child_care</span>
+</div>
+<h2 class="text-xl font-extrabold tracking-tight">Raising Humans</h2>
+</div>
+<p class="text-slate-400 text-sm leading-relaxed">
+                        Empowering parents with science-backed strategies for the modern digital world.
+                    </p>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-accent-cyan">Course Modules</h4>
+<ul class="space-y-3 text-slate-400 text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Unit 1: Digital Wellness</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Unit 2: Emotional Intelligence</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Unit 3: Boundary Setting</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Unit 4: Future Skills</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-accent-cyan">Resources</h4>
+<ul class="space-y-3 text-slate-400 text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Parenting Masterclass</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Printable Checklists</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Community Forum</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Direct Coaching</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-accent-cyan">Connect</h4>
+<div class="flex gap-4">
+<a class="size-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</a>
+<a class="size-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">groups</span>
+</a>
+<a class="size-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">play_circle</span>
+</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-slate-500 text-xs">© 2024 Raising Humans Course. All rights reserved.</p>
+<div class="flex gap-6 text-slate-500 text-xs font-medium">
+<a class="hover:text-white" href="#">Privacy Policy</a>
+<a class="hover:text-white" href="#">Terms of Service</a>
+<a class="hover:text-white" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>
+
+<!-- Unit 1: Family Screen Time Tracker -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Reflection: Family Screen Time Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#107dd5",
+                        "cyan-accent": "#00F5FF",
+                        "acid-yellow": "#CCFF00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            .print-border { border: 1px solid #e2e8f0 !important; }
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 md:px-10 py-4 no-print">
+<div class="flex items-center gap-4">
+<div class="size-8 flex items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">Digital Reflection</h2>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold leading-normal transition-all hover:bg-primary/90" onclick="window.print()">
+<span class="material-symbols-outlined mr-2 text-xl">print</span>
+<span class="truncate">Print Worksheet</span>
+</button>
+</header>
+<main class="max-w-5xl mx-auto w-full p-6 md:p-10 space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col gap-4 border-l-4 border-cyan-accent pl-6 py-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 bg-acid-yellow text-slate-900 text-xs font-black uppercase tracking-widest rounded">Unit 1</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm font-semibold tracking-wide uppercase">Interactive Resource</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">
+                    Our Digital Reflection: <br class="hidden md:block"/>
+<span class="text-primary">Family Screen Time Tracker</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
+                    Monitoring our digital habits with <span class="text-cyan-600 font-bold">Cyan</span> and <span class="text-yellow-600 font-bold">Acid Yellow</span> energy to create a healthier digital environment.
+                </p>
+</div>
+<!-- Tracking Table Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-cyan-accent">calendar_month</span>
+                        7-Day Screen Time Log
+                    </h2>
+<span class="text-xs font-medium text-slate-400 uppercase tracking-widest">Page 01 / 02</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">Child Name</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">App/Activity</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">Duration</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">How they felt after</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Generate rows -->
+<tr class="h-16 group">
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4"></td>
+</tr>
+<tr class="h-16 bg-slate-50/30 dark:bg-slate-800/20">
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4"></td>
+</tr>
+<tr class="h-16">
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4"></td>
+</tr>
+<tr class="h-16 bg-slate-50/30 dark:bg-slate-800/20">
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4"></td>
+</tr>
+<tr class="h-16">
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4"></td>
+</tr>
+<tr class="h-16 bg-slate-50/30 dark:bg-slate-800/20">
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4"></td>
+</tr>
+<tr class="h-16">
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4 border-r border-slate-50 dark:border-slate-800"></td>
+<td class="px-6 py-4"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Visualization & Analysis Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Donut Chart Sketch Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl p-8 border border-slate-200 dark:border-slate-800 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-acid-yellow/10 rounded-full -mr-16 -mt-16"></div>
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-acid-yellow">pie_chart</span>
+                        Visualizing Balance
+                    </h2>
+<div class="flex flex-col items-center justify-center space-y-6 py-4">
+<p class="text-sm text-slate-500 dark:text-slate-400 text-center mb-4">
+                            Sketch a Donut Chart below to visualize the ratio between <br/><strong>Active</strong> and <strong>Passive</strong> consumption.
+                        </p>
+<!-- Donut Chart Canvas Area -->
+<div class="relative w-48 h-48 border-4 border-dashed border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center">
+<div class="w-24 h-24 border-4 border-dashed border-slate-200 dark:border-slate-700 rounded-full"></div>
+<span class="absolute text-[10px] font-bold text-slate-300 uppercase tracking-tighter">Sketch Area</span>
+</div>
+<div class="flex gap-8 w-full justify-center pt-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-cyan-accent"></div>
+<span class="text-sm font-semibold">Active</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-acid-yellow border border-slate-300"></div>
+<span class="text-sm font-semibold">Passive</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Reflection Questions -->
+<section class="bg-slate-900 text-white rounded-xl p-8 border border-slate-800 flex flex-col justify-between">
+<div>
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-cyan-accent">psychology</span>
+                            Family Reflection
+                        </h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase">1. What activity occupied most of the time?</label>
+<div class="h-10 border-b border-slate-700 w-full"></div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase">2. Which activities caused the most energy?</label>
+<div class="h-10 border-b border-slate-700 w-full"></div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase">3. One change we will make for next week:</label>
+<div class="h-10 border-b border-slate-700 w-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-800 flex items-center justify-between text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+<span>© 2024 Digital Reflection Framework</span>
+<span>Level 01</span>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Graphic Accents -->
+<footer class="mt-auto h-2 flex no-print">
+<div class="flex-1 bg-primary"></div>
+<div class="flex-1 bg-cyan-accent"></div>
+<div class="flex-1 bg-acid-yellow"></div>
+</footer>
+</div>
+</body></html>

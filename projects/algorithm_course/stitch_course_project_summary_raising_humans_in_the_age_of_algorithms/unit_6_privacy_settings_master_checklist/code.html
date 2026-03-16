@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF2D78",
+                        "secondary": "#FF6B00",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'IBM Plex Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-white dark:bg-slate-950 group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-6 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<!-- Top Header Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-100 dark:border-slate-800 px-4 md:px-10 py-6">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary text-white">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-extrabold leading-tight tracking-tight">Raising Humans</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<div class="size-10 rounded-full border-2 border-secondary/20 bg-cover bg-center" data-alt="Portrait of a female educator smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA52qmdCXxK18sHXql5v-8nJKd_sKqXtRD3tvYoXF4FwA9qecMSzuWCT_BtVSQnt-jar34YPrDoCGGaui8XNaXvl_oHx4CgU12i1hCN8AFDlGdDkBjAsMXkmwTbBiYfwndPetRLNxd5KQf0awJSUMMKGdNS2-IYo-Q90ckmfQ6twXzTAg2auTeFhFpil4j-pLIoxqkFhjAyMzJlQwxNEShYkcWZWpmm5_fPQoqAwG6glibV83tC0Lf9mmtnv0PS9vIclsP5AFvO3Dki')"></div>
+</div>
+</header>
+<!-- Breadcrumbs & Page Info -->
+<div class="flex flex-wrap gap-2 p-4 mt-4">
+<a class="text-slate-500 text-sm font-medium hover:text-primary transition-colors" href="#">Unit 6: Online Safety Fundamentals</a>
+<span class="text-slate-300 text-sm font-medium">/</span>
+<span class="text-slate-900 dark:text-slate-100 text-sm font-semibold">Privacy Settings Master Checklist</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 p-4 mb-8">
+<div class="flex flex-col gap-3 max-w-2xl">
+<h1 class="text-slate-900 dark:text-slate-100 text-4xl md:text-5xl font-black leading-tight tracking-tight">
+                            Privacy Settings <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Master Checklist</span>
+</h1>
+<p class="text-slate-500 text-lg font-medium">Part of <span class="text-slate-700 dark:text-slate-300">Raising Humans in the Age of Algorithms</span> • Course Resource</p>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-xl h-12 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+<span>Download PDF</span>
+</button>
+</div>
+<!-- Section Tabs -->
+<div class="px-4">
+<div class="flex border-b border-slate-200 dark:border-slate-800 gap-8 overflow-x-auto no-scrollbar">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-4 px-2" href="#">
+<span class="text-sm font-bold tracking-wide uppercase">Social Media</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-400 hover:text-slate-600 pb-4 px-2" href="#">
+<span class="text-sm font-bold tracking-wide uppercase">Device Level</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-400 hover:text-slate-600 pb-4 px-2" href="#">
+<span class="text-sm font-bold tracking-wide uppercase">Browsing</span>
+</a>
+</div>
+</div>
+<!-- Main Content Areas -->
+<div class="flex flex-col gap-12 p-4 mt-8">
+<!-- Social Media Privacy Section -->
+<section class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">public</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Social Media Privacy</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Instagram -->
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold flex items-center gap-2 text-slate-800 dark:text-slate-200">
+<span class="material-symbols-outlined text-primary text-xl">camera</span> Instagram
+                                </h3>
+<div class="flex flex-col gap-3">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Set Account to Private</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Disable 'Activity Status'</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Manual Tag Approval</span>
+</label>
+</div>
+</div>
+<!-- TikTok -->
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold flex items-center gap-2 text-slate-800 dark:text-slate-200">
+<span class="material-symbols-outlined text-secondary text-xl">music_note</span> TikTok
+                                </h3>
+<div class="flex flex-col gap-3">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Suggest account to others OFF</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Limit Ad Personalization</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Enable Family Pairing</span>
+</label>
+</div>
+</div>
+<!-- Snapchat -->
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold flex items-center gap-2 text-slate-800 dark:text-slate-200">
+<span class="material-symbols-outlined text-yellow-500 text-xl">mist</span> Snapchat
+                                </h3>
+<div class="flex flex-col gap-3">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-yellow-500 focus:ring-yellow-500" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Enable Ghost Mode (Map)</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-yellow-500 focus:ring-yellow-500" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">'My Friends Only' Contact</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 h-5 w-5 rounded border-slate-300 text-yellow-500 focus:ring-yellow-500" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900">Disable 'Quick Add'</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Device-Level Security Section -->
+<section class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 rounded-lg bg-secondary/10 text-secondary">
+<span class="material-symbols-outlined">smartphone</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Device-Level Security</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">my_location</span>
+<h3 class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs">Find My &amp; Location</h3>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<input class="mt-1 h-6 w-6 rounded-full border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-200">Enable Find My Device</p>
+<p class="text-xs text-slate-500">Ensures you can locate or remote-wipe device if lost.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<input class="mt-1 h-6 w-6 rounded-full border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-200">Review System Location Services</p>
+<p class="text-xs text-slate-500">Turn off 'Significant Locations' and analytics tracking.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">timer</span>
+<h3 class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs">Screen Time &amp; Content</h3>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<input class="mt-1 h-6 w-6 rounded-full border-slate-300 text-secondary focus:ring-secondary" type="checkbox"/>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-200">Set Content &amp; Privacy Restrictions</p>
+<p class="text-xs text-slate-500">Block adult websites and limit explicit content.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<input class="mt-1 h-6 w-6 rounded-full border-slate-300 text-secondary focus:ring-secondary" type="checkbox"/>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-200">App Tracking Transparency</p>
+<p class="text-xs text-slate-500">Ensure 'Allow Apps to Request to Track' is OFF.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Browser Protections Section -->
+<section class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 md:p-8 text-white shadow-xl">
+<div class="flex items-center gap-3 mb-8">
+<div class="p-2 rounded-lg bg-white/10 text-white">
+<span class="material-symbols-outlined">language</span>
+</div>
+<h2 class="text-2xl font-bold">Browser Protections</h2>
+</div>
+<div class="space-y-4 max-w-2xl">
+<label class="flex items-center gap-4 p-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors cursor-pointer">
+<input class="h-6 w-6 rounded border-white/20 bg-transparent text-secondary focus:ring-offset-slate-900 focus:ring-secondary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-bold">Set Default Search Engine to DuckDuckGo</span>
+<span class="text-xs text-slate-400">Prevents tracking of search history for targeted advertising.</span>
+</div>
+</label>
+<label class="flex items-center gap-4 p-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors cursor-pointer">
+<input class="h-6 w-6 rounded border-white/20 bg-transparent text-secondary focus:ring-offset-slate-900 focus:ring-secondary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-bold">Block Third-Party Cookies</span>
+<span class="text-xs text-slate-400">Limits across-site tracking by advertisers and data brokers.</span>
+</div>
+</label>
+<label class="flex items-center gap-4 p-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors cursor-pointer">
+<input class="h-6 w-6 rounded border-white/20 bg-transparent text-secondary focus:ring-offset-slate-900 focus:ring-secondary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-bold">Enable 'HTTPS Only' Mode</span>
+<span class="text-xs text-slate-400">Forces encrypted connections to websites whenever possible.</span>
+</div>
+</label>
+</div>
+<div class="mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-full overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="Instructor portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5Zhj7q9J5wlo4PWlG3qdTN5nWuRHgztCaA_ejP-jMgurH-PjxLmHQtzd1l8YjctRtLDeO7YOfzxuqOxuA4oNqHFSkTBYD1l3ZJHXfISwVZs8NgRyObuvPy9WJt7JRv3lqPlvyCSqTh7h1opJTQX5Wh-uCSd9CCuniz8K9pKvjUUtDnuXN2fddnpvZtEuseDMvlwdzMgtuhiZKrEIFKIdfU4YWyat6LLjMoeaL3h2TR5THVZLdI1F0Nod_Hg9HUKwFOOb8hJqTkc1I"/>
+</div>
+<div>
+<p class="text-sm font-bold">Need help with these settings?</p>
+<p class="text-xs text-slate-400">Watch the Unit 6 Tutorial Video in your dashboard.</p>
+</div>
+</div>
+<button class="bg-white text-slate-900 px-6 py-2 rounded-lg font-bold text-sm hover:bg-slate-200 transition-colors">Go to Course Dashboard</button>
+</div>
+</section>
+</div>
+<!-- Footer branding -->
+<footer class="mt-20 border-t border-slate-100 dark:border-slate-800 p-10 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined">copyright</span>
+<p class="text-sm font-medium">2024 Raising Humans Education Program</p>
+</div>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">language</span></a>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+</body></html>
