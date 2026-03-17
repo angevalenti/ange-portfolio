@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)file:///Users/jvalenti/Downloads/angela_valenti_resume.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angela Valenti — Resume</title>
+  <link href="./Angela Valenti — Resume_files/css2" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1A1714;
+      --ink-light: #4A4540;
+      --sand: #F5F0E8;
+      --warm-white: #FDFBF7;
+      --terracotta: #A0634A;
+      --terracotta-light: #C8896E;
+      --rule: #D8CFC2;
+      --sidebar-bg: #1A1714;
+      --sidebar-text: #EDE8DE;
+      --sidebar-muted: #A09585;
+    }
+
+    html, body {
+      background: var(--warm-white);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9pt;
+      line-height: 1.4;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Page shell ── */
+    .page {
+      width: 8.5in;
+      height: 11in;
+      overflow: hidden;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2.1in 1fr;
+      background: var(--warm-white);
+    }
+
+    /* ══════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════ */
+    .sidebar {
+      background: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      padding: 0.55in 0.32in 0.5in 0.45in;
+      display: flex;
+      flex-direction: column;
+      gap: 0.13in;
+    }
+
+    .name-block {
+      border-bottom: 1px solid #3A3530;
+      padding-bottom: 0.15in;
+      margin-bottom: 0.05in;
+    }
+
+    .name-block .first {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28pt;
+      font-weight: 300;
+      font-style: normal;
+      letter-spacing: 0.01em;
+      line-height: 1.05;
+      color: var(--sidebar-text);
+    }
+
+    .name-block .last {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28pt;
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.01em;
+      line-height: 1.05;
+      color: var(--sidebar-text);
+    }
+
+    .name-block .last::after {
+      content: '.';
+      color: #E8A0A0;
+    }
+
+    .name-block .title {
+      margin-top: 0.13in;
+      font-size: 7.5pt;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sidebar-muted);
+      line-height: 1.55;
+    }
+
+    .sidebar-section { display: flex; flex-direction: column; gap: 0.06in; }
+
+    .sidebar-label {
+      font-size: 7pt;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta-light);
+      font-weight: 500;
+      margin-bottom: 0.04in;
+    }
+
+    .contact-item {
+      font-size: 8.5pt;
+      color: var(--sidebar-muted);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .contact-item a { color: var(--sidebar-muted); text-decoration: none; }
+
+    .skill-tag {
+      display: inline-block;
+      font-size: 7.5pt;
+      font-weight: 400;
+      color: var(--sidebar-text);
+      background: #2C2824;
+      padding: 1px 6px;
+      margin: 1px 2px 0 0;
+      border-radius: 2px;
+      letter-spacing: 0.02em;
+      line-height: 1.7;
+    }
+
+    .skill-group { margin-bottom: 0.06in; }
+    .skill-group-label {
+      font-size: 7pt;
+      color: var(--sidebar-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 3px;
+      font-weight: 400;
+    }
+
+    .cert-item {
+      font-size: 8pt;
+      color: var(--sidebar-text);
+      line-height: 1.45;
+      padding: 4px 0 4px 8px;
+      border-left: 2px solid #3A3530;
+      margin-bottom: 4px;
+    }
+
+    .cert-item .cert-name { font-weight: 500; }
+    .cert-item .cert-issuer { color: var(--sidebar-muted); font-size: 7.5pt; }
+
+    /* ══════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════ */
+    .main {
+      padding: 0.55in 0.55in 0.45in 0.42in;
+      display: flex;
+      flex-direction: column;
+      gap: 0.24in;
+    }
+
+    .main-top-bar {
+      background: var(--ink);
+      border-radius: 3px;
+      padding: 0.18in 0.22in;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.04in;
+    }
+
+    .main-top-bar .philosophy-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 6.5pt;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--terracotta-light);
+      font-weight: 500;
+    }
+
+    .top-bar-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13pt;
+      color: var(--sidebar-text);
+      letter-spacing: 0.01em;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .top-bar-text .highlight {
+      color: var(--terracotta-light);
+    }
+
+    /* Section headings */
+    .section { display: flex; flex-direction: column; gap: 0.08in; }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.03in;
+    }
+
+    .section-heading h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* Experience entries */
+    .exp-entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0 10px;
+      padding-bottom: 0.1in;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .exp-entry:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .exp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13pt;
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .exp-company {
+      font-size: 9pt;
+      font-weight: 400;
+      color: var(--terracotta);
+      letter-spacing: 0.03em;
+      margin-top: 1px;
+    }
+
+    .exp-meta {
+      font-size: 8pt;
+      color: var(--ink-light);
+      opacity: 0.7;
+      margin-top: 1px;
+    }
+
+    .exp-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 10pt;
+      color: var(--ink-light);
+      text-align: right;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .exp-bullets {
+      grid-column: 1 / -1;
+      margin-top: 0.05in;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .exp-bullets li {
+      font-size: 9.5pt;
+      color: var(--ink-light);
+      line-height: 1.45;
+      padding-left: 13px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--terracotta-light);
+      font-size: 9pt;
+    }
+
+    /* Education */
+    .edu-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .edu-degree {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13pt;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .edu-school {
+      font-size: 9pt;
+      color: var(--terracotta);
+      margin-top: 2px;
+    }
+
+    .edu-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 10pt;
+      color: var(--ink-light);
+      white-space: nowrap;
+    }
+
+    /* Print styles */
+    @media print {
+      @page {
+        size: letter;
+        margin: 0;
+      }
+      html, body { margin: 0; padding: 0; }
+      .page { width: 100%; margin: 0; }
+    }
+
+    /* Screen preview border */
+    @media screen {
+      body { padding: 0.3in; background: #E8E2D8; }
+      .page { box-shadow: 0 8px 40px rgba(0,0,0,0.18); }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════ SIDEBAR ════ -->
+  <aside class="sidebar">
+
+    <div class="name-block">
+      <div class="first">Angela</div>
+      <div class="last">Valenti</div>
+      <div class="title">Instructional Designer<br>E-Learning Developer<br>Art Educator · Curriculum Designer</div>
+    </div>
+
+    <!-- Contact -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">Contact</div>
+      <div class="contact-item"><a href="mailto:ange.valenti@gmail.com">ange.valenti@gmail.com</a></div>
+      <div class="contact-item"><a href="https://linkedin.com/in/angelavalenti">linkedin.com/in/angelavalenti</a></div>
+      <div class="contact-item"><a href="https://angevalenti.github.io/ange-portfolio/">angevalenti.github.io</a></div>
+    </div>
+
+    <!-- Design Skills -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">Design &amp; Technology</div>
+      <div>
+        <div class="skill-group">
+          <div class="skill-group-label">Creative Tools</div>
+          <span class="skill-tag">Adobe Creative Suite</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Canva</span>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Design Expertise</div>
+          <span class="skill-tag">Visual Design</span>
+          <span class="skill-tag">Brand Identity</span>
+          <span class="skill-tag">UI / UX</span>
+          <span class="skill-tag">Graphic Design</span>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Web &amp; Development</div>
+          <span class="skill-tag">Bootstrap</span>
+          <span class="skill-tag">WordPress</span>
+          <span class="skill-tag">Online Content Creation</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Certifications -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">PA Certifications</div>
+      <div class="cert-item">
+        <div class="cert-name">Art K-12</div>
+        <div class="cert-issuer">Pennsylvania Teaching Cert. · May 2025</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name">ESL K-12</div>
+        <div class="cert-issuer">Pennsylvania Teaching Cert. · Jun 2024</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name">Special Education K-12</div>
+        <div class="cert-issuer">Pennsylvania Teaching Cert. · Oct 2024</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ════ MAIN ════ -->
+  <main class="main">
+
+    <!-- Intro quote -->
+    <div class="main-top-bar">
+      <div class="philosophy-label">Philosophy</div>
+      <div class="top-bar-text">"Good design isn't just beautiful — it's <span class="highlight">accessible</span>, intentional, and built for every learner in the room."</div>
+    </div>
+
+    <!-- Experience -->
+    <div class="section">
+      <div class="section-heading"><h2>Experience</h2></div>
+
+      <div class="exp-entry">
+        <div>
+          <div class="exp-title">English Second Language Teacher</div>
+          <div class="exp-company">Pittston Area School District</div>
+          <div class="exp-meta">Contract · Pittston, PA · On-site</div>
+        </div>
+        <div class="exp-date">Aug 2024 – Jun 2025</div>
+        <ul class="exp-bullets">
+          <li>Delivered differentiated ESL instruction to high school English Language Learners across multiple proficiency levels using WIDA standards.</li>
+          <li>Designed digitally enhanced lessons with Google Classroom and multimedia tools to drive engagement and support language acquisition.</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div>
+          <div class="exp-title">English Second Language Teacher</div>
+          <div class="exp-company">Luzerne Intermediate Unit 18 – P.A.L. High School Program</div>
+          <div class="exp-meta">Contract · Plains, PA · On-site</div>
+        </div>
+        <div class="exp-date">Sep 2022 – Jun 2024</div>
+        <ul class="exp-bullets">
+          <li>Designed and delivered research-based ESL lessons using digital platforms and interactive activities for diverse learner populations.</li>
+          <li>Developed original lesson plans and curated materials aligned to student proficiency levels in an inclusive classroom environment.</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div>
+          <div class="exp-title">Digital Designer</div>
+          <div class="exp-company">Penn Foster Group</div>
+          <div class="exp-meta">Full-time · Scranton, PA · On-site</div>
+        </div>
+        <div class="exp-date">Jan 2017 – Nov 2019</div>
+        <ul class="exp-bullets">
+          <li>Designed visual assets for online educational courses — infographics, diagrams, and instructional graphics — used directly in digital learning modules.</li>
+          <li>Maintained corporate brand identity and Bootstrap-based design system, managing a digital asset library across all educational and marketing materials.</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div>
+          <div class="exp-title">Art Director</div>
+          <div class="exp-company">All About Dancewear</div>
+          <div class="exp-meta">Full-time · Kingston, PA · Hybrid</div>
+        </div>
+        <div class="exp-date">Jan 2013 – Dec 2016</div>
+        <ul class="exp-bullets">
+          <li>Led all visual design for digital and print marketing campaigns, including full ownership of the company's print magazine from concept to production.</li>
+          <li>Managed web content within CMS platforms, maintaining brand consistency and user-friendly layouts across all channels.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+      <div class="section-heading"><h2>Education</h2></div>
+      <div class="edu-entry">
+        <div>
+          <div class="edu-degree">Bachelor of Fine Arts</div>
+          <div class="edu-school">The Art Institute of Philadelphia</div>
+        </div>
+        <div class="edu-date">Philadelphia, PA</div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+
+</body></html>

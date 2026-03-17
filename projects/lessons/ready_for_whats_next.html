@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light-mode">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -425,7 +425,7 @@
     .unit-container {
       max-width: 860px;
       margin: 0 auto;
-      padding: 108px 16px 100px;
+      padding: 108px 16px 160px;
     }
 
     /* Back button */
@@ -942,6 +942,126 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+    /* ─── Resource Card ─── */
+    .resource-card {
+      background: #1A1F2E;
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin: 0 0 var(--space-8);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+    html.light-mode .resource-card {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    }
+    .resource-card-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+    .resource-card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--color-text-inverse);
+      margin: 0;
+    }
+    .resource-card-desc {
+      font-size: 0.92rem;
+      color: var(--color-text-inverse-secondary);
+      line-height: 1.55;
+      margin: 0 0 var(--space-5);
+    }
+    .resource-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.28);
+      color: var(--color-text-inverse);
+      background: none;
+      font-family: var(--font-display);
+      font-size: 0.87rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background var(--transition-base), border-color var(--transition-base);
+    }
+    .resource-card-link:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.5);
+    }
+    .resource-card-link:focus-visible {
+      outline: 2.5px solid rgba(255,255,255,0.65);
+      outline-offset: 3px;
+    }
+
+    /* ─── Lesson Nav Footer ─── */
+    .lesson-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: var(--space-4) var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .lesson-nav .btn-outline {
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--text-secondary);
+      font-family: var(--font-display);
+      font-size: 0.87rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color var(--transition-base), color var(--transition-base);
+      white-space: nowrap;
+    }
+    .lesson-nav .btn-outline:hover { border-color: var(--text-muted); color: var(--text-primary); }
+    .lesson-nav .btn-outline:disabled { opacity: 0.3; cursor: default; }
+    .lesson-nav .btn-ghost {
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      border: none;
+      background: none;
+      color: var(--text-secondary);
+      font-family: var(--font-display);
+      font-size: 0.87rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color var(--transition-base);
+      white-space: nowrap;
+    }
+    .lesson-nav .btn-ghost:hover { color: var(--text-primary); }
+    .lesson-nav .btn-ghost:disabled { opacity: 0.65; cursor: default; }
+    .lesson-nav .btn-primary {
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      border: none;
+      background: var(--lesson-nav-accent, var(--color-coral));
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.87rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity var(--transition-base), transform var(--transition-base);
+      white-space: nowrap;
+    }
+    .lesson-nav .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .lesson-nav .btn-primary:disabled { opacity: 0.65; cursor: default; transform: none; }
+    @media (max-width: 600px) {
+      .lesson-nav .btn-ghost { display: none; }
+      .lesson-nav .btn-outline,
+      .lesson-nav .btn-primary { flex: 1; text-align: center; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -952,7 +1072,7 @@
 <header role="banner">
 <nav class="course-nav" aria-label="Course navigation">
   <div id="theme-toggle">
-    <button id="theme-btn" onclick="toggleTheme()" aria-label="Switch to light mode">🌙</button>
+    <button id="theme-btn" onclick="toggleTheme()" aria-label="Switch to dark mode">☀️</button>
   </div>
   <div id="lang-toggle" role="group" aria-label="Select language">
     <button class="lang-btn active" data-lang="en" onclick="switchLang('en')" aria-pressed="true">🇺🇸 EN</button>
@@ -999,6 +1119,19 @@
 <div id="unit-view">
   <div class="unit-container" id="unit-container"></div>
 </div>
+
+<!-- Lesson Nav Footer (shown only inside a unit) -->
+<footer class="lesson-nav" id="lesson-nav" role="navigation" aria-label="Lesson navigation" style="display: none;">
+  <button class="lesson-nav__prev btn-outline" id="lesson-nav-prev" aria-label="Go to previous unit" onclick="prevUnit()">
+    ← Previous Unit
+  </button>
+  <button class="lesson-nav__save btn-ghost" id="lesson-nav-save" aria-label="Save progress" onclick="saveProgress()">
+    Save for Later
+  </button>
+  <button class="lesson-nav__complete btn-primary" id="lesson-nav-complete" aria-label="Mark this unit as complete" onclick="markUnitComplete()">
+    Mark Complete ✓
+  </button>
+</footer>
 
 <script>
 /* ══════════════════════════════════════════════
@@ -1583,6 +1716,7 @@ function toggleTheme() {
   const btn = document.getElementById('theme-btn');
   btn.textContent = isLight ? '☀️' : '🌙';
   btn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  try { localStorage.setItem('rfwn_theme', isLight ? 'light' : 'dark'); } catch(e) {}
 }
 
 /* ══════════════════════════════════════════════
@@ -1943,12 +2077,26 @@ function openUnit(unitId) {
   const view = document.getElementById('unit-view');
   view.scrollTo({ top: 0 });
   view.classList.add('active');
+  updateLessonNav(unitId);
 }
 
 function goBack() {
   document.getElementById('unit-view').classList.remove('active');
+  const nav = document.getElementById('lesson-nav');
+  if (nav) nav.style.display = 'none';
   renderDashboard();
 }
+
+/* ══════════════════════════════════════════════
+   UNIT RESOURCES
+══════════════════════════════════════════════ */
+const UNIT_RESOURCES = {
+  1: { path: 'resources/unit1_online_presence_map.html',    desc: 'Map out your digital identity and build an action plan.' },
+  2: { path: 'resources/unit2_ai_detective_game.html',      desc: 'Test your skills — can you spot AI-written text?' },
+  3: { path: 'resources/unit3_financial_checklist.html',    desc: 'Track your financial readiness with this interactive checklist.' },
+  4: { path: 'resources/unit4_communication_checklist.html',desc: "Your reference guide for professional do's and don'ts." },
+  5: { path: 'resources/unit5_career_portal_guide.html',    desc: 'Step-by-step walkthrough of the portals that matter most.' },
+};
 
 /* ══════════════════════════════════════════════
    UNIT VIEW — RENDER
@@ -2012,6 +2160,24 @@ function renderUnitView(unit) {
         <div class="accordion-list">${accordionItems}</div>
       </section>
     `;
+
+    /* ── Resource Card ── */
+    const res = UNIT_RESOURCES[unit.id];
+    if (res) {
+      html += `
+        <div class="resource-card" aria-label="Downloadable resource for ${unit.title}">
+          <div class="resource-card-row">
+            <span aria-hidden="true">📄</span>
+            <h3 class="resource-card-title">Unit Resource</h3>
+          </div>
+          <p class="resource-card-desc">${res.desc}</p>
+          <a class="resource-card-link" href="${res.path}" target="_blank" rel="noopener noreferrer"
+             aria-label="Open Unit ${unit.id} resource: ${unit.title} — opens in new tab">
+            Open Resource →
+          </a>
+        </div>
+      `;
+    }
 
     /* ── Quiz section ── */
     if (unit.quiz.length > 0) {
@@ -2186,6 +2352,7 @@ function retakeQuiz() {
 
 function markComplete() {
   state.completedUnits.add(state.currentUnitId);
+  saveCompletedToStorage();
   goBack();
 }
 
@@ -2212,8 +2379,93 @@ function toggleAcc(index) {
 }
 
 /* ══════════════════════════════════════════════
+   LESSON NAV — LOGIC
+══════════════════════════════════════════════ */
+function updateLessonNav(unitId) {
+  const unit = currentUnits().find(u => u.id === unitId);
+  const nav  = document.getElementById('lesson-nav');
+  if (!nav) return;
+  nav.style.display = 'flex';
+  nav.style.setProperty('--lesson-nav-accent', unit.accent);
+
+  const prevBtn     = document.getElementById('lesson-nav-prev');
+  const completeBtn = document.getElementById('lesson-nav-complete');
+
+  const units = currentUnits();
+  const idx   = units.findIndex(u => u.id === unitId);
+  if (prevBtn) prevBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+
+  if (completeBtn) {
+    const isDone = state.completedUnits.has(unitId);
+    completeBtn.textContent = isDone ? '✓ Completed' : 'Mark Complete ✓';
+    completeBtn.disabled    = isDone;
+  }
+}
+
+function prevUnit() {
+  const units = currentUnits();
+  const idx   = units.findIndex(u => u.id === state.currentUnitId);
+  if (idx > 0) openUnit(units[idx - 1].id);
+}
+
+function saveProgress() {
+  const unitId = state.currentUnitId;
+  try {
+    localStorage.setItem(`rfwn_progress_unit${unitId}`, JSON.stringify({ quizState: state.quiz }));
+  } catch(e) {}
+  const btn = document.getElementById('lesson-nav-save');
+  if (!btn) return;
+  btn.textContent = 'Saved ✓';
+  btn.disabled    = true;
+  setTimeout(() => {
+    btn.textContent = 'Save for Later';
+    btn.disabled    = false;
+  }, 2000);
+}
+
+function markUnitComplete() {
+  state.completedUnits.add(state.currentUnitId);
+  saveCompletedToStorage();
+  const completeBtn = document.getElementById('lesson-nav-complete');
+  if (completeBtn) {
+    completeBtn.textContent = '✓ Completed';
+    completeBtn.disabled    = true;
+  }
+  renderDashboard(); // update dashboard card completion indicator in background
+}
+
+function saveCompletedToStorage() {
+  try {
+    localStorage.setItem('rfwn_completed_units', JSON.stringify([...state.completedUnits]));
+  } catch(e) {}
+}
+
+/* ══════════════════════════════════════════════
    INIT
 ══════════════════════════════════════════════ */
+
+// Restore theme preference (default: light, already set via html class)
+(function initTheme() {
+  try {
+    const saved = localStorage.getItem('rfwn_theme');
+    const btn   = document.getElementById('theme-btn');
+    if (saved === 'dark') {
+      document.documentElement.classList.remove('light-mode');
+      btn.textContent = '🌙';
+      btn.setAttribute('aria-label', 'Switch to light mode');
+    }
+    // If saved === 'light' or no preference: light-mode class is already on <html>
+  } catch(e) {}
+})();
+
+// Restore completed units from localStorage
+(function initProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('rfwn_completed_units') || '[]');
+    saved.forEach(id => state.completedUnits.add(Number(id)));
+  } catch(e) {}
+})();
+
 renderDashboard();
 </script>
 </body>
