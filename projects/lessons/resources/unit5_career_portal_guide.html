@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Portal Navigation Guide — Unit 5: College & Career Portals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design System Tokens ── */
+    :root {
+      --color-bg-light:       #F6F7F8;
+      --color-bg-white:       #FFFFFF;
+      --color-text-primary:   #1A1A2E;
+      --color-text-secondary: #4A4A6A;
+      --color-text-muted:     #8888A0;
+      --color-border-light:   #E5E7EB;
+      --color-coral:          #FF5C3A;
+      --color-coral-light:    #FFF0ED;
+      --shadow-card:    0 2px 20px rgba(0,0,0,0.07);
+      --shadow-card-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+      --space-12: 48px; --space-16: 64px;
+      --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
+      --radius-xl: 16px; --radius-pill: 9999px;
+      --font-display: 'Manrope', system-ui, sans-serif;
+      --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+      /* Unit 5 accent */
+      --unit-accent:     #4ADE80;
+      --unit-accent-rgb: 74, 222, 128;
+      --unit-accent-light: rgba(74, 222, 128, 0.12);
+      --unit-accent-mid:   rgba(74, 222, 128, 0.22);
+      --unit-accent-dark:  #16A34A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-light);
+      color: var(--color-text-primary);
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    .course-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-6);
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-border-light);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    .nav-brand { display: flex; flex-direction: column; gap: 1px; }
+    .nav-brand-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+    .nav-brand-unit {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--unit-accent-dark);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-actions { display: flex; align-items: center; gap: var(--space-3); }
+    .back-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      transition: background 150ms ease, color 150ms ease;
+    }
+    .back-link:hover { background: var(--color-bg-light); color: var(--color-text-primary); }
+    .btn-ghost {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      background: none;
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+    }
+    .btn-ghost:hover {
+      background: var(--unit-accent-light);
+      color: var(--unit-accent-dark);
+      border-color: rgba(var(--unit-accent-rgb), 0.4);
+    }
+
+    /* ── Page Layout ── */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 88px var(--space-6) var(--space-16);
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      background: var(--color-text-primary);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10);
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-card-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .doc-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at top right, rgba(var(--unit-accent-rgb), 0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .premium-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--unit-accent);
+      color: #0B3A1F;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-4);
+    }
+
+    .doc-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(var(--unit-accent-rgb), 0.75);
+      margin-bottom: var(--space-4);
+    }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #F0F0F5;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-5);
+    }
+    .doc-title .accent-word { color: var(--unit-accent); }
+
+    .doc-subtitle {
+      font-size: 1rem;
+      color: rgba(240, 240, 245, 0.65);
+      line-height: 1.6;
+      max-width: 540px;
+    }
+
+    /* ── Intro ── */
+    .intro-card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6) var(--space-8);
+      margin-bottom: var(--space-8);
+      border-left: 4px solid var(--unit-accent);
+      box-shadow: var(--shadow-card);
+    }
+    .intro-card p {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── Portal Cards ── */
+    .portal-card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      margin-bottom: var(--space-5);
+      border: 1px solid var(--color-border-light);
+    }
+
+    .portal-card-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-6);
+      background: linear-gradient(135deg, rgba(var(--unit-accent-rgb), 0.10) 0%, rgba(var(--unit-accent-rgb), 0.03) 100%);
+      border-bottom: 1px solid rgba(var(--unit-accent-rgb), 0.15);
+    }
+
+    .step-badge {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--unit-accent);
+      color: #0B3A1F;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portal-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .portal-card-body { padding: var(--space-5) var(--space-6); }
+
+    .portal-section {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .portal-section:last-child { margin-bottom: 0; }
+
+    .portal-section-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+    .icon-what { background: rgba(var(--unit-accent-rgb), 0.14); }
+    .icon-do   { background: rgba(59, 130, 246, 0.12); }
+    .icon-warn { background: rgba(239, 68, 68, 0.10); }
+
+    .portal-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .label-what { color: var(--unit-accent-dark); }
+    .label-do   { color: #2563EB; }
+    .label-warn { color: #DC2626; }
+
+    .portal-section-text {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .mistake-callout {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.18);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      margin-top: var(--space-4);
+    }
+    .mistake-callout .portal-section-label { color: #DC2626; margin-bottom: var(--space-2); }
+    .mistake-callout .portal-section-text { color: #7F1D1D; font-size: 0.85rem; }
+
+    /* ── Golden Rule ── */
+    .golden-rule {
+      border: 2px dashed var(--color-coral);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      margin: var(--space-8) 0;
+      background: var(--color-coral-light);
+      text-align: center;
+    }
+    .golden-rule-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-coral);
+      margin-bottom: var(--space-4);
+    }
+    .golden-rule-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-3);
+      letter-spacing: -0.02em;
+    }
+    .golden-rule p {
+      font-size: 0.92rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── Action Plan ── */
+    .action-plan {
+      background: var(--color-bg-white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-8);
+      margin-bottom: var(--space-8);
+      border: 1px solid var(--color-border-light);
+    }
+    .action-plan-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .action-plan-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+    .action-plan-header .header-icon { font-size: 1.3rem; }
+
+    .action-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+    .action-row:last-child { margin-bottom: 0; }
+    .action-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--unit-accent-light);
+      color: var(--unit-accent-dark);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .action-content { flex: 1; }
+    .action-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+    .action-line {
+      width: 100%;
+      height: 1px;
+      background: var(--color-border-light);
+      position: relative;
+    }
+    .action-line::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--unit-accent);
+      border-radius: var(--radius-pill);
+    }
+
+    /* ── Footer ── */
+    .doc-footer {
+      border-top: 1px solid var(--color-border-light);
+      padding-top: var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .footer-brand { font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); }
+    .footer-accent-bar {
+      height: 4px;
+      width: 120px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(90deg, var(--unit-accent) 0%, rgba(var(--unit-accent-rgb), 0.3) 100%);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .page-wrap { padding: 80px var(--space-4) var(--space-12); }
+      .doc-header { padding: var(--space-8) var(--space-5); }
+      .course-nav { padding: 0 var(--space-4); }
+      .nav-actions .back-link { display: none; }
+      .portal-card-header { padding: var(--space-4) var(--space-5); }
+      .portal-card-body { padding: var(--space-4) var(--space-5); }
+      .action-plan { padding: var(--space-6); }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .course-nav { display: none !important; }
+      .btn-ghost, .back-link { display: none !important; }
+      body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+      .page-wrap { padding: 0; max-width: 100%; }
+      .doc-header {
+        background: #1A1A2E !important;
+        box-shadow: none;
+        padding: 16pt;
+        margin-bottom: 16pt;
+        page-break-inside: avoid;
+        print-color-adjust: exact;
+      }
+      .doc-header::before { display: none; }
+      .doc-title { color: #fff !important; }
+      .doc-subtitle { color: rgba(255,255,255,0.7) !important; }
+      .doc-eyebrow { color: rgba(74, 222, 128, 0.8) !important; }
+      .intro-card { box-shadow: none; border: 1pt solid #ddd; }
+      .portal-card {
+        box-shadow: none;
+        border: 1pt solid #ddd;
+        page-break-inside: avoid;
+        margin-bottom: 12pt;
+      }
+      .portal-card-header { background: #f5f5f5 !important; }
+      .step-badge { print-color-adjust: exact; }
+      .mistake-callout { background: #fff5f5 !important; border-color: #fca5a5 !important; }
+      .golden-rule {
+        border: 2pt dashed #FF5C3A;
+        background: #fff7f5 !important;
+        page-break-inside: avoid;
+      }
+      .action-plan { box-shadow: none; border: 1pt solid #ddd; }
+      .doc-footer { margin-top: 16pt; border-top: 1pt solid #ddd; }
+      @page { margin: 1.5cm 2cm; size: letter portrait; }
+    }
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <nav class="course-nav" aria-label="Course navigation">
+    <div class="nav-brand">
+      <span class="nav-brand-title">Ready for What's Next</span>
+      <span class="nav-brand-unit">Unit 5: College &amp; Career Portals</span>
+    </div>
+    <div class="nav-actions">
+      <a class="back-link" href="../ready_for_whats_next.html">← Back to Course</a>
+      <button class="btn-ghost" onclick="window.print()" aria-label="Print guide">🖨 Print</button>
+      <button class="btn-ghost" onclick="window.print()" aria-label="Save as PDF">⬇ PDF</button>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content" role="main">
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="doc-header">
+      <div class="premium-badge">⭐ Premium Resource</div>
+      <div class="doc-eyebrow">Unit 5: College &amp; Career Portals</div>
+      <h1 class="doc-title"><span class="accent-word">Career Portal</span><br>Navigation Guide</h1>
+      <p class="doc-subtitle">A step-by-step walkthrough of the platforms that matter most.</p>
+    </div>
+
+    <!-- Intro -->
+    <div class="intro-card">
+      <p>Between FAFSA, Common App, LinkedIn, Indeed, and your school's own college portal, the number of platforms you need to manage senior year is overwhelming. This guide walks you through the five most important ones — what they are, what to do first, and the mistakes to avoid.</p>
+    </div>
+
+    <!-- Portal 1 -->
+    <article class="portal-card" aria-label="Portal 1: FAFSA">
+      <div class="portal-card-header">
+        <div class="step-badge" aria-hidden="true">1</div>
+        <h2 class="portal-title">FAFSA (Free Application for Federal Student Aid)</h2>
+      </div>
+      <div class="portal-card-body">
+        <div class="portal-section">
+          <div class="portal-section-icon icon-what" aria-hidden="true">📋</div>
+          <div>
+            <div class="portal-section-label label-what">What it is</div>
+            <p class="portal-section-text">The federal form that determines how much financial aid you qualify for. Every college-bound student should fill this out, even if you think you won't qualify.</p>
+          </div>
+        </div>
+        <div class="portal-section">
+          <div class="portal-section-icon icon-do" aria-hidden="true">✅</div>
+          <div>
+            <div class="portal-section-label label-do">Do this first</div>
+            <p class="portal-section-text">Create an FSA ID for yourself AND have a parent/guardian create one too. You'll both need them to sign the form electronically.</p>
+          </div>
+        </div>
+        <div class="mistake-callout">
+          <div class="portal-section-label">⚠ Common Mistake</div>
+          <p class="portal-section-text">Waiting until the deadline. FAFSA opens October 1 — some aid is first-come, first-served. Don't leave money on the table.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Portal 2 -->
+    <article class="portal-card" aria-label="Portal 2: Common App">
+      <div class="portal-card-header">
+        <div class="step-badge" aria-hidden="true">2</div>
+        <h2 class="portal-title">Common App / Coalition App</h2>
+      </div>
+      <div class="portal-card-body">
+        <div class="portal-section">
+          <div class="portal-section-icon icon-what" aria-hidden="true">📋</div>
+          <div>
+            <div class="portal-section-label label-what">What it is</div>
+            <p class="portal-section-text">The main application platform for most 4-year colleges. One application, submitted to multiple schools.</p>
+          </div>
+        </div>
+        <div class="portal-section">
+          <div class="portal-section-icon icon-do" aria-hidden="true">✅</div>
+          <div>
+            <div class="portal-section-label label-do">Do this first</div>
+            <p class="portal-section-text">Fill out the "Profile" and "Education" sections completely. These don't change between schools and save you hours later.</p>
+          </div>
+        </div>
+        <div class="mistake-callout">
+          <div class="portal-section-label">⚠ Common Mistake</div>
+          <p class="portal-section-text">Using the same personal essay for every school without tailoring it. Admissions officers can tell when it's generic.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Portal 3 -->
+    <article class="portal-card" aria-label="Portal 3: LinkedIn">
+      <div class="portal-card-header">
+        <div class="step-badge" aria-hidden="true">3</div>
+        <h2 class="portal-title">LinkedIn</h2>
+      </div>
+      <div class="portal-card-body">
+        <div class="portal-section">
+          <div class="portal-section-icon icon-what" aria-hidden="true">📋</div>
+          <div>
+            <div class="portal-section-label label-what">What it is</div>
+            <p class="portal-section-text">Your professional profile. Think of it as a living resume that recruiters, colleges, and future employers can find.</p>
+          </div>
+        </div>
+        <div class="portal-section">
+          <div class="portal-section-icon icon-do" aria-hidden="true">✅</div>
+          <div>
+            <div class="portal-section-label label-do">Do this first</div>
+            <p class="portal-section-text">Upload a clear, professional headshot. Write a headline that says more than "Student" — try "High School Senior | Aspiring [Your Interest] | Class of 2026".</p>
+          </div>
+        </div>
+        <div class="mistake-callout">
+          <div class="portal-section-label">⚠ Common Mistake</div>
+          <p class="portal-section-text">Leaving your profile blank and expecting connections to come to you. LinkedIn rewards people who post, comment, and engage.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Portal 4 -->
+    <article class="portal-card" aria-label="Portal 4: Indeed and Handshake">
+      <div class="portal-card-header">
+        <div class="step-badge" aria-hidden="true">4</div>
+        <h2 class="portal-title">Indeed / Handshake</h2>
+      </div>
+      <div class="portal-card-body">
+        <div class="portal-section">
+          <div class="portal-section-icon icon-what" aria-hidden="true">📋</div>
+          <div>
+            <div class="portal-section-label label-what">What it is</div>
+            <p class="portal-section-text">Job search platforms. Indeed is general; Handshake is specifically for students and recent grads, often connected to your school.</p>
+          </div>
+        </div>
+        <div class="portal-section">
+          <div class="portal-section-icon icon-do" aria-hidden="true">✅</div>
+          <div>
+            <div class="portal-section-label label-do">Do this first</div>
+            <p class="portal-section-text">Upload your resume as a PDF. Set up job alerts for 2–3 roles you're interested in so new listings come to your inbox.</p>
+          </div>
+        </div>
+        <div class="mistake-callout">
+          <div class="portal-section-label">⚠ Common Mistake</div>
+          <p class="portal-section-text">Applying to 50 jobs with the same generic resume. Tailor your resume to each role — even small tweaks to the summary and skills section make a difference.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Portal 5 -->
+    <article class="portal-card" aria-label="Portal 5: School College and Career Portal">
+      <div class="portal-card-header">
+        <div class="step-badge" aria-hidden="true">5</div>
+        <h2 class="portal-title">Your School's College &amp; Career Portal</h2>
+      </div>
+      <div class="portal-card-body">
+        <div class="portal-section">
+          <div class="portal-section-icon icon-what" aria-hidden="true">📋</div>
+          <div>
+            <div class="portal-section-label label-what">What it is</div>
+            <p class="portal-section-text">Most high schools have a Naviance, Scoir, or similar platform. This is where you track applications, request transcripts, and get recommendations.</p>
+          </div>
+        </div>
+        <div class="portal-section">
+          <div class="portal-section-icon icon-do" aria-hidden="true">✅</div>
+          <div>
+            <div class="portal-section-label label-do">Do this first</div>
+            <p class="portal-section-text">Request recommendation letters at least 3 weeks before your earliest deadline. Teachers are busy — give them time.</p>
+          </div>
+        </div>
+        <div class="mistake-callout">
+          <div class="portal-section-label">⚠ Common Mistake</div>
+          <p class="portal-section-text">Ignoring this portal until December. Deadlines sneak up, and your counselor needs time to process everything.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Golden Rule -->
+    <div class="golden-rule" role="note" aria-label="Golden rule of portal management">
+      <div class="golden-rule-eyebrow">🏆 Golden Rule</div>
+      <div class="golden-rule-title">The Golden Rule of Portal Management</div>
+      <p>Create one master document with every username, password, and deadline across all platforms. Update it weekly. The students who stay organized are the ones who don't miss opportunities.</p>
+    </div>
+
+    <!-- Action Plan -->
+    <div class="action-plan">
+      <div class="action-plan-header">
+        <span class="header-icon" aria-hidden="true">📝</span>
+        <h2>My Portal Action Plan</h2>
+      </div>
+
+      <div class="action-row">
+        <div class="action-num" aria-hidden="true">1</div>
+        <div class="action-content">
+          <span class="action-label">The portal I'll set up first this week:</span>
+          <div class="action-line" role="presentation"></div>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-num" aria-hidden="true">2</div>
+        <div class="action-content">
+          <span class="action-label">My earliest application deadline:</span>
+          <div class="action-line" role="presentation"></div>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-num" aria-hidden="true">3</div>
+        <div class="action-content">
+          <span class="action-label">One person I'll ask for a recommendation:</span>
+          <div class="action-line" role="presentation"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="doc-footer" role="contentinfo">
+      <span class="footer-brand">Ready for What's Next © 2026 — College &amp; Career Portals</span>
+      <div class="footer-accent-bar" aria-hidden="true"></div>
+    </footer>
+
+  </div><!-- /page-wrap -->
+</main>
+
+</body>
+</html>

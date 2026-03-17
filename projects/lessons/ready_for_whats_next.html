@@ -6,11 +6,74 @@
   <title>Ready for What's Next</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Noto+Sans:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      /* ── Course Design System Tokens ── */
+      /* Backgrounds */
+      --color-bg-dark:        #0B0B12;
+      --color-bg-mid:         #151520;
+      --color-bg-light:       #F6F7F8;
+      --color-bg-white:       #FFFFFF;
+      --color-bg-overlay:     rgba(8, 8, 15, 0.85);
+
+      /* Text */
+      --color-text-primary:   #1A1A2E;
+      --color-text-secondary: #4A4A6A;
+      --color-text-muted:     #8888A0;
+      --color-text-inverse:   #F0F0F5;
+      --color-text-inverse-secondary: #A0A0B2;
+
+      /* Borders */
+      --color-border-light:   #E5E7EB;
+      --color-border-dark:    #2A2A3C;
+      --color-border-card:    rgba(0, 0, 0, 0.08);
+
+      /* Primary Action (Coral) */
+      --color-coral:          #FF5C3A;
+      --color-coral-light:    #FFF0ED;
+      --color-coral-dark:     #E04020;
+
+      /* Feedback */
+      --color-correct:        #22C55E;
+      --color-incorrect:      #EF4444;
+      --color-correct-bg:     rgba(34, 197, 94, 0.10);
+      --color-incorrect-bg:   rgba(239, 68, 68, 0.08);
+
+      /* Shadows */
+      --shadow-card:    0 2px 20px rgba(0, 0, 0, 0.07);
+      --shadow-card-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+      /* Spacing */
+      --space-1:   4px;
+      --space-2:   8px;
+      --space-3:   12px;
+      --space-4:   16px;
+      --space-5:   20px;
+      --space-6:   24px;
+      --space-8:   32px;
+      --space-10:  40px;
+      --space-12:  48px;
+      --space-16:  64px;
+
+      /* Radius */
+      --radius-sm:   4px;
+      --radius-md:   8px;
+      --radius-lg:   12px;
+      --radius-xl:   16px;
+      --radius-pill: 9999px;
+
+      /* Transitions */
+      --transition-fast:   150ms ease;
+      --transition-base:   250ms ease;
+      --transition-slow:   400ms ease;
+
+      /* Fonts — Noto Sans kept for Cyrillic/multilingual fallback */
+      --font-display: 'Manrope', system-ui, sans-serif;
+      --font-body:    'IBM Plex Sans', 'Noto Sans', Inter, system-ui, sans-serif;
+
       /* ── Base palette (dark mode default) ── */
       --bg:             #0B0B12;
       --card-bg:        #151520;
@@ -52,19 +115,49 @@
     html {
       background: var(--bg);
       color: var(--text-primary);
-      font-family: 'Outfit', 'Noto Sans', sans-serif;
+      font-family: var(--font-body);
       font-weight: 400;
       min-height: 100%;
     }
 
     body { min-height: 100%; }
 
+    /* ─── Skip Link ─── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      padding: var(--space-3) var(--space-5);
+      background: var(--color-coral);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.85rem;
+      z-index: 9999;
+      text-decoration: none;
+      border-radius: 0 0 var(--radius-md) 0;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─── Course Nav ─── */
+    .course-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    html.light-mode .course-nav {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
     /* ─── Language Toggle ─── */
     #lang-toggle {
-      position: fixed;
-      top: 16px;
-      right: 20px;
-      z-index: 1001;
       display: flex;
       gap: 2px;
       background: var(--card-bg);
@@ -81,7 +174,7 @@
       border: none;
       background: none;
       color: var(--text-muted);
-      font-family: 'Outfit', 'Noto Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
@@ -102,7 +195,7 @@
     /* ─── WIDA Badge ─── */
     #wida-badge {
       position: fixed;
-      top: 62px;
+      top: 68px;
       right: 20px;
       z-index: 999;
       display: flex;
@@ -130,6 +223,7 @@
 
     /* ─── Dashboard ─── */
     #dashboard {
+      padding-top: 60px;
       opacity: 0;
       animation: fadeIn 0.45s ease 0.05s forwards;
     }
@@ -144,7 +238,7 @@
     .dash-header { margin-bottom: 32px; }
 
     .dash-title {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(2rem, 5vw, 3.25rem);
       font-weight: 800;
       line-height: 1.1;
@@ -163,7 +257,7 @@
     .progress-panel {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: var(--radius-xl);
       padding: 22px 26px;
       margin-bottom: 32px;
     }
@@ -186,7 +280,7 @@
       font-weight: 500;
     }
     .progress-track {
-      height: 8px;
+      height: 4px;
       background: var(--track-bg);
       border-radius: 99px;
       overflow: hidden;
@@ -213,7 +307,7 @@
     .unit-card {
       background: var(--card-bg);
       border: 2px solid var(--border);
-      border-radius: 16px;
+      border-radius: var(--radius-xl);
       padding: 22px;
       cursor: pointer;
       display: flex;
@@ -221,6 +315,7 @@
       gap: 14px;
       opacity: 0;
       transform: translateY(20px);
+      box-shadow: var(--shadow-card);
       transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     }
     .unit-card.revealed {
@@ -269,7 +364,7 @@
 
     .card-body { flex: 1; }
     .card-title {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--text-primary);
@@ -328,9 +423,9 @@
     }
 
     .unit-container {
-      max-width: 768px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 48px 16px 100px;
+      padding: 108px 16px 100px;
     }
 
     /* Back button */
@@ -341,7 +436,7 @@
       background: none;
       border: none;
       color: var(--text-muted);
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
@@ -366,14 +461,14 @@
     }
     .unit-icon-pill .pill-emoji { font-size: 1.25rem; line-height: 1; }
     .unit-icon-pill .pill-label {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
 
     .unit-view-title {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(1.85rem, 4vw, 2.6rem);
       font-weight: 800;
       color: var(--text-primary);
@@ -388,7 +483,7 @@
 
     /* Section heading */
     .section-heading {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 1.3rem;
       font-weight: 700;
       color: var(--text-primary);
@@ -404,11 +499,14 @@
     .acc-item {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-lg);
       overflow: hidden;
       transition: border-color 0.2s ease;
     }
-    .acc-item.open { border-color: rgba(var(--unit-accent-rgb), 0.4); }
+    .acc-item.open {
+      border-color: rgba(var(--unit-accent-rgb), 0.3);
+      box-shadow: inset 3px 0 0 var(--unit-accent, #00D4FF), var(--shadow-card);
+    }
 
     .acc-trigger {
       width: 100%;
@@ -470,6 +568,9 @@
       font-weight: 600;
       position: relative;
       cursor: help;
+      text-decoration: underline;
+      text-decoration-style: dashed;
+      text-underline-offset: 3px;
     }
     .kw-tooltip {
       display: none;
@@ -480,12 +581,12 @@
       background: var(--tooltip-bg);
       border: 1px solid var(--tooltip-border);
       color: var(--tooltip-text);
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.77rem;
       font-weight: 400;
       line-height: 1.5;
       padding: 7px 11px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       white-space: normal;
       max-width: 220px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.4);
@@ -494,16 +595,15 @@
     }
     .kw:hover .kw-tooltip,
     .kw:focus .kw-tooltip { display: block; }
-    .kw:focus { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
+    .kw:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
 
     /* Focus rings */
     :focus-visible {
-      outline: 2px solid #00D4FF;
+      outline: 2.5px solid var(--color-coral);
       outline-offset: 3px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
-    #unit-view :focus-visible { outline-color: var(--unit-accent, #00D4FF); }
-    .unit-card:focus-visible   { outline-color: var(--accent, #00D4FF); }
+    :focus:not(:focus-visible) { outline: none; }
 
     /* Accordion overflow — allow tooltips to escape */
     .acc-item.open            { overflow: visible; }
@@ -555,7 +655,7 @@
     .quiz-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: var(--radius-xl);
       padding: 26px;
     }
 
@@ -621,46 +721,62 @@
       color: var(--text-primary);
     }
     .quiz-option.correct {
-      border-color: #06D6A0;
-      background: rgba(6, 214, 160, 0.08);
-      color: #06D6A0;
+      border-color: var(--color-correct);
+      background: var(--color-correct-bg);
+      color: var(--color-correct);
     }
     .quiz-option.wrong {
-      border-color: rgba(239, 68, 68, 0.4);
-      background: rgba(239, 68, 68, 0.05);
-      color: rgba(239, 68, 68, 0.8);
+      border-color: var(--color-incorrect);
+      background: var(--color-incorrect-bg);
+      color: var(--color-incorrect);
     }
     .quiz-option.locked { cursor: default; }
 
     .opt-letter {
-      font-size: 0.7rem;
-      font-weight: 700;
-      width: 18px;
+      width: 22px;
+      height: 22px;
       flex-shrink: 0;
+      border-radius: 50%;
+      border: 2px solid var(--border);
       color: var(--text-muted);
-      padding-top: 3px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .quiz-option.correct .opt-letter { color: #06D6A0; }
-    .quiz-option.wrong   .opt-letter { color: rgba(239,68,68,0.8); }
+    .quiz-option:not(.locked):hover .opt-letter {
+      border-color: rgba(var(--unit-accent-rgb), 0.6);
+    }
+    .quiz-option.correct .opt-letter {
+      background: var(--color-correct);
+      border-color: var(--color-correct);
+      color: #fff;
+    }
+    .quiz-option.wrong .opt-letter {
+      background: var(--color-incorrect);
+      border-color: var(--color-incorrect);
+      color: #fff;
+    }
 
     .quiz-feedback {
       margin-top: 14px;
       padding: 11px 15px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-size: 0.91rem;
       line-height: 1.55;
       display: none;
     }
     .quiz-feedback.show { display: block; }
     .quiz-feedback.good {
-      background: rgba(6, 214, 160, 0.08);
-      border: 1px solid rgba(6, 214, 160, 0.28);
-      color: #06D6A0;
+      background: var(--color-correct-bg);
+      border: 1px solid var(--color-correct);
+      color: var(--color-correct);
     }
     .quiz-feedback.bad {
-      background: rgba(239, 68, 68, 0.06);
-      border: 1px solid rgba(239, 68, 68, 0.22);
-      color: rgba(239, 68, 68, 0.85);
+      background: var(--color-incorrect-bg);
+      border: 1px solid var(--color-incorrect);
+      color: var(--color-incorrect);
     }
 
     .quiz-next-btn {
@@ -668,13 +784,13 @@
       align-items: center;
       gap: 8px;
       margin-top: 18px;
-      background: var(--unit-accent);
+      background: linear-gradient(135deg, var(--color-coral), var(--color-coral-dark));
       color: #fff;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 0.87rem;
       font-weight: 700;
       padding: 11px 22px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       border: none;
       cursor: pointer;
       letter-spacing: 0.02em;
@@ -687,7 +803,7 @@
     .quiz-results { text-align: center; padding: 12px 0; }
 
     .result-score {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 3.75rem;
       font-weight: 800;
       color: var(--text-primary);
@@ -711,11 +827,11 @@
     }
     .btn-retake {
       padding: 11px 22px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       border: 1px solid var(--border);
       background: none;
       color: var(--text-secondary);
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 0.87rem;
       font-weight: 700;
       cursor: pointer;
@@ -725,10 +841,10 @@
 
     .btn-mark-complete {
       padding: 11px 22px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       border: none;
       color: #fff;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 0.87rem;
       font-weight: 700;
       cursor: pointer;
@@ -740,13 +856,13 @@
     .coming-soon-panel {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: var(--radius-xl);
       padding: 56px 28px;
       text-align: center;
     }
     .coming-soon-icon { font-size: 2.5rem; margin-bottom: 18px; }
     .coming-soon-title {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-display);
       font-size: 1.3rem;
       font-weight: 700;
       color: var(--text-primary);
@@ -770,12 +886,6 @@
     }
 
     /* ─── Theme Toggle ─── */
-    #theme-toggle {
-      position: fixed;
-      top: 16px;
-      left: 20px;
-      z-index: 1001;
-    }
     #theme-btn {
       display: inline-flex;
       align-items: center;
@@ -793,22 +903,64 @@
     #theme-btn:hover {
       background: var(--hover-bg);
     }
+
+    /* ─── Pull Quotes ─── */
+    .pull-quote {
+      border-left: 3px solid var(--unit-accent, #00D4FF);
+      padding: 0 0 0 16px;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.6;
+      position: relative;
+    }
+    .pull-quote::before {
+      content: '\201C';
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--unit-accent, #00D4FF);
+      line-height: 0.5;
+      margin-bottom: 12px;
+    }
+
+    /* ─── Footer ─── */
+    .course-footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 16px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+
+    /* ─── Reduced Motion ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- Theme Toggle -->
-<div id="theme-toggle">
-  <button id="theme-btn" onclick="toggleTheme()" aria-label="Switch to light mode">🌙</button>
-</div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
-<!-- Language Toggle -->
-<div id="lang-toggle" role="group" aria-label="Select language">
-  <button class="lang-btn active" data-lang="en" onclick="switchLang('en')" aria-pressed="true">🇺🇸 EN</button>
-  <button class="lang-btn" data-lang="es" onclick="switchLang('es')" aria-pressed="false">🇪🇸 ES</button>
-  <button class="lang-btn" data-lang="pt" onclick="switchLang('pt')" aria-pressed="false">🇧🇷 PT</button>
-  <button class="lang-btn" data-lang="ru" onclick="switchLang('ru')" aria-pressed="false">🇷🇺 RU</button>
-</div>
+<!-- Site Header -->
+<header role="banner">
+<nav class="course-nav" aria-label="Course navigation">
+  <div id="theme-toggle">
+    <button id="theme-btn" onclick="toggleTheme()" aria-label="Switch to light mode">🌙</button>
+  </div>
+  <div id="lang-toggle" role="group" aria-label="Select language">
+    <button class="lang-btn active" data-lang="en" onclick="switchLang('en')" aria-pressed="true">🇺🇸 EN</button>
+    <button class="lang-btn" data-lang="es" onclick="switchLang('es')" aria-pressed="false">🇪🇸 ES</button>
+    <button class="lang-btn" data-lang="ru" onclick="switchLang('ru')" aria-pressed="false">🇷🇺 RU</button>
+  </div>
+</nav>
+</header>
 
 <!-- WIDA Badge -->
 <div id="wida-badge">
@@ -834,9 +986,12 @@
       </div>
     </div>
 
-    <main aria-label="Course Units">
+    <main id="main-content" role="main" aria-label="Course Units">
       <div class="unit-grid" id="unit-grid"></div>
     </main>
+    <footer class="course-footer" role="contentinfo">
+      <p>Ready for What's Next &mdash; Angela Valenti</p>
+    </footer>
   </div>
 </div>
 
@@ -1365,33 +1520,6 @@ const UI = {
     resultOk:      (s, n) => `Respondiste ${s} de ${n} preguntas correctamente. Revisa la secci\u00f3n de aprendizaje y vuelve a intentarlo.`,
     resultTryAgain:(s, n) => `Respondiste ${s} de ${n} preguntas correctamente. Revisa las lecciones y rep\u00edte el quiz cuando est\u00e9s listo.`,
   },
-  pt: {
-    dashTitle: "Prontos para o que Vem a Seguir",
-    dashTitleAccent: "o que Vem a Seguir",
-    dashSubtitle: "Seu guia para a vida digital ap\u00f3s o ensino m\u00e9dio.",
-    courseProgress: "Progresso do Curso",
-    unitCompleted: (n, t) => n === 0 ? `0 de ${t} Unidades Conclu\u00eddas` : `${n} de ${t} Unidades Conclu\u00eddas (${Math.round(n/t*100)}%)`,
-    notStarted: "N\u00e3o iniciado",
-    startUnit: "Iniciar Unidade",
-    reviewUnit: "Revisar Unidade",
-    quizScore: "Pontua\u00e7\u00e3o do Quiz",
-    completed: "\u2713 Conclu\u00eddo",
-    backToDashboard: "Voltar ao Painel",
-    learnTheBasics: "Aprenda o B\u00e1sico",
-    testYourKnowledge: "Teste seu Conhecimento",
-    quizInstruction: "Escolha a melhor resposta para cada pergunta. Voc\u00ea pode revisar a se\u00e7\u00e3o Aprendizado acima a qualquer momento.",
-    nextQuestion: "Pr\u00f3xima Pergunta \u2192",
-    seeResults: "Ver Resultados \u2192",
-    retakeQuiz: "\u21B3 Refazer Quiz",
-    markComplete: "Marcar como Conclu\u00eddo \u2713",
-    question: "Pergunta",
-    score: "Pontua\u00e7\u00e3o",
-    of: "de",
-    resultPerfect: (n) => `Voc\u00ea respondeu todas as ${n} perguntas corretamente. Voc\u00ea dominou esta unidade!`,
-    resultGood:    (s, n) => `Voc\u00ea respondeu ${s} de ${n} perguntas corretamente. \u00d3timo trabalho \u2014 voc\u00ea est\u00e1 pronto para o pr\u00f3ximo passo.`,
-    resultOk:      (s, n) => `Voc\u00ea respondeu ${s} de ${n} perguntas corretamente. Revise a se\u00e7\u00e3o Aprendizado acima e tente novamente.`,
-    resultTryAgain:(s, n) => `Voc\u00ea respondeu ${s} de ${n} perguntas corretamente. Revise as li\u00e7\u00f5es acima e refaça o quiz quando estiver pronto.`,
-  },
   ru: {
     dashTitle: "\u0413\u043e\u0442\u043e\u0432\u044b \u043a \u0422\u043e\u043c\u0443, \u0447\u0442\u043e \u0414\u0430\u043b\u044c\u0448\u0435",
     dashTitleAccent: "\u0447\u0442\u043e \u0414\u0430\u043b\u044c\u0448\u0435",
@@ -1536,7 +1664,7 @@ function applyTooltips() {
 }
 
 /* ══════════════════════════════════════════════
-   UNIT TRANSLATIONS — ES & PT
+   UNIT TRANSLATIONS — ES & RU
 ══════════════════════════════════════════════ */
 const UNIT_TRANSLATIONS = {
   es: [
@@ -1622,92 +1750,6 @@ const UNIT_TRANSLATIONS = {
         {question:'¿Para qu\u00e9 te ayuda el m\u00e9todo STAR en una entrevista?', options:['Recordar el nombre de tu entrevistador','Estructurar tus respuestas usando Situaci\u00f3n, Tarea, Acci\u00f3n, Resultado','Decidir qu\u00e9 ropa ponerte','Calcular tu salario ideal'], correct:1, feedbackCorrect:'&#10003; STAR le da a tus respuestas un inicio, desarrollo y fin claros \u2014 haci\u00e9ndote sonar preparado y cre\u00edble.', feedbackWrong:'No exactamente \u2014 la respuesta es B. STAR le da estructura a tus respuestas: Situaci\u00f3n, Tarea, Acci\u00f3n, Resultado.'},
         {question:'¿Cu\u00e1l es lo m\u00e1s importante que debes verificar en una carta de oferta de ayuda financiera?', options:['La mascota y los colores de la escuela','La diferencia entre becas (dinero gratuito) y pr\u00e9stamos (dinero que debes devolver)','Si tu amigo recibi\u00f3 la misma oferta','La extensi\u00f3n de la carta'], correct:1, feedbackCorrect:'&#10003; Muchos estudiantes aceptan pr\u00e9stamos creyendo que son becas. Siempre resta los pr\u00e9stamos para ver tu costo real.', feedbackWrong:'No exactamente \u2014 la respuesta es B. Siempre identifica y resta los pr\u00e9stamos para ver tu costo real de la universidad.'},
         {question:'¿Es aceptable pedir tiempo antes de aceptar una oferta de trabajo?', options:['No, debes decidir de inmediato o retirar\u00e1n la oferta','S\u00ed, pedir 24-48 horas para revisar es completamente profesional y esperado','Solo si tienes otra oferta en mano','Solo para pasant\u00edas, no para trabajos de tiempo completo'], correct:1, feedbackCorrect:'&#10003; Los empleadores esperan que los candidatos tomen tiempo para revisar. Pedir 24-48 horas es est\u00e1ndar y profesional.', feedbackWrong:'No exactamente \u2014 la respuesta es B. Pedir 24-48 horas para revisar una oferta es completamente profesional y esperado.'}
-      ]
-    }
-  ],
-  pt: [
-    {
-      id:1, title:'Identidade Digital', description:'Construa uma presen\u00e7a online que trabalhe para voc\u00ea.',
-      chunks:[
-        {title:'Quem Voc\u00ea \u00c9 Online?', content:'Sua <span class="kw">identidade digital</span> \u00e9 tudo que empregadores e faculdades v\u00eaem antes de te conhecer. Inclui suas <span class="kw">redes sociais</span>, seu <span class="kw">endere\u00e7o de e-mail</span>, seu <span class="kw">perfil no LinkedIn</span> e tudo que aparece quando algu\u00e9m pesquisa seu nome no Google.'},
-        {title:'No\u00e7\u00f5es B\u00e1sicas de Curr\u00edculo', content:'Um <span class="kw">curr\u00edculo</span> \u00e9 sua <span class="kw">primeira impress\u00e3o</span> no papel. Mantenha em <span class="kw">uma p\u00e1gina</span>, use <span class="kw">verbos de a\u00e7\u00e3o</span> fortes e inclua educa\u00e7\u00e3o, experi\u00eancia e habilidades. Projetos escolares e trabalho volunt\u00e1rio tamb\u00e9m contam.'},
-        {title:'LinkedIn', content:'<span class="kw">LinkedIn</span> \u00e9 sua <span class="kw">presen\u00e7a digital profissional</span>. Um perfil forte tem uma <span class="kw">foto de perfil clara</span>, um <span class="kw">t\u00edtulo</span> que descreve seus objetivos e conex\u00f5es com professores, mentores e conhecidos da fam\u00edlia.'},
-        {title:'E-mail Profissional', content:'Seu <span class="kw">endere\u00e7o de e-mail</span> deve ser profissional. Sempre use um <span class="kw">assunto claro</span>, uma <span class="kw">sauda\u00e7\u00e3o formal</span> e uma <span class="kw">assinatura profissional</span>. Revise antes de enviar.'},
-        {title:'Sua Pegada Digital', content:'Assuma que <span class="kw">empregadores e faculdades</span> v\u00e3o pesquisar seu nome. <span class="kw">Revise suas redes sociais</span>, exclua publica\u00e7\u00f5es inapropriadas e verifique suas <span class="kw">configura\u00e7\u00f5es de privacidade</span> regularmente.'}
-      ],
-      quiz:[
-        {question:'O que torna um curr\u00edculo MAIS prov\u00e1vel de ser notado pelos empregadores?', options:['Usar uma fonte decorativa para se destacar','Incluir palavras-chave da descri\u00e7\u00e3o da vaga','Fazer com 3 p\u00e1ginas para cobrir toda a experi\u00eancia','Adicionar um design de fundo colorido'], correct:1, feedbackCorrect:'&#10003; Correto! Palavras-chave ajudam seu curr\u00edculo a passar pelos sistemas de triagem autom\u00e1tica que a maioria dos empregadores usa.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Palavras-chave da descri\u00e7\u00e3o da vaga ajudam seu curr\u00edculo a passar pelos filtros autom\u00e1ticos.'},
-        {question:'Relacione cada elemento do LinkedIn com o que ele faz por voc\u00ea.', options:['Foto de Perfil \u2192 Primeira impress\u00e3o \u00b7 T\u00edtulo \u2192 Sua apresenta\u00e7\u00e3o \u00b7 Habilidades \u2192 Endossadas por conex\u00f5es','T\u00edtulo \u2192 Primeira impress\u00e3o \u00b7 Foto \u2192 Sua apresenta\u00e7\u00e3o \u00b7 Habilidades \u2192 Endossadas por conex\u00f5es','Habilidades \u2192 Primeira impress\u00e3o \u00b7 T\u00edtulo \u2192 Sua apresenta\u00e7\u00e3o \u00b7 Foto \u2192 Endossadas por conex\u00f5es','Foto \u2192 Primeira impress\u00e3o \u00b7 Habilidades \u2192 Sua apresenta\u00e7\u00e3o \u00b7 T\u00edtulo \u2192 Endossadas por conex\u00f5es'], correct:0, feedbackCorrect:'&#10003; Perfeito! Cada elemento do seu perfil do LinkedIn tem uma fun\u00e7\u00e3o espec\u00edfica.', feedbackWrong:'Alguns n\u00e3o coincidem \u2014 Foto = primeira impress\u00e3o, T\u00edtulo = sua apresenta\u00e7\u00e3o, Habilidades = endossadas por conex\u00f5es.'},
-        {question:'Qual \u00e9 o melhor assunto para um e-mail pedindo emprego de ver\u00e3o em um caf\u00e9 local?', options:['"oi, tem vaga?"','"Candidatura \u2013 Emprego de Ver\u00e3o no Caf\u00e9 Local"','"por favor quero trabalhar a\u00ed!!!"','"RE: Vaga de emprego (n\u00e3o lembro o t\u00edtulo exato)"'], correct:1, feedbackCorrect:'&#10003; Otimo! Um assunto curto e espec\u00edfico \u00e9 aberto com mais facilidade.', feedbackWrong:'N\u00e3o exatamente. Um assunto profissional deve ser claro, espec\u00edfico e com mai\u00fasculas corretas. A op\u00e7\u00e3o B \u00e9 a melhor.'},
-        {question:'Um oficial de admiss\u00f5es pesquisa seu nome e encontra fotos que voc\u00ea preferiria n\u00e3o compartilhar. Qual \u00e9 a melhor resposta?', options:['Ignorar \u2014 provavelmente n\u00e3o vai importar','Excluir todas as redes sociais imediatamente','Colocar contas pessoais no privado e criar um LinkedIn p\u00fablico forte','Pedir aos amigos que te desmarquem de tudo'], correct:2, feedbackCorrect:'&#10003; Correto. Uma conta pessoal privada mais um LinkedIn forte te d\u00e1 controle sobre o que os outros v\u00eaem.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 C. Voc\u00ea n\u00e3o precisa deletar tudo; s\u00f3 controle o que \u00e9 p\u00fablico.'}
-      ]
-    },
-    {
-      id:2, title:'Ferramentas de IA e Voc\u00ea', description:'Aprenda a usar ferramentas de IA de forma respons\u00e1vel, identifique conte\u00fado gerado por IA e proteja sua integridade acad\u00eamica.',
-      chunks:[
-        {title:'Usando o ChatGPT de Forma Respons\u00e1vel', content:'Ferramentas de IA como <span class="kw">ChatGPT</span> podem ajudar a gerar ideias, fazer esbo\u00e7os e editar \u2014 mas s\u00e3o um ponto de partida, n\u00e3o um produto acabado. Sempre <span class="kw">verifique</span> as informa\u00e7\u00f5es da IA pois ela pode afirmar coisas incorretas com confian\u00e7a. Use a IA para aprimorar seu pensamento, n\u00e3o para substitui-lo.'},
-        {title:'Integridade Acad\u00eamica e IA', content:'A maioria das escolas tem pol\u00edticas de <span class="kw">integridade acad\u00eamica</span> sobre o uso de IA. Usar IA para escrever um ensaio inteiro e entreg\u00e1-lo como seu \u00e9 considerado <span class="kw">desonestidade acad\u00eamica</span>. A pergunta-chave: aprendi algo, ou s\u00f3 deixei a m\u00e1quina pensar por mim? Seu crescimento vale mais do que a nota.'},
-        {title:'Identificando Conte\u00fado Gerado por IA', content:'Textos de IA tendem a ser excessivamente suaves, vagos e cheios de frases gen\u00e9ricas como \u201c\u00e9 importante notar\u201d. Identificar conte\u00fado <span class="kw">gerado por IA</span> est\u00e1 se tornando uma habilidade essencial \u2014 empregadores, professores e jornalistas est\u00e3o aprendendo a reconhec\u00ea-lo.'},
-        {title:'Escrevendo Prompts Melhores', content:'A qualidade do que a IA gera depende do que voc\u00ea pede. Prompt fraco: \u201cEscreva um ensaio\u201d. Prompt forte: \u201cEscreva um ensaio argumentativo de 3 par\u00e1grafos sobre por que anos sabáticos s\u00e3o valiosos, usando dois exemplos reais\u201d. Seja espec\u00edfico sobre formato, p\u00fablico, extens\u00e3o e tom.'},
-        {title:'Ferramentas de IA que Voc\u00ea Deve Conhecer', content:'Al\u00e9m do ChatGPT: <span class="kw">Grammarly</span> ajuda com gram\u00e1tica e tom, <span class="kw">Google NotebookLM</span> resume pesquisas e <span class="kw">Otter.ai</span> transcreve reuni\u00f5es. Saber qual ferramenta usar para cada tarefa faz voc\u00ea se destacar desde o primeiro dia.'}
-      ],
-      quiz:[
-        {question:'Qual \u00e9 o maior risco de entregar trabalho gerado por IA como pr\u00f3prio?', options:['Demora muito para gerar','Viola as pol\u00edticas de integridade acad\u00eamica e voc\u00ea perde a aprendizagem real','A IA \u00e9 sempre errada ent\u00e3o n\u00e3o far\u00e1 sentido','Professores n\u00e3o conseguem perceber'], correct:1, feedbackCorrect:'&#10003; Entregar trabalho de IA como pr\u00f3prio \u00e9 considerado desonesto na maioria das escolas \u2014 e voc\u00ea perde a chance de desenvolver a habilidade.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Entregar trabalho de IA como pr\u00f3prio \u00e9 desonesto e voc\u00ea perde a chance de aprender.'},
-        {question:'Qual destes \u00e9 um sinal de que o conte\u00fado pode ter sido gerado por IA?', options:['Tem erros de ortografia','Usa hist\u00f3rias pessoais e detalhes espec\u00edficos','\u00c9 excessivamente suave, vago e usa frases gen\u00e9ricas como \u201c\u00e9 importante notar\u201d','\u00c9 muito curto'], correct:2, feedbackCorrect:'&#10003; Textos de IA tendem a ser pol\u00eddos mas gen\u00e9ricos \u2014 evitam especificidades e usam frases de preenchimento.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 C. Textos de IA tendem a ser pol\u00eddos mas gen\u00e9ricos, com frases de preenchimento.'},
-        {question:'O que faz um prompt de IA ser bom?', options:['Ser o mais curto poss\u00edvel','Ser espec\u00edfico sobre formato, p\u00fablico, extens\u00e3o e tom','Pedir que a IA fa\u00e7a tudo por voc\u00ea','Usar apenas uma palavra'], correct:1, feedbackCorrect:'&#10003; Prompts espec\u00edficos geram resultados espec\u00edficos. Quanto mais contexto voc\u00ea der, mais \u00fatil ser\u00e1 o resultado.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Prompts espec\u00edficos geram resultados espec\u00edficos. Mais contexto = melhor resultado.'},
-        {question:'Como voc\u00ea deve tratar informa\u00e7\u00f5es da IA ao pesquisar um assunto?', options:['Copiar e colar diretamente na tarefa','Assumir que \u00e9 sempre precisa','Usar como ponto de partida e verificar tudo','Evitar usar IA para pesquisa'], correct:2, feedbackCorrect:'&#10003; A IA pode gerar informa\u00e7\u00f5es falsas com confian\u00e7a. Sempre verifique os fatos com fontes confi\u00e1veis.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 C. A IA pode errar. Sempre verifique com fontes confi\u00e1veis.'},
-        {question:'Qual dessas \u00e9 uma ferramenta de IA real usada em ambientes profissionais?', options:['CorretorBot 3000','Otter.ai para transcrever reuni\u00f5es e aulas','NoteIA','EnsaioAuto Pro'], correct:1, feedbackCorrect:'&#10003; O Otter.ai \u00e9 uma ferramenta profissional amplamente usada que transcreve conversas em tempo real.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. O Otter.ai transcreve conversas em tempo real e \u00e9 amplamente usado profissionalmente.'}
-      ]
-    },
-    {
-      id:3, title:'Dinheiro e Vida Digital', description:'Domine o b\u00e1sico de bancos, cr\u00e9dito e como se proteger de golpes no mundo digital.',
-      chunks:[
-        {title:'Aplicativos Banc\u00e1rios e Dinheiro Digital', content:'A maioria das opera\u00e7\u00f5es banc\u00e1rias hoje acontecem no celular. Apps como <span class="kw">Cash App</span>, <span class="kw">Venmo</span> e <span class="kw">Zelle</span> permitem enviar e receber dinheiro na hora \u2014 mas erros s\u00e3o dif\u00edceis de reverter. Abra uma conta corrente real em um banco ou cooperativa de cr\u00e9dito antes de depender s\u00f3 de apps de pagamento.'},
-        {title:'Entendendo as Pontua\u00e7\u00f5es de Cr\u00e9dito', content:'Seu <span class="kw">score de cr\u00e9dito</span> \u00e9 um n\u00famero entre <span class="kw">300 e 850</span> que mostra aos credores o quanto voc\u00ea \u00e9 confi\u00e1vel com dinheiro. Voc\u00ea constr\u00f3i cr\u00e9dito abrindo um <span class="kw">cart\u00e3o de cr\u00e9dito inicial</span>, mantendo o saldo baixo e pagando em dia todo m\u00eas.'},
-        {title:'Conscientiza\u00e7\u00e3o sobre Golpes', content:'Golpistas miram jovens porque eles s\u00e3o novos em gerenciar dinheiro online. Golpes comuns incluem e-mails de <span class="kw">phishing</span> fingindo ser seu banco ou escola. A regra: se parece urgente ou pede informa\u00e7\u00f5es pessoais do nada \u2014 pare e verifique antes de agir.'},
-        {title:'No\u00e7\u00f5es B\u00e1sicas de Finan\u00e7as Pessoais', content:'Morar sozinho significa controlar cada real. A regra <span class="kw">50/30/20</span>: 50% para necessidades como aluguel e comida, 30% para desejos como sair ou streaming, e 20% para poupan\u00e7a e pagamento de d\u00edvidas. Forme um <span class="kw">fundo de emerg\u00eancia</span> de pelo menos R$500 antes de gastar no supérfluo.'},
-        {title:'Protegendo Sua Identidade Financeira', content:'Nunca compartilhe seu <span class="kw">CPF</span>, login banc\u00e1rio ou n\u00fameros de cart\u00e3o por mensagem, e-mail ou telefone. Ative alertas de transa\u00e7\u00f5es no app do banco. Consulte seu relat\u00f3rio de cr\u00e9dito gratuitamente em <span class="kw">AnnualCreditReport.com</span> uma vez por ano (para quem est\u00e1 nos EUA).'}
-      ],
-      quiz:[
-        {question:'O que seu score de cr\u00e9dito afeta?', options:['Apenas sua capacidade de comprar ingressos de show','Sua capacidade de alugar apartamentos, conseguir empr\u00e9stimos e \u00e0s vezes ser contratado','Apenas pessoas com mais de 40 anos','Nada at\u00e9 voc\u00ea completar 30 anos'], correct:1, feedbackCorrect:'&#10003; Scores de cr\u00e9dito importam mais do que a maioria dos jovens percebe \u2014 propriet\u00e1rios, credores e alguns empregadores os verificam.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Scores de cr\u00e9dito s\u00e3o verificados por propriet\u00e1rios, credores e at\u00e9 alguns empregadores.'},
-        {question:'O que \u00e9 a regra or\u00e7ament\u00e1ria 50/30/20?', options:['50% poupan\u00e7a, 30% necessidades, 20% desejos','50% necessidades, 30% desejos, 20% poupan\u00e7a e d\u00edvidas','50% desejos, 30% poupan\u00e7a, 20% impostos','50% comida, 30% aluguel, 20% diversão'], correct:1, feedbackCorrect:'&#10003; A regra 50/30/20: metade da renda para o essencial, cerca de um ter\u00e7o para estilo de vida, e um quinto para poupan\u00e7a e d\u00edvidas.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. 50% necessidades, 30% desejos, 20% poupan\u00e7a e pagamento de d\u00edvidas.'},
-        {question:'Qual destes \u00e9 um sinal de alerta de golpe?', options:['Uma empresa pedindo que voc\u00ea aplique pelo site oficial','Uma mensagem criando press\u00e3o urgente e pedindo informa\u00e7\u00f5es pessoais imediatamente','Um banco enviando extrato mensal para seu endere\u00e7o','Uma vaga no LinkedIn com nome de empresa real'], correct:1, feedbackCorrect:'&#10003; Urg\u00eancia e pedidos de informa\u00e7\u00f5es pessoais do nada s\u00e3o os maiores sinais de golpe. Institui\u00e7\u00f5es leg\u00edtimas n\u00e3o pressionam.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Urg\u00eancia e pedidos de informa\u00e7\u00f5es pessoais s\u00e3o os maiores sinais de golpe.'},
-        {question:'O que voc\u00ea deve fazer antes de depender do Venmo ou Cash App como conta principal?', options:['Nada, apps de pagamento s\u00e3o tudo que voc\u00ea precisa','Abrir primeiro uma conta corrente real em um banco ou cooperativa de cr\u00e9dito','Pedir aos pais que gerenciem seu dinheiro','Esperar at\u00e9 conseguir seu primeiro emprego de tempo integral'], correct:1, feedbackCorrect:'&#10003; Apps de pagamento s\u00e3o convenientes mas n\u00e3o substituem uma conta banc\u00e1ria real com prote\u00e7\u00e3o e sem taxas.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Apps de pagamento n\u00e3o substituem uma conta banc\u00e1ria real.'},
-        {question:'Onde voc\u00ea pode consultar seu relat\u00f3rio de cr\u00e9dito gratuitamente uma vez por ano (EUA)?', options:['Apenas em CreditKarma.com','No orientador da escola','AnnualCreditReport.com','Voc\u00ea precisa pagar para ver seu relat\u00f3rio de cr\u00e9dito'], correct:2, feedbackCorrect:'&#10003; AnnualCreditReport.com \u00e9 o site oficial autorizado pelo governo federal para acesso gratuito ao seu relat\u00f3rio de cr\u00e9dito anual.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 C. AnnualCreditReport.com \u00e9 o site oficial para seu relat\u00f3rio de cr\u00e9dito gratuito anual.'}
-      ]
-    },
-    {
-      id:4, title:'Comunica\u00e7\u00e3o no Trabalho', description:'Aprenda a se comunicar profissionalmente usando as ferramentas, o tom e as habilidades que os ambientes de trabalho modernos esperam.',
-      chunks:[
-        {title:'Slack, Teams e Mensagens de Trabalho', content:'A maioria dos ambientes de trabalho modernos usa ferramentas como <span class="kw">Slack</span> ou <span class="kw">Microsoft Teams</span>. Mantenha as mensagens claras e concisas. Use os canais para os t\u00f3picos certos, n\u00e3o envie perguntas urgentes \u00e0 meia-noite, e sempre leia o t\u00f3pico existente antes de intervir.'},
-        {title:'Tom Profissional na Escrita', content:'Tom na comunica\u00e7\u00e3o escrita \u00e9 f\u00e1cil de errar porque n\u00e3o h\u00e1 express\u00e3o facial ou voz para ajudar. Uma mensagem casual para voc\u00ea pode parecer grossa para um gerente. Releia antes de enviar. Substitua \u201cok\u201d informal por uma resposta mais cuidadosa, evite caps lock, e use \u201cpor favor\u201d e \u201cobrigado\u201d mais do que acha necess\u00e1rio.'},
-        {title:'Etiqueta em Reuni\u00f5es', content:'Seja presencial ou no Zoom, chegar preparado n\u00e3o \u00e9 opcional. Conhe\u00e7a a pauta antes da <span class="kw">reuni\u00e3o</span>. Mantenha a c\u00e2mera ligada em reuni\u00f5es virtuais. Se tiver uma d\u00favida, anote em vez de interromper. E sempre d\u00ea seguimento aos <span class="kw">itens de a\u00e7\u00e3o</span> que voc\u00ea foi atribu\u00eddo.'},
-        {title:'Dar e Receber Feedback', content:'<span class="kw">Feedback</span> no trabalho n\u00e3o \u00e9 pessoal \u2014 \u00e9 profissional. Ao receber <span class="kw">feedback</span>, escute completamente antes de responder e agradeça \u00e0 pessoa. Ao dar <span class="kw">feedback</span>, use o modelo \u201cObservei / Sinto / Sugiro\u201d para mant\u00ea-lo construtivo. O objetivo \u00e9 sempre a melhoria, n\u00e3o a culpa.'},
-        {title:'Lendo o Ambiente (Profissionalmente)', content:'Todo local de trabalho tem uma cultura n\u00e3o escrita. Passe suas primeiras semanas observando mais do que falando. Perceba como seu gerente se comunica e adapte esse estilo. N\u00e3o seja a pessoa mais barulhenta da sala at\u00e9 ter conquistado a confian\u00e7a para ser ouvido.'}
-      ],
-      quiz:[
-        {question:'Qual \u00e9 a melhor pr\u00e1tica ao entrar em um canal do Slack ou Teams?', options:['Enviar uma mensagem imediatamente para que as pessoas saibam que voc\u00ea est\u00e1 l\u00e1','Ler o t\u00f3pico existente primeiro para n\u00e3o perguntar algo j\u00e1 respondido','Enviar uma mensagem privada para todos individualmente','Postar uma sauda\u00e7\u00e3o em cada canal que voc\u00ea entra'], correct:1, feedbackCorrect:'&#10003; Ler o t\u00f3pico antes de postar mostra respeito pelo tempo dos outros e te ajuda a contribuir com algo \u00fatil.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Ler o t\u00f3pico antes de postar mostra respeito e te ajuda a contribuir com algo \u00fatil.'},
-        {question:'Por que o tom profissional \u00e9 importante em mensagens escritas no trabalho?', options:['Impressiona as pessoas com vocabul\u00e1rio sofisticado','Mensagens escritas n\u00e3o t\u00eam tom de voz nem express\u00f5es faciais, ent\u00e3o a escolha de palavras tem mais peso','Gerentes s\u00f3 leem e-mails formais','Voc\u00ea ser\u00e1 avaliado pela gram\u00e1tica'], correct:1, feedbackCorrect:'&#10003; Sem pistas vocais, palavras casuais podem parecer grosseiras ou pouco profissionais \u2014 a escolha intencional de palavras \u00e9 uma habilidade cr\u00edtica.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Sem pistas vocais, a escolha de palavras tem muito mais peso.'},
-        {question:'O que voc\u00ea deve fazer ao receber feedback de um gerente?', options:['Ficar na defensiva e explicar por que fez do seu jeito','Ignorar se n\u00e3o concordar','Escutar completamente, agradecer e fazer uma pergunta esclarecedora se necess\u00e1rio','Dar feedback de volta imediatamente'], correct:2, feedbackCorrect:'&#10003; Receber feedback com maturidade \u00e9 uma das habilidades profissionais mais valorizadas.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 C. Escute completamente, agradeça e fa\u00e7a perguntas esclarecedoras se necess\u00e1rio.'},
-        {question:'Qual destes \u00e9 um bom comportamento em uma videochamada?', options:['Desligar a c\u00e2mera e fazer v\u00e1rias coisas ao mesmo tempo','Chegar cinco minutos atrasado porque \u00e9 virtual','Manter a c\u00e2mera ligada e revisar a pauta antecipadamente','Enviar mensagem para um colega durante a apresenta\u00e7\u00e3o principal'], correct:2, feedbackCorrect:'&#10003; Participar com a c\u00e2mera ligada mostra engajamento, e chegar preparado demonstra respeito pelo tempo de todos.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 C. C\u00e2mera ligada + preparado = engajamento e respeito.'},
-        {question:'Qual \u00e9 a jogada mais inteligente nas suas primeiras semanas em um novo emprego?', options:['Fazer grandes mudan\u00e7as imediatamente para mostrar iniciativa','Falar o m\u00e1ximo poss\u00edvel para que as pessoas percebam voc\u00ea','Observar a cultura do local de trabalho antes de expressar opini\u00f5es fortes','Evitar toda comunica\u00e7\u00e3o em equipe at\u00e9 se sentir confiante'], correct:2, feedbackCorrect:'&#10003; Todo local de trabalho tem uma cultura n\u00e3o escrita. Ouvir e observar primeiro te ajuda a contribuir de forma eficaz.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 C. Ouvir e observar primeiro te ajuda a entender como contribuir efetivamente.'}
-      ]
-    },
-    {
-      id:5, title:'Portais de Faculdade e Carreira', description:'Navegue pelas ferramentas reais \u2014 FAFSA, candidaturas, prepara\u00e7\u00e3o para entrevistas e cartas de oferta \u2014 com confian\u00e7a.',
-      chunks:[
-        {title:'A FAFSA Explicada', content:'A <span class="kw">FAFSA</span> \u2014 <span class="kw">Free Application for Federal Student Aid</span> \u2014 \u00e9 o formul\u00e1rio para acessar aux\u00edlios federais, empr\u00e9stimos e programas de <span class="kw">trabalho-estudo</span> para a faculdade. Abre em 1\u00ba de outubro e voc\u00ea deve enviar o mais cedo poss\u00edvel. Mesmo que ache que n\u00e3o vai se qualificar, sempre inscreva-se.'},
-        {title:'Navegando Candidaturas de Emprego', content:'A maioria das candidaturas \u00e9 enviada por portais como <span class="kw">Indeed</span>, <span class="kw">LinkedIn</span> ou o site da empresa. Adapte seu curr\u00edculo e carta de apresenta\u00e7\u00e3o para cada vaga. Candidate-se mesmo que n\u00e3o atenda 100% dos requisitos. Fa\u00e7a acompanhamento com um e-mail breve e profissional 5-7 dias depois.'},
-        {title:'Prepara\u00e7\u00e3o para Entrevistas', content:'Pesquise a empresa antes da entrevista. Pratique respondendo perguntas comportamentais usando o <span class="kw">m\u00e9todo STAR</span>: Situa\u00e7\u00e3o, Tarefa, A\u00e7\u00e3o, Resultado. Prepare 2-3 perguntas para fazer ao entrevistador. Vista-se um n\u00edvel mais formal que o c\u00f3digo de vestimenta di\u00e1rio e planeje chegar 10 minutos antes.'},
-        {title:'Entendendo Cartas de Oferta', content:'Uma <span class="kw">carta de oferta</span> \u00e9 mais do que s\u00f3 um sal\u00e1rio. Leia com aten\u00e7\u00e3o: data de in\u00edcio, cargo, sal\u00e1rio, benef\u00edcios e pol\u00edtica de f\u00e9rias. Nunca se sinta pressionado a aceitar imediatamente \u2014 \u00e9 completamente profissional pedir 24-48 horas para revisar.'},
-        {title:'Comparando Ofertas de Aux\u00edlio Financeiro', content:'Se aceito em v\u00e1rias faculdades, cada uma enviar\u00e1 uma carta de aux\u00edlio financeiro. Elas misturam <span class="kw">bolsas</span> (dinheiro gratuito) com <span class="kw">empr\u00e9stimos</span> (dinheiro que voc\u00ea devolve). Sempre subtraia os <span class="kw">empr\u00e9stimos</span> para ver seu custo real. Use a <span class="kw">Calculadora de Pre\u00e7o L\u00edquido</span> de cada escola para comparar.'}
-      ],
-      quiz:[
-        {question:'O que \u00e9 a FAFSA e por que ela importa?', options:['Um exame de admiss\u00e3o que voc\u00ea faz no 11\u00ba ano','O formul\u00e1rio federal que determina sua elegibilidade para bolsas, empr\u00e9stimos e aux\u00edlio de trabalho-estudo','Uma candidatura de bolsa apenas para universidades privadas','Um formul\u00e1rio que voc\u00ea preenche ap\u00f3s se formar para pagar empr\u00e9stimos'], correct:1, feedbackCorrect:'&#10003; A FAFSA \u00e9 a porta de entrada para o aux\u00edlio financeiro federal \u2014 envie cedo e reenvie todo ano que estiver matriculado.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. A FAFSA \u00e9 a porta de entrada para o aux\u00edlio financeiro federal.'},
-        {question:'O que voc\u00ea deve fazer ao ler uma descri\u00e7\u00e3o de vaga antes de se candidatar?', options:['Verificar apenas o t\u00edtulo do cargo e o sal\u00e1rio','Adaptar a linguagem do seu curr\u00edculo e carta de apresenta\u00e7\u00e3o \u00e0s palavras espec\u00edficas da vaga','Enviar o mesmo curr\u00edculo para todas as vagas sem mudan\u00e7as','Esperar at\u00e9 atender 100% dos requisitos antes de se candidatar'], correct:1, feedbackCorrect:'&#10003; Adaptar sua candidatura \u00e0 linguagem da vaga mostra compatibilidade e ajuda a passar pelos sistemas de triagem autom\u00e1tica.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Adaptar sua candidatura \u00e0 linguagem da vaga te ajuda a se destacar.'},
-        {question:'Para que o m\u00e9todo STAR te ajuda em uma entrevista?', options:['Lembrar o nome do entrevistador','Estruturar suas respostas a perguntas comportamentais usando Situa\u00e7\u00e3o, Tarefa, A\u00e7\u00e3o, Resultado','Decidir o que vestir','Calcular seu sal\u00e1rio ideal'], correct:1, feedbackCorrect:'&#10003; O STAR d\u00e1 \u00e0s suas respostas de entrevista um in\u00edcio, meio e fim claros \u2014 fazendo voc\u00ea soar preparado e cred\u00edvel.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. O STAR estrutura suas respostas: Situa\u00e7\u00e3o, Tarefa, A\u00e7\u00e3o, Resultado.'},
-        {question:'O que \u00e9 mais importante verificar em uma carta de aux\u00edlio financeiro?', options:['O mascote e as cores da escola','A diferen\u00e7a entre bolsas (dinheiro gratuito) e empr\u00e9stimos (dinheiro que voc\u00ea devolve)','Se seu amigo recebeu a mesma oferta','O comprimento da carta'], correct:1, feedbackCorrect:'&#10003; Muitos estudantes aceitam empr\u00e9stimos achando que s\u00e3o bolsas. Sempre subtraia os empr\u00e9stimos para ver seu custo real.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Sempre identifique e subtraia os empr\u00e9stimos para entender o custo real da faculdade.'},
-        {question:'\u00c9 aceit\u00e1vel pedir tempo antes de aceitar uma oferta de emprego?', options:['N\u00e3o, voc\u00ea precisa decidir imediatamente ou retirar\u00e3o a oferta','Sim, pedir 24-48 horas para revisar \u00e9 completamente profissional e esperado','Apenas se tiver outra oferta em m\u00e3os','Apenas para est\u00e1gios, n\u00e3o para empregos de tempo integral'], correct:1, feedbackCorrect:'&#10003; Empregadores esperam que candidatos levem tempo para revisar uma oferta. Pedir 24-48 horas \u00e9 padr\u00e3o e profissional.', feedbackWrong:'N\u00e3o exatamente \u2014 a resposta \u00e9 B. Pedir 24-48 horas para revisar uma oferta \u00e9 completamente profissional e esperado.'}
       ]
     }
   ],
@@ -1979,7 +2021,7 @@ function renderUnitView(unit) {
 
       const optionsHtml = question.options.map((opt, i) => `
         <li class="quiz-option" data-idx="${i}" onclick="selectOption(${i})"
-            role="button" tabindex="0"
+            role="radio" aria-checked="false" tabindex="0"
             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectOption(${i})}">
           <span class="opt-letter" aria-hidden="true">${letters[i]}</span>
           <span>${opt}</span>
@@ -1996,14 +2038,14 @@ function renderUnitView(unit) {
           <div class="quiz-card" id="quiz-card">
             <div class="quiz-meta-row">
               <span class="quiz-q-label">${t('question')} ${q.currentQ + 1} ${t('of')} ${unit.quiz.length}</span>
-              <span class="quiz-score-label">${t('score')}: ${q.score}</span>
+              <span class="quiz-score-label" role="status" aria-live="polite">${t('score')}: ${q.score}</span>
             </div>
             <div class="quiz-mini-track" role="progressbar" aria-valuenow="${q.currentQ}" aria-valuemin="0" aria-valuemax="${unit.quiz.length}" aria-label="Quiz progress">
               <div class="quiz-mini-fill" style="width: ${progress}%;"></div>
             </div>
-            <div role="group" aria-label="${t('question')} ${q.currentQ + 1} ${t('of')} ${unit.quiz.length}">
+            <div role="radiogroup" aria-labelledby="quiz-question-text">
               <div class="quiz-question" id="quiz-question-text">${question.question}</div>
-              <ul class="quiz-options" id="quiz-options" aria-labelledby="quiz-question-text">${optionsHtml}</ul>
+              <ul class="quiz-options" id="quiz-options">${optionsHtml}</ul>
             </div>
             <div class="quiz-feedback" id="quiz-feedback" aria-live="polite" aria-atomic="true"></div>
             <button class="quiz-next-btn" id="quiz-next" onclick="nextQuestion()">
@@ -2034,7 +2076,7 @@ function refreshQuizCard() {
 
   const optionsHtml = question.options.map((opt, i) => `
     <li class="quiz-option" data-idx="${i}" onclick="selectOption(${i})"
-        role="button" tabindex="0"
+        role="radio" aria-checked="false" tabindex="0"
         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectOption(${i})}">
       <span class="opt-letter" aria-hidden="true">${letters[i]}</span>
       <span>${opt}</span>
@@ -2044,14 +2086,14 @@ function refreshQuizCard() {
   document.getElementById('quiz-card').innerHTML = `
     <div class="quiz-meta-row">
       <span class="quiz-q-label">${t('question')} ${q.currentQ + 1} ${t('of')} ${unit.quiz.length}</span>
-      <span class="quiz-score-label">${t('score')}: ${q.score}</span>
+      <span class="quiz-score-label" role="status" aria-live="polite">${t('score')}: ${q.score}</span>
     </div>
     <div class="quiz-mini-track" role="progressbar" aria-valuenow="${q.currentQ}" aria-valuemin="0" aria-valuemax="${unit.quiz.length}" aria-label="Quiz progress">
       <div class="quiz-mini-fill" style="width: ${progress}%;"></div>
     </div>
-    <div role="group" aria-label="${t('question')} ${q.currentQ + 1} ${t('of')} ${unit.quiz.length}">
+    <div role="radiogroup" aria-labelledby="quiz-question-text">
       <div class="quiz-question" id="quiz-question-text">${question.question}</div>
-      <ul class="quiz-options" id="quiz-options" aria-labelledby="quiz-question-text">${optionsHtml}</ul>
+      <ul class="quiz-options" id="quiz-options">${optionsHtml}</ul>
     </div>
     <div class="quiz-feedback" id="quiz-feedback" aria-live="polite" aria-atomic="true"></div>
     <button class="quiz-next-btn" id="quiz-next" onclick="nextQuestion()">
@@ -2101,9 +2143,12 @@ function selectOption(index) {
 
   if (isCorrect) state.quiz.score++;
 
-  // Lock all options and mark correct/wrong
-  document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.add('locked'));
+  // Lock all options, update aria-checked, mark correct/wrong
   const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach((opt, i) => {
+    opt.classList.add('locked');
+    opt.setAttribute('aria-checked', i === index ? 'true' : 'false');
+  });
   opts[index].classList.add(isCorrect ? 'correct' : 'wrong');
   if (!isCorrect) opts[question.correct].classList.add('correct');
 

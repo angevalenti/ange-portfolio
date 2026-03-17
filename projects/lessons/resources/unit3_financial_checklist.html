@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Readiness Checklist — Unit 3: Money & Digital Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design System Tokens ── */
+    :root {
+      --color-bg-light:       #F6F7F8;
+      --color-bg-white:       #FFFFFF;
+      --color-text-primary:   #1A1A2E;
+      --color-text-secondary: #4A4A6A;
+      --color-text-muted:     #8888A0;
+      --color-border-light:   #E5E7EB;
+      --color-coral:          #FF5C3A;
+      --color-coral-light:    #FFF0ED;
+      --color-coral-dark:     #E04020;
+      --shadow-card:    0 2px 20px rgba(0,0,0,0.07);
+      --shadow-card-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+      --space-12: 48px; --space-16: 64px;
+      --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
+      --radius-xl: 16px; --radius-pill: 9999px;
+      --font-display: 'Manrope', system-ui, sans-serif;
+      --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+      /* Unit 3 accent */
+      --unit-accent:     #FB7185;
+      --unit-accent-rgb: 251, 113, 133;
+      --unit-accent-light: rgba(251, 113, 133, 0.10);
+      --unit-accent-mid:   rgba(251, 113, 133, 0.20);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-light);
+      color: var(--color-text-primary);
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    .course-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-6);
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-border-light);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .nav-brand-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+    .nav-brand-unit {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--unit-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .back-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      transition: background 150ms ease, color 150ms ease;
+    }
+    .back-link:hover {
+      background: var(--color-bg-light);
+      color: var(--color-text-primary);
+    }
+
+    .btn-ghost {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      background: none;
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+    }
+    .btn-ghost:hover {
+      background: var(--unit-accent-light);
+      color: var(--unit-accent);
+      border-color: rgba(var(--unit-accent-rgb), 0.3);
+    }
+
+    /* ── Page Layout ── */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 88px var(--space-6) var(--space-16);
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      background: var(--color-bg-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10) var(--space-10);
+      margin-bottom: var(--space-8);
+      border-left: 5px solid var(--unit-accent);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .doc-header::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--unit-accent-light);
+      pointer-events: none;
+    }
+
+    .doc-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--unit-accent);
+      margin-bottom: var(--space-4);
+    }
+    .eyebrow-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-bg-white);
+      background: var(--unit-accent);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--color-text-primary);
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-4);
+    }
+
+    .doc-subtitle {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    /* ── Section Band ── */
+    .section-band {
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-6);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      background: linear-gradient(135deg, rgba(var(--unit-accent-rgb), 0.18) 0%, rgba(var(--unit-accent-rgb), 0.06) 100%);
+      border: 1px solid rgba(var(--unit-accent-rgb), 0.20);
+    }
+    .section-band-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .section-band h2 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+    }
+    .section-band p {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ── Progress Bar ── */
+    .progress-bar-wrap {
+      background: var(--color-bg-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+      margin-bottom: var(--space-6);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--color-border-light);
+    }
+    .progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+    .progress-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .progress-count {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--unit-accent);
+    }
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: var(--color-border-light);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--unit-accent) 0%, rgba(var(--unit-accent-rgb), 0.7) 100%);
+      border-radius: var(--radius-pill);
+      transition: width 400ms ease;
+    }
+
+    /* ── Checklist ── */
+    .checklist-container {
+      background: var(--color-bg-white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      margin-bottom: var(--space-8);
+      border: 1px solid var(--color-border-light);
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-5);
+      padding: var(--space-6);
+      border-bottom: 1px solid var(--color-border-light);
+      cursor: pointer;
+      transition: background 200ms ease;
+      position: relative;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .checklist-item:hover { background: rgba(var(--unit-accent-rgb), 0.03); }
+    .checklist-item:focus-visible {
+      outline: 2px solid var(--unit-accent);
+      outline-offset: -2px;
+    }
+    .checklist-item.checked {
+      background: rgba(var(--unit-accent-rgb), 0.04);
+    }
+
+    .check-box {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--color-border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: background 200ms ease, border-color 200ms ease;
+    }
+    .checklist-item.checked .check-box {
+      background: var(--unit-accent);
+      border-color: var(--unit-accent);
+    }
+    .check-icon {
+      display: none;
+      color: #fff;
+      font-size: 0.85rem;
+      line-height: 1;
+    }
+    .checklist-item.checked .check-icon { display: block; }
+
+    .item-number {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--unit-accent-light);
+      color: var(--unit-accent);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      transition: background 200ms ease, color 200ms ease;
+    }
+    .checklist-item.checked .item-number {
+      background: rgba(var(--unit-accent-rgb), 0.15);
+    }
+
+    .item-content { flex: 1; min-width: 0; }
+    .item-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+      transition: color 200ms ease;
+    }
+    .checklist-item.checked .item-title {
+      color: var(--unit-accent);
+    }
+    .item-desc {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .item-tag {
+      flex-shrink: 0;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      background: var(--color-bg-light);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    /* ── Bottom Cards ── */
+    .bottom-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+      margin-bottom: var(--space-10);
+    }
+
+    .card-pro-tip {
+      background: #FFF3E0;
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+    }
+    .card-pro-tip .card-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #D97706;
+      margin-bottom: var(--space-3);
+    }
+    .card-pro-tip p {
+      font-size: 0.9rem;
+      color: #7C4B00;
+      line-height: 1.6;
+    }
+
+    .card-next-milestone {
+      background: #FFF1F2;
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      border: 1px solid rgba(var(--unit-accent-rgb), 0.20);
+      border-left: 4px solid var(--unit-accent);
+    }
+    .card-next-milestone .card-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--unit-accent);
+      margin-bottom: var(--space-3);
+    }
+    .card-next-milestone .milestone-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .card-next-milestone p {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+    }
+    .card-next-milestone .unlock-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+      background: var(--unit-accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* ── Footer ── */
+    .doc-footer {
+      border-top: 1px solid var(--color-border-light);
+      padding-top: var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .footer-brand {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+    .footer-accent-bar {
+      height: 4px;
+      width: 120px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(90deg, var(--unit-accent) 0%, rgba(var(--unit-accent-rgb), 0.3) 100%);
+    }
+
+    /* ── Completed state ── */
+    .completion-banner {
+      display: none;
+      background: linear-gradient(135deg, rgba(var(--unit-accent-rgb), 0.12) 0%, rgba(var(--unit-accent-rgb), 0.05) 100%);
+      border: 1px solid rgba(var(--unit-accent-rgb), 0.25);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6) var(--space-8);
+      margin-bottom: var(--space-8);
+      text-align: center;
+    }
+    .completion-banner.visible { display: block; }
+    .completion-banner .banner-emoji { font-size: 2.5rem; margin-bottom: var(--space-3); }
+    .completion-banner h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--unit-accent);
+      margin-bottom: var(--space-2);
+    }
+    .completion-banner p {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .page-wrap { padding: 80px var(--space-4) var(--space-12); }
+      .doc-header { padding: var(--space-8) var(--space-5); }
+      .bottom-cards { grid-template-columns: 1fr; }
+      .course-nav { padding: 0 var(--space-4); }
+      .nav-actions .back-link { display: none; }
+      .checklist-item { gap: var(--space-3); padding: var(--space-5); }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .course-nav { display: none !important; }
+      .btn-ghost, .back-link { display: none !important; }
+      .progress-bar-wrap { display: none !important; }
+      .completion-banner { display: none !important; }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 11pt;
+      }
+
+      .page-wrap { padding: 0; max-width: 100%; }
+
+      .doc-header {
+        box-shadow: none;
+        border: none;
+        border-left: 4pt solid var(--unit-accent);
+        background: #fff !important;
+        padding: 16pt 16pt;
+        margin-bottom: 16pt;
+        page-break-inside: avoid;
+      }
+      .doc-header::after { display: none; }
+
+      .section-band {
+        background: #f5f5f5 !important;
+        border: 1pt solid #ddd;
+        page-break-after: avoid;
+      }
+
+      .checklist-container {
+        box-shadow: none;
+        border: 1pt solid #ddd;
+      }
+
+      .checklist-item {
+        page-break-inside: avoid;
+        border-bottom: 1pt solid #e5e5e5;
+      }
+
+      .check-box {
+        border: 2pt solid #888;
+        print-color-adjust: exact;
+      }
+      .checklist-item.checked .check-box {
+        background: var(--unit-accent) !important;
+        print-color-adjust: exact;
+      }
+
+      .bottom-cards {
+        page-break-inside: avoid;
+      }
+      .card-pro-tip, .card-next-milestone {
+        background: #f9f9f9 !important;
+        box-shadow: none;
+        border: 1pt solid #ddd;
+      }
+      .card-next-milestone { border-left: 3pt solid var(--unit-accent) !important; }
+      .unlock-pill { display: none !important; }
+
+      .doc-footer {
+        margin-top: 16pt;
+        border-top: 1pt solid #ddd;
+      }
+
+      @page {
+        margin: 1.5cm 2cm;
+        size: letter portrait;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header role="banner">
+  <nav class="course-nav" aria-label="Course navigation">
+    <div class="nav-brand">
+      <span class="nav-brand-title">Ready for What's Next</span>
+      <span class="nav-brand-unit">Unit 3: Money &amp; Digital Life</span>
+    </div>
+    <div class="nav-actions">
+      <a class="back-link" href="../ready_for_whats_next.html">← Back to Course</a>
+      <button class="btn-ghost" onclick="window.print()" aria-label="Print checklist">🖨 Print</button>
+      <button class="btn-ghost" onclick="window.print()" aria-label="Save as PDF">⬇ PDF</button>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content" role="main">
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="doc-header">
+      <div class="doc-eyebrow">
+        <span class="eyebrow-badge">Interactive Resource</span>
+        Unit 3: Money &amp; Digital Life
+      </div>
+      <h1 class="doc-title">Financial Readiness Checklist</h1>
+      <p class="doc-subtitle">Unit 3: Money &amp; Digital Life — Your pre-launch checklist for financial independence.</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-wrap" aria-live="polite" aria-atomic="true">
+      <div class="progress-label-row">
+        <span class="progress-label">Your Progress</span>
+        <span class="progress-count" id="progress-count">0 / 8 complete</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="8" aria-label="Checklist progress">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Completion Banner -->
+    <div class="completion-banner" id="completion-banner" role="status" aria-live="polite">
+      <div class="banner-emoji">🎉</div>
+      <h3>Checklist Complete!</h3>
+      <p>You've reviewed all 8 essential financial skills. You're building real readiness.</p>
+    </div>
+
+    <!-- Section Band -->
+    <div class="section-band">
+      <span class="section-band-icon">💰</span>
+      <div>
+        <h2>Essential Financial Skills</h2>
+        <p>Click each item to mark it complete. Use this as a self-assessment and study guide.</p>
+      </div>
+    </div>
+
+    <!-- Checklist -->
+    <div class="checklist-container" role="list" aria-label="Financial readiness checklist">
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="0">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">1</div>
+        <div class="item-content">
+          <div class="item-title">Open a checking account</div>
+          <p class="item-desc">Research student accounts with no monthly fees. Compare at least 2 banks or credit unions before choosing.</p>
+        </div>
+        <span class="item-tag">Banking</span>
+      </div>
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="1">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">2</div>
+        <div class="item-content">
+          <div class="item-title">Set up a simple budget</div>
+          <p class="item-desc">Track your income vs. expenses for one month. Use the 50/30/20 rule: 50% needs, 30% wants, 20% savings.</p>
+        </div>
+        <span class="item-tag">Budgeting</span>
+      </div>
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="2">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">3</div>
+        <div class="item-content">
+          <div class="item-title">Understand your credit score</div>
+          <p class="item-desc">Learn what builds credit (on-time payments, low utilization) and what hurts it (missed payments, maxing out cards).</p>
+        </div>
+        <span class="item-tag">Credit</span>
+      </div>
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="3">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">4</div>
+        <div class="item-content">
+          <div class="item-title">Spot common scams</div>
+          <p class="item-desc">If it sounds too good to be true, it is. Never share your SSN, bank login, or verification codes with anyone who contacts you first.</p>
+        </div>
+        <span class="item-tag">Safety</span>
+      </div>
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="4">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">5</div>
+        <div class="item-content">
+          <div class="item-title">Read before you sign</div>
+          <p class="item-desc">Whether it's a lease, loan, or subscription — read the fine print. Know the cancellation policy and total cost.</p>
+        </div>
+        <span class="item-tag">Contracts</span>
+      </div>
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="5">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">6</div>
+        <div class="item-content">
+          <div class="item-title">Build an emergency fund</div>
+          <p class="item-desc">Start small: $500 covers most unexpected expenses. Automate a weekly transfer, even if it's just $10.</p>
+        </div>
+        <span class="item-tag">Savings</span>
+      </div>
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="6">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">7</div>
+        <div class="item-content">
+          <div class="item-title">Know your paycheck</div>
+          <p class="item-desc">Understand gross vs. net pay, tax withholdings, and how to read a pay stub. Your first paycheck will be smaller than you expect.</p>
+        </div>
+        <span class="item-tag">Income</span>
+      </div>
+
+      <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleItem(this)" onkeydown="handleKey(event, this)" data-index="7">
+        <div class="check-box" aria-hidden="true"><span class="check-icon">✓</span></div>
+        <div class="item-number" aria-hidden="true">8</div>
+        <div class="item-content">
+          <div class="item-title">Protect your financial identity</div>
+          <p class="item-desc">Use unique passwords for banking. Enable two-factor authentication. Check your accounts weekly for unauthorized charges.</p>
+        </div>
+        <span class="item-tag">Security</span>
+      </div>
+
+    </div><!-- /checklist-container -->
+
+    <!-- Bottom Cards -->
+    <div class="bottom-cards">
+      <div class="card-pro-tip">
+        <div class="card-eyebrow">💡 Pro Tip</div>
+        <p>You don't need to be perfect with money right away. The goal isn't to never make mistakes — it's to catch them early and learn fast.</p>
+      </div>
+
+      <div class="card-next-milestone">
+        <div class="card-eyebrow">Next Up</div>
+        <div class="milestone-title">Unit 4: Workplace Communication</div>
+        <p>Learn how to write professional emails, navigate workplace dynamics, and communicate with confidence.</p>
+        <div class="unlock-pill">Unlock Next →</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="doc-footer" role="contentinfo">
+      <span class="footer-brand">Ready for What's Next © 2026 — Money &amp; Digital Life</span>
+      <div class="footer-accent-bar" aria-hidden="true"></div>
+    </footer>
+
+  </div><!-- /page-wrap -->
+</main>
+
+<script>
+  const TOTAL = 8;
+
+  function toggleItem(el) {
+    const isChecked = el.classList.toggle('checked');
+    el.setAttribute('aria-checked', String(isChecked));
+    updateProgress();
+  }
+
+  function handleKey(e, el) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleItem(el);
+    }
+  }
+
+  function updateProgress() {
+    const checked = document.querySelectorAll('.checklist-item.checked').length;
+    const fill = document.getElementById('progress-fill');
+    const count = document.getElementById('progress-count');
+    const track = fill.closest('[role="progressbar"]');
+    const banner = document.getElementById('completion-banner');
+
+    const pct = Math.round((checked / TOTAL) * 100);
+    fill.style.width = pct + '%';
+    count.textContent = checked + ' / ' + TOTAL + ' complete';
+    track.setAttribute('aria-valuenow', String(checked));
+
+    if (checked === TOTAL) {
+      banner.classList.add('visible');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      banner.classList.remove('visible');
+    }
+  }
+</script>
+</body>
+</html>
