@@ -3,188 +3,400 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Pursuit of Happyness — Angela Valenti</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Project Title — Angela Valenti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css">
   <style>
 
-    /* ── NAV BACK ── */
-    .nav-back {
-      font-size: 0.72rem; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--mid); transition: color 0.2s;
-      display: flex; align-items: center; gap: 0.5rem;
+    /* ─── ACCENT TOKEN — swap this one variable per project ─── */
+    :root {
+      --accent: #004643;
+      --accent-dark: #003533;
+      --accent-secondary: #d1ac00;
+      --peach: #f6be9a;
+      --cream: #faf4d3;
+      --dark: #0c1618;
     }
-    .nav-back:hover { color: var(--black); }
-    .nav-back::before {
-      content: '←'; font-size: 0.9rem;
-      transition: transform 0.2s;
-    }
-    .nav-back:hover::before { transform: translateX(-3px); }
 
-    /* ── HERO ── */
-    .project-hero {
-      background: #0e0e0e;
-      padding: 7rem 3rem 5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      text-align: center;
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FFFFFF;
+      color: #0c1618;
+      margin: 0;
     }
-    .project-hero-inner { max-width: 900px; margin: 0 auto; }
-    .project-hero-tag {
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    .cs-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .cs-nav.scrolled { border-color: #E0E0E0; }
+
+    .cs-nav-back {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #333333;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.3s ease;
+    }
+    .cs-nav-back:hover { color: #004643; }
+    .cs-nav-back-arrow {
       display: inline-block;
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); font-weight: 500;
-      border: 1px solid rgba(200,240,0,0.25);
-      padding: 0.25rem 0.7rem;
-      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
     }
-    /* project name demoted to small muted eyebrow */
-    .project-hero-title {
-      font-family: var(--font-body);
-      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 500;
-      color: rgba(255,255,255,0.3);
-      margin-bottom: 1.75rem;
-    }
-    .project-hero-title em { font-style: normal; }
-    /* description promoted to the hero statement */
-    .project-hero-desc {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4.5vw, 3rem);
-      font-weight: 300; line-height: 1.15;
-      letter-spacing: -0.01em;
-      color: #f8f8f4;
-      max-width: 700px; margin: 0 auto 2.5rem;
+    .cs-nav-back:hover .cs-nav-back-arrow { transform: translateX(-3px); }
+
+    .cs-nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 300; font-style: italic;
+      font-size: 1rem; color: #0c1618;
     }
 
-    /* ── LAUNCH BUTTON ── */
-    .project-launch-btn {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      padding: 1.1rem 3rem;
-      background: #FF6B81; color: #fff;
-      font-family: var(--font-body);
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-      transition: background 0.2s, transform 0.2s;
+    /* ─── HERO ─── */
+    .cs-hero {
+      min-height: 85vh;
+      padding: 60px 3rem;
+      display: flex; align-items: center;
+      background: #FFFFFF;
     }
-    .project-launch-btn:hover {
-      background: #c91f50;
+    .cs-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    /* Left column */
+    .cs-hero-left { display: flex; flex-direction: column; gap: 0; }
+
+    .cs-hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .cs-hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .cs-hero-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: #0c1618;
+      margin: 0 0 1.5rem;
+    }
+    .cs-hero-heading em { font-style: italic; }
+
+    .cs-hero-sub {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #333333;
+      margin: 0 0 2.5rem;
+      max-width: 480px;
+    }
+
+    .cs-launch-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 16px 40px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em;
+      border-radius: 8px;
+      border: none; cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .cs-launch-btn:hover {
+      background: var(--accent-dark);
       transform: translateY(-2px);
     }
 
-    /* ── STAT BAR ── */
-    .project-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-bottom: 1px solid var(--rule);
-    }
-    .project-stat {
-      padding: 2rem 2.5rem;
-      border-right: 1px solid var(--rule);
-      background: var(--white);
-    }
-    .project-stat:last-child { border-right: none; background: var(--accent); }
-    .project-stat-val {
-      font-family: var(--font-display);
-      font-size: 1.5rem; font-weight: 300;
-      color: var(--black); line-height: 1.1; margin-bottom: 0.4rem;
-    }
-    .project-stat-label {
-      font-size: 0.6rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--mid);
-    }
-    .project-stat:last-child .project-stat-label { color: rgba(0,0,0,0.5); }
+    /* Right column */
+    .cs-hero-right { display: flex; align-items: center; justify-content: center; }
 
-    /* ── CONTENT SECTIONS ── */
-    .ps-section {
-      padding: 6rem 3rem;
+    .cs-hero-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: rgba(246, 190, 154, 0.3);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
     }
-    .ps-section--light { background: #F8F4F4; }
-    .ps-section--dark  { background: #1a1a1a; }
-    .ps-section-inner  { max-width: 820px; margin: 0 auto; }
+    .cs-hero-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 12px;
+    }
+    .cs-hero-img-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      color: #888888;
+    }
+    .cs-hero-img-placeholder svg { opacity: 0.5; }
+    .cs-hero-img-placeholder span {
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    }
 
-    .ps-eyebrow {
+    /* ─── AT A GLANCE ─── */
+    .cs-glance {
+      background: #d1ac00;
+      border-top: none;
+      border-bottom: none;
+      padding: 28px 3rem;
+      overflow: visible;
+    }
+    .cs-glance-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-glance-item {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    .cs-glance-item + .cs-glance-item {
+      border-left: 1px solid rgba(255,255,255,0.3);
+    }
+    .cs-glance-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #faf4d3;
+      margin-bottom: 0.35rem;
+    }
+    .cs-glance-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+
+    /* ─── STORY SECTIONS ─── */
+    .cs-story {
+      background: #FFFFFF;
+      padding: 0 3rem;
+    }
+
+    .cs-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
+      border-bottom: 1px solid #E0E0E0;
+    }
+    /* Remove borders that would frame The Challenge as a card */
+    .cs-section:nth-child(1) { border-bottom: none; }
+    .cs-section:nth-child(2) { border-bottom: none; }
+    .cs-section:last-child   { border-bottom: none; }
+
+    /* The Challenge (2nd): full-bleed mustard gold tint */
+    .cs-section:nth-child(2) {
+      position: relative;
+    }
+    .cs-section:nth-child(2)::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      background: rgba(209, 172, 0, 0.08);
+      z-index: 0;
+    }
+    .cs-section:nth-child(2) > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cs-section-rule {
+      width: 40px; height: 3px;
+      background: #d1ac00;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .cs-section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888888;
+      margin-bottom: 0.85rem;
       display: block;
-      font-family: var(--font-body);
-      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 600; margin-bottom: 1rem;
-    }
-    .ps-section--light .ps-eyebrow { color: var(--accent-dark); }
-    .ps-section--dark  .ps-eyebrow { color: #FF6B81; }
-
-    .ps-heading {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-      font-weight: 300; line-height: 1.02;
-      letter-spacing: -0.015em;
-      margin-bottom: 1.75rem;
-    }
-    .ps-section--light .ps-heading { color: #0e0e0e; }
-    .ps-section--dark  .ps-heading { color: #f8f8f4; }
-    .ps-heading em { font-style: italic; }
-
-    .ps-body {
-      font-family: var(--font-body);
-      font-size: 0.95rem; line-height: 1.85;
-      max-width: 580px;
-    }
-    .ps-section--light .ps-body { color: var(--mid); }
-    .ps-section--dark  .ps-body { color: rgba(248,248,244,0.5); }
-
-    /* ── TECH GRID ── */
-    .ps-tech-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0; border: 1px solid var(--rule);
-      margin-top: 1rem;
-    }
-    .ps-tech-item {
-      padding: 1.75rem 2rem;
-      border-right: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-    }
-    .ps-tech-item:nth-child(3n) { border-right: none; }
-    .ps-tech-item:nth-last-child(-n+3) { border-bottom: none; }
-    .ps-tech-val {
-      font-family: var(--font-display);
-      font-size: 1.1rem; font-weight: 400;
-      color: var(--black); margin-bottom: 0.3rem;
-    }
-    .ps-tech-label {
-      font-size: 0.58rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--mid);
     }
 
-    /* ── BOTTOM LAUNCH CTA ── */
-    .ps-cta {
-      padding: 7rem 3rem;
-      background: #0e0e0e;
+    .cs-section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.2;
+      color: #0c1618;
+      margin: 0 0 1.25rem;
+    }
+
+    .cs-section-body {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: #333333;
+      max-width: 680px;
+    }
+
+    .cs-process-img {
+      margin-top: 3rem;
+      width: 100%;
+      height: 300px;
+      background: rgba(246, 190, 154, 0.3);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: #888888;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── OUTCOME (dark close) ─── */
+    .cs-outcome {
+      background: #0c1618;
+      padding: 80px 3rem;
       text-align: center;
     }
-    .ps-cta-note {
-      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-bottom: 2rem; display: block;
+    .cs-outcome-inner {
+      max-width: 800px; margin: 0 auto;
     }
-    .ps-cta .project-launch-btn {
-      padding: 1.4rem 4.5rem;
-      font-size: 0.75rem;
+    .cs-outcome-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #d1ac00;
+      margin: 0 auto 2.5rem;
+    }
+    .cs-outcome-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 3.5vw, 2.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.25;
+      color: #FFFFFF;
+      margin: 0 0 1.25rem;
+    }
+    .cs-outcome-body {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+    }
+    .cs-outcome-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 16px 40px;
+      background: transparent;
+      color: #d1ac00;
+      border: 2px solid #d1ac00;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em;
+      border-radius: 8px;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    .cs-outcome-btn:hover {
+      background: #d1ac00;
+      color: #0c1618;
+      transform: translateY(-2px);
+    }
+    .cs-outcome-back {
+      display: block;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+    .cs-outcome-back:hover { color: rgba(255,255,255,0.7); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0c1618;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2.5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-weight: 300;
+      font-size: 1rem; color: #FFFFFF;
+    }
+    .footer-links {
+      display: flex; gap: 2rem;
+    }
+    .footer-links a {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35);
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy {
+      font-size: 0.7rem; color: rgba(255,255,255,0.2);
+      margin: 0;
     }
 
-    /* ── RESPONSIVE ── */
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      .project-hero { padding: 5rem 1.5rem 3.5rem; }
-      .project-stats { grid-template-columns: repeat(2, 1fr); }
-      .project-stat { border-bottom: 1px solid var(--rule); }
-      .project-stat:nth-child(2) { border-right: none; }
-      .project-stat:nth-child(4) { border-right: none; }
-      .project-stat:nth-child(3),
-      .project-stat:nth-child(4) { border-bottom: none; }
-      .ps-section { padding: 4rem 1.5rem; }
-      .ps-tech-grid { grid-template-columns: repeat(2, 1fr); }
-      .ps-cta { padding: 5rem 1.5rem; }
-      .ps-cta .project-launch-btn { width: 100%; justify-content: center; }
+      .cs-nav { padding: 0 1.5rem; }
+      .cs-hero { padding: 60px 1.5rem; min-height: auto; }
+      .cs-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .cs-hero-right { order: -1; }
+      .cs-hero-img-wrap { max-height: 260px; }
+      .cs-glance { padding: 20px 1.5rem; }
+      .cs-glance-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+      .cs-glance-item {
+        padding: 1rem;
+        border-left: none !important;
+      }
+      .cs-glance-item:nth-child(2n) { border-left: 1px solid rgba(255,255,255,0.3) !important; }
+      .cs-glance-item:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.3); }
+      .cs-story { padding: 0 1.5rem; }
+      .cs-section { padding: 50px 0; }
+      .cs-outcome { padding: 60px 1.5rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
+
     @media (max-width: 600px) {
-      .ps-tech-grid { grid-template-columns: 1fr; }
-      .ps-tech-item { border-right: none; border-bottom: 1px solid var(--rule); }
-      .ps-tech-item:last-child { border-bottom: none; }
+      .cs-hero-heading { font-size: 2rem; }
+      .cs-section-heading { font-size: 1.75rem; }
+      .cs-launch-btn { width: 100%; justify-content: center; }
     }
 
   </style>
@@ -192,107 +404,117 @@
 <body>
 
   <!-- NAV -->
-  <nav id="nav">
-    <a class="nav-back" href="../index.html#portfolio">Back to Portfolio</a>
-    <a class="nav-logo" href="../index.html">Angela <em>Valenti</em></a>
+  <nav class="cs-nav" id="cs-nav">
+    <a class="cs-nav-back" href="../index.html#portfolio">
+      <span class="cs-nav-back-arrow">←</span> Portfolio
+    </a>
+    <a class="cs-nav-logo" href="../index.html">Angela <em>Valenti</em></a>
   </nav>
-
   <main>
 
     <!-- HERO -->
-    <section class="project-hero">
-      <div class="project-hero-inner">
-        <span class="project-hero-tag">E-Learning · ESL</span>
-        <h1 class="project-hero-title">The Pursuit of Happyness</h1>
-        <p class="project-hero-desc">A differentiated interactive lesson for secondary ELLs, built across three WIDA-aligned proficiency tiers.</p>
-        <a class="project-launch-btn" href="lessons/pursuit_of_happyness_interactive_lesson.html" target="_blank" rel="noopener noreferrer">Launch Course →</a>
-      </div>
-    </section>
+    <section class="cs-hero">
+      <div class="cs-hero-inner">
 
-    <!-- STAT BAR -->
-    <div class="project-stats">
-      <div class="project-stat">
-        <div class="project-stat-val">HTML/CSS/JS</div>
-        <div class="project-stat-label">Format</div>
-      </div>
-      <div class="project-stat">
-        <div class="project-stat-val">Browser-based</div>
-        <div class="project-stat-label">Delivery</div>
-      </div>
-      <div class="project-stat">
-        <div class="project-stat-val">3 WIDA Tiers</div>
-        <div class="project-stat-label">Levels</div>
-      </div>
-      <div class="project-stat">
-        <div class="project-stat-val">45–60 min</div>
-        <div class="project-stat-label">Duration</div>
-      </div>
-    </div>
+        <!-- Left -->
+        <div class="cs-hero-left">
+          <div class="cs-hero-eyebrow">E-Learning · Curriculum Design</div>
+          <h1 class="cs-hero-heading">A short, compelling description<br>of what this project is<br><em>and why it matters.</em></h1>
+          <p class="cs-hero-sub">Two sentences of supporting context. Who it's for, what makes it distinctive, what problem it solves.</p>
+          <a class="cs-launch-btn" href="#" target="_blank" rel="noopener noreferrer">Launch Course →</a>
+        </div>
 
-    <!-- OVERVIEW -->
-    <section class="ps-section ps-section--light">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">Overview</span>
-        <h2 class="ps-heading">One lesson.<br><em>Every learner.</em></h2>
-        <p class="ps-body">An interactive ESL lesson for secondary ELLs — scaffolded across three WIDA proficiency tiers so every student engages with the same rigorous content at their level. No LMS, no login. Runs entirely in the browser.</p>
-      </div>
-    </section>
-
-    <!-- THE CHALLENGE -->
-    <section class="ps-section ps-section--dark">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">The Challenge</span>
-        <h2 class="ps-heading">One room.<br><em>Five reading levels.</em></h2>
-        <p class="ps-body">In a typical ESL class, students span four or five WIDA levels simultaneously. Traditional differentiation — separate worksheets, separate pacing — signals to lower-level students that they're getting less. The goal was one experience that felt designed for everyone.</p>
-      </div>
-    </section>
-
-    <!-- APPROACH -->
-    <section class="ps-section ps-section--light">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">Approach</span>
-        <h2 class="ps-heading">Design first.<br><em>Code second.</em></h2>
-        <p class="ps-body">Each tier was mapped to WIDA Can-Do Descriptors before a line of HTML was written. Scaffolds — vocabulary banks, sentence frames, visual anchors — appear where the task demands them and taper off as proficiency rises. Same visual language across all tiers; different entry points, same content dignity.</p>
-      </div>
-    </section>
-
-    <!-- TECHNICAL DETAILS -->
-    <section class="ps-section ps-section--light" style="padding-top: 0;">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">Technical Details</span>
-        <div class="ps-tech-grid">
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">HTML / CSS / JS</div>
-            <div class="ps-tech-label">Languages</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">Browser-based</div>
-            <div class="ps-tech-label">Delivery</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">No LMS Required</div>
-            <div class="ps-tech-label">Dependencies</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">WIDA 1–2, 3, 4–5</div>
-            <div class="ps-tech-label">Proficiency Levels</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">VS Code · GitHub Pages</div>
-            <div class="ps-tech-label">Tools &amp; Hosting</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">Secondary ELLs</div>
-            <div class="ps-tech-label">Audience</div>
+        <!-- Right -->
+        <div class="cs-hero-right">
+          <div class="cs-hero-img-wrap">
+            <!-- Replace div below with <img src="..." alt="..."> when screenshot is ready -->
+            <div class="cs-hero-img-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+              <span>Project Screenshot</span>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- LAUNCH CTA -->
-    <section class="ps-cta">
-      <span class="ps-cta-note">Interactive Lesson</span>
-      <a class="project-launch-btn" href="lessons/pursuit_of_happyness_interactive_lesson.html" target="_blank" rel="noopener noreferrer">Launch Course →</a>
+    <!-- AT A GLANCE -->
+    <div class="cs-glance">
+      <div class="cs-glance-inner">
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Role</div>
+          <div class="cs-glance-value">Instructional Designer</div>
+        </div>
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Timeline</div>
+          <div class="cs-glance-value">4 Weeks</div>
+        </div>
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Tools</div>
+          <div class="cs-glance-value">HTML · CSS · JS</div>
+        </div>
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Audience</div>
+          <div class="cs-glance-value">Secondary ELLs</div>
+        </div>
+      </div>
+    </div>
+  <!-- SCALLOP: stats bar bottom edge — gold into white story section -->
+  <svg style="display:block;width:100%;margin:0;padding:0;overflow:visible;" viewBox="0 0 1200 30" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <pattern id="scallop-stats" x="0" y="0" width="40" height="30" patternUnits="userSpaceOnUse">
+        <rect width="40" height="10" fill="#d1ac00"/>
+        <circle cx="20" cy="10" r="20" fill="#d1ac00"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="30" fill="#FFFFFF"/>
+    <rect width="1200" height="30" fill="url(#scallop-stats)"/>
+  </svg>
+
+    <!-- STORY SECTIONS -->
+    <div class="cs-story">
+
+      <!-- OVERVIEW -->
+      <div class="cs-section">
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">Overview</span>
+        <h2 class="cs-section-heading">What this is and who it's for.</h2>
+        <p class="cs-section-body">An overview of the project: what it is, who it's designed for, and the context in which it lives. Two to three sentences that ground the reader before diving into the problem. No jargon — just clarity.</p>
+        <div class="cs-process-img">Process Visual</div>
+      </div>
+
+      <!-- THE CHALLENGE -->
+      <div class="cs-section">
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">The Challenge</span>
+        <h2 class="cs-section-heading">The problem that made this worth solving.</h2>
+        <p class="cs-section-body">Describe the design or instructional challenge. What constraint, tension, or gap made this project hard? What would a generic solution have missed? Two to four sentences that reveal the thinking behind the work.</p>
+        <div class="cs-process-img">Process Visual</div>
+      </div>
+
+      <!-- APPROACH -->
+      <div class="cs-section">
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">Approach</span>
+        <h2 class="cs-section-heading">The decisions that shaped the solution.</h2>
+        <p class="cs-section-body">Explain the instructional or design strategy. What principles guided the structure? What tradeoffs were made and why? This is where craft shows — describe the how, not just the what.</p>
+        <div class="cs-process-img">Process Visual</div>
+      </div>
+
+    </div>
+
+    <!-- OUTCOME -->
+    <section class="cs-outcome">
+      <div class="cs-outcome-inner">
+        <div class="cs-outcome-dot"></div>
+        <h2 class="cs-outcome-heading">A summary statement about what this work produced.</h2>
+        <p class="cs-outcome-body">One or two sentences on the outcome, impact, or what this project demonstrates about your practice as an instructional designer.</p>
+        <a class="cs-outcome-btn" href="#" target="_blank" rel="noopener noreferrer">Launch Course →</a>
+        <a class="cs-outcome-back" href="../index.html#portfolio">← Back to Portfolio</a>
+      </div>
     </section>
 
   </main>
@@ -302,15 +524,15 @@
     <div class="footer-logo">Angela <em>Valenti</em></div>
     <div class="footer-links">
       <a href="../index.html">Portfolio</a>
-      <a href="../index.html">About</a>
-      <a href="../index.html">Contact</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
     </div>
-    <p class="footer-copy">© 2025 Angela Valenti</p>
+    <p class="footer-copy">© 2026 Angela Valenti</p>
   </footer>
 
   <script>
     window.addEventListener('scroll', () => {
-      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+      document.getElementById('cs-nav').classList.toggle('scrolled', window.scrollY > 10);
     });
   </script>
 
