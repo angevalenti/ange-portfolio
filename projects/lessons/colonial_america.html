@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colonial America — Interactive Study Lesson</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Mono&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; padding: 0; }
+    button { font-family: inherit; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useRef, useEffect } = React;
+
+    // ─── SOUND EFFECTS ENGINE ───
+    const SFX = {
+      _started: false,
+      async _ensure() {
+        if (this.muted) return false;
+        if (!this._started) {
+          await Tone.start();
+          this._started = true;
+        }
+        return true;
+      },
+      async correct() {
+        if (!(await this._ensure())) return;
+        const synth = new Tone.Synth({ oscillator: { type: "triangle" }, envelope: { attack: 0.01, decay: 0.15, sustain: 0.05, release: 0.3 } }).toDestination();
+        synth.volume.value = -8;
+        synth.triggerAttackRelease("C5", "8n", Tone.now());
+        synth.triggerAttackRelease("E5", "8n", Tone.now() + 0.12);
+        synth.triggerAttackRelease("G5", "8n", Tone.now() + 0.24);
+        setTimeout(() => synth.dispose(), 1500);
+      },
+      async wrong() {
+        if (!(await this._ensure())) return;
+        const synth = new Tone.Synth({ oscillator: { type: "square" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.05, release: 0.2 } }).toDestination();
+        synth.volume.value = -12;
+        synth.triggerAttackRelease("E3", "16n", Tone.now());
+        synth.triggerAttackRelease("Eb3", "8n", Tone.now() + 0.15);
+        setTimeout(() => synth.dispose(), 1500);
+      },
+      async whoosh() {
+        if (!(await this._ensure())) return;
+        const noise = new Tone.Noise("white").toDestination();
+        noise.volume.value = -22;
+        const filter = new Tone.Filter({ frequency: 800, type: "bandpass", Q: 2 }).toDestination();
+        noise.disconnect();
+        noise.connect(filter);
+        noise.start();
+        filter.frequency.rampTo(2000, 0.15);
+        filter.frequency.rampTo(200, 0.2, "+0.15");
+        setTimeout(() => { noise.stop(); noise.dispose(); filter.dispose(); }, 500);
+      },
+      async lightbulb() {
+        if (!(await this._ensure())) return;
+        const synth = new Tone.Synth({ oscillator: { type: "sine" }, envelope: { attack: 0.01, decay: 0.3, sustain: 0, release: 0.3 } }).toDestination();
+        synth.volume.value = -10;
+        synth.triggerAttackRelease("A5", "16n", Tone.now());
+        synth.triggerAttackRelease("E6", "16n", Tone.now() + 0.08);
+        setTimeout(() => synth.dispose(), 1500);
+      },
+      async celebrate() {
+        if (!(await this._ensure())) return;
+        const synth = new Tone.PolySynth(Tone.Synth, { oscillator: { type: "triangle" }, envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.4 } }).toDestination();
+        synth.volume.value = -8;
+        const t = Tone.now();
+        synth.triggerAttackRelease("C5", "8n", t);
+        synth.triggerAttackRelease("E5", "8n", t + 0.1);
+        synth.triggerAttackRelease("G5", "8n", t + 0.2);
+        synth.triggerAttackRelease("C6", "4n", t + 0.35);
+        synth.triggerAttackRelease(["E5", "G5", "C6"], "4n", t + 0.55);
+        setTimeout(() => synth.dispose(), 2500);
+      },
+      async tap() {
+        if (!(await this._ensure())) return;
+        const synth = new Tone.MembraneSynth({ pitchDecay: 0.01, octaves: 2, envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination();
+        synth.volume.value = -18;
+        synth.triggerAttackRelease("C2", "32n");
+        setTimeout(() => synth.dispose(), 500);
+      },
+      async sectionChange() {
+        if (!(await this._ensure())) return;
+        const synth = new Tone.Synth({ oscillator: { type: "sine" }, envelope: { attack: 0.02, decay: 0.15, sustain: 0.05, release: 0.3 } }).toDestination();
+        synth.volume.value = -12;
+        synth.triggerAttackRelease("G4", "16n", Tone.now());
+        synth.triggerAttackRelease("C5", "16n", Tone.now() + 0.1);
+        setTimeout(() => synth.dispose(), 1000);
+      },
+      muted: false,
+    };
+
+    // ─── SLIDES DATA ───
+    const SLIDES = [
+      { type: "teach", category: "intro", emoji: "🏛️", title: "Tonight's Game Plan", body: "We're going to learn everything for your Chapter 4 test — but in small bites. One idea at a time. No rush.", sub: "Just keep tapping NEXT and you'll get through it all!", color: "#f0b429" },
+      { type: "teach", category: "intro", emoji: "📋", title: "What's on the test?", body: null, bullets: [{ emoji: "📚", text: "24 Vocabulary Words", color: "#e74c3c" }, { emoji: "🎭", text: "11 Key Figures (Who Am I?)", color: "#f0b429" }, { emoji: "👑", text: "Class Structure Pyramid", color: "#bb8fce" }, { emoji: "🗺️", text: "3 Colonial Regions", color: "#3498db" }], color: "#3498db" },
+      { type: "teach", category: "regions", emoji: "🗺️", title: "The 3 Colonial Regions", body: "The 13 colonies were split into 3 groups based on where they were and how people lived. Let's learn each one.", color: "#3498db", illust: "coloniesmap" },
+      { type: "video", category: "regions", videoId: "UUmi3iNMawo", label: "13 Colonies Overview (5 min)", note: "Watch this first — it covers all 3 regions with maps and visuals!" },
+      { type: "teach", category: "regions", emoji: "🐟", title: "New England Colonies", body: "Thin, rocky soil meant farming was tough. So they turned to the SEA — fishing, whaling, and shipbuilding became their money-makers.", sub: "They also had lots of skilled artisans (craftspeople) and the Puritans set up their communities here.", color: "#3498db", illust: "newengland" },
+      { type: "trick", category: "regions", trick: "New England = FISH & SHIPS", explain: "Rocky soil? Can't farm? Go fish! Their shipbuilders used timber to build boats for whaling.", color: "#3498db", emoji: "🐟" },
+      { type: "quiz", category: "regions", question: "New England had thin, rocky soil. What did they focus on instead of farming?", options: ["Growing wheat", "Fishing & shipbuilding", "Tobacco plantations", "Iron mining"], correct: 1, color: "#3498db" },
+      { type: "teach", category: "regions", emoji: "🌾", title: "Middle Colonies", body: "Rich soil + warmer climate = TONS of wheat. That's why they were called 'The Breadbasket.' They also dug iron and had big cities like Philadelphia full of merchants.", sub: "This region was super diverse — people from all different religions and backgrounds. The Quakers lived here.", color: "#f0b429", illust: "middle" },
+      { type: "trick", category: "regions", trick: "Middle = BREAD BASKET 🍞", explain: "Wheat + diverse people + Quakers + Philadelphia merchants. Think of a big basket of bread shared by all kinds of people!", color: "#f0b429", emoji: "🌾" },
+      { type: "quiz", category: "regions", question: "Which region was called 'The Breadbasket' because of all the wheat they grew?", options: ["New England", "Middle Colonies", "Southern Colonies"], correct: 1, color: "#f0b429" },
+      { type: "teach", category: "regions", emoji: "🏛️", title: "Southern Colonies", body: "Very warm climate + great soil = huge plantations growing tobacco and rice. They relied heavily on enslaved people to do the farming.", sub: "Their governing body was called the House of Burgesses — one of the first examples of self-government in the colonies.", color: "#e74c3c", illust: "southern" },
+      { type: "trick", category: "regions", trick: "Southern = PLANTATIONS + SLAVERY", explain: "Warm weather → big farms (plantations) → needed labor → relied on slavery. Also: House of Burgesses = their government.", color: "#e74c3c", emoji: "🏛️" },
+      { type: "quiz", category: "regions", question: "Which region had large plantations and relied heavily on enslaved labor?", options: ["New England", "Middle Colonies", "Southern Colonies"], correct: 2, color: "#e74c3c" },
+      {
+        type: "sort", category: "regions", title: "Region Sort! 🗺️", subtitle: "These are from your actual test. Tap the right region!",
+        items: [
+          { text: "Governing body: House of Burgesses", answer: "Southern", num: 40 },
+          { text: "Thin, rocky soil → fishing industries", answer: "New England", num: 41 },
+          { text: "Warm climate → large plantations", answer: "Southern", num: 42 },
+          { text: "Slavery was key to farming", answer: "Southern", num: 43 },
+          { text: "Very diverse, all religions welcome", answer: "Middle", num: 44 },
+          { text: "Shipbuilders used timber for whaling", answer: "New England", num: 45 },
+          { text: "Philadelphia + large group of merchants", answer: "Middle", num: 46 },
+          { text: "Rich soil → wheat + iron", answer: "Middle", num: 47 },
+          { text: "Many skilled artisans", answer: "New England", num: 48 },
+          { text: "Home to the Quakers", answer: "Middle", num: 49 },
+          { text: "Puritans established their town here", answer: "New England", num: 50 },
+        ],
+      },
+      { type: "teach", category: "class", emoji: "👑", title: "The Class Pyramid", body: "Colonial society had 3 levels — like a pyramid. A tiny group of rich people on top, more in the middle, and the most people at the bottom doing the hardest work.", color: "#bb8fce" },
+      { type: "pyramid", category: "class" },
+      { type: "trick", category: "class", trick: "Top = RICH & POWERFUL (3 groups)", explain: "Rich merchants 💰, Landowners 🏡, Church leaders ⛪ — these were the elite Gentry class.", color: "#f0b429", emoji: "👑" },
+      { type: "trick", category: "class", trick: "Middle = WORKERS WITH SKILLS (3 groups)", explain: "Small farmers 🌱, Shopkeepers 🏪, Artisans 🔨 — they had trades and small businesses.", color: "#bb8fce", emoji: "🔨" },
+      { type: "trick", category: "class", trick: "Bottom = LEAST FREEDOM (4 groups)", explain: "Workers, Servants, Apprentices, Indentured servants — they worked for others and had little power.", color: "#5dade2", emoji: "⛓️" },
+      { type: "quiz", category: "class", question: "Who belongs at the TOP of the colonial class pyramid?", options: ["Small farmers & shopkeepers", "Rich merchants, landowners & church leaders", "Servants & apprentices", "Workers & artisans"], correct: 1, color: "#bb8fce" },
+      { type: "quiz", category: "class", question: "Artisans (skilled craftspeople) belonged in which level?", options: ["Top (Gentry)", "Middle Class", "Lower Class"], correct: 1, color: "#bb8fce" },
+      { type: "teach", category: "figures", emoji: "🎭", title: "Key Figures: Who Am I?", body: "Your test has 11 'Who Am I?' clues. Let's learn them in pairs with memory tricks!", color: "#f0b429" },
+      { type: "video", category: "figures", videoId: "Eaztqe8hHHg", label: "Founding of the 13 Colonies (2 min)", note: "Quick overview of who founded which colony and why." },
+      { type: "teach", category: "figures", emoji: "🕊️", title: "#28. William Penn", body: "A Quaker who formed the colony of Pennsylvania as a place of religious freedom.", color: "#f0b429", illust: "penn" },
+      { type: "trick", category: "figures", trick: "William PENN → PENNsylvania", explain: "His name is literally IN the colony name! He was a Quaker who wanted religious freedom for everyone.", color: "#f0b429", emoji: "🕊️" },
+      { type: "teach", category: "figures", emoji: "👑", title: "#35. Duke of York", body: "The king gave him the colony of New Netherland after the British defeated the Dutch. He renamed it after himself.", color: "#f0b429", illust: "duke" },
+      { type: "trick", category: "figures", trick: "Duke of YORK → New YORK", explain: "He renamed the whole colony after himself! New Netherland became New York.", color: "#f0b429", emoji: "🗽" },
+      { type: "whoami", category: "figures", clue: "I was a Quaker who formed the colony of Pennsylvania.", options: ["Duke of York", "James Oglethorpe", "William Penn", "Thomas Hooker"], correct: 2 },
+      { type: "teach", category: "figures", emoji: "🏃", title: "#29 & #33: The Rhode Island Two", body: "Both Roger Williams AND Anne Hutchinson got kicked out of Massachusetts for challenging Puritan leaders. Both ended up helping form Rhode Island!", sub: "Roger Williams offended Puritan leaders and fled. Anne Hutchinson believed in freedom of religion and was banned.", color: "#e74c3c", illust: "rhodeisland" },
+      { type: "trick", category: "figures", trick: "Kicked out of MA → Rhode Island (BOTH!)", explain: "Roger Williams AND Anne Hutchinson = same story, same destination. Massachusetts said 'Get out!' and Rhode Island said 'Come on in!'", color: "#e74c3c", emoji: "🚪" },
+      { type: "whoami", category: "figures", clue: "I was a church leader who believed in freedom of religion. I was banned from Massachusetts and helped form Rhode Island.", options: ["Roger Williams", "Anne Hutchinson", "William Penn", "Lord Baltimore"], correct: 1 },
+      { type: "teach", category: "figures", emoji: "🌟", title: "#26. James Oglethorpe", body: "Given Georgia by King George III to start a colony for English debtors — people who owed money and needed a fresh start.", color: "#58d68d", illust: "oglethorpe" },
+      { type: "trick", category: "figures", trick: "OgleTHORPE gave people HOPE", explain: "Debtors (people who owed money) got a second chance in Georgia. Oglethorpe = hope for the hopeless!", color: "#58d68d", emoji: "🌟" },
+      { type: "teach", category: "figures", emoji: "✝️", title: "#34. Lord Baltimore", body: "Loyal follower of King Charles I who was rewarded with land to form Maryland. He welcomed all Catholics there.", color: "#9b59b6", illust: "baltimore" },
+      { type: "trick", category: "figures", trick: "Lord BALTIMORE → MARYLAND → Catholics", explain: "Baltimore is still a real city in Maryland today! He welcomed Catholics when few other colonies did.", color: "#9b59b6", emoji: "✝️" },
+      { type: "whoami", category: "figures", clue: "I was given Georgia by King George III to start a colony for English debtors.", options: ["Lord Baltimore", "William Penn", "James Oglethorpe", "Thomas Hooker"], correct: 2 },
+      { type: "teach", category: "figures", emoji: "🗳️", title: "#27. Thomas Hooker", body: "Wanted political freedom where ALL men could vote. So he started the Connecticut colony.", color: "#3498db", illust: "hooker" },
+      { type: "teach", category: "figures", emoji: "🤝", title: "#31. Carteret & Berkley", body: "Got land from their friend the Duke of York and started New Jersey as a propriety colony.", color: "#3498db", illust: "carteret" },
+      { type: "teach", category: "figures", emoji: "⚔️", title: "#30. George Washington", body: "Before he was president, he was a young soldier from Virginia who was captured at Fort Necessity by the French.", sub: "Yes, THAT George Washington — but as a young man!", color: "#2c3e50", illust: "washington" },
+      { type: "teach", category: "figures", emoji: "🏹", title: "#25 & #32: Native American Leaders", body: "Two leaders who fought back against the colonists.", sub: "Pontiac (Ottawa) attacked British forts in the Ohio River Valley.\nMetacom/King Phillip (Wampanoag) started a war against colonists in New England.", color: "#e67e22", illust: "nativeleaders" },
+      { type: "trick", category: "figures", trick: "PONTIAC → Ohio. METACOM → New England.", explain: "Pontiac's Rebellion = out west at British forts. King Philip's War (Metacom) = in the colonies. Both were Native American leaders fighting back!", color: "#e67e22", emoji: "🏹" },
+      { type: "whoami", category: "figures", clue: "I was a Wampanoag leader who began a war against the colonists.", options: ["Pontiac", "Metacom/King Phillip", "George Washington", "Duke of York"], correct: 1 },
+      { type: "whoami", category: "figures", clue: "I was a loyal follower of King Charles I and was given land to form Maryland. I welcomed Catholics.", options: ["William Penn", "Roger Williams", "James Oglethorpe", "Lord Baltimore"], correct: 3 },
+      { type: "teach", category: "vocab", emoji: "📚", title: "Vocabulary Time!", body: "24 words — broken into small groups by theme. Each group has a trick to help you remember!", color: "#e74c3c" },
+      {
+        type: "teach", category: "vocab", emoji: "⛵", title: "Trade Words", body: null, color: "#58d68d",
+        vocabList: [
+          { term: "Export", def: "A product SOLD to other countries", emoji: "📦➡️" },
+          { term: "Import", def: "A product BOUGHT from other countries", emoji: "⬅️📦" },
+          { term: "Barter", def: "Trading goods directly — no money!", emoji: "🤝" },
+          { term: "Raw Materials", def: "Resources like timber that get made into products", emoji: "🪵" },
+        ],
+      },
+      { type: "trick", category: "vocab", trick: "EXport = EXit (goods EXIT the country)", explain: "IMport = goods come IN. Easy! EX = Exit, IM = In.", color: "#58d68d", emoji: "📦" },
+      { type: "quiz", category: "vocab", question: "What does EXPORT mean?", options: ["Buying products from other countries", "Selling products TO other countries", "Trading without money", "Storing goods"], correct: 1, color: "#58d68d" },
+      {
+        type: "teach", category: "vocab", emoji: "⚖️", title: "Economics Words", body: null, color: "#f0b429",
+        vocabList: [
+          { term: "Mercantilism", def: "Countries benefit by exporting MORE than they import", emoji: "⚖️" },
+          { term: "Protectionism", def: "Laws to LIMIT colonists' trade with other countries", emoji: "🛡️" },
+          { term: "Triangular Trade", def: "3-sided trade route: Africa ↔ Americas ↔ Europe", emoji: "🔺" },
+          { term: "Auction", def: "Public sale where the highest bidder wins", emoji: "🔨" },
+        ],
+      },
+      { type: "trick", category: "vocab", trick: "ME ME ME-rcantilism", explain: "The mother country (England) only cared about making ITSELF rich. Export more, import less = more money for ME!", color: "#f0b429", emoji: "💰" },
+      { type: "quiz", category: "vocab", question: "Mercantilism means countries tried to...", options: ["Import as much as possible", "Export MORE than they import", "Stop all trade", "Only barter"], correct: 1, color: "#f0b429" },
+      {
+        type: "teach", category: "vocab", emoji: "🌍", title: "Society Words", body: null, color: "#bb8fce",
+        vocabList: [
+          { term: "Region", def: "An area defined by common features", emoji: "🗺️" },
+          { term: "Climate", def: "Weather pattern over a LONG time", emoji: "🌤️" },
+          { term: "Diverse", def: "People from many different backgrounds in one place", emoji: "🌍" },
+          { term: "Class", def: "Society groups based on wealth or importance", emoji: "👑" },
+          { term: "Proprietor", def: "Someone who OWNS land or properties", emoji: "🏠" },
+          { term: "Artisan", def: "Skilled worker in a specific trade", emoji: "🔨" },
+          { term: "Dissent", def: "Disagreement", emoji: "✊" },
+        ],
+      },
+      { type: "quiz", category: "vocab", question: "A 'proprietor' is someone who...", options: ["Disagrees with the government", "Owns land or properties", "Works as a skilled craftsperson", "Trades without money"], correct: 1, color: "#bb8fce" },
+      {
+        type: "teach", category: "vocab", emoji: "⛓️", title: "Slavery & Conflict Words", body: null, color: "#e74c3c",
+        vocabList: [
+          { term: "Slavery", def: "People bought and sold as property", emoji: "⛓️" },
+          { term: "Middle Passage", def: "Horrific ocean journey of enslaved people to the Americas", emoji: "🚢" },
+          { term: "Uprising", def: "Rebellions when enslaved people fought back", emoji: "🔥" },
+          { term: "Ally", def: "A military partner", emoji: "🤝" },
+          { term: "Treaty", def: "A formal agreement between countries", emoji: "📜" },
+        ],
+      },
+      {
+        type: "teach", category: "vocab", emoji: "📜", title: "Key Events", body: null, color: "#e67e22",
+        vocabList: [
+          { term: "King Philip's War", def: "Conflict between Metacom and the colonists", emoji: "⚔️" },
+          { term: "Pontiac's Rebellion", def: "Ottawa leader attacked British forts, Ohio Valley", emoji: "🏹" },
+          { term: "Proclamation of 1763", def: "King George III BLOCKED settlement west of the Appalachians", emoji: "🚫" },
+          { term: "Great Awakening", def: "Religious revival — fiery preachers inspired people", emoji: "⛪" },
+        ],
+      },
+      { type: "trick", category: "vocab", trick: "Proclamation of 1763 = 'STOP! No going west!'", explain: "King George III drew a line at the Appalachian Mountains and told colonists: you CANNOT cross. They were NOT happy.", color: "#e67e22", emoji: "🚫" },
+      { type: "quiz", category: "vocab", question: "The Proclamation of 1763 said colonists couldn't...", options: ["Trade with France", "Settle west of the Appalachian Mountains", "Own land in New England", "Vote in elections"], correct: 1, color: "#e67e22" },
+      { type: "summary", category: "final" },
+    ];
+
+    // ─── FONT & STYLE CONSTANTS ───
+    const F = `'Lilita One', cursive`;
+    const B = `'DM Sans', sans-serif`;
+    const M = `'Space Mono', monospace`;
+    const cs = { background: "#ffffff", borderRadius: 18, padding: "24px 22px", border: "1px solid #e0ddd5", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" };
+
+    // ─── MINI SVG ILLUSTRATIONS ───
+    function MiniIllustration({ type }) {
+      const scenes = {
+        // ── REGION SCENES (landscape 200×100, height 80) ──
+        newengland: (
+          <svg viewBox="0 0 400 250" style={{ width: "100%", height: 200, display: "block" }}>
+            {/* sky */}
+            <defs>
+              <linearGradient id="neSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#b0d8f5"/>
+                <stop offset="100%" stopColor="#e8f4fb"/>
+              </linearGradient>
+              <linearGradient id="neOcean" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#2e86c1"/>
+                <stop offset="100%" stopColor="#5dade2"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="250" fill="url(#neSky)" rx="12"/>
+            {/* clouds */}
+            <ellipse cx="80" cy="35" rx="35" ry="16" fill="#fff" opacity="0.85"/>
+            <ellipse cx="110" cy="30" rx="25" ry="14" fill="#fff" opacity="0.85"/>
+            <ellipse cx="55" cy="38" rx="22" ry="12" fill="#fff" opacity="0.85"/>
+            <ellipse cx="300" cy="28" rx="30" ry="13" fill="#fff" opacity="0.75"/>
+            <ellipse cx="325" cy="24" rx="20" ry="11" fill="#fff" opacity="0.75"/>
+            {/* ocean */}
+            <path d="M0 155 Q100 140 200 150 Q300 160 400 145 L400 250 L0 250Z" fill="url(#neOcean)"/>
+            {/* ocean waves */}
+            <path d="M0 170 Q50 162 100 168 Q150 174 200 168 Q250 162 300 168 Q350 174 400 168" fill="none" stroke="#85c1e9" strokeWidth="2" opacity="0.6"/>
+            <path d="M0 185 Q50 178 100 183 Q150 188 200 183 Q250 178 300 183 Q350 188 400 183" fill="none" stroke="#85c1e9" strokeWidth="1.5" opacity="0.5"/>
+            {/* rocky soil foreground */}
+            <path d="M0 210 Q50 205 100 208 Q150 212 200 207 Q250 202 300 206 Q350 210 400 205 L400 250 L0 250Z" fill="#8d7355"/>
+            {/* rocky boulders */}
+            <ellipse cx="30" cy="215" rx="22" ry="14" fill="#9e9e9e" stroke="#78716c" strokeWidth="2"/>
+            <ellipse cx="60" cy="220" rx="16" ry="10" fill="#a8a29e" stroke="#78716c" strokeWidth="1.5"/>
+            <ellipse cx="340" cy="218" rx="20" ry="12" fill="#9e9e9e" stroke="#78716c" strokeWidth="2"/>
+            <ellipse cx="370" cy="222" rx="14" ry="9" fill="#a8a29e" stroke="#78716c" strokeWidth="1.5"/>
+            <ellipse cx="190" cy="216" rx="18" ry="11" fill="#a8a29e" stroke="#78716c" strokeWidth="1.5"/>
+            {/* pine trees left */}
+            <g>
+              <polygon points="22,130 38,170 6,170" fill="#1a5e20" stroke="#1c1917" strokeWidth="1.5"/>
+              <polygon points="22,110 42,155 2,155" fill="#2e7d32" stroke="#1c1917" strokeWidth="1.5"/>
+              <polygon points="22,90 46,140 -2,140" fill="#388e3c" stroke="#1c1917" strokeWidth="1.5"/>
+              <rect x="18" y="168" width="8" height="14" fill="#5d4037" stroke="#1c1917" strokeWidth="1.5"/>
+            </g>
+            <g transform="translate(48,0)">
+              <polygon points="22,138 36,168 8,168" fill="#1a5e20" stroke="#1c1917" strokeWidth="1.5"/>
+              <polygon points="22,118 40,158 4,158" fill="#2e7d32" stroke="#1c1917" strokeWidth="1.5"/>
+              <polygon points="22,100 44,145 0,145" fill="#388e3c" stroke="#1c1917" strokeWidth="1.5"/>
+              <rect x="18" y="166" width="8" height="12" fill="#5d4037" stroke="#1c1917" strokeWidth="1.5"/>
+            </g>
+            {/* stacked timber logs */}
+            <rect x="5" y="195" width="62" height="9" fill="#8d6e63" stroke="#5d4037" strokeWidth="1.5" rx="4"/>
+            <rect x="8" y="187" width="56" height="9" fill="#a1887f" stroke="#5d4037" strokeWidth="1.5" rx="4"/>
+            <rect x="12" y="179" width="48" height="9" fill="#8d6e63" stroke="#5d4037" strokeWidth="1.5" rx="4"/>
+            {/* Puritan meetinghouse */}
+            <rect x="148" y="100" width="72" height="80" fill="#f5f5f4" stroke="#292524" strokeWidth="2.5"/>
+            <path d="M143 100 L184 68 L225 100Z" fill="#d1d5db" stroke="#292524" strokeWidth="2"/>
+            {/* steeple */}
+            <rect x="179" y="52" width="10" height="18" fill="#e5e7eb" stroke="#292524" strokeWidth="2"/>
+            <polygon points="184,30 178,52 190,52" fill="#9ca3af" stroke="#292524" strokeWidth="2"/>
+            {/* cross on steeple */}
+            <line x1="184" y1="34" x2="184" y2="44" stroke="#292524" strokeWidth="1.5"/>
+            <line x1="180" y1="38" x2="188" y2="38" stroke="#292524" strokeWidth="1.5"/>
+            {/* meetinghouse windows */}
+            <rect x="158" y="115" width="14" height="20" fill="#bfdbfe" stroke="#292524" strokeWidth="1.5" rx="1"/>
+            <rect x="196" y="115" width="14" height="20" fill="#bfdbfe" stroke="#292524" strokeWidth="1.5" rx="1"/>
+            {/* arched door */}
+            <rect x="176" y="145" width="16" height="25" fill="#78350f" stroke="#292524" strokeWidth="1.5" rx="8"/>
+            {/* meetinghouse path */}
+            <rect x="180" y="178" width="8" height="12" fill="#d6d3d1"/>
+            {/* shipyard right */}
+            <rect x="290" y="120" width="6" height="70" fill="#5d4037" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="296" y="125" width="52" height="8" fill="#795548" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <path d="M270 155 Q310 145 360 148 Q370 155 360 165 Q310 165 270 165Z" fill="#8d6e63" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="296" y1="125" x2="340" y2="120" stroke="#5d4037" strokeWidth="2"/>
+            {/* fishing boat */}
+            <path d="M240 148 Q260 142 285 145 Q290 155 280 160 Q258 162 240 158Z" fill="#a0522d" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="262" y1="145" x2="262" y2="115" stroke="#5d4037" strokeWidth="2.5"/>
+            <path d="M262 115 L285 130 L262 138Z" fill="#f5f5f4" stroke="#1c1917" strokeWidth="1.5"/>
+            {/* fishing nets hanging */}
+            <path d="M250 158 Q260 168 270 158" fill="none" stroke="#78716c" strokeWidth="1.5" strokeDasharray="3,2"/>
+            <path d="M252 162 L268 162" stroke="#78716c" strokeWidth="1" strokeDasharray="2,2"/>
+            {/* whale tail */}
+            <path d="M355 148 Q365 138 372 145 Q368 152 375 155 Q365 160 358 155 Q352 150 355 148Z" fill="#2c3e50" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M370 148 Q378 140 386 146 Q384 153 390 155 Q381 160 374 156 Q367 152 370 148Z" fill="#2c3e50" stroke="#1c1917" strokeWidth="1.5"/>
+            {/* label */}
+            <text x="200" y="244" textAnchor="middle" fontSize="13" fill="#f5f5f4" fontFamily="sans-serif" fontWeight="bold" opacity="0.9">New England</text>
+          </svg>
+        ),
+        middle: (
+          <svg viewBox="0 0 400 250" style={{ width: "100%", height: 200, display: "block" }}>
+            <defs>
+              <linearGradient id="midSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#c8e6c9"/>
+                <stop offset="100%" stopColor="#e8f5e9"/>
+              </linearGradient>
+            </defs>
+            {/* sky */}
+            <rect width="400" height="250" fill="url(#midSky)" rx="12"/>
+            {/* clouds */}
+            <ellipse cx="60" cy="32" rx="30" ry="13" fill="#fff" opacity="0.8"/>
+            <ellipse cx="85" cy="27" rx="22" ry="12" fill="#fff" opacity="0.8"/>
+            <ellipse cx="200" cy="22" rx="26" ry="11" fill="#fff" opacity="0.7"/>
+            {/* rich dark soil */}
+            <path d="M0 205 Q100 198 200 202 Q300 206 400 200 L400 250 L0 250Z" fill="#4e342e"/>
+            <path d="M0 215 Q100 210 200 213 Q300 216 400 212 L400 250 L0 250Z" fill="#3e2723" opacity="0.7"/>
+            {/* rolling wheat fields */}
+            {[0,30,60,90,120,150,180,210,240,270,300,330,360].map((x,i) => (
+              <g key={i}>
+                <line x1={x+8} y1="205" x2={x+8} y2="155" stroke="#a16207" strokeWidth="2.5"/>
+                <ellipse cx={x+8} cy="152" rx="5" ry="14" fill="#f59e0b"/>
+                <ellipse cx={x+2} cy="162" rx="4" ry="10" fill="#fbbf24" transform={`rotate(-18 ${x+2} 162)`}/>
+                <ellipse cx={x+14} cy="162" rx="4" ry="10" fill="#fbbf24" transform={`rotate(18 ${x+14} 162)`}/>
+              </g>
+            ))}
+            {/* ground between wheat and soil */}
+            <rect x="0" y="198" width="400" height="8" fill="#7c5c2a" opacity="0.5"/>
+            {/* Quaker meetinghouse (no steeple, plain) */}
+            <rect x="12" y="95" width="65" height="60" fill="#ece7d8" stroke="#292524" strokeWidth="2.5"/>
+            <path d="M8 95 L44 70 L80 95Z" fill="#c8b89a" stroke="#292524" strokeWidth="2"/>
+            {/* plain windows — Quakers were simple */}
+            <rect x="22" y="108" width="13" height="18" fill="#bfdbfe" stroke="#292524" strokeWidth="1.5" rx="1"/>
+            <rect x="52" y="108" width="13" height="18" fill="#bfdbfe" stroke="#292524" strokeWidth="1.5" rx="1"/>
+            <rect x="35" y="128" width="14" height="22" fill="#78350f" stroke="#292524" strokeWidth="1.5" rx="6"/>
+            <text x="44" y="88" textAnchor="middle" fontSize="8" fill="#292524" fontFamily="sans-serif" fontWeight="bold">MEETING</text>
+            {/* iron ore mine entrance */}
+            <path d="M90 155 Q110 145 130 155 L130 180 L90 180Z" fill="#37474f" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="95" y="155" width="30" height="4" fill="#546e7a" stroke="#1c1917" strokeWidth="1"/>
+            <rect x="102" y="159" width="4" height="21" fill="#78350f" stroke="#1c1917" strokeWidth="1"/>
+            <rect x="118" y="159" width="4" height="21" fill="#78350f" stroke="#1c1917" strokeWidth="1"/>
+            <text x="110" y="173" textAnchor="middle" fontSize="7" fill="#cfd8dc" fontFamily="sans-serif" fontWeight="bold">IRON</text>
+            <text x="110" y="181" textAnchor="middle" fontSize="7" fill="#cfd8dc" fontFamily="sans-serif">MINE</text>
+            {/* Philadelphia brick buildings */}
+            <rect x="245" y="88" width="44" height="80" fill="#b71c1c" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="245" y="88" width="44" height="8" fill="#8b0000" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="295" y="98" width="36" height="70" fill="#c62828" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="295" y="98" width="36" height="7" fill="#8b0000" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="335" y="108" width="30" height="60" fill="#b71c1c" stroke="#1c1917" strokeWidth="2"/>
+            {/* windows on buildings */}
+            {[[252,100],[270,100],[252,118],[270,118],[252,136],[270,136]].map(([wx,wy],i) => (
+              <rect key={i} x={wx} y={wy} width="10" height="12" fill="#fff9c4" stroke="#1c1917" strokeWidth="1" rx="1"/>
+            ))}
+            {[[302,112],[318,112],[302,128],[318,128],[302,144],[318,144]].map(([wx,wy],i) => (
+              <rect key={`b${i}`} x={wx} y={wy} width="10" height="12" fill="#fff9c4" stroke="#1c1917" strokeWidth="1" rx="1"/>
+            ))}
+            {/* market square with people */}
+            <rect x="148" y="160" width="80" height="38" fill="#ede7d5" stroke="#9e9e9e" strokeWidth="1.5" rx="4"/>
+            <text x="188" y="172" textAnchor="middle" fontSize="8" fill="#5d4037" fontFamily="sans-serif" fontWeight="bold">MARKET</text>
+            {/* diverse figures at market */}
+            <circle cx="162" cy="148" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="158" y="155" width="8" height="16" fill="#1565c0" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <circle cx="182" cy="146" r="7" fill="#c49a6c" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="178" y="153" width="8" height="18" fill="#6a1b9a" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <circle cx="202" cy="148" r="7" fill="#795548" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="198" y="155" width="8" height="16" fill="#2e7d32" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            {/* bread basket */}
+            <path d="M370 150 Q385 148 395 152 L392 175 Q383 180 373 175Z" fill="#d4a853" stroke="#1c1917" strokeWidth="2"/>
+            <path d="M372 150 Q383 145 393 150" fill="none" stroke="#1c1917" strokeWidth="2"/>
+            <ellipse cx="375" cy="145" rx="5" ry="8" fill="#fbbf24" stroke="#92400e" strokeWidth="1.5" transform="rotate(-15 375 145)"/>
+            <ellipse cx="383" cy="140" rx="5" ry="9" fill="#fbbf24" stroke="#92400e" strokeWidth="1.5"/>
+            <ellipse cx="391" cy="145" rx="5" ry="8" fill="#fbbf24" stroke="#92400e" strokeWidth="1.5" transform="rotate(15 391 145)"/>
+            {/* label */}
+            <text x="200" y="244" textAnchor="middle" fontSize="13" fill="#f5f5f4" fontFamily="sans-serif" fontWeight="bold" opacity="0.9">Middle Colonies</text>
+          </svg>
+        ),
+        southern: (
+          <svg viewBox="0 0 400 250" style={{ width: "100%", height: 200, display: "block" }}>
+            <defs>
+              <linearGradient id="southSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#ffe0b2"/>
+                <stop offset="100%" stopColor="#fff8e1"/>
+              </linearGradient>
+              <linearGradient id="southRiver" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0d47a1"/>
+                <stop offset="100%" stopColor="#1976d2"/>
+              </linearGradient>
+            </defs>
+            {/* warm sky */}
+            <rect width="400" height="250" fill="url(#southSky)" rx="12"/>
+            {/* blazing sun */}
+            <circle cx="350" cy="45" r="28" fill="#ff8f00"/>
+            <circle cx="350" cy="45" r="22" fill="#ffb300"/>
+            <circle cx="350" cy="45" r="16" fill="#ffd54f"/>
+            {/* sun rays */}
+            {[0,30,60,90,120,150,180,210,240,270,300,330].map((angle,i) => {
+              const rad = angle * Math.PI / 180;
+              return <line key={i} x1={350 + 28*Math.cos(rad)} y1={45 + 28*Math.sin(rad)} x2={350 + 40*Math.cos(rad)} y2={45 + 40*Math.sin(rad)} stroke="#ffd54f" strokeWidth="2.5" strokeLinecap="round"/>;
+            })}
+            {/* warm red-orange soil */}
+            <path d="M0 210 Q100 205 200 208 Q300 211 400 206 L400 250 L0 250Z" fill="#bf360c"/>
+            <path d="M0 222 Q100 218 200 220 Q300 222 400 218 L400 250 L0 250Z" fill="#8d1c00" opacity="0.7"/>
+            {/* crop rows — tobacco/rice */}
+            {[0,1,2,3,4,5,6,7,8,9].map((i) => (
+              <g key={i}>
+                <line x1={15+i*18} y1="210" x2={15+i*18} y2="170" stroke="#558b2f" strokeWidth="2.5"/>
+                <ellipse cx={15+i*18} cy="167" rx="7" ry="12" fill="#7cb342"/>
+                <ellipse cx={9+i*18} cy="178" rx="5" ry="9" fill="#558b2f" transform={`rotate(-20 ${9+i*18} 178)`}/>
+                <ellipse cx={21+i*18} cy="178" rx="5" ry="9" fill="#558b2f" transform={`rotate(20 ${21+i*18} 178)`}/>
+              </g>
+            ))}
+            {/* river */}
+            <path d="M0 230 Q80 218 160 225 Q200 228 240 222 Q280 216 320 224 Q360 232 400 222 L400 250 L0 250Z" fill="url(#southRiver)" opacity="0.75"/>
+            <path d="M0 235 Q80 228 160 233 Q200 236 240 230 Q280 224 320 232 Q360 238 400 230" fill="none" stroke="#90caf9" strokeWidth="1.5" opacity="0.5"/>
+            {/* plantation house */}
+            <rect x="148" y="90" width="105" height="90" fill="#fafaf9" stroke="#292524" strokeWidth="3"/>
+            {/* roof */}
+            <path d="M140 90 L200 60 L260 90Z" fill="#d7ccc8" stroke="#292524" strokeWidth="2.5"/>
+            {/* columns */}
+            {[158,174,190,206,222,238].map((cx,i) => (
+              <rect key={i} x={cx} y="90" width="7" height="90" fill="#eceff1" stroke="#bdbdbd" strokeWidth="1.5" rx="3"/>
+            ))}
+            {/* pediment detail */}
+            <path d="M142 90 L200 62 L258 90" fill="none" stroke="#9e9e9e" strokeWidth="1.5"/>
+            {/* windows */}
+            <rect x="153" y="105" width="18" height="26" fill="#b3e5fc" stroke="#292524" strokeWidth="1.5" rx="2"/>
+            <rect x="180" y="105" width="18" height="26" fill="#b3e5fc" stroke="#292524" strokeWidth="1.5" rx="2"/>
+            <rect x="207" y="105" width="18" height="26" fill="#b3e5fc" stroke="#292524" strokeWidth="1.5" rx="2"/>
+            <rect x="233" y="105" width="18" height="26" fill="#b3e5fc" stroke="#292524" strokeWidth="1.5" rx="2"/>
+            {/* door */}
+            <rect x="191" y="148" width="20" height="32" fill="#5d4037" stroke="#292524" strokeWidth="2" rx="9"/>
+            {/* steps */}
+            <rect x="183" y="178" width="36" height="6" fill="#d7ccc8" stroke="#9e9e9e" strokeWidth="1" rx="2"/>
+            <rect x="179" y="183" width="44" height="6" fill="#d7ccc8" stroke="#9e9e9e" strokeWidth="1" rx="2"/>
+            {/* oak trees flanking */}
+            <circle cx="125" cy="110" r="30" fill="#33691e" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="115" cy="100" r="22" fill="#558b2f" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="120" y="138" width="10" height="42" fill="#5d4037" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="280" cy="110" r="30" fill="#33691e" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="290" cy="100" r="22" fill="#558b2f" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="276" y="138" width="10" height="42" fill="#5d4037" stroke="#1c1917" strokeWidth="2"/>
+            {/* House of Burgesses */}
+            <rect x="314" y="110" width="72" height="68" fill="#eceff1" stroke="#292524" strokeWidth="2.5"/>
+            <path d="M308 110 L350 86 L392 110Z" fill="#cfd8dc" stroke="#292524" strokeWidth="2"/>
+            {[321,334,347,360,373].map((cx,i) => (
+              <rect key={i} x={cx} y="110" width="6" height="68" fill="#fff" stroke="#bdbdbd" strokeWidth="1" rx="2"/>
+            ))}
+            <rect x="320" y="118" width="12" height="18" fill="#b3e5fc" stroke="#292524" strokeWidth="1" rx="1"/>
+            <rect x="352" y="118" width="12" height="18" fill="#b3e5fc" stroke="#292524" strokeWidth="1" rx="1"/>
+            <rect x="374" y="118" width="12" height="18" fill="#b3e5fc" stroke="#292524" strokeWidth="1" rx="1"/>
+            <rect x="339" y="140" width="14" height="28" fill="#5d4037" stroke="#292524" strokeWidth="1.5" rx="6"/>
+            {/* flag on Burgesses */}
+            <line x1="350" y1="68" x2="350" y2="86" stroke="#5d4037" strokeWidth="2.5"/>
+            <line x1="350" y1="68" x2="350" y2="52" stroke="#5d4037" strokeWidth="2"/>
+            <rect x="350" y="52" width="24" height="16" fill="#b71c1c" stroke="#1c1917" strokeWidth="1.5" rx="1"/>
+            <text x="362" y="63" textAnchor="middle" fontSize="7" fill="#fff" fontFamily="sans-serif" fontWeight="bold">VA</text>
+            <text x="350" y="82" textAnchor="middle" fontSize="7" fill="#292524" fontFamily="sans-serif" fontWeight="bold">HOUSE OF</text>
+            <text x="350" y="90" textAnchor="middle" fontSize="7" fill="#292524" fontFamily="sans-serif" fontWeight="bold">BURGESSES</text>
+            {/* label */}
+            <text x="200" y="244" textAnchor="middle" fontSize="13" fill="#bf360c" fontFamily="sans-serif" fontWeight="bold" opacity="0.9">Southern Colonies</text>
+          </svg>
+        ),
+
+
+        coloniesmap: (
+          <svg viewBox="0 0 400 280" style={{ width: "100%", height: 220, display: "block" }}>
+            <defs>
+              <linearGradient id="mapOcean" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#b3e5fc"/>
+                <stop offset="100%" stopColor="#81d4fa"/>
+              </linearGradient>
+            </defs>
+            {/* background ocean */}
+            <rect width="400" height="280" fill="url(#mapOcean)" rx="12"/>
+            {/* land mass (simplified eastern seaboard shape) */}
+            <path d="M60 10 L240 8 L280 20 L300 40 L295 70 L310 95 L305 120 L290 145 L285 175 L270 200 L255 220 L240 240 L220 255 L200 265 L180 265 L160 258 L145 248 L130 235 L120 218 L110 200 L100 180 L90 158 L80 135 L70 110 L62 85 L55 60 L52 35 Z" fill="#c8e6c9" stroke="#388e3c" strokeWidth="2"/>
+            {/* New England region — top section */}
+            <path d="M150 8 L240 8 L280 20 L295 70 L270 68 L240 55 L200 45 L165 38 L150 25 Z" fill="#60a5fa" stroke="#1d4ed8" strokeWidth="1.5" opacity="0.8"/>
+            {/* Middle Colonies region */}
+            <path d="M150 25 L165 38 L200 45 L240 55 L270 68 L295 70 L285 130 L265 128 L240 120 L205 115 L175 118 L155 125 L145 110 L140 85 L140 55 Z" fill="#86efac" stroke="#16a34a" strokeWidth="1.5" opacity="0.8"/>
+            {/* Southern Colonies region */}
+            <path d="M145 110 L155 125 L175 118 L205 115 L240 120 L265 128 L285 130 L285 175 L270 200 L255 220 L240 240 L220 255 L200 265 L180 265 L160 258 L145 248 L130 235 L120 218 L110 200 L100 180 L105 150 L115 130 Z" fill="#fca5a5" stroke="#dc2626" strokeWidth="1.5" opacity="0.8"/>
+            {/* colony dividing lines */}
+            <path d="M150 25 L140 55 L140 85 L145 110" stroke="#292524" strokeWidth="1" strokeDasharray="4,3" opacity="0.5"/>
+            <path d="M270 68 L285 130" stroke="#292524" strokeWidth="1" strokeDasharray="4,3" opacity="0.5"/>
+            {/* colony name labels */}
+            <text x="215" y="36" textAnchor="middle" fontSize="9" fill="#1e3a8a" fontFamily="sans-serif" fontWeight="bold">NEW ENGLAND</text>
+            <text x="215" y="47" textAnchor="middle" fontSize="7.5" fill="#1e3a8a" fontFamily="sans-serif">MA · CT · RI · NH</text>
+            <text x="215" y="90" textAnchor="middle" fontSize="9" fill="#14532d" fontFamily="sans-serif" fontWeight="bold">MIDDLE</text>
+            <text x="215" y="101" textAnchor="middle" fontSize="7.5" fill="#14532d" fontFamily="sans-serif">NY · NJ · PA · DE</text>
+            <text x="195" y="185" textAnchor="middle" fontSize="9" fill="#7f1d1d" fontFamily="sans-serif" fontWeight="bold">SOUTHERN</text>
+            <text x="195" y="196" textAnchor="middle" fontSize="7.5" fill="#7f1d1d" fontFamily="sans-serif">VA · MD · NC · SC · GA</text>
+            {/* compass rose */}
+            <g transform="translate(355, 55)">
+              <circle cx="0" cy="0" r="20" fill="#fff" stroke="#9ca3af" strokeWidth="1.5" opacity="0.9"/>
+              <polygon points="0,-18 4,-6 -4,-6" fill="#374151"/>
+              <polygon points="0,18 4,6 -4,6" fill="#9ca3af"/>
+              <polygon points="-18,0 -6,-4 -6,4" fill="#9ca3af"/>
+              <polygon points="18,0 6,-4 6,4" fill="#9ca3af"/>
+              <text x="0" y="-8" textAnchor="middle" fontSize="8" fill="#fff" fontFamily="sans-serif" fontWeight="bold">N</text>
+            </g>
+            {/* legend */}
+            <rect x="12" y="215" width="160" height="55" fill="#fff" stroke="#9ca3af" strokeWidth="1.5" rx="6" opacity="0.92"/>
+            <rect x="20" y="224" width="14" height="10" fill="#60a5fa" stroke="#1d4ed8" strokeWidth="1" rx="2"/>
+            <text x="40" y="233" fontSize="9" fill="#292524" fontFamily="sans-serif" fontWeight="bold">New England</text>
+            <rect x="20" y="239" width="14" height="10" fill="#86efac" stroke="#16a34a" strokeWidth="1" rx="2"/>
+            <text x="40" y="248" fontSize="9" fill="#292524" fontFamily="sans-serif" fontWeight="bold">Middle Colonies</text>
+            <rect x="20" y="254" width="14" height="10" fill="#fca5a5" stroke="#dc2626" strokeWidth="1" rx="2"/>
+            <text x="40" y="263" fontSize="9" fill="#292524" fontFamily="sans-serif" fontWeight="bold">Southern Colonies</text>
+            {/* Atlantic Ocean label */}
+            <text x="358" y="160" textAnchor="middle" fontSize="10" fill="#0369a1" fontFamily="sans-serif" fontWeight="bold" transform="rotate(90 358 160)">ATLANTIC OCEAN</text>
+            {/* title */}
+            <text x="200" y="272" textAnchor="middle" fontSize="11" fill="#292524" fontFamily="sans-serif" fontWeight="bold">13 Colonies — 3 Regions</text>
+          </svg>
+        ),
+
+        // ── CHARACTER PORTRAITS (200×200, height 160) ──
+
+        penn: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#ede9fe" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#c4b5fd" opacity="0.35"/>
+            <rect x="20" y="110" width="9" height="58" fill="#92400e" stroke="#1c1917" strokeWidth="1.5"/>
+            <circle cx="24" cy="96" r="25" fill="#4ade80" stroke="#1c1917" strokeWidth="2" opacity="0.8"/>
+            <ellipse cx="100" cy="54" rx="34" ry="8" fill="#292524" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="77" y="23" width="46" height="32" fill="#292524" stroke="#1c1917" strokeWidth="2" rx="2"/>
+            <circle cx="100" cy="82" r="27" fill="#fde8c8" stroke="#1c1917" strokeWidth="2.5"/>
+            <circle cx="90" cy="77" r="3.5" fill="#1c1917"/>
+            <circle cx="110" cy="77" r="3.5" fill="#1c1917"/>
+            <path d="M90 92 Q100 101 110 92" fill="none" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <rect x="75" y="108" width="50" height="52" fill="#44403c" stroke="#1c1917" strokeWidth="2" rx="3"/>
+            <path d="M89 108 L100 120 L111 108" fill="#f5f5f4" stroke="#1c1917" strokeWidth="1.5" strokeLinejoin="round"/>
+            <path d="M75 122 L50 145" stroke="#44403c" strokeWidth="12" strokeLinecap="round"/>
+            <circle cx="48" cy="146" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M125 122 L150 138" stroke="#44403c" strokeWidth="12" strokeLinecap="round"/>
+            <rect x="145" y="110" width="44" height="54" fill="#fef3c7" rx="4" stroke="#d4880f" strokeWidth="2.5"/>
+            <rect x="145" y="110" width="44" height="9" fill="#f0b429" rx="3"/>
+            <rect x="145" y="155" width="44" height="9" fill="#f0b429" rx="3"/>
+            <text x="167" y="131" textAnchor="middle" fontSize="10" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">PA</text>
+            <text x="167" y="144" textAnchor="middle" fontSize="8" fill="#92400e" fontFamily="sans-serif">CHARTER</text>
+            <line x1="152" y1="149" x2="181" y2="149" stroke="#d4880f" strokeWidth="1"/>
+            <rect x="83" y="158" width="13" height="22" fill="#292524" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <rect x="104" y="158" width="13" height="22" fill="#292524" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <text x="100" y="196" textAnchor="middle" fontSize="11" fill="#5b21b6" fontFamily="sans-serif" fontWeight="bold">William Penn 🕊️</text>
+          </svg>
+        ),
+
+        duke: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#fef3c7" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#fde68a" opacity="0.5"/>
+            <path d="M66 46 L66 28 L80 39 L100 22 L120 39 L134 28 L134 46Z" fill="#fbbf24" stroke="#1c1917" strokeWidth="2.5"/>
+            <rect x="64" y="44" width="72" height="12" fill="#fbbf24" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="80" cy="34" r="4" fill="#dc2626"/>
+            <circle cx="100" cy="27" r="5" fill="#3b82f6"/>
+            <circle cx="120" cy="34" r="4" fill="#16a34a"/>
+            <ellipse cx="69" cy="86" rx="13" ry="24" fill="#f5f5f4" stroke="#1c1917" strokeWidth="2"/>
+            <ellipse cx="131" cy="86" rx="13" ry="24" fill="#f5f5f4" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="100" cy="78" r="27" fill="#fde8c8" stroke="#1c1917" strokeWidth="2.5"/>
+            <circle cx="90" cy="73" r="3.5" fill="#1c1917"/>
+            <circle cx="110" cy="73" r="3.5" fill="#1c1917"/>
+            <path d="M93 88 Q105 95 114 88" fill="none" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M70 105 L130 105 L136 168 L64 168Z" fill="#7c3aed" stroke="#1c1917" strokeWidth="2"/>
+            <path d="M72 107 L132 152" stroke="#fbbf24" strokeWidth="6" opacity="0.8"/>
+            <circle cx="97" cy="122" r="3.5" fill="#fbbf24" stroke="#1c1917" strokeWidth="1"/>
+            <circle cx="97" cy="134" r="3.5" fill="#fbbf24" stroke="#1c1917" strokeWidth="1"/>
+            <circle cx="97" cy="146" r="3.5" fill="#fbbf24" stroke="#1c1917" strokeWidth="1"/>
+            <path d="M71 118 L44 136" stroke="#7c3aed" strokeWidth="12" strokeLinecap="round"/>
+            <path d="M129 118 L156 136" stroke="#7c3aed" strokeWidth="12" strokeLinecap="round"/>
+            <circle cx="42" cy="137" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <circle cx="158" cy="137" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="28" y="148" width="144" height="22" fill="#fbbf24" rx="4" stroke="#1c1917" strokeWidth="2"/>
+            <text x="100" y="163" textAnchor="middle" fontSize="13" fill="#1c1917" fontFamily="sans-serif" fontWeight="bold">→ NEW YORK!</text>
+            <rect x="82" y="160" width="13" height="22" fill="#4c1d95" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <rect x="105" y="160" width="13" height="22" fill="#4c1d95" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <text x="100" y="196" textAnchor="middle" fontSize="11" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">Duke of York 👑</text>
+          </svg>
+        ),
+
+        rhodeisland: (
+          <svg viewBox="0 0 200 148" style={{ width: "100%", height: 118, display: "block" }}>
+            <rect width="200" height="148" fill="#fee2e2" rx="12"/>
+            <rect x="0" y="124" width="200" height="24" fill="#fca5a5" opacity="0.4"/>
+            <rect x="4" y="12" width="58" height="46" fill="#fafaf9" rx="6" stroke="#d6d3d1" strokeWidth="1.5"/>
+            <text x="33" y="32" textAnchor="middle" fontSize="13" fill="#78716c" fontFamily="sans-serif" fontWeight="bold">MA</text>
+            <text x="33" y="46" textAnchor="middle" fontSize="8" fill="#9a958d" fontFamily="sans-serif">kicked out!</text>
+            <line x1="12" y1="18" x2="54" y2="50" stroke="#dc2626" strokeWidth="4" strokeLinecap="round"/>
+            <line x1="54" y1="18" x2="12" y2="50" stroke="#dc2626" strokeWidth="4" strokeLinecap="round"/>
+            <line x1="68" y1="55" x2="110" y2="55" stroke="#16a34a" strokeWidth="2.5" strokeDasharray="5"/>
+            <path d="M109 49 L122 55 L109 61Z" fill="#16a34a"/>
+            <rect x="126" y="12" width="68" height="46" fill="#dcfce7" rx="6" stroke="#4ade80" strokeWidth="2"/>
+            <text x="160" y="30" textAnchor="middle" fontSize="9" fill="#166534" fontFamily="sans-serif" fontWeight="bold">RHODE</text>
+            <text x="160" y="41" textAnchor="middle" fontSize="9" fill="#166534" fontFamily="sans-serif" fontWeight="bold">ISLAND ✓</text>
+            <path d="M135 50 L145 58 L170 35" fill="none" stroke="#16a34a" strokeWidth="3" strokeLinecap="round"/>
+            <circle cx="74" cy="78" r="13" fill="#fde8c8" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="70" cy="75" r="2" fill="#1c1917"/>
+            <circle cx="79" cy="75" r="2" fill="#1c1917"/>
+            <path d="M70 84 Q74 88 79 84" fill="none" stroke="#1c1917" strokeWidth="1.5"/>
+            <ellipse cx="74" cy="65" rx="16" ry="4" fill="#292524"/>
+            <rect x="67" y="57" width="14" height="9" fill="#292524" rx="1"/>
+            <path d="M74 91 L74 108" stroke="#44403c" strokeWidth="7" strokeLinecap="round"/>
+            <path d="M74 96 L62 104" stroke="#44403c" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M74 96 L85 103" stroke="#44403c" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M74 108 L65 122" stroke="#44403c" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M74 108 L82 121" stroke="#44403c" strokeWidth="5" strokeLinecap="round"/>
+            <text x="74" y="136" textAnchor="middle" fontSize="7" fill="#7f1d1d" fontFamily="sans-serif" fontWeight="bold">Roger W.</text>
+            <circle cx="114" cy="75" r="13" fill="#fde8c8" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="110" cy="72" r="2" fill="#1c1917"/>
+            <circle cx="119" cy="72" r="2" fill="#1c1917"/>
+            <path d="M110 81 Q114 85 119 81" fill="none" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M102 73 Q114 58 126 73" fill="#d6d3d1" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M114 88 L114 108" stroke="#9b59b6" strokeWidth="7" strokeLinecap="round"/>
+            <path d="M114 94 L102 102" stroke="#9b59b6" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M114 94 L126 101" stroke="#9b59b6" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M108 108 L100 122" stroke="#9b59b6" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M120 108 L126 120" stroke="#9b59b6" strokeWidth="5" strokeLinecap="round"/>
+            <text x="114" y="136" textAnchor="middle" fontSize="7" fill="#7f1d1d" fontFamily="sans-serif" fontWeight="bold">Anne H.</text>
+          </svg>
+        ),
+
+        oglethorpe: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#dcfce7" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#86efac" opacity="0.4"/>
+            <circle cx="172" cy="28" r="18" fill="#fde68a" opacity="0.8"/>
+            {[0,40,80,120,160,200,240,280,320].map((deg, i) => {
+              const r = deg * Math.PI / 180;
+              return <line key={i} x1={172 + 20*Math.cos(r)} y1={28 + 20*Math.sin(r)} x2={172 + 30*Math.cos(r)} y2={28 + 30*Math.sin(r)} stroke="#fbbf24" strokeWidth="2.5"/>;
+            })}
+            <path d="M63 54 Q100 32 137 54 L132 60 L100 42 L68 60Z" fill="#1c4e3a" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="70" y="57" width="60" height="9" fill="#1c4e3a" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <circle cx="100" cy="84" r="27" fill="#fde8c8" stroke="#1c1917" strokeWidth="2.5"/>
+            <circle cx="89" cy="78" r="3.5" fill="#1c1917"/>
+            <circle cx="111" cy="78" r="3.5" fill="#1c1917"/>
+            <ellipse cx="83" cy="89" rx="7" ry="5" fill="#fda4af" opacity="0.5"/>
+            <ellipse cx="117" cy="89" rx="7" ry="5" fill="#fda4af" opacity="0.5"/>
+            <path d="M87 93 Q100 107 113 93" fill="none" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M70 111 L130 111 L134 168 L66 168Z" fill="#1c4e3a" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="62" y="109" width="18" height="8" fill="#fbbf24" rx="2" stroke="#1c1917" strokeWidth="1"/>
+            <rect x="120" y="109" width="18" height="8" fill="#fbbf24" rx="2" stroke="#1c1917" strokeWidth="1"/>
+            <circle cx="94" cy="126" r="3.5" fill="#fbbf24"/>
+            <circle cx="106" cy="126" r="3.5" fill="#fbbf24"/>
+            <path d="M71 125 L50 148" stroke="#1c4e3a" strokeWidth="12" strokeLinecap="round"/>
+            <circle cx="48" cy="149" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M129 125 L158 116" stroke="#1c4e3a" strokeWidth="12" strokeLinecap="round"/>
+            <circle cx="160" cy="115" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <text x="165" y="105" textAnchor="middle" fontSize="14">✨</text>
+            <rect x="20" y="148" width="160" height="23" fill="#4ade80" rx="5" stroke="#1c1917" strokeWidth="2"/>
+            <text x="100" y="164" textAnchor="middle" fontSize="12" fill="#14532d" fontFamily="sans-serif" fontWeight="bold">GEORGIA — FRESH START!</text>
+            <rect x="82" y="160" width="13" height="22" fill="#1c4e3a" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <rect x="105" y="160" width="13" height="22" fill="#1c4e3a" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <text x="100" y="196" textAnchor="middle" fontSize="11" fill="#14532d" fontFamily="sans-serif" fontWeight="bold">James Oglethorpe 🌟</text>
+          </svg>
+        ),
+
+        baltimore: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#f3e8ff" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#d8b4fe" opacity="0.4"/>
+            <rect x="158" y="14" width="28" height="50" fill="#fef9c3" rx="14" stroke="#d6d3d1" strokeWidth="1.5"/>
+            <line x1="172" y1="18" x2="172" y2="58" stroke="#a855f7" strokeWidth="2"/>
+            <line x1="162" y1="32" x2="182" y2="32" stroke="#a855f7" strokeWidth="2"/>
+            <ellipse cx="100" cy="50" rx="37" ry="9" fill="#1c1917" stroke="#1c1917" strokeWidth="2"/>
+            <path d="M72 48 Q72 27 100 25 Q128 27 128 48" fill="#292524" stroke="#1c1917" strokeWidth="2"/>
+            <path d="M134 46 Q148 28 140 16 Q142 30 130 42" fill="#9333ea" stroke="#7c3aed" strokeWidth="1"/>
+            <circle cx="100" cy="79" r="27" fill="#fde8c8" stroke="#1c1917" strokeWidth="2.5"/>
+            <circle cx="90" cy="74" r="3.5" fill="#1c1917"/>
+            <circle cx="110" cy="74" r="3.5" fill="#1c1917"/>
+            <path d="M90 89 Q100 98 110 89" fill="none" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M68 106 L132 106 L136 168 L64 168Z" fill="#3b0764" stroke="#1c1917" strokeWidth="2"/>
+            <path d="M68 106 L84 132 L78 168 L64 168Z" fill="#7c3aed"/>
+            <path d="M132 106 L116 132 L122 168 L136 168Z" fill="#7c3aed"/>
+            <rect x="95" y="114" width="10" height="28" fill="#fbbf24" stroke="#1c1917" strokeWidth="2" rx="1"/>
+            <rect x="86" y="122" width="28" height="10" fill="#fbbf24" stroke="#1c1917" strokeWidth="2" rx="1"/>
+            <path d="M70 120 L34 132" stroke="#3b0764" strokeWidth="12" strokeLinecap="round"/>
+            <path d="M130 120 L166 132" stroke="#3b0764" strokeWidth="12" strokeLinecap="round"/>
+            <circle cx="32" cy="133" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <circle cx="168" cy="133" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="20" y="149" width="160" height="22" fill="#9333ea" rx="5" stroke="#1c1917" strokeWidth="2"/>
+            <text x="100" y="164" textAnchor="middle" fontSize="13" fill="#faf5ff" fontFamily="sans-serif" fontWeight="bold">MARYLAND ✝️</text>
+            <rect x="82" y="160" width="13" height="22" fill="#3b0764" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <rect x="105" y="160" width="13" height="22" fill="#3b0764" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <text x="100" y="196" textAnchor="middle" fontSize="11" fill="#6b21a8" fontFamily="sans-serif" fontWeight="bold">Lord Baltimore ✝️</text>
+          </svg>
+        ),
+
+        washington: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#e2e8f0" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#94a3b8" opacity="0.3"/>
+            <rect x="118" y="48" width="70" height="82" fill="#d6d3d1" stroke="#78716c" strokeWidth="1.5" rx="2"/>
+            <rect x="126" y="38" width="11" height="18" fill="#78716c" stroke="#57534e" strokeWidth="1"/>
+            <rect x="169" y="38" width="11" height="18" fill="#78716c" stroke="#57534e" strokeWidth="1"/>
+            <rect x="144" y="88" width="20" height="42" fill="#57534e"/>
+            <text x="153" y="68" textAnchor="middle" fontSize="6.5" fill="#44403c" fontFamily="sans-serif" fontWeight="bold">FORT</text>
+            <text x="153" y="77" textAnchor="middle" fontSize="5.5" fill="#44403c" fontFamily="sans-serif" fontWeight="bold">NECESSITY</text>
+            <path d="M62 54 Q100 30 138 54 L133 60 L100 40 L67 60Z" fill="#1e3a5f" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="68" y="57" width="64" height="9" fill="#1e3a5f" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <circle cx="100" cy="83" r="27" fill="#fde8c8" stroke="#1c1917" strokeWidth="2.5"/>
+            <circle cx="89" cy="78" r="3.5" fill="#1c1917"/>
+            <circle cx="111" cy="78" r="3.5" fill="#1c1917"/>
+            <path d="M91 93 L109 93" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M74 61 Q64 76 68 93" fill="none" stroke="#292524" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M126 61 Q136 76 132 93" fill="none" stroke="#292524" strokeWidth="5" strokeLinecap="round"/>
+            <path d="M70 110 L130 110 L134 168 L66 168Z" fill="#1d4ed8" stroke="#1c1917" strokeWidth="2"/>
+            <path d="M70 110 L85 132 L79 168 L66 168Z" fill="#fef3c7"/>
+            <path d="M130 110 L115 132 L121 168 L134 168Z" fill="#fef3c7"/>
+            <circle cx="95" cy="122" r="3" fill="#fbbf24"/>
+            <circle cx="95" cy="133" r="3" fill="#fbbf24"/>
+            <circle cx="105" cy="122" r="3" fill="#fbbf24"/>
+            <circle cx="105" cy="133" r="3" fill="#fbbf24"/>
+            <path d="M71 123 L46 144" stroke="#1d4ed8" strokeWidth="12" strokeLinecap="round"/>
+            <circle cx="44" cy="145" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M129 123 L114 148" stroke="#1d4ed8" strokeWidth="12" strokeLinecap="round"/>
+            <circle cx="112" cy="149" r="7" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="112" y1="142" x2="106" y2="182" stroke="#78716c" strokeWidth="4" strokeLinecap="round"/>
+            <path d="M106 182 L104 174 L110 174Z" fill="#78716c"/>
+            <rect x="22" y="150" width="84" height="19" fill="#1e3a5f" rx="4" stroke="#1c1917" strokeWidth="1.5"/>
+            <text x="64" y="163" textAnchor="middle" fontSize="8.5" fill="#fff" fontFamily="sans-serif" fontWeight="bold">Young GW ⚔️</text>
+            <rect x="82" y="161" width="13" height="22" fill="#1e3a5f" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <rect x="105" y="161" width="13" height="22" fill="#1e3a5f" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <text x="100" y="196" textAnchor="middle" fontSize="11" fill="#1e3a5f" fontFamily="sans-serif" fontWeight="bold">George Washington</text>
+          </svg>
+        ),
+
+        nativeleaders: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#ffedd5" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#fb923c" opacity="0.25"/>
+            <line x1="100" y1="8" x2="100" y2="192" stroke="#c2410c" strokeWidth="1.5" strokeDasharray="5"/>
+            {[-18,-9,0,9,18].map((angle, i) => {
+              const r = (angle - 90) * Math.PI / 180;
+              return <line key={i} x1={50 + 18*Math.cos(r)} y1={40 + 18*Math.sin(r)} x2={50 + 32*Math.cos(r)} y2={40 + 32*Math.sin(r)} stroke={i%2===0?"#dc2626":"#f97316"} strokeWidth="4" strokeLinecap="round"/>;
+            })}
+            <ellipse cx="50" cy="40" rx="18" ry="6" fill="#92400e" opacity="0.5"/>
+            <circle cx="50" cy="60" r="20" fill="#d97706" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="43" cy="56" r="2.5" fill="#1c1917"/>
+            <circle cx="57" cy="56" r="2.5" fill="#1c1917"/>
+            <path d="M44 68 L56 68" stroke="#1c1917" strokeWidth="2" strokeLinecap="round"/>
+            <rect x="35" y="80" width="30" height="44" fill="#b45309" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            {[37,42,47,52,57,62].map((x,i) => <line key={i} x1={x} y1="124" x2={x} y2="133" stroke="#92400e" strokeWidth="2"/>)}
+            <path d="M35 92 L15 110" stroke="#b45309" strokeWidth="9" strokeLinecap="round"/>
+            <path d="M65 92 L82 104" stroke="#b45309" strokeWidth="9" strokeLinecap="round"/>
+            <path d="M78 92 Q92 106 78 120" fill="none" stroke="#78716c" strokeWidth="3" strokeLinecap="round"/>
+            <line x1="78" y1="92" x2="78" y2="120" stroke="#78716c" strokeWidth="1.5" strokeDasharray="3"/>
+            <line x1="66" y1="106" x2="90" y2="100" stroke="#92400e" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M90 100 L86 96 L86 104Z" fill="#92400e"/>
+            <rect x="38" y="124" width="10" height="24" fill="#78350f" stroke="#1c1917" strokeWidth="1.5" rx="1"/>
+            <rect x="52" y="124" width="10" height="24" fill="#78350f" stroke="#1c1917" strokeWidth="1.5" rx="1"/>
+            <text x="50" y="158" textAnchor="middle" fontSize="9" fill="#7c2d12" fontFamily="sans-serif" fontWeight="bold">PONTIAC</text>
+            <text x="50" y="168" textAnchor="middle" fontSize="7" fill="#9a3412" fontFamily="sans-serif">Ottawa · Ohio</text>
+            {[-18,-9,0,9,18].map((angle, i) => {
+              const r = (angle - 90) * Math.PI / 180;
+              return <line key={`m${i}`} x1={150 + 18*Math.cos(r)} y1={40 + 18*Math.sin(r)} x2={150 + 32*Math.cos(r)} y2={40 + 32*Math.sin(r)} stroke={i%2===0?"#1e40af":"#7c3aed"} strokeWidth="4" strokeLinecap="round"/>;
+            })}
+            <ellipse cx="150" cy="40" rx="18" ry="6" fill="#92400e" opacity="0.5"/>
+            <circle cx="150" cy="60" r="20" fill="#d97706" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="143" cy="56" r="2.5" fill="#1c1917"/>
+            <circle cx="157" cy="56" r="2.5" fill="#1c1917"/>
+            <path d="M143 52 L150 55 L157 52" fill="none" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M144 68 Q150 64 156 68" fill="none" stroke="#1c1917" strokeWidth="2" strokeLinecap="round"/>
+            <rect x="135" y="80" width="30" height="44" fill="#b45309" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            {[137,142,147,152,157,162].map((x,i) => <line key={i} x1={x} y1="124" x2={x} y2="133" stroke="#92400e" strokeWidth="2"/>)}
+            <path d="M135 92 L116 106" stroke="#b45309" strokeWidth="9" strokeLinecap="round"/>
+            <path d="M165 92 L186 106" stroke="#b45309" strokeWidth="9" strokeLinecap="round"/>
+            <line x1="108" y1="86" x2="118" y2="130" stroke="#78716c" strokeWidth="3.5" strokeLinecap="round"/>
+            <path d="M108 86 L104 95 L114 94Z" fill="#78716c"/>
+            <rect x="138" y="124" width="10" height="24" fill="#78350f" stroke="#1c1917" strokeWidth="1.5" rx="1"/>
+            <rect x="152" y="124" width="10" height="24" fill="#78350f" stroke="#1c1917" strokeWidth="1.5" rx="1"/>
+            <text x="150" y="158" textAnchor="middle" fontSize="9" fill="#7c2d12" fontFamily="sans-serif" fontWeight="bold">METACOM</text>
+            <text x="150" y="168" textAnchor="middle" fontSize="7" fill="#9a3412" fontFamily="sans-serif">Wampanoag · NE</text>
+            <text x="100" y="186" textAnchor="middle" fontSize="9" fill="#7c2d12" fontFamily="sans-serif" fontWeight="bold">Both Fought Back! 🏹⚔️</text>
+          </svg>
+        ),
+
+        hooker: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#dbeafe" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#93c5fd" opacity="0.4"/>
+            <rect x="162" y="106" width="9" height="62" fill="#92400e" stroke="#1c1917" strokeWidth="1.5"/>
+            <circle cx="166" cy="93" r="23" fill="#4ade80" stroke="#1c1917" strokeWidth="2" opacity="0.75"/>
+            <rect x="22" y="114" width="8" height="54" fill="#92400e" stroke="#1c1917" strokeWidth="1.5"/>
+            <circle cx="26" cy="102" r="19" fill="#4ade80" stroke="#1c1917" strokeWidth="2" opacity="0.65"/>
+            <rect x="78" y="18" width="44" height="38" fill="#1c1917" rx="2" stroke="#1c1917" strokeWidth="2"/>
+            <ellipse cx="100" cy="58" rx="32" ry="7" fill="#1c1917" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="78" y="49" width="44" height="6" fill="#f5f5f4"/>
+            <circle cx="100" cy="83" r="26" fill="#fde8c8" stroke="#1c1917" strokeWidth="2.5"/>
+            <circle cx="90" cy="78" r="3.5" fill="#1c1917"/>
+            <circle cx="110" cy="78" r="3.5" fill="#1c1917"/>
+            <path d="M91 92 Q100 100 109 92" fill="none" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M73 109 L127 109 L131 168 L69 168Z" fill="#1c1917" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="87" y="108" width="26" height="9" fill="#f5f5f4" rx="2"/>
+            <path d="M74 123 L51 114" stroke="#1c1917" strokeWidth="11" strokeLinecap="round"/>
+            <path d="M126 119 L152 110" stroke="#1c1917" strokeWidth="11" strokeLinecap="round"/>
+            <rect x="34" y="88" width="54" height="40" fill="#fef3c7" rx="4" stroke="#1c1917" strokeWidth="2.5"/>
+            <rect x="34" y="88" width="54" height="11" fill="#f0b429" rx="3"/>
+            <rect x="55" y="84" width="14" height="6" fill="#1c1917" rx="2"/>
+            <text x="61" y="115" textAnchor="middle" fontSize="12" fill="#1c1917" fontFamily="sans-serif" fontWeight="bold">VOTE</text>
+            <text x="61" y="125" textAnchor="middle" fontSize="8" fill="#78716c" fontFamily="sans-serif">for ALL!</text>
+            <rect x="114" y="90" width="74" height="34" fill="#3b82f6" rx="5" stroke="#1c1917" strokeWidth="2"/>
+            <text x="151" y="104" textAnchor="middle" fontSize="8" fill="#fff" fontFamily="sans-serif" fontWeight="bold">CONNECTICUT</text>
+            <text x="151" y="116" textAnchor="middle" fontSize="7.5" fill="#bfdbfe" fontFamily="sans-serif">Est. by Hooker</text>
+            <rect x="82" y="161" width="13" height="21" fill="#1c1917" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <rect x="105" y="161" width="13" height="21" fill="#1c1917" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <text x="100" y="196" textAnchor="middle" fontSize="11" fill="#1e40af" fontFamily="sans-serif" fontWeight="bold">Thomas Hooker 🗳️</text>
+          </svg>
+        ),
+
+        carteret: (
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: 160, display: "block" }}>
+            <rect width="200" height="200" fill="#fff7ed" rx="12"/>
+            <rect x="0" y="168" width="200" height="32" fill="#fdba74" opacity="0.4"/>
+            <rect x="74" y="94" width="52" height="66" fill="#fef9c3" rx="4" stroke="#d4880f" strokeWidth="2"/>
+            <text x="100" y="116" textAnchor="middle" fontSize="8.5" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">NEW</text>
+            <text x="100" y="128" textAnchor="middle" fontSize="8.5" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">JERSEY</text>
+            <path d="M82 136 L86 134 L91 138 L96 133 L101 137 L106 133 L111 137 L116 134 L118 136 L116 154 L84 154Z" fill="#fde68a" stroke="#d4880f" strokeWidth="1.5"/>
+            <path d="M22 42 Q48 24 70 42 L66 48 L48 34 L26 48Z" fill="#1e3a5f" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="26" y="45" width="40" height="8" fill="#1e3a5f" rx="2"/>
+            <circle cx="48" cy="68" r="21" fill="#fde8c8" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="41" cy="64" r="2.5" fill="#1c1917"/>
+            <circle cx="55" cy="64" r="2.5" fill="#1c1917"/>
+            <path d="M42 76 Q48 82 54 76" fill="none" stroke="#1c1917" strokeWidth="2" strokeLinecap="round"/>
+            <rect x="33" y="89" width="30" height="48" fill="#1e3a5f" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <circle cx="48" cy="100" r="3" fill="#fbbf24"/>
+            <circle cx="48" cy="110" r="3" fill="#fbbf24"/>
+            <path d="M63 99 L82 110" stroke="#1e3a5f" strokeWidth="9" strokeLinecap="round"/>
+            <circle cx="84" cy="111" r="6" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M33 99 L14 112" stroke="#1e3a5f" strokeWidth="9" strokeLinecap="round"/>
+            <rect x="36" y="136" width="10" height="28" fill="#1e3a5f" rx="1"/>
+            <rect x="53" y="136" width="10" height="28" fill="#1e3a5f" rx="1"/>
+            <text x="48" y="174" textAnchor="middle" fontSize="8" fill="#1e3a5f" fontFamily="sans-serif" fontWeight="bold">CARTERET</text>
+            <path d="M130 42 Q152 24 178 42 L174 48 L152 34 L134 48Z" fill="#7c3aed" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="134" y="45" width="40" height="8" fill="#7c3aed" rx="2"/>
+            <circle cx="152" cy="68" r="21" fill="#fde8c8" stroke="#1c1917" strokeWidth="2"/>
+            <circle cx="145" cy="64" r="2.5" fill="#1c1917"/>
+            <circle cx="159" cy="64" r="2.5" fill="#1c1917"/>
+            <path d="M146 76 Q152 82 158 76" fill="none" stroke="#1c1917" strokeWidth="2" strokeLinecap="round"/>
+            <rect x="137" y="89" width="30" height="48" fill="#7c3aed" stroke="#1c1917" strokeWidth="1.5" rx="2"/>
+            <circle cx="152" cy="100" r="3" fill="#fbbf24"/>
+            <circle cx="152" cy="110" r="3" fill="#fbbf24"/>
+            <path d="M137 99 L118 110" stroke="#7c3aed" strokeWidth="9" strokeLinecap="round"/>
+            <circle cx="116" cy="111" r="6" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M167 99 L186 112" stroke="#7c3aed" strokeWidth="9" strokeLinecap="round"/>
+            <rect x="140" y="136" width="10" height="28" fill="#7c3aed" rx="1"/>
+            <rect x="157" y="136" width="10" height="28" fill="#7c3aed" rx="1"/>
+            <text x="152" y="174" textAnchor="middle" fontSize="8" fill="#7c3aed" fontFamily="sans-serif" fontWeight="bold">BERKELEY</text>
+            <text x="100" y="195" textAnchor="middle" fontSize="10" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">Carteret &amp; Berkeley 🤝</text>
+          </svg>
+        ),
+      };
+      return scenes[type] || null;
+    }
+
+
+    // ─── VOCAB ICONS ───
+    function VocabIcon({ term, emoji }) {
+      const S = { display: "block", flexShrink: 0 };
+      const icons = {
+        // ── TRADE (green) ──
+        "Export": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#d1fae5" rx="8"/>
+            <rect x="3" y="13" width="20" height="16" rx="2" fill="#fff" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="3" y1="18" x2="23" y2="18" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="26" y1="21" x2="40" y2="21" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M36 16 L41 21 L36 26" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        "Import": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#d1fae5" rx="8"/>
+            <rect x="21" y="13" width="20" height="16" rx="2" fill="#fff" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="21" y1="18" x2="41" y2="18" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="4" y1="21" x2="18" y2="21" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M8 16 L3 21 L8 26" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        "Barter": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#d1fae5" rx="8"/>
+            <circle cx="8" cy="22" r="6" fill="#4ade80" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="8" y1="16" x2="9" y2="13" stroke="#92400e" strokeWidth="2" strokeLinecap="round"/>
+            <rect x="30" y="17" width="12" height="10" rx="4" fill="#fef3c7" stroke="#1c1917" strokeWidth="2"/>
+            <path d="M17 17 L27 17" stroke="#1c1917" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M24 13 L28 17 L24 21" fill="none" stroke="#1c1917" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M27 27 L17 27" stroke="#1c1917" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M20 23 L16 27 L20 31" fill="none" stroke="#1c1917" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        "Raw Materials": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#d1fae5" rx="8"/>
+            <rect x="5" y="8" width="34" height="12" rx="6" fill="#92400e" stroke="#1c1917" strokeWidth="2"/>
+            <ellipse cx="5" cy="14" rx="4" ry="6" fill="#a16207" stroke="#1c1917" strokeWidth="1.5"/>
+            <ellipse cx="39" cy="14" rx="4" ry="6" fill="#a16207" stroke="#1c1917" strokeWidth="1.5"/>
+            <ellipse cx="14" cy="33" rx="8" ry="6" fill="#a8a29e" stroke="#1c1917" strokeWidth="1.5"/>
+            <ellipse cx="30" cy="34" rx="7" ry="5" fill="#a8a29e" stroke="#1c1917" strokeWidth="1.5"/>
+          </svg>
+        ),
+        // ── ECONOMICS (gold) ──
+        "Mercantilism": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fef9c3" rx="8"/>
+            <line x1="22" y1="4" x2="22" y2="40" stroke="#1c1917" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="4" y1="22" x2="40" y2="13" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <line x1="6" y1="22" x2="6" y2="30" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="14" y1="22" x2="14" y2="30" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M4 30 Q10 36 16 30" fill="#fde68a" stroke="#d4880f" strokeWidth="2"/>
+            <line x1="30" y1="13" x2="30" y2="18" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="38" y1="13" x2="38" y2="18" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M28 18 Q34 22 40 18" fill="#e5e7eb" stroke="#78716c" strokeWidth="1.5"/>
+          </svg>
+        ),
+        "Protectionism": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fef9c3" rx="8"/>
+            <path d="M8 5 L28 5 L28 22 Q28 35 18 40 Q8 35 8 22Z" fill="#fef3c7" stroke="#d4880f" strokeWidth="2.5"/>
+            <line x1="18" y1="11" x2="18" y2="31" stroke="#d4880f" strokeWidth="1.5"/>
+            <line x1="11" y1="19" x2="25" y2="19" stroke="#d4880f" strokeWidth="1.5"/>
+            <line x1="33" y1="13" x2="27" y2="13" stroke="#dc2626" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M32 10 L37 13 L32 16" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <line x1="35" y1="22" x2="29" y2="22" stroke="#dc2626" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M34 19 L39 22 L34 25" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        "Triangular Trade": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fef9c3" rx="8"/>
+            <circle cx="22" cy="5" r="5" fill="#fde68a" stroke="#d4880f" strokeWidth="1.5"/>
+            <text x="22" y="8" textAnchor="middle" fontSize="5" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">EU</text>
+            <circle cx="5" cy="37" r="5" fill="#fde68a" stroke="#d4880f" strokeWidth="1.5"/>
+            <text x="5" y="40" textAnchor="middle" fontSize="5" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">AF</text>
+            <circle cx="39" cy="37" r="5" fill="#fde68a" stroke="#d4880f" strokeWidth="1.5"/>
+            <text x="39" y="40" textAnchor="middle" fontSize="5" fill="#92400e" fontFamily="sans-serif" fontWeight="bold">AM</text>
+            <line x1="18" y1="9" x2="9" y2="33" stroke="#d4880f" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="10" y1="33" x2="35" y2="33" stroke="#d4880f" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="35" y1="33" x2="26" y2="9" stroke="#d4880f" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        ),
+        "Auction": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fef9c3" rx="8"/>
+            <rect x="6" y="6" width="20" height="11" rx="3" fill="#fde68a" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="16" y1="17" x2="28" y2="34" stroke="#1c1917" strokeWidth="4" strokeLinecap="round"/>
+            <line x1="6" y1="40" x2="38" y2="40" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <line x1="32" y1="8" x2="38" y2="5" stroke="#d4880f" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="33" y1="13" x2="40" y2="12" stroke="#d4880f" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="32" y1="18" x2="38" y2="20" stroke="#d4880f" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        ),
+        // ── SOCIETY (purple) ──
+        "Region": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ede9fe" rx="8"/>
+            <rect x="5" y="7" width="34" height="28" rx="3" fill="#f5f3ff" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="5" y1="20" x2="39" y2="20" stroke="#7c3aed" strokeWidth="1.5"/>
+            <line x1="20" y1="7" x2="20" y2="35" stroke="#7c3aed" strokeWidth="1.5"/>
+            <circle cx="12" cy="13" r="2" fill="#7c3aed"/>
+            <circle cx="30" cy="13" r="2" fill="#c084fc"/>
+            <circle cx="12" cy="28" r="2" fill="#c084fc"/>
+            <circle cx="30" cy="28" r="2" fill="#7c3aed"/>
+          </svg>
+        ),
+        "Climate": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ede9fe" rx="8"/>
+            <circle cx="22" cy="12" r="8" fill="#fde68a" stroke="#d4880f" strokeWidth="2"/>
+            <path d="M14 26 Q14 20 20 20 Q22 16 26 18 Q32 16 32 22 Q36 22 36 26 Q36 30 32 30 L14 30 Q10 30 10 26 Q10 22 14 26Z" fill="#fff" stroke="#78716c" strokeWidth="1.5"/>
+            <line x1="16" y1="34" x2="14" y2="39" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="22" y1="34" x2="20" y2="39" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="28" y1="34" x2="26" y2="39" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        ),
+        "Diverse": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ede9fe" rx="8"/>
+            <circle cx="10" cy="14" r="5" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="10" y1="19" x2="10" y2="32" stroke="#7c3aed" strokeWidth="5" strokeLinecap="round"/>
+            <circle cx="22" cy="12" r="5" fill="#d97706" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="22" y1="17" x2="22" y2="30" stroke="#1e40af" strokeWidth="5" strokeLinecap="round"/>
+            <circle cx="34" cy="14" r="5" fill="#fde8c8" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="34" y1="19" x2="34" y2="32" stroke="#16a34a" strokeWidth="5" strokeLinecap="round"/>
+          </svg>
+        ),
+        "Class": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ede9fe" rx="8"/>
+            <path d="M16 8 L28 8 L28 16 L16 16Z" fill="#fbbf24" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M10 18 L34 18 L34 26 L10 26Z" fill="#c084fc" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M4 28 L40 28 L40 36 L4 36Z" fill="#60a5fa" stroke="#1c1917" strokeWidth="1.5"/>
+          </svg>
+        ),
+        "Proprietor": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ede9fe" rx="8"/>
+            <path d="M8 22 L22 8 L36 22 L36 38 L8 38Z" fill="#f5f3ff" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="17" y="28" width="10" height="10" fill="#7c3aed" opacity="0.3" stroke="#1c1917" strokeWidth="1.5"/>
+            <rect x="28" y="8" width="12" height="14" fill="#fef3c7" rx="2" stroke="#d4880f" strokeWidth="1.5"/>
+            <line x1="30" y1="12" x2="38" y2="12" stroke="#d4880f" strokeWidth="1"/>
+            <line x1="30" y1="15" x2="38" y2="15" stroke="#d4880f" strokeWidth="1"/>
+            <text x="34" y="21" textAnchor="middle" fontSize="6" fill="#d4880f" fontFamily="sans-serif" fontWeight="bold">DEED</text>
+          </svg>
+        ),
+        "Artisan": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ede9fe" rx="8"/>
+            <rect x="6" y="8" width="14" height="8" rx="3" fill="#a8a29e" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="13" y1="16" x2="22" y2="34" stroke="#1c1917" strokeWidth="4" strokeLinecap="round"/>
+            <rect x="24" y="26" width="16" height="4" rx="2" fill="#a8a29e" stroke="#1c1917" strokeWidth="1.5" transform="rotate(-30 24 26)"/>
+            <circle cx="36" cy="30" r="3" fill="#1c1917"/>
+          </svg>
+        ),
+        "Dissent": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ede9fe" rx="8"/>
+            <path d="M6 8 L38 8 Q42 8 42 12 L42 28 Q42 32 38 32 L24 32 L18 40 L18 32 L6 32 Q2 32 2 28 L2 12 Q2 8 6 8Z" fill="#f5f3ff" stroke="#7c3aed" strokeWidth="2"/>
+            <line x1="14" y1="16" x2="30" y2="26" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round"/>
+            <line x1="30" y1="16" x2="14" y2="26" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round"/>
+          </svg>
+        ),
+        // ── SLAVERY & CONFLICT (red) ──
+        "Slavery": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fee2e2" rx="8"/>
+            <circle cx="10" cy="22" r="6" fill="none" stroke="#1c1917" strokeWidth="3"/>
+            <circle cx="22" cy="22" r="6" fill="none" stroke="#1c1917" strokeWidth="3"/>
+            <circle cx="34" cy="22" r="6" fill="none" stroke="#1c1917" strokeWidth="3"/>
+            <line x1="16" y1="22" x2="16" y2="22" stroke="#1c1917" strokeWidth="3"/>
+            <line x1="28" y1="22" x2="28" y2="22" stroke="#1c1917" strokeWidth="3"/>
+          </svg>
+        ),
+        "Middle Passage": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fee2e2" rx="8"/>
+            <path d="M0 32 Q11 26 22 32 Q33 38 44 32" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.6"/>
+            <path d="M0 36 Q11 30 22 36 Q33 42 44 36" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.4"/>
+            <path d="M8 22 L36 22 L32 30 L12 30Z" fill="#78716c" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="22" y1="22" x2="22" y2="10" stroke="#57534e" strokeWidth="2"/>
+            <path d="M22 10 L34 17 L22 18Z" fill="#f5f5f4" stroke="#1c1917" strokeWidth="1"/>
+            <path d="M14 30 Q22 38 30 30" fill="none" stroke="#dc2626" strokeWidth="2" strokeDasharray="3"/>
+          </svg>
+        ),
+        "Uprising": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fee2e2" rx="8"/>
+            <path d="M22 38 L18 28 L14 30 L16 20 L12 22 L16 10 L22 14 L26 8 L28 16 L32 14 L30 24 L34 22 L30 32 L26 30Z" fill="#dc2626" stroke="#1c1917" strokeWidth="1.5"/>
+          </svg>
+        ),
+        "Ally": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fee2e2" rx="8"/>
+            <circle cx="13" cy="12" r="6" fill="#fde8c8" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="13" y1="18" x2="13" y2="32" stroke="#1e40af" strokeWidth="6" strokeLinecap="round"/>
+            <circle cx="31" cy="12" r="6" fill="#fde8c8" stroke="#1c1917" strokeWidth="2"/>
+            <line x1="31" y1="18" x2="31" y2="32" stroke="#dc2626" strokeWidth="6" strokeLinecap="round"/>
+            <path d="M19 24 Q22 22 25 24" fill="none" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+          </svg>
+        ),
+        "Treaty": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#fee2e2" rx="8"/>
+            <rect x="8" y="6" width="28" height="32" fill="#fef3c7" rx="3" stroke="#1c1917" strokeWidth="2"/>
+            <rect x="8" y="6" width="28" height="7" fill="#f0b429" rx="2"/>
+            <line x1="13" y1="20" x2="31" y2="20" stroke="#78716c" strokeWidth="1.5"/>
+            <line x1="13" y1="24" x2="31" y2="24" stroke="#78716c" strokeWidth="1.5"/>
+            <line x1="13" y1="28" x2="25" y2="28" stroke="#78716c" strokeWidth="1.5"/>
+            <circle cx="30" cy="32" r="5" fill="#dc2626" opacity="0.7" stroke="#1c1917" strokeWidth="1.5"/>
+          </svg>
+        ),
+        // ── KEY EVENTS (orange) ──
+        "King Philip's War": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ffedd5" rx="8"/>
+            <line x1="10" y1="34" x2="34" y2="10" stroke="#78716c" strokeWidth="4" strokeLinecap="round"/>
+            <rect x="6" y="30" width="14" height="5" rx="2" fill="#a16207" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M32 7 L37 10 L34 13Z" fill="#78716c" stroke="#1c1917" strokeWidth="1"/>
+            <line x1="34" y1="10" x2="10" y2="34" stroke="#a16207" strokeWidth="4" strokeLinecap="round"/>
+            <rect x="24" y="9" width="14" height="5" rx="2" fill="#a16207" stroke="#1c1917" strokeWidth="1.5" transform="rotate(45 31 11)"/>
+            <path d="M9 8 L12 13 L9 13Z" fill="#a16207"/>
+          </svg>
+        ),
+        "Pontiac's Rebellion": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ffedd5" rx="8"/>
+            <rect x="10" y="20" width="24" height="20" fill="#d6d3d1" stroke="#78716c" strokeWidth="1.5" rx="1"/>
+            <rect x="14" y="14" width="6" height="10" fill="#78716c" stroke="#57534e" strokeWidth="1"/>
+            <rect x="24" y="14" width="6" height="10" fill="#78716c" stroke="#57534e" strokeWidth="1"/>
+            <path d="M14 20 Q22 38 30 20" fill="#ef4444" opacity="0.7"/>
+            <path d="M18 18 Q22 32 26 18" fill="#fbbf24" opacity="0.8"/>
+            <path d="M20 16 Q22 24 24 16" fill="#fff" opacity="0.6"/>
+          </svg>
+        ),
+        "Proclamation of 1763": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ffedd5" rx="8"/>
+            <circle cx="22" cy="22" r="16" fill="#fee2e2" stroke="#dc2626" strokeWidth="3"/>
+            <line x1="10" y1="10" x2="34" y2="34" stroke="#dc2626" strokeWidth="3" strokeLinecap="round"/>
+            <path d="M13 22 L26 22" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round"/>
+            <path d="M22 18 L26 22 L22 26" fill="none" stroke="#1c1917" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        "Great Awakening": (
+          <svg viewBox="0 0 44 44" width="44" height="44" style={S}>
+            <rect width="44" height="44" fill="#ffedd5" rx="8"/>
+            <rect x="16" y="22" width="12" height="16" fill="#f5f5f4" stroke="#1c1917" strokeWidth="1.5"/>
+            <path d="M10 22 L22 8 L34 22Z" fill="#fef3c7" stroke="#1c1917" strokeWidth="1.5"/>
+            <line x1="22" y1="4" x2="22" y2="8" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="22" y1="6" x2="22" y2="6" stroke="#fbbf24" strokeWidth="2"/>
+            <line x1="12" y1="10" x2="9" y2="7" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="32" y1="10" x2="35" y2="7" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="8" y1="18" x2="4" y2="17" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="36" y1="18" x2="40" y2="17" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="22" y1="16" x2="22" y2="20" stroke="#9333ea" strokeWidth="2"/>
+            <line x1="18" y1="18" x2="26" y2="18" stroke="#9333ea" strokeWidth="2"/>
+          </svg>
+        ),
+      };
+      const icon = icons[term];
+      if (icon) return <div style={{ flexShrink: 0, lineHeight: 0 }}>{icon}</div>;
+      return <span style={{ fontSize: 24, flexShrink: 0 }}>{emoji}</span>;
+    }
+
+    // ─── SLIDE COMPONENTS ───
+
+    function SlideTeach({ s }) {
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease" }}>
+          <div style={{ textAlign: "center", marginBottom: 16 }}>
+            {!s.illust && <div style={{ fontSize: 48, marginBottom: 4 }}>{s.emoji}</div>}
+            <h2 style={{ fontFamily: F, fontSize: 26, color: s.color || "#d4880f", margin: 0, lineHeight: 1.2 }}>{s.title}</h2>
+          </div>
+          {s.illust && <div style={{ marginBottom: 14, borderRadius: 14, overflow: "hidden" }}><MiniIllustration type={s.illust} /></div>}
+          {s.body && (
+            <div style={{ ...cs, fontFamily: B, fontSize: 16, color: "#3a3632", lineHeight: 1.8 }}>
+              {s.body}
+              {s.sub && <div style={{ marginTop: 10, fontSize: 14, color: "#7a756d", lineHeight: 1.6, whiteSpace: "pre-line" }}>{s.sub}</div>}
+            </div>
+          )}
+          {s.bullets && (
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+              {s.bullets.map((b, i) => (
+                <div key={i} style={{ ...cs, padding: "14px 16px", borderLeft: `3px solid ${b.color}` }}>
+                  <span style={{ fontSize: 22, marginRight: 8 }}>{b.emoji}</span>
+                  <span style={{ fontFamily: B, fontSize: 14, color: b.color, fontWeight: 600 }}>{b.text}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {s.vocabList && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+              {s.vocabList.map((v, i) => (
+                <div key={i} style={{ ...cs, padding: "12px 16px", display: "flex", alignItems: "flex-start", gap: 12 }}>
+                  <VocabIcon term={v.term} emoji={v.emoji} />
+                  <div>
+                    <div style={{ fontFamily: F, fontSize: 16, color: s.color }}>{v.term}</div>
+                    <div style={{ fontFamily: B, fontSize: 13, color: "#5a5650", marginTop: 2 }}>{v.def}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function SlideTrick({ s }) {
+      useEffect(() => { SFX.lightbulb(); }, []);
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease", textAlign: "center" }}>
+          <div style={{ fontSize: 44, marginBottom: 8 }}>💡</div>
+          <div style={{ fontFamily: M, fontSize: 11, color: "#9a958d", textTransform: "uppercase", letterSpacing: 3, marginBottom: 8 }}>Memory Trick</div>
+          <div style={{ background: `${s.color}10`, border: `2px solid ${s.color}33`, borderRadius: 18, padding: "24px 22px" }}>
+            <div style={{ fontFamily: F, fontSize: 24, color: s.color, marginBottom: 10, lineHeight: 1.3 }}>{s.trick}</div>
+            <div style={{ fontFamily: B, fontSize: 15, color: "#4a4640", lineHeight: 1.7 }}>{s.explain}</div>
+          </div>
+        </div>
+      );
+    }
+
+    function SlideVideo({ s }) {
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease" }}>
+          <a href={`https://www.youtube.com/watch?v=${s.videoId}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "block" }}>
+            <div style={{ ...cs, padding: 0, overflow: "hidden", border: "2px solid #d4880f33" }}>
+              <div style={{ background: "linear-gradient(135deg, #1a1a2e, #2c3e50)", padding: "32px 24px", textAlign: "center", position: "relative" }}>
+                <div style={{ width: 64, height: 64, background: "rgba(255,255,255,0.15)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px", border: "3px solid rgba(255,255,255,0.3)" }}>
+                  <div style={{ width: 0, height: 0, borderTop: "14px solid transparent", borderBottom: "14px solid transparent", borderLeft: "24px solid #fff", marginLeft: 4 }} />
+                </div>
+                <div style={{ fontFamily: F, fontSize: 18, color: "#fff", marginBottom: 4 }}>{s.label}</div>
+                <div style={{ fontFamily: M, fontSize: 11, color: "rgba(255,255,255,0.5)" }}>youtube.com</div>
+              </div>
+              <div style={{ padding: "14px 18px", background: "#fff" }}>
+                <div style={{ fontFamily: B, fontSize: 13, color: "#7a756d" }}>{s.note}</div>
+                <div style={{ fontFamily: M, fontSize: 11, color: "#d4880f", marginTop: 8, textTransform: "uppercase", letterSpacing: 2 }}>TAP TO WATCH ON YOUTUBE →</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      );
+    }
+
+    function SlideQuiz({ s }) {
+      const [sel, setSel] = useState(null);
+      const [rev, setRev] = useState(false);
+      const pick = (i) => {
+        if (rev) return;
+        setSel(i);
+        setRev(true);
+        if (i === s.correct) SFX.correct(); else SFX.wrong();
+      };
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease" }}>
+          <div style={{ textAlign: "center", marginBottom: 12 }}>
+            <div style={{ fontFamily: M, fontSize: 11, color: "#9a958d", textTransform: "uppercase", letterSpacing: 3 }}>Quick Check</div>
+          </div>
+          <div style={{ ...cs, marginBottom: 14 }}>
+            <div style={{ fontFamily: B, fontSize: 17, color: "#2a2520", lineHeight: 1.6 }}>{s.question}</div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {s.options.map((opt, i) => {
+              let bg = "#f8f7f4", bdr = "#e0ddd5";
+              if (rev && i === s.correct) { bg = "#e8f5e9"; bdr = "#4caf50"; }
+              else if (rev && i === sel) { bg = "#fce4ec"; bdr = "#e53935"; }
+              return (
+                <button key={i} onClick={() => pick(i)} style={{ background: bg, border: `2px solid ${bdr}`, borderRadius: 14, padding: "14px 18px", color: "#3a3632", fontSize: 16, fontFamily: B, cursor: rev ? "default" : "pointer", textAlign: "left", transition: "all 0.25s" }}>
+                  <span style={{ fontWeight: 700, color: s.color, marginRight: 10 }}>{String.fromCharCode(65 + i)}.</span>{opt}
+                </button>
+              );
+            })}
+          </div>
+          {rev && (
+            <div style={{ marginTop: 14, padding: "14px 18px", borderRadius: 14, textAlign: "center", background: sel === s.correct ? "#e8f5e9" : "#fce4ec", border: `1px solid ${sel === s.correct ? "#4caf50" : "#e53935"}`, fontFamily: B, fontSize: 16, color: "#2a2520" }}>
+              {sel === s.correct ? "🎉 Nailed it!" : `Not quite — it's: ${s.options[s.correct]}`}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function SlideWhoAmI({ s }) {
+      const [sel, setSel] = useState(null);
+      const [rev, setRev] = useState(false);
+      const pick = (i) => {
+        if (rev) return;
+        setSel(i);
+        setRev(true);
+        if (i === s.correct) SFX.correct(); else SFX.wrong();
+      };
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease" }}>
+          <div style={{ textAlign: "center", marginBottom: 8 }}>
+            <div style={{ fontSize: 36, marginBottom: 4 }}>🕵️</div>
+            <div style={{ fontFamily: M, fontSize: 11, color: "#d4880f", textTransform: "uppercase", letterSpacing: 3 }}>Who Am I?</div>
+          </div>
+          <div style={{ ...cs, textAlign: "center", border: "2px solid #d4880f33", background: "#fdf8ee", marginBottom: 14 }}>
+            <div style={{ fontFamily: "'Georgia', serif", fontSize: 17, fontStyle: "italic", color: "#3a3632", lineHeight: 1.6 }}>"{s.clue}"</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            {s.options.map((opt, i) => {
+              let bg = "#f8f7f4", bdr = "#e0ddd5";
+              if (rev && i === s.correct) { bg = "#e8f5e9"; bdr = "#4caf50"; }
+              else if (rev && i === sel) { bg = "#fce4ec"; bdr = "#e53935"; }
+              return (
+                <button key={i} onClick={() => pick(i)} style={{ background: bg, border: `2px solid ${bdr}`, borderRadius: 14, padding: "14px 12px", color: "#3a3632", fontSize: 15, fontFamily: B, cursor: rev ? "default" : "pointer", textAlign: "center", fontWeight: 600 }}>{opt}</button>
+              );
+            })}
+          </div>
+          {rev && (
+            <div style={{ marginTop: 14, padding: "14px 18px", borderRadius: 14, textAlign: "center", background: sel === s.correct ? "#e8f5e9" : "#fce4ec", border: `1px solid ${sel === s.correct ? "#4caf50" : "#e53935"}`, fontFamily: B, fontSize: 16, color: "#2a2520" }}>
+              {sel === s.correct ? "🎉 You got it!" : `It's ${s.options[s.correct]}!`}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function SortScoreScreen({ sc, total }) {
+      useEffect(() => { if (sc >= 6) SFX.celebrate(); }, []);
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease", textAlign: "center" }}>
+          <div style={{ fontSize: 48, marginBottom: 8 }}>{sc >= 9 ? "🏆" : sc >= 6 ? "⭐" : "📖"}</div>
+          <div style={{ fontFamily: F, fontSize: 28, color: "#d4880f" }}>{sc} / {total}</div>
+          <div style={{ fontFamily: B, fontSize: 16, color: "#5a5650", marginTop: 8 }}>
+            {sc >= 9 ? "Amazing! You know your regions!" : sc >= 6 ? "Solid! Review the tricky ones." : "Keep studying — the tricks will help!"}
+          </div>
+        </div>
+      );
+    }
+
+    function SlideSort({ s }) {
+      const [cur, setCur] = useState(0);
+      const [sc, setSc] = useState(0);
+      const [sel, setSel] = useState(null);
+      const [rev, setRev] = useState(false);
+      const regions = ["New England", "Middle", "Southern"];
+      const colors = { "New England": "#3498db", Middle: "#f0b429", Southern: "#e74c3c" };
+      const emojis = { "New England": "🐟", Middle: "🌾", Southern: "🏛️" };
+
+      if (cur >= s.items.length) {
+        return <SortScoreScreen sc={sc} total={s.items.length} />;
+      }
+      const item = s.items[cur];
+      const pick = (r) => {
+        if (rev) return;
+        setSel(r);
+        setRev(true);
+        if (r === item.answer) { setSc(prev => prev + 1); SFX.correct(); } else { SFX.wrong(); }
+      };
+      const next = () => { setCur(c => c + 1); setSel(null); setRev(false); };
+
+      return (
+        <div style={{ animation: "fadeIn 0.35s ease" }} key={cur}>
+          <div style={{ textAlign: "center", marginBottom: 8 }}>
+            <div style={{ fontFamily: F, fontSize: 20, color: "#d4880f" }}>{s.title}</div>
+            <div style={{ fontFamily: M, fontSize: 11, color: "#9a958d" }}>{cur + 1} of {s.items.length} · Score: {sc}</div>
+          </div>
+          <div style={{ ...cs, marginBottom: 14 }}>
+            <div style={{ fontFamily: M, fontSize: 10, color: "#aaa", marginBottom: 4 }}>Q#{item.num} from your test:</div>
+            <div style={{ fontFamily: B, fontSize: 16, color: "#2a2520", lineHeight: 1.6 }}>"{item.text}"</div>
+          </div>
+          <div style={{ display: "flex", gap: 8 }}>
+            {regions.map(r => {
+              let bg = "#f8f7f4", bdr = "#e0ddd5";
+              if (rev && r === item.answer) { bg = "#e8f5e9"; bdr = "#4caf50"; }
+              else if (rev && r === sel && r !== item.answer) { bg = "#fce4ec"; bdr = "#e53935"; }
+              return (
+                <button key={r} onClick={() => pick(r)} style={{ flex: 1, background: bg, border: `2px solid ${bdr}`, borderRadius: 14, padding: "16px 8px", color: colors[r], fontSize: 14, fontFamily: F, cursor: rev ? "default" : "pointer", textAlign: "center" }}>
+                  {emojis[r]}<br />{r}
+                </button>
+              );
+            })}
+          </div>
+          {rev && (
+            <div style={{ textAlign: "center", marginTop: 14 }}>
+              <button onClick={next} style={{ background: "linear-gradient(135deg, #d4880f, #c67a0a)", color: "#fff", border: "none", borderRadius: 12, padding: "12px 32px", fontSize: 16, fontFamily: F, cursor: "pointer" }}>
+                {cur + 1 >= s.items.length ? "SEE SCORE ✨" : "NEXT →"}
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function SlidePyramid() {
+      const levels = [
+        { label: "Top (Gentry)", people: "Rich merchants · Landowners · Church leaders", color: "#f0b429", width: "55%" },
+        { label: "Middle Class", people: "Small farmers · Shopkeepers · Artisans", color: "#bb8fce", width: "75%" },
+        { label: "Lower Class", people: "Workers · Servants · Apprentices · Indentured servants", color: "#5dade2", width: "95%" },
+      ];
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease" }}>
+          <div style={{ textAlign: "center", marginBottom: 16 }}>
+            <div style={{ fontSize: 42 }}>👑</div>
+            <div style={{ fontFamily: F, fontSize: 22, color: "#bb8fce" }}>The Class Pyramid</div>
+            <div style={{ fontFamily: B, fontSize: 13, color: "#777", marginTop: 4 }}>Small group at top, biggest group at bottom</div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+            {levels.map((l, i) => (
+              <div key={i} style={{ width: l.width, background: `${l.color}12`, border: `2px solid ${l.color}`, borderRadius: 16, padding: "14px 16px", textAlign: "center" }}>
+                <div style={{ fontFamily: F, fontSize: 15, color: l.color }}>{l.label}</div>
+                <div style={{ fontFamily: B, fontSize: 12, color: "#5a5650", marginTop: 4 }}>{l.people}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    function SlideSummary() {
+      useEffect(() => { SFX.celebrate(); }, []);
+      const sections = [
+        { title: "🗺️ Regions", color: "#2874a6", lines: ["New England = Fish & Ships (rocky soil, Puritans, artisans)", "Middle = Bread Basket (wheat, iron, Quakers, diverse, Philly)", "Southern = Plantations + Slavery (warm, House of Burgesses)"] },
+        { title: "👑 Pyramid", color: "#7d3c98", lines: ["Top: Rich merchants, Landowners, Church leaders", "Middle: Small farmers, Shopkeepers, Artisans", "Bottom: Workers, Servants, Apprentices, Indentured servants"] },
+        { title: "🎭 Figures", color: "#d4880f", lines: ["PENN → PENNsylvania (Quaker)", "Duke of YORK → New YORK", "Williams + Hutchinson → kicked from MA → Rhode Island", "OgleTHORPE = HOPE (Georgia, debtors)", "BALTIMORE → MARYLAND (Catholics)", "Hooker → Connecticut (voting)", "Pontiac → Ohio. Metacom → King Philip's War", "Washington → young soldier, Fort Necessity", "Carteret/Berkley → New Jersey"] },
+        { title: "📚 Tricky Vocab", color: "#c0392b", lines: ["EXport = EXit, IMport = IN", "ME-rcantilism = export > import", "Proclamation 1763 = STOP, no going west!", "Middle Passage = horrific journey of enslaved people", "Great Awakening = religious revival"] },
+      ];
+      return (
+        <div style={{ animation: "fadeIn 0.45s ease" }}>
+          <div style={{ textAlign: "center", marginBottom: 16 }}>
+            <div style={{ fontSize: 52 }}>🏆</div>
+            <div style={{ fontFamily: F, fontSize: 28, color: "#d4880f" }}>YOU DID IT!</div>
+            <div style={{ fontFamily: B, fontSize: 14, color: "#9a958d", marginTop: 4 }}>Screenshot this for the morning!</div>
+          </div>
+          {sections.map((sec, si) => (
+            <div key={si} style={{ ...cs, borderLeft: `4px solid ${sec.color}`, marginBottom: 10, padding: "14px 18px" }}>
+              <div style={{ fontFamily: F, fontSize: 16, color: sec.color, marginBottom: 6 }}>{sec.title}</div>
+              {sec.lines.map((l, li) => (
+                <div key={li} style={{ fontFamily: B, fontSize: 13, color: "#4a4640", lineHeight: 1.7 }}>{l}</div>
+              ))}
+            </div>
+          ))}
+          <div style={{ textAlign: "center", marginTop: 20, fontFamily: F, fontSize: 20, color: "#d4880f" }}>🌙 Good luck tomorrow!</div>
+        </div>
+      );
+    }
+
+    // ─── MAIN APP ───
+    function ColonialLesson() {
+      const [slide, setSlide] = useState(0);
+      const total = SLIDES.length;
+      const s = SLIDES[slide];
+      const pct = (slide / (total - 1)) * 100;
+      const [muted, setMuted] = useState(false);
+      const toggleMute = () => { const m = !muted; setMuted(m); SFX.muted = m; };
+
+      const cats = { intro: "Getting Started", regions: "Regions", class: "Class Structure", figures: "Key Figures", vocab: "Vocabulary", final: "Review" };
+      const catColors = { intro: "#f0b429", regions: "#3498db", class: "#bb8fce", figures: "#f0b429", vocab: "#e74c3c", final: "#58d68d" };
+
+      const prevCat = useRef(s.category);
+      useEffect(() => {
+        if (s.category !== prevCat.current) {
+          SFX.sectionChange();
+          prevCat.current = s.category;
+        }
+      }, [slide]);
+
+      const goNext = () => { SFX.whoosh(); setSlide(prev => prev + 1); };
+      const goBack = () => { SFX.tap(); setSlide(prev => prev - 1); };
+
+      return (
+        <div style={{ minHeight: "100vh", background: "linear-gradient(160deg, #faf9f6 0%, #f3f1ec 50%, #edeae3 100%)", color: "#2a2520", fontFamily: B }}>
+          {/* Back to portfolio link */}
+          <a href="/ange-portfolio/" style={{ position: "fixed", top: 12, left: 12, zIndex: 200, fontFamily: B, fontSize: 13, color: "#7a756d", textDecoration: "none", background: "rgba(250,249,246,0.92)", padding: "6px 12px", borderRadius: 20, border: "1px solid #e0ddd5", backdropFilter: "blur(8px)", display: "inline-flex", alignItems: "center", gap: 4 }}>← Portfolio</a>
+
+          {/* Sticky header with progress bar */}
+          <div style={{ position: "sticky", top: 0, zIndex: 100, background: "#faf9f6ee", padding: "8px 16px", backdropFilter: "blur(8px)", borderBottom: "1px solid #e8e5de" }}>
+            <div style={{ maxWidth: 600, margin: "0 auto" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                <span style={{ fontFamily: M, fontSize: 10, color: catColors[s.category], textTransform: "uppercase", letterSpacing: 2 }}>{cats[s.category]}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <button onClick={toggleMute} style={{ background: "none", border: "none", fontSize: 18, cursor: "pointer", padding: 0, lineHeight: 1 }} title={muted ? "Unmute" : "Mute"}>
+                    {muted ? "🔇" : "🔊"}
+                  </button>
+                  <span style={{ fontFamily: M, fontSize: 10, color: "#b5b0a8" }}>{slide + 1} / {total}</span>
+                </div>
+              </div>
+              <div style={{ height: 6, background: "#e8e5de", borderRadius: 99, overflow: "hidden" }}>
+                <div style={{ width: `${pct}%`, height: "100%", background: "linear-gradient(90deg, #d4880f, #c0392b, #7d3c98)", borderRadius: 99, transition: "width 0.4s" }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Slide content */}
+          <div style={{ maxWidth: 600, margin: "0 auto", padding: "20px 16px 100px" }}>
+            {s.type === "teach"   && <SlideTeach   s={s} key={slide} />}
+            {s.type === "trick"   && <SlideTrick   s={s} key={slide} />}
+            {s.type === "video"   && <SlideVideo   s={s} key={slide} />}
+            {s.type === "quiz"    && <SlideQuiz    s={s} key={slide} />}
+            {s.type === "whoami"  && <SlideWhoAmI  s={s} key={slide} />}
+            {s.type === "sort"    && <SlideSort    s={s} key={slide} />}
+            {s.type === "pyramid" && <SlidePyramid     key={slide} />}
+            {s.type === "summary" && <SlideSummary     key={slide} />}
+          </div>
+
+          {/* Fixed navigation bar */}
+          <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, #faf9f6ee 30%)", padding: "20px 16px 16px" }}>
+            <div style={{ maxWidth: 600, margin: "0 auto", display: "flex", gap: 12 }}>
+              {slide > 0 && (
+                <button onClick={goBack} style={{ flex: 0, background: "#fff", color: "#7a756d", border: "2px solid #e0ddd5", borderRadius: 14, padding: "14px 24px", fontSize: 16, fontFamily: F, cursor: "pointer" }}>← BACK</button>
+              )}
+              {slide < total - 1 && (
+                <button onClick={goNext} style={{ flex: 1, background: "linear-gradient(135deg, #d4880f, #c67a0a)", color: "#fff", border: "none", borderRadius: 14, padding: "14px 24px", fontSize: 18, fontFamily: F, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 12px rgba(212,136,15,0.3)" }}>NEXT →</button>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ─── MOUNT ───
+    ReactDOM.createRoot(document.getElementById('root')).render(<ColonialLesson />);
+  </script>
+</body>
+</html>
