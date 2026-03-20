@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Buddies — Angela Valenti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F8F4F4;
+      color: #1a1614;
+      min-height: 100vh;
+    }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 100;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #7a756d;
+      text-decoration: none;
+      background: rgba(248, 244, 244, 0.92);
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid #e0ddd5;
+      backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #B07A8A; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 24px 48px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #B07A8A;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.1;
+      color: #1a1614;
+      margin-bottom: 18px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: #B07A8A;
+    }
+
+    .hero-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      color: #6a6a6a;
+      line-height: 1.6;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .hero-rule {
+      width: 48px;
+      height: 2px;
+      background: #B07A8A;
+      margin: 32px auto 0;
+      border-radius: 99px;
+    }
+
+    /* ── GRID ── */
+    .grid-section {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .grid-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #b5b0a8;
+      margin-bottom: 28px;
+    }
+
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .lesson-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── LESSON CARD ── */
+    .lesson-card {
+      background: #fff;
+      border: 1px solid #e8e4de;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .lesson-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .card-icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 24px 28px;
+    }
+
+    .card-body {
+      padding: 0 24px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #b5b0a8;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 22px;
+      color: #1a1614;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #6a6a6a;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .card-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #B07A8A;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; }
+
+    /* ── COMING SOON STATE ── */
+    .card-coming {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .card-coming .card-link {
+      color: #b5b0a8;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid #e8e4de;
+      padding: 28px 24px;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #b5b0a8;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/ange-portfolio/" class="back-link">← Portfolio</a>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-eyebrow">Interactive E-Learning Series</div>
+    <h1 class="hero-title">Study <em>Buddies</em></h1>
+    <p class="hero-tagline">Teach-first e-learning with mnemonics, quizzes &amp; custom illustrations. Pick a lesson and start exploring.</p>
+    <div class="hero-rule"></div>
+  </div>
+
+  <!-- ── LESSON GRID ── -->
+  <div class="grid-section">
+    <div class="grid-label">Lessons</div>
+    <div class="lesson-grid">
+
+      <!-- Card 1: Colonial America -->
+      <div class="lesson-card">
+        <div class="card-icon-wrap">
+          <!-- Scroll + quill doodle icon, gold background circle -->
+          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+            <!-- background circle -->
+            <circle cx="60" cy="60" r="56" fill="#fff4e0" stroke="#D4880F" stroke-width="3"/>
+            <!-- parchment scroll body -->
+            <rect x="30" y="35" width="60" height="52" rx="4" fill="#fef3c7" stroke="#92400e" stroke-width="2.5"/>
+            <!-- top roll -->
+            <ellipse cx="60" cy="35" rx="30" ry="7" fill="#fde68a" stroke="#92400e" stroke-width="2.5"/>
+            <!-- bottom roll -->
+            <ellipse cx="60" cy="87" rx="30" ry="7" fill="#fde68a" stroke="#92400e" stroke-width="2.5"/>
+            <!-- scroll lines (text) -->
+            <line x1="40" y1="50" x2="80" y2="50" stroke="#a16207" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="59" x2="80" y2="59" stroke="#a16207" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="68" x2="68" y2="68" stroke="#a16207" stroke-width="1.8" stroke-linecap="round"/>
+            <!-- quill -->
+            <path d="M78 82 Q86 60 92 38" fill="none" stroke="#1c1917" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M92 38 Q82 50 78 82 Q84 58 96 42 Q94 40 92 38Z" fill="#f0fdf4" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- quill tip -->
+            <line x1="78" y1="82" x2="75" y2="86" stroke="#1c1917" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Social Studies · 5th Grade</div>
+          <div class="card-title">Colonial America</div>
+          <div class="card-desc">60+ interactive slides covering vocabulary, key figures, colonial regions &amp; class structure — with memory tricks and quizzes.</div>
+          <a href="lessons/colonial_america.html" class="card-link">Start Lesson →</a>
+        </div>
+      </div>
+
+      <!-- Card 2: Body Explorer -->
+      <div class="lesson-card">
+        <div class="card-icon-wrap">
+          <!-- Heart + arteries doodle icon, red/coral background circle -->
+          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+            <!-- background circle -->
+            <circle cx="60" cy="60" r="56" fill="#fef2f2" stroke="#E74C3C" stroke-width="3"/>
+            <!-- arteries branching out (behind heart) -->
+            <path d="M60 65 Q40 72 22 68" fill="none" stroke="#E74C3C" stroke-width="3" stroke-linecap="round"/>
+            <path d="M22 68 Q16 60 20 52" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M22 68 Q14 72 18 80" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round"/>
+            <path d="M60 65 Q80 72 98 68" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+            <path d="M98 68 Q104 60 100 52" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M98 68 Q106 72 102 80" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
+            <!-- vein down -->
+            <path d="M60 72 Q58 84 56 95" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M60 72 Q62 84 64 95" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round"/>
+            <!-- heart shape -->
+            <path d="M60 70 C60 70 34 55 34 42 C34 33 42 28 50 31 C54 33 58 37 60 41 C62 37 66 33 70 31 C78 28 86 33 86 42 C86 55 60 70 60 70Z" fill="#E74C3C" stroke="#1c1917" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- heart shine -->
+            <path d="M46 36 Q48 32 54 33" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <!-- pulse line across heart -->
+            <path d="M42 46 L50 46 L53 40 L57 54 L61 42 L65 50 L68 46 L78 46" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Science · 5th Grade</div>
+          <div class="card-title">Body Explorer: Circulatory System</div>
+          <div class="card-desc">Cells, tissue types, blood vessels, the heart &amp; blood flow — with interactive matching, drag-and-drop, and a final quiz.</div>
+          <a href="lessons/circulatory_system.html" class="card-link">Start Lesson →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">© Angela Valenti · Study Buddies E-Learning Series</div>
+
+</body>
+</html>
