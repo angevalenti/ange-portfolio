@@ -4,292 +4,404 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Study Buddies — Angela Valenti</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #F8F4F4;
-      color: #1a1614;
-      min-height: 100vh;
+    /* ── NAV BACK ── */
+    .nav-back {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mid); transition: color 0.2s;
+      display: flex; align-items: center; gap: 0.5rem;
     }
+    .nav-back:hover { color: var(--black); }
+    .nav-back::before {
+      content: '←'; font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+    .nav-back:hover::before { transform: translateX(-3px); }
 
-    /* ── BACK LINK ── */
-    .back-link {
-      position: fixed;
-      top: 16px;
-      left: 16px;
-      z-index: 100;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: #7a756d;
-      text-decoration: none;
-      background: rgba(248, 244, 244, 0.92);
-      padding: 7px 14px;
-      border-radius: 20px;
-      border: 1px solid #e0ddd5;
-      backdrop-filter: blur(8px);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s;
-    }
-    .back-link:hover { color: #B07A8A; }
+    /* ── LOCAL ACCENT ── */
+    :root { --sb-amber: #C8956C; --sb-amber-dark: #a3724a; }
 
     /* ── HERO ── */
-    .hero {
-      padding: 80px 24px 48px;
+    .project-hero {
+      background: #0e0e0e;
+      padding: 7rem 3rem 5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
       text-align: center;
-      max-width: 760px;
-      margin: 0 auto;
+    }
+    .project-hero-inner { max-width: 900px; margin: 0 auto; }
+    .project-hero-tag {
+      display: inline-block;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--sb-amber); font-weight: 500;
+      border: 1px solid rgba(200,149,108,0.3);
+      padding: 0.25rem 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .project-hero-title {
+      font-family: var(--font-body);
+      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.75rem;
+    }
+    .project-hero-desc {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3rem);
+      font-weight: 300; line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: #f8f8f4;
+      max-width: 720px; margin: 0 auto 2.5rem;
     }
 
-    .hero-eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #B07A8A;
-      margin-bottom: 16px;
+    /* ── STAT BAR ── */
+    .project-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--rule);
     }
-
-    .hero-title {
-      font-family: 'Fraunces', serif;
-      font-weight: 300;
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      line-height: 1.1;
-      color: #1a1614;
-      margin-bottom: 18px;
+    .project-stat {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid var(--rule);
+      background: var(--white);
     }
-
-    .hero-title em {
-      font-style: italic;
-      color: #B07A8A;
+    .project-stat:last-child { border-right: none; background: var(--sb-amber); }
+    .project-stat-val {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--black); line-height: 1.1; margin-bottom: 0.4rem;
     }
-
-    .hero-tagline {
-      font-family: 'Inter', sans-serif;
-      font-size: 17px;
-      color: #6a6a6a;
-      line-height: 1.6;
-      max-width: 520px;
-      margin: 0 auto;
+    .project-stat-label {
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mid);
     }
+    .project-stat:last-child .project-stat-label { color: rgba(0,0,0,0.45); }
+    .project-stat:last-child .project-stat-val { color: #fff; }
 
-    .hero-rule {
-      width: 48px;
-      height: 2px;
-      background: #B07A8A;
-      margin: 32px auto 0;
-      border-radius: 99px;
+    /* ── CONTENT SECTIONS ── */
+    .ps-section { padding: 6rem 3rem; }
+    .ps-section--light { background: #F8F4F4; }
+    .ps-section--dark  { background: #1a1a1a; }
+    .ps-section--white { background: #fff; }
+    .ps-section-inner  { max-width: 820px; margin: 0 auto; }
+
+    .ps-eyebrow {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 1rem;
     }
+    .ps-section--light .ps-eyebrow,
+    .ps-section--white .ps-eyebrow { color: var(--sb-amber-dark); }
+    .ps-section--dark  .ps-eyebrow { color: var(--sb-amber); }
 
-    /* ── GRID ── */
-    .grid-section {
-      max-width: 840px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
+    .ps-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 300; line-height: 1.02;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.75rem;
     }
+    .ps-section--light .ps-heading,
+    .ps-section--white .ps-heading { color: #0e0e0e; }
+    .ps-section--dark  .ps-heading { color: #f8f8f4; }
+    .ps-heading em { font-style: italic; }
 
-    .grid-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #b5b0a8;
-      margin-bottom: 28px;
+    .ps-body {
+      font-family: var(--font-body);
+      font-size: 0.95rem; line-height: 1.85;
+      max-width: 580px;
     }
+    .ps-section--light .ps-body,
+    .ps-section--white .ps-body { color: var(--mid); }
+    .ps-section--dark  .ps-body { color: rgba(248,248,244,0.5); }
 
-    .lesson-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+    /* ── LESSON CARDS ── */
+    .lesson-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; margin-top: 3rem;
+      border: 1px solid var(--rule);
     }
-
-    @media (max-width: 600px) {
-      .lesson-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── LESSON CARD ── */
     .lesson-card {
       background: #fff;
-      border: 1px solid #e8e4de;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
+      padding: 2.5rem 2.25rem;
+      border-right: 1px solid var(--rule);
+      display: flex; flex-direction: column;
     }
-    .lesson-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    .lesson-card:last-child { border-right: none; }
+    .lesson-card-eyebrow {
+      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+      font-weight: 600; color: var(--sb-amber); margin-bottom: 0.75rem;
     }
-
-    .card-icon-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 36px 24px 28px;
+    .lesson-card-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem; font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.01em; color: var(--black);
+      margin-bottom: 1rem;
     }
-
-    .card-body {
-      padding: 0 24px 28px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
+    .lesson-card-desc {
+      font-size: 0.88rem; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1.5rem; flex: 1;
     }
-
-    .card-tag {
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #b5b0a8;
-      margin-bottom: 8px;
+    .lesson-card-features {
+      list-style: none; margin-bottom: 2rem;
     }
-
-    .card-title {
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: 22px;
-      color: #1a1614;
-      line-height: 1.2;
-      margin-bottom: 10px;
+    .lesson-card-features li {
+      font-size: 0.75rem; line-height: 1.6; color: var(--mid);
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: baseline; gap: 0.5rem;
     }
-
-    .card-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: #6a6a6a;
-      line-height: 1.6;
-      flex: 1;
-      margin-bottom: 20px;
+    .lesson-card-features li::before {
+      content: '—'; color: var(--sb-amber); flex-shrink: 0;
+    }
+    .lesson-launch-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      background: var(--sb-amber); color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .lesson-launch-btn:hover {
+      background: var(--sb-amber-dark);
+      transform: translateY(-2px);
     }
 
-    .card-link {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: #B07A8A;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap 0.2s;
+    /* ── COMING SOON STRIP ── */
+    .coming-soon-strip {
+      border-top: 1px solid var(--rule);
+      padding: 1.75rem 2.25rem;
+      background: #F8F4F4;
+      margin-top: 0;
+      display: flex; align-items: center; gap: 1.25rem;
     }
-    .card-link:hover { gap: 10px; }
+    .coming-soon-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--sb-amber); flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100%{ opacity:1; transform: scale(1); }
+      50%{ opacity:0.4; transform: scale(0.7); }
+    }
+    .coming-soon-text {
+      font-size: 0.85rem; line-height: 1.6;
+      color: var(--mid);
+    }
+    .coming-soon-text strong { color: var(--black); font-weight: 600; }
 
-    /* ── COMING SOON STATE ── */
-    .card-coming {
-      opacity: 0.55;
-      pointer-events: none;
+    /* ── TECH GRID ── */
+    .ps-tech-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border: 1px solid var(--rule);
+      margin-top: 1rem;
     }
-    .card-coming .card-link {
-      color: #b5b0a8;
+    .ps-tech-item {
+      padding: 1.75rem 2rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .ps-tech-item:nth-child(3n) { border-right: none; }
+    .ps-tech-item:nth-last-child(-n+3) { border-bottom: none; }
+    .ps-tech-val {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 400;
+      color: var(--black); margin-bottom: 0.3rem;
+    }
+    .ps-tech-label {
+      font-size: 0.58rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--mid);
     }
 
-    /* ── FOOTER ── */
-    .footer {
-      border-top: 1px solid #e8e4de;
-      padding: 28px 24px;
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      color: #b5b0a8;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .project-hero { padding: 5rem 1.5rem 3.5rem; }
+      .project-stats { grid-template-columns: repeat(2, 1fr); }
+      .project-stat { border-bottom: 1px solid var(--rule); }
+      .project-stat:nth-child(2) { border-right: none; }
+      .project-stat:nth-child(4) { border-right: none; }
+      .project-stat:nth-child(3),
+      .project-stat:nth-child(4) { border-bottom: none; }
+      .ps-section { padding: 4rem 1.5rem; }
+      .lesson-cards { grid-template-columns: 1fr; }
+      .lesson-card { border-right: none; border-bottom: 1px solid var(--rule); }
+      .lesson-card:last-child { border-bottom: none; }
+      .ps-tech-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    @media (max-width: 600px) {
+      .ps-tech-grid { grid-template-columns: 1fr; }
+      .ps-tech-item { border-right: none; border-bottom: 1px solid var(--rule); }
+      .ps-tech-item:last-child { border-bottom: none; }
+      .lesson-launch-btn { width: 100%; justify-content: center; }
+    }
+
   </style>
 </head>
 <body>
 
-  <a href="/ange-portfolio/" class="back-link">← Portfolio</a>
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-back" href="../index.html#portfolio">Back to Portfolio</a>
+    <a class="nav-logo" href="../index.html">Angela <em>Valenti</em></a>
+  </nav>
 
-  <!-- ── HERO ── -->
-  <div class="hero">
-    <div class="hero-eyebrow">Interactive E-Learning Series</div>
-    <h1 class="hero-title">Study <em>Buddies</em></h1>
-    <p class="hero-tagline">Teach-first e-learning with mnemonics, quizzes &amp; custom illustrations. Pick a lesson and start exploring.</p>
-    <div class="hero-rule"></div>
-  </div>
+  <main>
 
-  <!-- ── LESSON GRID ── -->
-  <div class="grid-section">
-    <div class="grid-label">Lessons</div>
-    <div class="lesson-grid">
-
-      <!-- Card 1: Colonial America -->
-      <div class="lesson-card">
-        <div class="card-icon-wrap">
-          <!-- Scroll + quill doodle icon, gold background circle -->
-          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
-            <!-- background circle -->
-            <circle cx="60" cy="60" r="56" fill="#fff4e0" stroke="#D4880F" stroke-width="3"/>
-            <!-- parchment scroll body -->
-            <rect x="30" y="35" width="60" height="52" rx="4" fill="#fef3c7" stroke="#92400e" stroke-width="2.5"/>
-            <!-- top roll -->
-            <ellipse cx="60" cy="35" rx="30" ry="7" fill="#fde68a" stroke="#92400e" stroke-width="2.5"/>
-            <!-- bottom roll -->
-            <ellipse cx="60" cy="87" rx="30" ry="7" fill="#fde68a" stroke="#92400e" stroke-width="2.5"/>
-            <!-- scroll lines (text) -->
-            <line x1="40" y1="50" x2="80" y2="50" stroke="#a16207" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="40" y1="59" x2="80" y2="59" stroke="#a16207" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="40" y1="68" x2="68" y2="68" stroke="#a16207" stroke-width="1.8" stroke-linecap="round"/>
-            <!-- quill -->
-            <path d="M78 82 Q86 60 92 38" fill="none" stroke="#1c1917" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M92 38 Q82 50 78 82 Q84 58 96 42 Q94 40 92 38Z" fill="#f0fdf4" stroke="#1c1917" stroke-width="1.5"/>
-            <!-- quill tip -->
-            <line x1="78" y1="82" x2="75" y2="86" stroke="#1c1917" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="card-body">
-          <div class="card-tag">Social Studies · 5th Grade</div>
-          <div class="card-title">Colonial America</div>
-          <div class="card-desc">60+ interactive slides covering vocabulary, key figures, colonial regions &amp; class structure — with memory tricks and quizzes.</div>
-          <a href="lessons/colonial_america.html" class="card-link">Start Lesson →</a>
-        </div>
+    <!-- HERO -->
+    <section class="project-hero">
+      <div class="project-hero-inner">
+        <span class="project-hero-tag">E-Learning</span>
+        <h1 class="project-hero-title">Study Buddies</h1>
+        <p class="project-hero-desc">Interactive science lessons built for 5th graders — bold, visual, and packed with games, quizzes, and animated explorations.</p>
       </div>
+    </section>
 
-      <!-- Card 2: Body Explorer -->
-      <div class="lesson-card">
-        <div class="card-icon-wrap">
-          <!-- Heart + arteries doodle icon, red/coral background circle -->
-          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
-            <!-- background circle -->
-            <circle cx="60" cy="60" r="56" fill="#fef2f2" stroke="#E74C3C" stroke-width="3"/>
-            <!-- arteries branching out (behind heart) -->
-            <path d="M60 65 Q40 72 22 68" fill="none" stroke="#E74C3C" stroke-width="3" stroke-linecap="round"/>
-            <path d="M22 68 Q16 60 20 52" fill="none" stroke="#E74C3C" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M22 68 Q14 72 18 80" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round"/>
-            <path d="M60 65 Q80 72 98 68" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
-            <path d="M98 68 Q104 60 100 52" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M98 68 Q106 72 102 80" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
-            <!-- vein down -->
-            <path d="M60 72 Q58 84 56 95" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M60 72 Q62 84 64 95" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round"/>
-            <!-- heart shape -->
-            <path d="M60 70 C60 70 34 55 34 42 C34 33 42 28 50 31 C54 33 58 37 60 41 C62 37 66 33 70 31 C78 28 86 33 86 42 C86 55 60 70 60 70Z" fill="#E74C3C" stroke="#1c1917" stroke-width="2.5" stroke-linejoin="round"/>
-            <!-- heart shine -->
-            <path d="M46 36 Q48 32 54 33" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-            <!-- pulse line across heart -->
-            <path d="M42 46 L50 46 L53 40 L57 54 L61 42 L65 50 L68 46 L78 46" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
-          </svg>
-        </div>
-        <div class="card-body">
-          <div class="card-tag">Science · 5th Grade</div>
-          <div class="card-title">Body Explorer: Circulatory System</div>
-          <div class="card-desc">Cells, tissue types, blood vessels, the heart &amp; blood flow — with interactive matching, drag-and-drop, and a final quiz.</div>
-          <a href="lessons/circulatory_system.html" class="card-link">Start Lesson →</a>
-        </div>
+    <!-- STAT BAR -->
+    <div class="project-stats">
+      <div class="project-stat">
+        <div class="project-stat-val">5th Grade</div>
+        <div class="project-stat-label">Audience</div>
       </div>
-
+      <div class="project-stat">
+        <div class="project-stat-val">HTML / CSS / JS</div>
+        <div class="project-stat-label">Format</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">2 Lessons</div>
+        <div class="project-stat-label">Live &amp; Growing</div>
+      </div>
+      <div class="project-stat">
+        <div class="project-stat-val">No LMS</div>
+        <div class="project-stat-label">Zero Dependencies</div>
+      </div>
     </div>
-  </div>
 
-  <div class="footer">© Angela Valenti · Study Buddies E-Learning Series</div>
+    <!-- OVERVIEW -->
+    <section class="ps-section ps-section--light">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">Overview</span>
+        <h2 class="ps-heading">Science that<br><em>actually sticks.</em></h2>
+        <p class="ps-body">Study Buddies is a growing series of interactive science lessons designed to make complex body systems feel exciting and accessible for elementary learners. Each lesson is a single-file HTML experience — no frameworks, no dependencies — packed with animated SVG diagrams, drag-and-drop activities, interactive quizzes, and sound effects. The design evolves per lesson, giving each body system its own visual personality while maintaining a consistent level of interactivity and engagement.</p>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="ps-section ps-section--dark">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">Approach</span>
+        <h2 class="ps-heading">Teach first.<br><em>Then play.</em></h2>
+        <p class="ps-body">Every lesson follows a teach-first sequence: concept introduction, visual exploration, guided interaction, and assessment. Mnemonics, animations, and games aren't decorative — they're the mechanism of instruction. Each section earns its complexity only after the foundation is in place. The result feels more like an experience than a worksheet.</p>
+      </div>
+    </section>
+
+    <!-- LESSONS -->
+    <section class="ps-section ps-section--white">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">The Lessons</span>
+        <h2 class="ps-heading">Two body systems.<br><em>Fully interactive.</em></h2>
+
+        <div class="lesson-cards">
+
+          <!-- Card 1: Circulatory -->
+          <div class="lesson-card">
+            <div class="lesson-card-eyebrow">Lesson 01 · Circulatory System</div>
+            <div class="lesson-card-title">The Heart &amp; Blood Vessels</div>
+            <p class="lesson-card-desc">Heart, blood, and blood vessels — explore how your body's highway system works with interactive diagrams, drag-to-order activities, and a clickable 4-chamber heart.</p>
+            <ul class="lesson-card-features">
+              <li>9 interactive sections</li>
+              <li>SVG cell diagram with 9 clickable organelles</li>
+              <li>Drag-to-order &amp; drag-and-match quizzes</li>
+              <li>Animated 4-chamber heart diagram</li>
+              <li>Step-by-step blood flow animation</li>
+              <li>8-question scored final quiz</li>
+            </ul>
+            <a class="lesson-launch-btn" href="lessons/circulatory_system.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          </div>
+
+          <!-- Card 2: Respiratory -->
+          <div class="lesson-card">
+            <div class="lesson-card-eyebrow">Lesson 02 · Respiratory System</div>
+            <div class="lesson-card-title">Lungs, Breath &amp; Gas Exchange</div>
+            <p class="lesson-card-desc">Follow oxygen from your nose to your alveoli with animated journeys, a breathing exercise, gas exchange mini-games, and Web Audio sound effects throughout.</p>
+            <ul class="lesson-card-features">
+              <li>8 interactive sections</li>
+              <li>Clickable SVG respiratory diagram (8 hotspots)</li>
+              <li>Animated 7-stop oxygen journey</li>
+              <li>Breathe Along exercise synced to sounds</li>
+              <li>Gas exchange molecule mini-game</li>
+              <li>10-question scored final quiz</li>
+            </ul>
+            <a class="lesson-launch-btn" href="lessons/respiratory_system.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          </div>
+
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="coming-soon-strip">
+          <div class="coming-soon-dot"></div>
+          <p class="coming-soon-text">
+            <strong>More on the way.</strong> A standalone Operation-style board game covering organs from both body systems is in development — plus additional units planned for the series.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECHNICAL DETAILS -->
+    <section class="ps-section ps-section--light" style="padding-top: 0;">
+      <div class="ps-section-inner">
+        <span class="ps-eyebrow">Technical Details</span>
+        <div class="ps-tech-grid">
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">HTML / CSS / JS</div>
+            <div class="ps-tech-label">Languages</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">SVG · Web Audio API</div>
+            <div class="ps-tech-label">Key Technologies</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">No Dependencies</div>
+            <div class="ps-tech-label">Framework</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">Ages 10–11</div>
+            <div class="ps-tech-label">Audience</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">Browser-based</div>
+            <div class="ps-tech-label">Delivery</div>
+          </div>
+          <div class="ps-tech-item">
+            <div class="ps-tech-val">VS Code · GitHub Pages</div>
+            <div class="ps-tech-label">Tools &amp; Hosting</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Angela <em>Valenti</em></div>
+    <div class="footer-links">
+      <a href="../index.html">Portfolio</a>
+      <a href="../index.html">About</a>
+      <a href="../index.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 Angela Valenti</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
 
 </body>
 </html>
