@@ -19,6 +19,23 @@
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+  @media print {
+    /* hide everything interactive */
+    .no-print,
+    #root > div > a,                   /* back to portfolio link */
+    #root > div > div:first-of-type,   /* sticky progress bar */
+    #root > div > div:last-of-type     /* nav buttons row */
+    { display: none !important; }
+
+    /* reset layout for print */
+    body, #root, #root > div { background: #fff !important; }
+    * { color: #000 !important; box-shadow: none !important; }
+
+    /* remove max-width so content fills the page */
+    #root > div > div { max-width: 100% !important; padding: 0 !important; }
+
+    @page { margin: 18mm 14mm; }
+  }
   </style>
 </head>
 <body>
@@ -1149,13 +1166,13 @@
         <div style={{ animation: "fadeIn 0.45s ease" }}>
           <div style={{ textAlign: "center", marginBottom: 16 }}>
             {!s.illust && <div style={{ fontSize: 48, marginBottom: 4 }}>{s.emoji}</div>}
-            <h2 style={{ fontFamily: F, fontSize: 26, color: s.color || "#d4880f", margin: 0, lineHeight: 1.2 }}>{s.title}</h2>
+            <h2 style={{ fontFamily: F, fontSize: 30, color: s.color || "#d4880f", margin: 0, lineHeight: 1.2 }}>{s.title}</h2>
           </div>
           {s.illust && <div style={{ marginBottom: 14, borderRadius: 14, overflow: "hidden" }}><MiniIllustration type={s.illust} /></div>}
           {s.body && (
-            <div style={{ ...cs, fontFamily: B, fontSize: 16, color: "#3a3632", lineHeight: 1.8 }}>
+            <div style={{ ...cs, fontFamily: B, fontSize: 18, color: "#3a3632", lineHeight: 1.8 }}>
               {s.body}
-              {s.sub && <div style={{ marginTop: 10, fontSize: 14, color: "#7a756d", lineHeight: 1.6, whiteSpace: "pre-line" }}>{s.sub}</div>}
+              {s.sub && <div style={{ marginTop: 10, fontSize: 16, color: "#7a756d", lineHeight: 1.6, whiteSpace: "pre-line" }}>{s.sub}</div>}
             </div>
           )}
           {s.bullets && (
@@ -1163,7 +1180,7 @@
               {s.bullets.map((b, i) => (
                 <div key={i} style={{ ...cs, padding: "14px 16px", borderLeft: `3px solid ${b.color}` }}>
                   <span style={{ fontSize: 22, marginRight: 8 }}>{b.emoji}</span>
-                  <span style={{ fontFamily: B, fontSize: 14, color: b.color, fontWeight: 600 }}>{b.text}</span>
+                  <span style={{ fontFamily: B, fontSize: 16, color: b.color, fontWeight: 600 }}>{b.text}</span>
                 </div>
               ))}
             </div>
@@ -1174,8 +1191,8 @@
                 <div key={i} style={{ ...cs, padding: "12px 16px", display: "flex", alignItems: "flex-start", gap: 12 }}>
                   <VocabIcon term={v.term} emoji={v.emoji} />
                   <div>
-                    <div style={{ fontFamily: F, fontSize: 16, color: s.color }}>{v.term}</div>
-                    <div style={{ fontFamily: B, fontSize: 13, color: "#5a5650", marginTop: 2 }}>{v.def}</div>
+                    <div style={{ fontFamily: F, fontSize: 18, color: s.color }}>{v.term}</div>
+                    <div style={{ fontFamily: B, fontSize: 15, color: "#5a5650", marginTop: 2 }}>{v.def}</div>
                   </div>
                 </div>
               ))}
@@ -1192,8 +1209,8 @@
           <div style={{ fontSize: 44, marginBottom: 8 }}>💡</div>
           <div style={{ fontFamily: M, fontSize: 11, color: "#9a958d", textTransform: "uppercase", letterSpacing: 3, marginBottom: 8 }}>Memory Trick</div>
           <div style={{ background: `${s.color}10`, border: `2px solid ${s.color}33`, borderRadius: 18, padding: "24px 22px" }}>
-            <div style={{ fontFamily: F, fontSize: 24, color: s.color, marginBottom: 10, lineHeight: 1.3 }}>{s.trick}</div>
-            <div style={{ fontFamily: B, fontSize: 15, color: "#4a4640", lineHeight: 1.7 }}>{s.explain}</div>
+            <div style={{ fontFamily: F, fontSize: 27, color: s.color, marginBottom: 10, lineHeight: 1.3 }}>{s.trick}</div>
+            <div style={{ fontFamily: B, fontSize: 17, color: "#4a4640", lineHeight: 1.7 }}>{s.explain}</div>
           </div>
         </div>
       );
@@ -1236,7 +1253,7 @@
             <div style={{ fontFamily: M, fontSize: 11, color: "#9a958d", textTransform: "uppercase", letterSpacing: 3 }}>Quick Check</div>
           </div>
           <div style={{ ...cs, marginBottom: 14 }}>
-            <div style={{ fontFamily: B, fontSize: 17, color: "#2a2520", lineHeight: 1.6 }}>{s.question}</div>
+            <div style={{ fontFamily: B, fontSize: 19, color: "#2a2520", lineHeight: 1.6 }}>{s.question}</div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {s.options.map((opt, i) => {
@@ -1244,14 +1261,14 @@
               if (rev && i === s.correct) { bg = "#e8f5e9"; bdr = "#4caf50"; }
               else if (rev && i === sel) { bg = "#fce4ec"; bdr = "#e53935"; }
               return (
-                <button key={i} onClick={() => pick(i)} style={{ background: bg, border: `2px solid ${bdr}`, borderRadius: 14, padding: "14px 18px", color: "#3a3632", fontSize: 16, fontFamily: B, cursor: rev ? "default" : "pointer", textAlign: "left", transition: "all 0.25s" }}>
+                <button key={i} onClick={() => pick(i)} style={{ background: bg, border: `2px solid ${bdr}`, borderRadius: 14, padding: "15px 18px", color: "#3a3632", fontSize: 17, fontFamily: B, cursor: rev ? "default" : "pointer", textAlign: "left", transition: "all 0.25s" }}>
                   <span style={{ fontWeight: 700, color: s.color, marginRight: 10 }}>{String.fromCharCode(65 + i)}.</span>{opt}
                 </button>
               );
             })}
           </div>
           {rev && (
-            <div style={{ marginTop: 14, padding: "14px 18px", borderRadius: 14, textAlign: "center", background: sel === s.correct ? "#e8f5e9" : "#fce4ec", border: `1px solid ${sel === s.correct ? "#4caf50" : "#e53935"}`, fontFamily: B, fontSize: 16, color: "#2a2520" }}>
+            <div style={{ marginTop: 14, padding: "14px 18px", borderRadius: 14, textAlign: "center", background: sel === s.correct ? "#e8f5e9" : "#fce4ec", border: `1px solid ${sel === s.correct ? "#4caf50" : "#e53935"}`, fontFamily: B, fontSize: 17, color: "#2a2520" }}>
               {sel === s.correct ? "🎉 Nailed it!" : `Not quite — it's: ${s.options[s.correct]}`}
             </div>
           )}
@@ -1275,7 +1292,7 @@
             <div style={{ fontFamily: M, fontSize: 11, color: "#d4880f", textTransform: "uppercase", letterSpacing: 3 }}>Who Am I?</div>
           </div>
           <div style={{ ...cs, textAlign: "center", border: "2px solid #d4880f33", background: "#fdf8ee", marginBottom: 14 }}>
-            <div style={{ fontFamily: "'Georgia', serif", fontSize: 17, fontStyle: "italic", color: "#3a3632", lineHeight: 1.6 }}>"{s.clue}"</div>
+            <div style={{ fontFamily: "'Georgia', serif", fontSize: 19, fontStyle: "italic", color: "#3a3632", lineHeight: 1.6 }}>"{s.clue}"</div>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
             {s.options.map((opt, i) => {
@@ -1283,7 +1300,7 @@
               if (rev && i === s.correct) { bg = "#e8f5e9"; bdr = "#4caf50"; }
               else if (rev && i === sel) { bg = "#fce4ec"; bdr = "#e53935"; }
               return (
-                <button key={i} onClick={() => pick(i)} style={{ background: bg, border: `2px solid ${bdr}`, borderRadius: 14, padding: "14px 12px", color: "#3a3632", fontSize: 15, fontFamily: B, cursor: rev ? "default" : "pointer", textAlign: "center", fontWeight: 600 }}>{opt}</button>
+                <button key={i} onClick={() => pick(i)} style={{ background: bg, border: `2px solid ${bdr}`, borderRadius: 14, padding: "15px 12px", color: "#3a3632", fontSize: 17, fontFamily: B, cursor: rev ? "default" : "pointer", textAlign: "center", fontWeight: 600 }}>{opt}</button>
               );
             })}
           </div>
@@ -1338,7 +1355,7 @@
           </div>
           <div style={{ ...cs, marginBottom: 14 }}>
             <div style={{ fontFamily: M, fontSize: 10, color: "#aaa", marginBottom: 4 }}>Q#{item.num} from your test:</div>
-            <div style={{ fontFamily: B, fontSize: 16, color: "#2a2520", lineHeight: 1.6 }}>"{item.text}"</div>
+            <div style={{ fontFamily: B, fontSize: 17, color: "#2a2520", lineHeight: 1.6 }}>"{item.text}"</div>
           </div>
           <div style={{ display: "flex", gap: 8 }}>
             {regions.map(r => {
@@ -1412,6 +1429,10 @@
             </div>
           ))}
           <div style={{ textAlign: "center", marginTop: 20, fontFamily: F, fontSize: 20, color: "#d4880f" }}>🌙 Good luck tomorrow!</div>
+          <div className="no-print" style={{ display: "flex", gap: 12, marginTop: 24, justifyContent: "center", flexWrap: "wrap" }}>
+            <button onClick={() => window.print()} style={{ background: "linear-gradient(135deg, #d4880f, #c67a0a)", color: "#fff", border: "none", borderRadius: 14, padding: "15px 28px", fontSize: 17, fontFamily: F, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 12px rgba(212,136,15,0.3)" }}>🖨️ Print This Page</button>
+            <button onClick={() => window.print()} style={{ background: "#fff", color: "#d4880f", border: "2px solid #d4880f", borderRadius: 14, padding: "15px 28px", fontSize: 17, fontFamily: F, cursor: "pointer", letterSpacing: 1 }}>📄 Save as PDF</button>
+          </div>
         </div>
       );
     }
@@ -1440,13 +1461,13 @@
       const goBack = () => { SFX.tap(); setSlide(prev => prev - 1); };
 
       return (
-        <div style={{ minHeight: "100vh", background: "linear-gradient(160deg, #faf9f6 0%, #f3f1ec 50%, #edeae3 100%)", color: "#2a2520", fontFamily: B }}>
+        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "linear-gradient(160deg, #faf9f6 0%, #f3f1ec 50%, #edeae3 100%)", color: "#2a2520", fontFamily: B }}>
           {/* Back to portfolio link */}
           <a href="/ange-portfolio/" style={{ position: "fixed", top: 12, left: 12, zIndex: 200, fontFamily: B, fontSize: 13, color: "#7a756d", textDecoration: "none", background: "rgba(250,249,246,0.92)", padding: "6px 12px", borderRadius: 20, border: "1px solid #e0ddd5", backdropFilter: "blur(8px)", display: "inline-flex", alignItems: "center", gap: 4 }}>← Portfolio</a>
 
           {/* Sticky header with progress bar */}
-          <div style={{ position: "sticky", top: 0, zIndex: 100, background: "#faf9f6ee", padding: "8px 16px", backdropFilter: "blur(8px)", borderBottom: "1px solid #e8e5de" }}>
-            <div style={{ maxWidth: 600, margin: "0 auto" }}>
+          <div style={{ position: "sticky", top: 0, zIndex: 100, background: "#faf9f6ee", padding: "8px 16px", backdropFilter: "blur(8px)", borderBottom: "1px solid #e8e5de", flexShrink: 0 }}>
+            <div style={{ maxWidth: 720, margin: "0 auto" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                 <span style={{ fontFamily: M, fontSize: 10, color: catColors[s.category], textTransform: "uppercase", letterSpacing: 2 }}>{cats[s.category]}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -1462,8 +1483,8 @@
             </div>
           </div>
 
-          {/* Slide content */}
-          <div style={{ maxWidth: 600, margin: "0 auto", padding: "20px 16px 100px" }}>
+          {/* Slide content — fills available height, centers short content vertically */}
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "calc(100vh - 120px)", maxWidth: 720, width: "100%", margin: "0 auto", padding: "20px 20px 80px", boxSizing: "border-box" }}>
             {s.type === "teach"   && <SlideTeach   s={s} key={slide} />}
             {s.type === "trick"   && <SlideTrick   s={s} key={slide} />}
             {s.type === "video"   && <SlideVideo   s={s} key={slide} />}
@@ -1474,17 +1495,20 @@
             {s.type === "summary" && <SlideSummary     key={slide} />}
           </div>
 
-          {/* Fixed navigation bar */}
-          <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, #faf9f6ee 30%)", padding: "20px 16px 16px" }}>
-            <div style={{ maxWidth: 600, margin: "0 auto", display: "flex", gap: 12 }}>
+          {/* Fixed navigation bar — always at bottom */}
+          <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 99, background: "#faf9f6", borderTop: "1px solid #e8e5de", padding: "12px 16px 16px" }}>
+            <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", gap: 12 }}>
               {slide > 0 && (
-                <button onClick={goBack} style={{ flex: 0, background: "#fff", color: "#7a756d", border: "2px solid #e0ddd5", borderRadius: 14, padding: "14px 24px", fontSize: 16, fontFamily: F, cursor: "pointer" }}>← BACK</button>
+                <button onClick={goBack} style={{ flex: 0, background: "#fff", color: "#7a756d", border: "2px solid #e0ddd5", borderRadius: 14, padding: "17px 28px", fontSize: 17, fontFamily: F, cursor: "pointer" }}>← BACK</button>
               )}
               {slide < total - 1 && (
-                <button onClick={goNext} style={{ flex: 1, background: "linear-gradient(135deg, #d4880f, #c67a0a)", color: "#fff", border: "none", borderRadius: 14, padding: "14px 24px", fontSize: 18, fontFamily: F, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 12px rgba(212,136,15,0.3)" }}>NEXT →</button>
+                <button onClick={goNext} style={{ flex: 1, background: "linear-gradient(135deg, #d4880f, #c67a0a)", color: "#fff", border: "none", borderRadius: 14, padding: "17px 28px", fontSize: 20, fontFamily: F, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 12px rgba(212,136,15,0.3)" }}>NEXT →</button>
               )}
             </div>
           </div>
+
+          {/* Spacer so fixed nav doesn't overlap last content */}
+          <div style={{ height: 80, flexShrink: 0 }} />
         </div>
       );
     }
