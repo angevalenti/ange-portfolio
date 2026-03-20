@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Explorer: The Respiratory System | 5th Grade Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===================== CSS VARIABLES ===================== */
+:root {
+  --bg-dark: #0F172A;
+  --bg-light: #F0FDFA;
+  --bg-mid: #1E293B;
+  --teal-primary: #14B8A6;
+  --teal-dark: #0D9488;
+  --sky-blue: #38BDF8;
+  --coral-exhale: #FB7185;
+  --yellow-pop: #FBBF24;
+  --green-go: #34D399;
+  --purple-accent: #A78BFA;
+  --text-dark: #0F172A;
+  --text-light: #F8FAFC;
+  --text-muted: #94A3B8;
+}
+
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* ===================== SCROLL PROGRESS ===================== */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 4px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--teal-primary), var(--sky-blue));
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ===================== PARTICLES CANVAS ===================== */
+#particles-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ===================== SOUND TOGGLE ===================== */
+#sound-toggle {
+  position: fixed;
+  top: 16px; right: 16px;
+  z-index: 9000;
+  background: rgba(30,41,59,0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(20,184,166,0.3);
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+#sound-toggle:hover { background: rgba(20,184,166,0.2); transform: scale(1.1); }
+
+/* ===================== SCORE BADGE ===================== */
+#score-badge {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  z-index: 9000;
+  background: var(--yellow-pop);
+  color: var(--text-dark);
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  display: none;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 16px rgba(251,191,36,0.4);
+  transition: transform 0.2s;
+}
+#score-badge.pop { transform: scale(1.3); }
+
+/* ===================== HERO ===================== */
+.hero {
+  min-height: 100vh;
+  background: var(--bg-dark);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(20,184,166,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(56,189,248,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 60% 80%, rgba(167,139,250,0.12) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-eyebrow {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teal-primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  color: var(--text-light);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.hero-subtitle {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--teal-primary);
+  margin-bottom: 32px;
+}
+.hero-lungs-wrap {
+  position: relative;
+  width: 280px; height: 200px;
+  margin: 0 auto 24px;
+}
+#hero-lungs {
+  width: 280px; height: 200px;
+  overflow: visible;
+}
+.lung-left, .lung-right {
+  fill: rgba(56,189,248,0.18);
+  stroke: #38BDF8;
+  stroke-width: 2.5;
+  transform-origin: center bottom;
+  animation: lung-breathe 4s ease-in-out infinite;
+}
+.lung-right { animation-delay: 0.2s; }
+@keyframes lung-breathe {
+  0%,100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.12); }
+}
+.gas-dot {
+  position: absolute;
+  border-radius: 50%;
+  font-size: 0.55rem;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  animation: float-gas 3s ease-in-out infinite;
+}
+.gas-dot.o2 { background: rgba(56,189,248,0.5); color: #fff; width:22px; height:22px; }
+.gas-dot.co2 { background: rgba(251,113,133,0.5); color: #fff; width:24px; height:24px; }
+@keyframes float-gas {
+  0%,100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+  50% { transform: translateY(-14px) rotate(10deg); opacity: 1; }
+}
+.hero-intro {
+  max-width: 560px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+#btn-start {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--teal-primary), var(--teal-dark));
+  border: none;
+  border-radius: 999px;
+  padding: 16px 36px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(20,184,166,0.35);
+  transition: all 0.25s;
+  letter-spacing: 0.02em;
+}
+#btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 40px rgba(20,184,166,0.5); }
+
+/* ===================== WAVE DIVIDERS ===================== */
+.wave-divider { width: 100%; line-height: 0; overflow: hidden; }
+.wave-divider svg { display: block; }
+
+/* ===================== SECTION 1 ===================== */
+#section-1 {
+  background: var(--bg-light);
+  padding: 80px 24px;
+  color: var(--text-dark);
+}
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-eyebrow {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--teal-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+}
+.section-h2 {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.section-h2.light { color: var(--text-light); }
+.section-intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #334155;
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+
+/* ===================== GLASSMORPHISM CARDS ===================== */
+.cards-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.glass-card {
+  flex: 1 1 220px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(20,184,166,0.2);
+  border-radius: 18px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  text-align: center;
+  animation: breathing-pulse 3s ease-in-out infinite;
+}
+.glass-card:nth-child(2) { animation-delay: 1s; }
+.glass-card:nth-child(3) { animation-delay: 2s; }
+@keyframes breathing-pulse {
+  0%,100% { transform: scale(1.0); }
+  50% { transform: scale(1.02); }
+}
+.glass-card .card-emoji { font-size: 2.8rem; margin-bottom: 12px; }
+.glass-card .card-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.glass-card .card-desc { font-size: 0.9rem; color: #475569; line-height: 1.6; }
+
+/* ── FLIP CARDS ── */
+.flip-card-wrapper {
+  flex: 1 1 220px;
+  perspective: 1000px;
+  cursor: pointer;
+  min-height: 200px;
+}
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip-card-wrapper:hover .flip-card:not(.flipped) {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 8px 20px rgba(20,184,166,0.18));
+}
+.flip-card.flipped { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.flip-front {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(20,184,166,0.2);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  animation: breathing-pulse 3s ease-in-out infinite;
+}
+.cards-row .flip-card-wrapper:nth-child(2) .flip-front { animation-delay: 1s; }
+.cards-row .flip-card-wrapper:nth-child(3) .flip-front { animation-delay: 2s; }
+.flip-back {
+  background: linear-gradient(135deg, rgba(20,184,166,0.22), rgba(56,189,248,0.18));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(20,184,166,0.45);
+  box-shadow: 0 4px 24px rgba(20,184,166,0.12);
+  transform: rotateY(180deg);
+}
+.flip-front .card-emoji { font-size: 2.8rem; margin-bottom: 12px; }
+.flip-front .card-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+.flip-front .card-hint {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+.flip-back .card-back-desc {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.65;
+}
+/* Toast notification */
+#toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--green-go);
+  color: var(--text-dark);
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: 2px solid rgba(0,0,0,0.12);
+  box-shadow: 0 4px 20px rgba(52,211,153,0.45);
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Fun fact + connection badge */
+.fun-fact {
+  background: #FEF9C3;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #78350F;
+  line-height: 1.6;
+}
+.fun-fact-icon { font-size: 1.5rem; flex-shrink: 0; }
+.connection-badge {
+  background: var(--bg-dark);
+  border-left: 4px solid var(--teal-primary);
+  border-radius: 0 14px 14px 0;
+  padding: 18px 24px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ===================== SECTION 2 ===================== */
+#section-2 {
+  background: var(--bg-mid);
+  padding: 80px 24px;
+}
+#section-2 .section-eyebrow { color: var(--teal-primary); }
+#section-2 .section-intro { color: var(--text-muted); }
+
+.diagram-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.diagram-left { flex: 0 0 auto; width: 100%; max-width: 360px; }
+.diagram-right { flex: 1 1 300px; }
+
+/* Hotspot styles */
+.hotspot {
+  fill: rgba(251,191,36,0.25);
+  stroke: #FBBF24;
+  stroke-width: 2.5;
+  cursor: pointer;
+  transition: fill 0.2s, filter 0.2s;
+  animation: hotspot-pulse 2s ease-in-out infinite;
+}
+.hotspot:hover { fill: rgba(251,191,36,0.5); }
+.hotspot.discovered {
+  fill: rgba(52,211,153,0.4);
+  stroke: #34D399;
+  animation: none;
+}
+@keyframes hotspot-pulse {
+  0%,100% { filter: drop-shadow(0 0 4px #FBBF24); }
+  50% { filter: drop-shadow(0 0 12px #FBBF24); }
+}
+
+/* Info panel */
+#diagram-info-panel {
+  background: rgba(30,41,59,0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(20,184,166,0.3);
+  border-radius: 18px;
+  padding: 28px 24px;
+  min-height: 200px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+#diagram-info-panel .default-msg {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+}
+#diagram-info-panel .default-msg .icon { font-size: 2.5rem; }
+
+/* Progress */
+.parts-progress-wrap {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border: 1px solid rgba(20,184,166,0.15);
+}
+.parts-progress-label {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.parts-progress-label strong { color: var(--teal-primary); }
+.progress-bar-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+#parts-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--teal-primary), var(--green-go));
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+/* ===================== SECTION 3 ===================== */
+#section-3 {
+  background: var(--bg-light);
+  padding: 80px 24px;
+  color: var(--text-dark);
+}
+.breathing-panels {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.breath-panel {
+  flex: 1 1 240px;
+  max-width: 280px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(20,184,166,0.15);
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.breath-panel.active-panel {
+  border-color: var(--teal-primary);
+  box-shadow: 0 0 32px rgba(20,184,166,0.3);
+}
+.breath-panel-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+.breath-panel-label {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  color: #475569;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.breath-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.btn-breath {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: 2px solid var(--teal-primary);
+  background: transparent;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-breath:hover { background: var(--teal-primary); color: #fff; }
+
+/* Breathe Along */
+.breathe-along-card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(20,184,166,0.2);
+  border-radius: 20px;
+  padding: 40px 24px;
+  text-align: center;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.breathe-along-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 28px;
+}
+#breathe-circle {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56,189,248,0.3), rgba(20,184,166,0.1));
+  border: 3px solid #38BDF8;
+  margin: 0 auto 28px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 4s ease-in-out;
+}
+#breathe-circle .breathe-text {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+}
+#breathe-circle.inhale-state {
+  transform: scale(1.4);
+  border-color: #38BDF8;
+  box-shadow: 0 0 40px rgba(56,189,248,0.5);
+}
+#breathe-circle.exhale-state {
+  transform: scale(0.85);
+  border-color: #FB7185;
+  box-shadow: 0 0 30px rgba(251,113,133,0.4);
+  background: radial-gradient(circle, rgba(251,113,133,0.25), rgba(251,113,133,0.05));
+}
+#btn-breathe-along {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--teal-primary), var(--teal-dark));
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+}
+#btn-breathe-along:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(20,184,166,0.4); }
+.breathe-fact {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* ===================== SECTION 4 ===================== */
+#section-4 {
+  background: var(--bg-dark);
+  padding: 80px 24px;
+}
+#section-4 .section-eyebrow { color: var(--teal-primary); }
+
+.journey-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+#journey-track {
+  position: relative;
+  padding: 16px 0 16px 60px;
+  margin-bottom: 24px;
+}
+.journey-line {
+  position: absolute;
+  left: 29px; top: 0; bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, rgba(20,184,166,0.4) 0px, rgba(20,184,166,0.4) 6px, transparent 6px, transparent 12px);
+}
+.journey-stop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  opacity: 0.4;
+  transition: all 0.4s ease;
+}
+.journey-stop.active { opacity: 1; }
+.journey-stop.completed { opacity: 0.7; }
+.stop-dot {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(30,41,59,0.8);
+  border: 2px solid rgba(20,184,166,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  transition: all 0.4s;
+  position: relative;
+  z-index: 1;
+}
+.journey-stop.active .stop-dot {
+  border-color: var(--teal-primary);
+  box-shadow: 0 0 20px rgba(20,184,166,0.5);
+  background: rgba(20,184,166,0.15);
+}
+.journey-stop.completed .stop-dot {
+  border-color: var(--green-go);
+  background: rgba(52,211,153,0.15);
+}
+.stop-label {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.4s;
+}
+.journey-stop.active .stop-label { color: var(--text-light); }
+.journey-stop.completed .stop-label { color: var(--green-go); }
+
+#o2-molecule {
+  position: absolute;
+  left: 4px; top: 16px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sky-blue), var(--teal-primary));
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 10;
+  transition: top 0.6s ease;
+  box-shadow: 0 0 16px rgba(56,189,248,0.6);
+}
+#o2-molecule span:first-child {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+.mol-face { font-size: 0.8rem; line-height: 1; }
+
+#journey-info-box {
+  background: rgba(30,41,59,0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(20,184,166,0.3);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.journey-default {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+#btn-next-stop {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 14px 36px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--teal-primary), var(--sky-blue));
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto 16px;
+  transition: all 0.2s;
+  box-shadow: 0 8px 28px rgba(20,184,166,0.35);
+}
+#btn-next-stop:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(20,184,166,0.5); }
+
+#journey-complete {
+  text-align: center;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--yellow-pop);
+  padding: 20px;
+  background: rgba(251,191,36,0.1);
+  border: 2px solid rgba(251,191,36,0.3);
+  border-radius: 16px;
+  margin-top: 8px;
+}
+
+/* ===================== SCROLL ANIMATIONS ===================== */
+.animate-slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.animate-slide-left.animated,
+.animate-fade-up.animated {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===================== CONFETTI ===================== */
+@keyframes confetti-fall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .cards-row { flex-direction: column; }
+  .diagram-layout { flex-direction: column; align-items: center; }
+  .diagram-left { max-width: 100%; }
+  .breathing-panels { flex-direction: column; align-items: center; }
+  .breath-panel { max-width: 100%; width: 100%; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2rem; }
+  #section-1, #section-2, #section-3, #section-4 { padding: 48px 16px; }
+  .section-h2 { font-size: 1.8rem; }
+}
+
+/* ── SECTION 5: ZOOM SEQUENCE ── */
+#zoom-seq { position: relative; min-height: 260px; }
+.zoom-stage {
+  display: none;
+  animation: fadeIn 0.45s ease;
+  text-align: center;
+}
+.zoom-stage.active-stage { display: block; }
+.zoom-fact {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  color: #475569;
+  margin: 16px auto 0;
+  max-width: 420px;
+  line-height: 1.6;
+}
+.zoom-fact strong { color: var(--teal-primary); }
+.zoom-controls { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 24px; }
+.btn-zoom {
+  background: linear-gradient(135deg, var(--teal-primary), var(--teal-dark));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-zoom:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(20,184,166,0.35); }
+.zoom-pips { display: flex; gap: 8px; }
+.zoom-pip {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  transition: background 0.3s, transform 0.3s;
+}
+.zoom-pip.active { background: var(--teal-primary); transform: scale(1.3); }
+
+/* ── GAS EXCHANGE GAME ── */
+#ge-wrapper { max-width: 500px; margin: 0 auto; }
+.ge-instruction {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  color: #64748B;
+  margin-bottom: 14px;
+  text-align: center;
+}
+#gas-exchange-game {
+  display: flex;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(148,163,184,0.2);
+  min-height: 180px;
+}
+.ge-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 12px;
+}
+.ge-air {
+  background: rgba(56,189,248,0.08);
+  border-right: none;
+}
+.ge-blood {
+  background: rgba(251,113,133,0.08);
+  border-left: none;
+}
+.ge-wall {
+  width: 14px;
+  background: rgba(167,139,250,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 2px dashed rgba(167,139,250,0.4);
+  border-right: 2px dashed rgba(167,139,250,0.4);
+}
+.ge-wall-label {
+  writing-mode: vertical-rl;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 8px;
+  color: #A78BFA;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+.ge-side-label {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-bottom: 4px;
+}
+.ge-mols { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.ge-mol {
+  padding: 7px 12px;
+  border-radius: 50px;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.2s;
+  user-select: none;
+  border: 2px solid transparent;
+}
+.o2-mol { background: rgba(56,189,248,0.75); color: #fff; border-color: #38BDF8; }
+.co2-mol { background: rgba(251,113,133,0.75); color: #fff; border-color: #FB7185; }
+.ge-mol:hover { transform: scale(1.12); box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.ge-mol.gone { opacity: 0.2; pointer-events: none; transform: scale(0.7); }
+#ge-complete {
+  margin-top: 14px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+.ge-complete-text {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  color: var(--green-go);
+  background: rgba(52,211,153,0.1);
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(52,211,153,0.3);
+  display: inline-block;
+}
+
+/* ── SECTION 6 ── */
+.cycle-wrap { text-align: center; }
+
+/* ── SECTION 7: FACT GRID ── */
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 32px auto 0;
+}
+.fact-card { min-height: 180px; }
+.fact-front {
+  background: linear-gradient(135deg, rgba(20,184,166,0.08), rgba(56,189,248,0.08));
+  border: 1px solid rgba(20,184,166,0.25);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.fact-back {
+  background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(52,211,153,0.12));
+  border: 1px solid rgba(251,191,36,0.3);
+}
+.fact-back .card-back-desc { font-size: 0.88rem; }
+.fact-back .card-back-desc strong { color: var(--teal-primary); }
+/* Fact card back hierarchy */
+.fact-emoji-big { font-size: 3rem; line-height: 1; margin-bottom: 10px; }
+.fact-answer {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--teal-primary);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.fact-detail {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.fact-card:hover .flip-card:not(.flipped) {
+  transform: perspective(600px) rotateY(4deg) rotateX(-2deg) translateY(-4px);
+}
+
+/* ── SECTION 8: QUIZ ── */
+#quiz-wrap {
+  background: rgba(248,250,252,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 32px 28px;
+}
+#quiz-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.quiz-opt-btn {
+  background: rgba(248,250,252,0.06);
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 15px 20px;
+  color: var(--text-light);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+.quiz-opt-btn:hover { background: rgba(20,184,166,0.15); border-color: var(--teal-primary); }
+.quiz-opt-btn.correct { background: rgba(52,211,153,0.25); border-color: var(--green-go); color: var(--green-go); }
+.quiz-opt-btn.wrong { background: rgba(251,113,133,0.2); border-color: var(--coral-exhale); color: var(--coral-exhale); animation: qz-shake 0.4s ease; }
+@keyframes qz-shake {
+  0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)}
+}
+#qz-explanation { border-left: 3px solid var(--teal-primary); background: rgba(20,184,166,0.08); color: var(--text-muted); }
+
+@media(max-width:768px) {
+  .fact-grid { grid-template-columns: repeat(2,1fr); }
+  #quiz-wrap { padding: 24px 16px; }
+}
+@media(max-width:480px) {
+  .fact-grid { grid-template-columns: 1fr 1fr; gap:12px; }
+  .fact-card { min-height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- PARTICLES -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- SOUND TOGGLE -->
+<button id="sound-toggle" aria-label="Toggle sound">🔊</button>
+
+<!-- SCORE BADGE -->
+<div id="score-badge">⭐ 0</div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-eyebrow">5th Grade Science · Interactive Lesson</div>
+  <h1>BODY EXPLORER</h1>
+  <div class="hero-subtitle">The Respiratory System</div>
+
+  <div class="hero-lungs-wrap">
+    <!-- Floating gas dots -->
+    <div class="gas-dot o2" style="top:10px;left:30px;animation-delay:0s;">O₂</div>
+    <div class="gas-dot co2" style="top:20px;right:25px;animation-delay:0.8s;">CO₂</div>
+    <div class="gas-dot o2" style="top:60px;left:8px;animation-delay:1.5s;">O₂</div>
+    <div class="gas-dot co2" style="bottom:30px;right:10px;animation-delay:0.4s;">CO₂</div>
+    <div class="gas-dot o2" style="bottom:20px;left:45px;animation-delay:1.1s;">O₂</div>
+    <div class="gas-dot co2" style="top:80px;right:50px;animation-delay:2s;">CO₂</div>
+
+    <svg id="hero-lungs" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left lung -->
+      <path class="lung-left"
+        d="M140,180 C110,180 80,160 70,130 C60,100 65,60 80,40 C90,25 110,20 140,20 L140,180Z"
+        style="transform-origin: 140px 180px;" />
+      <!-- Right lung (mirror) -->
+      <path class="lung-right"
+        d="M140,180 C170,180 200,160 210,130 C220,100 215,60 200,40 C190,25 170,20 140,20 L140,180Z"
+        style="transform-origin: 140px 180px;" />
+      <!-- Trachea hint -->
+      <rect x="135" y="10" width="10" height="30" rx="5" fill="rgba(20,184,166,0.5)" stroke="#14B8A6" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <p class="hero-intro">
+    Every single minute, you breathe in and out about 15 times — without even thinking about it!
+    That's more than 20,000 breaths every day. Let's explore the incredible system that keeps you
+    alive with every single breath.
+  </p>
+
+  <button id="btn-start">TAKE A DEEP BREATH &amp; START →</button>
+</section>
+
+<!-- WAVE: dark → light -->
+<div class="wave-divider wave-to-light">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F0FDFA"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 1 ==================== -->
+<section id="section-1">
+  <div class="section-inner">
+    <div class="section-eyebrow animate-slide-left">The Basics</div>
+    <h2 class="section-h2 animate-slide-left" data-delay="100">What Is the Respiratory System?</h2>
+    <p class="section-intro animate-fade-up" data-delay="150">
+      The respiratory system brings oxygen INTO your body and pushes carbon dioxide OUT.
+      Oxygen is the fuel your cells need to make energy, and carbon dioxide is the waste they produce.
+    </p>
+
+    <div class="cards-row" data-group="s1">
+      <div class="flip-card-wrapper animate-fade-up" data-delay="0">
+        <div class="flip-card">
+          <div class="flip-front">
+            <div class="card-emoji">🫁</div>
+            <div class="card-title">Breathe In (Inhale)</div>
+            <div class="card-hint">tap to learn more ↩</div>
+          </div>
+          <div class="flip-back">
+            <div class="card-back-desc">Oxygen-rich air enters through your nose or mouth and travels down into your lungs.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card-wrapper animate-fade-up" data-delay="100">
+        <div class="flip-card">
+          <div class="flip-front">
+            <div class="card-emoji">💨</div>
+            <div class="card-title">Gas Exchange</div>
+            <div class="card-hint">tap to learn more ↩</div>
+          </div>
+          <div class="flip-back">
+            <div class="card-back-desc">Deep in your lungs, tiny air sacs swap oxygen into your blood and pull carbon dioxide out.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card-wrapper animate-fade-up" data-delay="200">
+        <div class="flip-card">
+          <div class="flip-front">
+            <div class="card-emoji">🌬️</div>
+            <div class="card-title">Breathe Out (Exhale)</div>
+            <div class="card-hint">tap to learn more ↩</div>
+          </div>
+          <div class="flip-back">
+            <div class="card-back-desc">Carbon dioxide — the waste gas your cells produce — travels back up and out of your body.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fun-fact animate-fade-up" data-delay="250">
+      <div class="fun-fact-icon">💡</div>
+      <div>You can't breathe through your nose and swallow at the same time — try it!</div>
+    </div>
+
+    <div class="connection-badge animate-fade-up" data-delay="300">
+      🔗 Remember the circulatory system? The blood carries the oxygen from your lungs to every cell in your body.
+    </div>
+  </div>
+</section>
+
+<!-- WAVE: light → dark -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,0 1080,80 1440,40 L1440,80 L0,80 Z" fill="#1E293B"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 2 ==================== -->
+<section id="section-2">
+  <div class="section-inner" style="max-width:1100px;margin:0 auto;">
+    <div class="section-eyebrow animate-slide-left">Meet the Team</div>
+    <h2 class="section-h2 light animate-slide-left" data-delay="100">Parts of the Respiratory System</h2>
+    <p class="section-intro animate-fade-up" data-delay="150">Click each glowing part to learn what it does!</p>
+
+    <div class="diagram-layout">
+      <!-- LEFT: SVG DIAGRAM -->
+      <div class="diagram-left animate-fade-up" data-delay="200">
+        <svg id="resp-diagram" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%;max-width:520px;display:block;">
+
+          <!-- Background -->
+          <rect width="600" height="600" rx="16" fill="#0F172A" stroke="#1E293B" stroke-width="1.5"/>
+
+          <!-- ── TORSO SILHOUETTE — anatomical front view with neck & curved shoulders ── -->
+          <path d="
+            M 300,58
+            C 292,58 284,61 279,68
+            C 274,74 270,82 263,93
+            C 249,104 226,113 200,126
+            C 172,141 152,158 143,183
+            C 136,206 136,238 137,278
+            C 139,324 142,370 146,416
+            C 150,456 154,494 158,530
+            C 161,551 163,566 165,578
+            L 435,578
+            C 437,566 439,551 442,530
+            C 446,494 450,456 454,416
+            C 458,370 461,324 463,278
+            C 464,238 464,206 457,183
+            C 448,158 428,141 400,126
+            C 374,113 351,104 337,93
+            C 330,82 326,74 321,68
+            C 316,61 308,58 300,58 Z"
+            fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+
+          <!-- Collarbone hints -->
+          <path d="M 278,68 Q 228,86 182,128" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M 322,68 Q 372,86 418,128" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+          <!-- ── NOSE & MOUTH ICON — airway opening above the neck ── -->
+          <ellipse cx="300" cy="35" rx="18" ry="13" fill="rgba(254,243,199,0.10)" stroke="rgba(254,243,199,0.40)" stroke-width="1.5"/>
+          <circle cx="294" cy="39" r="3" fill="rgba(15,23,42,0.7)" stroke="rgba(254,243,199,0.45)" stroke-width="1"/>
+          <circle cx="306" cy="39" r="3" fill="rgba(15,23,42,0.7)" stroke="rgba(254,243,199,0.45)" stroke-width="1"/>
+          <path d="M 292,46 Q 300,53 308,46" fill="none" stroke="rgba(254,243,199,0.45)" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Airway arrow down to pharynx -->
+          <line x1="300" y1="49" x2="300" y2="95" stroke="rgba(20,184,166,0.50)" stroke-width="2" stroke-dasharray="3,2"/>
+          <polygon points="295,91 300,99 305,91" fill="rgba(20,184,166,0.50)"/>
+
+          <!-- ── PHARYNX — wide tube in the throat (y 100–138) ── -->
+          <rect x="271" y="100" width="58" height="38" rx="14"
+            fill="rgba(251,191,36,0.22)" stroke="rgba(251,191,36,0.58)" stroke-width="2"/>
+
+          <!-- ── LARYNX — smaller box just below pharynx (y 141–168) ── -->
+          <rect x="280" y="141" width="40" height="27" rx="8"
+            fill="rgba(167,139,250,0.24)" stroke="rgba(167,139,250,0.58)" stroke-width="2"/>
+
+          <!-- ── TRACHEA — ribbed tube down center (y 170–296) ── -->
+          <rect x="288" y="170" width="24" height="126" rx="12"
+            fill="rgba(20,184,166,0.28)" stroke="#14B8A6" stroke-width="2.2"/>
+          <!-- C-ring cartilage bands -->
+          <path d="M 283,187 Q 291,183 317,187" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M 283,206 Q 291,202 317,206" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M 283,225 Q 291,221 317,225" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M 283,244 Q 291,240 317,244" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M 283,263 Q 291,259 317,263" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M 283,282 Q 291,278 317,282" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+          <!-- ── RIGHT LUNG — larger, 3 lobes ── -->
+          <path d="M 312,176
+            C 350,174 422,202 448,252
+            C 472,298 472,368 458,418
+            C 446,458 420,480 388,490
+            C 366,496 340,494 320,492
+            L 312,482 Z"
+            fill="rgba(56,189,248,0.18)" stroke="#38BDF8" stroke-width="2.2"/>
+          <!-- Right lung fissures (lobe lines) -->
+          <path d="M 380,194 Q 446,274 456,388" stroke="rgba(56,189,248,0.30)" stroke-width="1.2" fill="none" stroke-dasharray="5,3"/>
+          <path d="M 394,240 Q 434,256 458,280" stroke="rgba(56,189,248,0.22)" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+
+          <!-- ── LEFT LUNG — smaller, 2 lobes, cardiac notch ── -->
+          <path d="M 288,176
+            C 250,174 178,202 152,252
+            C 128,298 128,368 142,418
+            C 154,458 180,480 212,490
+            C 234,496 258,494 272,492
+            C 280,488 284,476 282,460
+            L 288,482 Z"
+            fill="rgba(56,189,248,0.18)" stroke="#38BDF8" stroke-width="2.2"/>
+          <!-- Left lung fissure -->
+          <path d="M 220,194 Q 154,274 144,388" stroke="rgba(56,189,248,0.30)" stroke-width="1.2" fill="none" stroke-dasharray="5,3"/>
+
+          <!-- ── BRONCHI — Y-split from base of trachea ── -->
+          <path d="M 300,294 L 300,310 Q 268,338 212,354" stroke="#14B8A6" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+          <path d="M 300,310 Q 332,338 388,354" stroke="#14B8A6" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+
+          <!-- ── BRONCHIOLES LEFT — branching smaller tubes inside left lung ── -->
+          <path d="M 212,354 Q 198,378 188,404" stroke="#0D9488" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M 212,354 Q 196,374 192,394" stroke="#0D9488" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 200,374 Q 184,388 178,404" stroke="#0D9488" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M 196,364 Q 176,382 170,404" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+          <!-- ── BRONCHIOLES RIGHT ── -->
+          <path d="M 388,354 Q 402,378 412,404" stroke="#0D9488" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M 388,354 Q 404,374 408,394" stroke="#0D9488" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 400,374 Q 416,388 422,404" stroke="#0D9488" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M 404,364 Q 424,382 430,404" stroke="#0D9488" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+          <!-- ── ALVEOLI LEFT — grape-like clusters at bronchiole ends ── -->
+          <circle cx="172" cy="410" r="8.5" fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+          <circle cx="184" cy="426" r="10"  fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+          <circle cx="168" cy="434" r="7.5" fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+          <circle cx="182" cy="440" r="6.5" fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+
+          <!-- ── ALVEOLI RIGHT ── -->
+          <circle cx="428" cy="410" r="8.5" fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+          <circle cx="416" cy="426" r="10"  fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+          <circle cx="432" cy="434" r="7.5" fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+          <circle cx="418" cy="440" r="6.5" fill="rgba(167,139,250,0.46)" stroke="#A78BFA" stroke-width="1.5"/>
+
+          <!-- ── DIAPHRAGM — muscular dome below lungs ── -->
+          <path d="M 143,494 Q 220,538 300,540 Q 380,538 457,494 L 457,578 L 143,578 Z"
+            fill="rgba(251,113,133,0.13)" stroke="none"/>
+          <path d="M 143,494 Q 220,538 300,540 Q 380,538 457,494"
+            stroke="#FB7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+          <!-- ── CONNECTOR LINES — dashed, linking hotspots to labels ── -->
+          <!-- Right side labels -->
+          <line x1="318" y1="35"  x2="446" y2="35"  stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="315" y1="119" x2="446" y2="119" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="312" y1="154" x2="446" y2="154" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="312" y1="228" x2="446" y2="228" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="312" y1="302" x2="446" y2="302" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+          <!-- Left side labels -->
+          <line x1="183" y1="388" x2="153" y2="388" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="166" y1="420" x2="126" y2="420" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="286" y1="508" x2="153" y2="508" stroke="#475569" stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- ── EXTERNAL LABELS ── -->
+          <!-- Right side -->
+          <text x="450" y="39"  font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="start">Nose &amp; Mouth</text>
+          <text x="450" y="123" font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="start">Pharynx</text>
+          <text x="450" y="158" font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="start">Larynx</text>
+          <text x="450" y="232" font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="start">Trachea</text>
+          <text x="450" y="306" font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="start">Bronchi</text>
+          <!-- Left side -->
+          <text x="149" y="392" font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="end">Bronchioles</text>
+          <text x="122" y="424" font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="end">Alveoli</text>
+          <text x="149" y="512" font-family="Quicksand,sans-serif" font-size="13" font-weight="700" fill="#94A3B8" text-anchor="end">Diaphragm</text>
+
+          <!-- ── HOTSPOTS — glowing click targets, class/data-part preserved ── -->
+          <circle class="hotspot" data-part="nose"        cx="300" cy="35"  r="16"/>
+          <circle class="hotspot" data-part="pharynx"     cx="300" cy="119" r="13"/>
+          <circle class="hotspot" data-part="larynx"      cx="300" cy="154" r="12"/>
+          <circle class="hotspot" data-part="trachea"     cx="300" cy="228" r="12"/>
+          <circle class="hotspot" data-part="bronchi"     cx="300" cy="302" r="12"/>
+          <circle class="hotspot" data-part="bronchioles" cx="195" cy="388" r="12"/>
+          <circle class="hotspot" data-part="alveoli"     cx="178" cy="420" r="12"/>
+          <circle class="hotspot" data-part="diaphragm"   cx="300" cy="508" r="14"/>
+
+        </svg>
+      </div>
+
+      <!-- RIGHT: INFO PANEL -->
+      <div class="diagram-right animate-fade-up" data-delay="300">
+        <div id="diagram-info-panel">
+          <div class="default-msg">
+            <div class="icon">🔬</div>
+            <div>Click any glowing circle on the diagram to discover what that part does!</div>
+          </div>
+        </div>
+
+        <div class="parts-progress-wrap">
+          <div class="parts-progress-label">
+            You've discovered <strong><span id="parts-count">0</span></strong> of 8 parts!
+          </div>
+          <div class="progress-bar-track">
+            <div id="parts-progress-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE: dark mid → light -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F0FDFA"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 3 ==================== -->
+<section id="section-3">
+  <div class="section-inner" style="max-width:1000px;margin:0 auto;">
+    <div class="section-eyebrow animate-slide-left">Mechanics</div>
+    <h2 class="section-h2 animate-slide-left" data-delay="100">Inhale... Exhale... How Does It Work?</h2>
+
+    <!-- Two-panel breathing diagram -->
+    <div class="breathing-panels">
+
+      <!-- INHALE PANEL -->
+      <div class="breath-panel" id="panel-inhale">
+        <div class="breath-panel-title" style="color:#38BDF8;">INHALE</div>
+        <svg id="svg-inhale" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px;display:block;margin:0 auto;background:rgba(56,189,248,0.05);border-radius:14px;">
+          <!-- Rib cage expanded -->
+          <path d="M50,40 L40,160 Q100,180 160,160 L150,40 Q100,20 50,40" fill="rgba(56,189,248,0.12)" stroke="#38BDF8" stroke-width="2"/>
+          <!-- Ribs -->
+          <path d="M50,70 Q100,60 150,70" stroke="#38BDF8" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M47,90 Q100,80 153,90" stroke="#38BDF8" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M44,110 Q100,100 156,110" stroke="#38BDF8" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M42,130 Q100,120 158,130" stroke="#38BDF8" stroke-width="1" fill="none" opacity="0.5"/>
+          <!-- Lungs large (expanded) -->
+          <ellipse cx="80" cy="100" rx="28" ry="45" fill="rgba(56,189,248,0.25)" stroke="#38BDF8" stroke-width="2"/>
+          <ellipse cx="120" cy="100" rx="28" ry="45" fill="rgba(56,189,248,0.25)" stroke="#38BDF8" stroke-width="2"/>
+          <!-- Diaphragm flat/low -->
+          <path d="M35,165 Q100,175 165,165" stroke="#FB7185" stroke-width="3" fill="none"/>
+          <!-- Trachea -->
+          <rect x="96" y="15" width="8" height="35" rx="4" fill="rgba(20,184,166,0.5)" stroke="#14B8A6" stroke-width="1.5"/>
+          <!-- Down arrows -->
+          <line x1="80" y1="14" x2="80" y2="30" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowDownBlue)"/>
+          <line x1="100" y1="10" x2="100" y2="26" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowDownBlue)"/>
+          <line x1="120" y1="14" x2="120" y2="30" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowDownBlue)"/>
+          <defs>
+            <marker id="arrowDownBlue" markerWidth="6" markerHeight="6" refX="3" refY="6" orient="auto">
+              <path d="M0,0 L3,6 L6,0" fill="#38BDF8"/>
+            </marker>
+          </defs>
+          <!-- Label -->
+          <text x="100" y="205" text-anchor="middle" font-family="Quicksand,sans-serif" font-size="10" fill="#475569">Diaphragm flattens — lungs expand</text>
+        </svg>
+        <div class="breath-panel-label">Air rushes IN as the diaphragm contracts and pulls downward, creating more space for your lungs.</div>
+      </div>
+
+      <!-- EXHALE PANEL -->
+      <div class="breath-panel" id="panel-exhale">
+        <div class="breath-panel-title" style="color:#FB7185;">EXHALE</div>
+        <svg id="svg-exhale" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px;display:block;margin:0 auto;background:rgba(251,113,133,0.05);border-radius:14px;">
+          <!-- Rib cage contracted -->
+          <path d="M55,45 L46,155 Q100,172 154,155 L145,45 Q100,28 55,45" fill="rgba(251,113,133,0.08)" stroke="#FB7185" stroke-width="2"/>
+          <!-- Ribs -->
+          <path d="M55,72 Q100,64 145,72" stroke="#FB7185" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M52,91 Q100,83 148,91" stroke="#FB7185" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M50,110 Q100,102 150,110" stroke="#FB7185" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M48,129 Q100,121 152,129" stroke="#FB7185" stroke-width="1" fill="none" opacity="0.5"/>
+          <!-- Lungs smaller (deflated) -->
+          <ellipse cx="80" cy="100" rx="22" ry="36" fill="rgba(251,113,133,0.15)" stroke="#FB7185" stroke-width="2"/>
+          <ellipse cx="120" cy="100" rx="22" ry="36" fill="rgba(251,113,133,0.15)" stroke="#FB7185" stroke-width="2"/>
+          <!-- Diaphragm domed up -->
+          <path d="M35,145 Q100,125 165,145" stroke="#FB7185" stroke-width="3" fill="none"/>
+          <!-- Trachea -->
+          <rect x="96" y="15" width="8" height="35" rx="4" fill="rgba(251,113,133,0.4)" stroke="#FB7185" stroke-width="1.5"/>
+          <!-- Up arrows -->
+          <line x1="80" y1="30" x2="80" y2="14" stroke="#FB7185" stroke-width="2" marker-end="url(#arrowUpCoral)"/>
+          <line x1="100" y1="26" x2="100" y2="10" stroke="#FB7185" stroke-width="2" marker-end="url(#arrowUpCoral)"/>
+          <line x1="120" y1="30" x2="120" y2="14" stroke="#FB7185" stroke-width="2" marker-end="url(#arrowUpCoral)"/>
+          <defs>
+            <marker id="arrowUpCoral" markerWidth="6" markerHeight="6" refX="3" refY="0" orient="auto">
+              <path d="M0,6 L3,0 L6,6" fill="#FB7185"/>
+            </marker>
+          </defs>
+          <!-- Label -->
+          <text x="100" y="205" text-anchor="middle" font-family="Quicksand,sans-serif" font-size="10" fill="#475569">Diaphragm relaxes — air pushed out</text>
+        </svg>
+        <div class="breath-panel-label">Air is pushed OUT as the diaphragm relaxes and domes upward, squeezing your lungs.</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="breath-btns">
+      <button class="btn-breath" id="btn-inhale">🫁 Breathe In</button>
+      <button class="btn-breath" id="btn-exhale">💨 Breathe Out</button>
+    </div>
+
+    <!-- Breathe Along -->
+    <div class="breathe-along-card animate-fade-up" data-delay="200">
+      <div class="breathe-along-title">Breathe Along</div>
+      <div id="breathe-circle">
+        <span class="breathe-text">Press start...</span>
+      </div>
+      <br>
+      <button id="btn-breathe-along">▶ Start Breathing</button>
+      <div class="breathe-fact">Your diaphragm contracts about 15 times every minute!</div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE: light → dark -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,0 1080,80 1440,40 L1440,80 L0,80 Z" fill="#0F172A"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 4 ==================== -->
+<section id="section-4">
+  <div class="section-inner" style="max-width:1100px;margin:0 auto;">
+    <div class="section-eyebrow animate-slide-left">Follow Along</div>
+    <h2 class="section-h2 light animate-slide-left" data-delay="100">Follow the Oxygen!</h2>
+    <p style="color:var(--text-muted);font-family:'Quicksand',sans-serif;margin-bottom:40px;font-size:1rem;" class="animate-fade-up" data-delay="150">
+      Click <strong style="color:var(--teal-primary);">NEXT STOP</strong> to follow an oxygen molecule through your respiratory system.
+    </p>
+
+    <div class="journey-wrap animate-fade-up" data-delay="200">
+      <div id="journey-container">
+        <div id="journey-track">
+          <!-- Built by JS -->
+        </div>
+        <div id="journey-info-box">
+          <div class="journey-default">
+            👆 Hit <strong>Next Stop</strong> below to begin the journey!
+          </div>
+        </div>
+        <button id="btn-next-stop">Next Stop →</button>
+        <div id="journey-complete" style="display:none;">Journey Complete! 🎉 You followed oxygen all the way through!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE: dark → light -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F0FDFA"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 5 ==================== -->
+<section id="section-5-alveoli" style="background:var(--bg-light); padding:80px 24px;">
+  <div class="section-inner">
+    <div class="section-eyebrow animate-slide-left">Zoom In</div>
+    <h2 class="section-h2 animate-slide-left" data-delay="100">Zoom In: The Alveoli</h2>
+
+    <!-- 3-stage zoom sequence -->
+    <div id="zoom-seq">
+      <!-- STAGE 0: Full lungs view -->
+      <div class="zoom-stage active-stage" id="zstage-0">
+        <svg viewBox="0 0 300 200" style="width:100%;max-width:380px;display:block;margin:0 auto;border-radius:16px;">
+          <rect width="300" height="200" rx="16" fill="#1E293B"/>
+          <!-- trachea -->
+          <rect x="143" y="8" width="14" height="26" rx="7" fill="rgba(20,184,166,0.5)" stroke="#14B8A6" stroke-width="1.5"/>
+          <!-- left lung -->
+          <path d="M150,34 C124,34 98,48 84,74 C70,100 70,140 80,166 C88,186 108,196 130,200 C140,202 150,202 150,202" fill="rgba(56,189,248,0.18)" stroke="#38BDF8" stroke-width="2"/>
+          <!-- right lung -->
+          <path d="M150,34 C176,34 202,48 216,74 C230,100 230,140 220,166 C212,186 192,196 170,200 C160,202 150,202 150,202" fill="rgba(56,189,248,0.18)" stroke="#38BDF8" stroke-width="2"/>
+          <!-- bronchi -->
+          <path d="M150,34 L150,58 Q138,72 112,80" stroke="#14B8A6" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M150,58 Q162,72 188,80" stroke="#14B8A6" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <!-- scattered alveoli dots -->
+          <circle cx="98" cy="90" r="4" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="110" cy="108" r="5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="90" cy="124" r="3.5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="105" cy="140" r="4.5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="118" cy="122" r="3" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="95" cy="155" r="4" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="112" cy="162" r="3.5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="130" cy="148" r="4" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="126" cy="100" r="3" fill="rgba(167,139,250,0.5)" stroke="#A78BFA" stroke-width="1"/>
+          <circle cx="202" cy="90" r="4" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="190" cy="108" r="5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="210" cy="124" r="3.5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="195" cy="140" r="4.5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="182" cy="122" r="3" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="205" cy="155" r="4" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="188" cy="162" r="3.5" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="170" cy="148" r="4" fill="rgba(167,139,250,0.6)" stroke="#A78BFA" stroke-width="1"/><circle cx="174" cy="100" r="3" fill="rgba(167,139,250,0.5)" stroke="#A78BFA" stroke-width="1"/>
+          <!-- label -->
+          <text x="150" y="192" text-anchor="middle" font-size="10" fill="#A78BFA" font-family="Baloo 2, sans-serif" font-weight="700">~300 MILLION ALVEOLI</text>
+        </svg>
+        <p class="zoom-fact">Your lungs contain about <strong>300 million</strong> alveoli &mdash; and all of them are working right now!</p>
+      </div>
+
+      <!-- STAGE 1: Bronchiole with alveoli clusters -->
+      <div class="zoom-stage" id="zstage-1">
+        <svg viewBox="0 0 300 200" style="width:100%;max-width:380px;display:block;margin:0 auto;border-radius:16px;">
+          <rect width="300" height="200" rx="16" fill="#1E293B"/>
+          <!-- main bronchiole tube -->
+          <path d="M10,100 Q60,100 100,100" stroke="#14B8A6" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <path d="M100,100 Q120,78 148,62" stroke="#0D9488" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M100,100 Q118,110 128,128" stroke="#0D9488" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <path d="M100,100 Q115,100 132,98" stroke="#0D9488" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M148,62 Q162,52 170,44" stroke="#0D9488" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M148,62 Q158,72 166,78" stroke="#0D9488" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M128,128 Q138,140 144,152" stroke="#0D9488" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <!-- alveoli bubbles -->
+          <circle cx="178" cy="38" r="20" fill="rgba(167,139,250,0.35)" stroke="#A78BFA" stroke-width="2"/>
+          <circle cx="172" cy="82" r="18" fill="rgba(167,139,250,0.35)" stroke="#A78BFA" stroke-width="2"/>
+          <circle cx="142" cy="160" r="20" fill="rgba(167,139,250,0.35)" stroke="#A78BFA" stroke-width="2"/>
+          <circle cx="136" cy="98" r="16" fill="rgba(167,139,250,0.35)" stroke="#A78BFA" stroke-width="2"/>
+          <!-- highlight one -->
+          <circle cx="250" cy="100" r="42" fill="rgba(56,189,248,0.2)" stroke="#38BDF8" stroke-width="2.5"/>
+          <text x="250" y="88" text-anchor="middle" font-size="9" fill="#38BDF8" font-family="Baloo 2" font-weight="700">ONE</text>
+          <text x="250" y="100" text-anchor="middle" font-size="9" fill="#38BDF8" font-family="Baloo 2" font-weight="700">ALVEOLUS</text>
+          <text x="250" y="115" text-anchor="middle" font-size="8" fill="#94A3B8" font-family="Quicksand">magnified</text>
+          <!-- arrow pointing to highlighted -->
+          <line x1="192" y1="100" x2="208" y2="100" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3,2"/>
+        </svg>
+        <p class="zoom-fact">Spread all your alveoli flat and they&#39;d cover an entire <strong>tennis court!</strong> 🎾</p>
+      </div>
+
+      <!-- STAGE 2: Gas exchange cross-section + mini-game -->
+      <div class="zoom-stage" id="zstage-2">
+        <p class="zoom-fact" style="margin-bottom:14px;">Alveoli walls are just <strong>ONE CELL thick</strong> &mdash; oxygen and CO&#x2082; pass right through! 🔬</p>
+        <!-- Gas exchange game -->
+        <div id="ge-wrapper">
+          <div class="ge-instruction" id="ge-instruction">👆 Tap each molecule to transfer it across the thin wall!</div>
+          <div id="gas-exchange-game">
+            <div class="ge-side ge-air">
+              <div class="ge-side-label">AIR SAC</div>
+              <div class="ge-mols" id="ge-air-mols">
+                <div class="ge-mol o2-mol" data-mol="o2-0">O&#x2082;</div>
+                <div class="ge-mol o2-mol" data-mol="o2-1">O&#x2082;</div>
+                <div class="ge-mol o2-mol" data-mol="o2-2">O&#x2082;</div>
+                <div class="ge-mol o2-mol" data-mol="o2-3">O&#x2082;</div>
+              </div>
+            </div>
+            <div class="ge-wall"><span class="ge-wall-label">thin wall</span></div>
+            <div class="ge-side ge-blood">
+              <div class="ge-side-label">CAPILLARY</div>
+              <div class="ge-mols" id="ge-blood-mols">
+                <div class="ge-mol co2-mol" data-mol="co2-0">CO&#x2082;</div>
+                <div class="ge-mol co2-mol" data-mol="co2-1">CO&#x2082;</div>
+                <div class="ge-mol co2-mol" data-mol="co2-2">CO&#x2082;</div>
+                <div class="ge-mol co2-mol" data-mol="co2-3">CO&#x2082;</div>
+              </div>
+            </div>
+          </div>
+          <div id="ge-complete" style="display:none;">
+            <span class="ge-complete-text">🎉 Gas exchange complete! Oxygen is now in the blood!</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- /zoom-seq -->
+
+    <!-- Zoom controls -->
+    <div class="zoom-controls">
+      <button class="btn-zoom" id="btn-zoom">🔬 Zoom In!</button>
+      <div class="zoom-pips">
+        <span class="zoom-pip active" id="zpip-0"></span>
+        <span class="zoom-pip" id="zpip-1"></span>
+        <span class="zoom-pip" id="zpip-2"></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WAVE: light → dark -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,0 1080,80 1440,40 L1440,80 L0,80 Z" fill="#0F172A"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 6 ==================== -->
+<section id="section-6-teamwork" style="background:var(--bg-dark); padding:80px 24px;">
+  <div class="section-inner">
+    <div class="section-eyebrow animate-slide-left" style="color:var(--teal-primary);">Systems Working Together</div>
+    <h2 class="section-h2 light animate-slide-left" data-delay="100">Teamwork: Breathing Meets Blood</h2>
+    <p class="section-intro animate-fade-up" style="color:var(--text-muted);" data-delay="150">
+      The respiratory system collects oxygen &mdash; but it needs a partner to get it to your cells. Enter: the circulatory system!
+    </p>
+
+    <!-- Animated cycle diagram -->
+    <div class="cycle-wrap animate-fade-up" data-delay="200">
+      <svg id="cycle-svg" viewBox="0 -12 440 326" style="width:100%;max-width:480px;display:block;margin:0 auto 28px;">
+        <!-- Oval track -->
+        <ellipse cx="220" cy="150" rx="165" ry="118" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3"/>
+        <!-- Station: LUNGS (top) cx=220 cy=32 -->
+        <circle cx="220" cy="32" r="38" fill="rgba(56,189,248,0.2)" stroke="#38BDF8" stroke-width="2"/>
+        <text x="220" y="26" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="11" font-weight="700" fill="#38BDF8">LUNGS</text>
+        <text x="220" y="40" text-anchor="middle" font-family="Quicksand,sans-serif" font-size="8.5" fill="#94A3B8">gets O&#x2082;</text>
+        <!-- Station: HEART right cx=385 cy=150 -->
+        <circle cx="385" cy="150" r="38" fill="rgba(251,113,133,0.2)" stroke="#FB7185" stroke-width="2"/>
+        <text x="385" y="144" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="13" fill="#FB7185">❤️</text>
+        <text x="385" y="158" text-anchor="middle" font-family="Quicksand,sans-serif" font-size="8" fill="#94A3B8">pumps to body</text>
+        <!-- Station: CELLS bottom cx=220 cy=268 -->
+        <circle cx="220" cy="268" r="38" fill="rgba(52,211,153,0.2)" stroke="#34D399" stroke-width="2"/>
+        <text x="220" y="262" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="10" font-weight="700" fill="#34D399">BODY</text>
+        <text x="220" y="274" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="10" font-weight="700" fill="#34D399">CELLS</text>
+        <!-- Station: HEART left cx=55 cy=150 -->
+        <circle cx="55" cy="150" r="38" fill="rgba(167,139,250,0.2)" stroke="#A78BFA" stroke-width="2"/>
+        <text x="55" y="144" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="13" fill="#A78BFA">❤️</text>
+        <text x="55" y="158" text-anchor="middle" font-family="Quicksand,sans-serif" font-size="8" fill="#94A3B8">back to lungs</text>
+        <!-- Cycle arrows on track: 4 small arrow arcs -->
+        <path d="M258,35 Q290,28 315,50" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+        <path d="M383,190 Q378,230 340,262" fill="none" stroke="#FB7185" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+        <path d="M182,268 Q150,275 120,258" fill="none" stroke="#34D399" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+        <path d="M55,108 Q60,70 100,48" fill="none" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+        <!-- Animated dots (placed by JS) -->
+        <circle class="cdot blue-dot"  r="7" fill="#38BDF8" opacity="0.85" id="cdot-0"/>
+        <circle class="cdot blue-dot"  r="7" fill="#38BDF8" opacity="0.85" id="cdot-1"/>
+        <circle class="cdot blue-dot"  r="5" fill="#38BDF8" opacity="0.6"  id="cdot-2"/>
+        <circle class="cdot blue-dot"  r="5" fill="#38BDF8" opacity="0.6"  id="cdot-3"/>
+        <circle class="cdot coral-dot" r="7" fill="#FB7185" opacity="0.85" id="cdot-4"/>
+        <circle class="cdot coral-dot" r="7" fill="#FB7185" opacity="0.85" id="cdot-5"/>
+        <circle class="cdot coral-dot" r="5" fill="#FB7185" opacity="0.6"  id="cdot-6"/>
+        <circle class="cdot coral-dot" r="5" fill="#FB7185" opacity="0.6"  id="cdot-7"/>
+      </svg>
+    </div>
+
+    <!-- 3 flip cards below -->
+    <div class="cards-row" style="margin-top:40px;" data-group="s6">
+      <div class="flip-card-wrapper animate-fade-up" data-delay="0">
+        <div class="flip-card">
+          <div class="flip-front" style="background:rgba(56,189,248,0.1);border-color:rgba(56,189,248,0.3);">
+            <div class="card-emoji">🫁</div>
+            <div class="card-title" style="color:var(--text-light);">Respiratory System</div>
+            <div class="card-hint">tap to learn more ↩</div>
+          </div>
+          <div class="flip-back" style="background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.4);">
+            <div class="card-back-desc" style="color:var(--text-light);">GETS the oxygen &mdash; breathes it in, passes it through the alveoli into the blood.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card-wrapper animate-fade-up" data-delay="100">
+        <div class="flip-card">
+          <div class="flip-front" style="background:rgba(251,113,133,0.1);border-color:rgba(251,113,133,0.3);">
+            <div class="card-emoji">❤️</div>
+            <div class="card-title" style="color:var(--text-light);">Circulatory System</div>
+            <div class="card-hint">tap to learn more ↩</div>
+          </div>
+          <div class="flip-back" style="background:rgba(251,113,133,0.15);border-color:rgba(251,113,133,0.4);">
+            <div class="card-back-desc" style="color:var(--text-light);">DELIVERS the oxygen &mdash; heart pumps it through blood vessels to every cell in your body.</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card-wrapper animate-fade-up" data-delay="200">
+        <div class="flip-card">
+          <div class="flip-front" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.3);">
+            <div class="card-emoji">🤝</div>
+            <div class="card-title" style="color:var(--text-light);">Together</div>
+            <div class="card-hint">tap to learn more ↩</div>
+          </div>
+          <div class="flip-back" style="background:rgba(52,211,153,0.15);border-color:rgba(52,211,153,0.4);">
+            <div class="card-back-desc" style="color:var(--text-light);">They keep every single cell alive &mdash; working in a non-stop loop, 24 hours a day, 7 days a week!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connection-badge animate-fade-up" data-delay="300" style="margin-top:32px;background:rgba(20,184,166,0.1);border-left-color:var(--teal-primary);">
+      🔗 Already explored the circulatory system?
+      <a href="circulatory_system.html" style="color:var(--teal-primary);font-weight:700;"> These two are best friends! &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE: dark → light -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F0FDFA"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 7 ==================== -->
+<section id="section-7-fun-facts" style="background:var(--bg-light); padding:80px 24px;">
+  <div class="section-inner">
+    <div class="section-eyebrow animate-slide-left">Did You Know?</div>
+    <h2 class="section-h2 animate-slide-left" data-delay="100">Whoa, That&#39;s Cool!</h2>
+    <p class="section-intro animate-fade-up" data-delay="150">Flip all 6 cards to unlock the wild facts!</p>
+
+    <div class="fact-grid" data-group="s7">
+      <!-- Card 1 -->
+      <div class="flip-card-wrapper fact-card animate-fade-up" data-delay="0">
+        <div class="flip-card">
+          <div class="flip-front fact-front">
+            <svg viewBox="0 0 80 70" width="72" height="63" aria-hidden="true" style="display:block;margin:0 auto 6px;">
+              <!-- left lung -->
+              <path d="M40,14 C30,14 20,20 16,32 C12,44 13,56 18,64 C22,70 30,72 38,70 C39,71 40,71 40,71" fill="rgba(56,189,248,0.25)" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <!-- right lung -->
+              <path d="M40,14 C50,14 60,20 64,32 C68,44 67,56 62,64 C58,70 50,72 42,70 C41,71 40,71 40,71" fill="rgba(56,189,248,0.25)" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <!-- trachea -->
+              <rect x="37" y="4" width="6" height="13" rx="3" fill="rgba(20,184,166,0.5)" stroke="#14B8A6" stroke-width="1.5"/>
+              <!-- breath lines left -->
+              <path d="M10,26 Q5,26 3,22" fill="none" stroke="#A78BFA" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M10,34 Q4,34 2,30" fill="none" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- breath lines right -->
+              <path d="M70,26 Q75,26 77,22" fill="none" stroke="#A78BFA" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M70,34 Q76,34 78,30" fill="none" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <div class="card-title">How many times do you breathe per day?</div>
+            <div class="card-hint">tap for the answer ↩</div>
+          </div>
+          <div class="flip-back fact-back">
+            <div class="fact-emoji-big">😮</div>
+            <div class="fact-answer">About 20,000 times!</div>
+            <div class="fact-detail">That&#39;s 20,000 chances your lungs have to do their job &mdash; and they never miss!</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="flip-card-wrapper fact-card animate-fade-up" data-delay="80">
+        <div class="flip-card">
+          <div class="flip-front fact-front">
+            <svg viewBox="0 0 80 70" width="72" height="63" aria-hidden="true" style="display:block;margin:0 auto 6px;">
+              <!-- face -->
+              <circle cx="40" cy="34" r="22" fill="#fef3c7" stroke="#FBBF24" stroke-width="2"/>
+              <!-- eyes squinting -->
+              <path d="M31,26 Q34,23 37,26" fill="none" stroke="#1a1614" stroke-width="2" stroke-linecap="round"/>
+              <path d="M43,26 Q46,23 49,26" fill="none" stroke="#1a1614" stroke-width="2" stroke-linecap="round"/>
+              <!-- nose -->
+              <ellipse cx="40" cy="33" rx="3" ry="2" fill="none" stroke="#92400e" stroke-width="1.5"/>
+              <!-- mouth open/sneeze -->
+              <path d="M33,42 Q40,50 47,42" fill="#FB7185" stroke="#1a1614" stroke-width="1.5"/>
+              <!-- speed lines -->
+              <path d="M62,38 L74,38" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M64,32 L76,28" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <path d="M64,44 L76,48" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <path d="M66,26 L75,20" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- spray dots -->
+              <circle cx="58" cy="38" r="2" fill="#38BDF8" opacity="0.7"/>
+              <circle cx="60" cy="33" r="1.5" fill="#38BDF8" opacity="0.6"/>
+              <circle cx="60" cy="43" r="1.5" fill="#38BDF8" opacity="0.6"/>
+            </svg>
+            <div class="card-title">How fast can a sneeze travel?</div>
+            <div class="card-hint">tap for the answer ↩</div>
+          </div>
+          <div class="flip-back fact-back">
+            <div class="fact-emoji-big">🤧</div>
+            <div class="fact-answer" style="color:var(--sky-blue);">Up to 100 mph!</div>
+            <div class="fact-detail">Your body launches air out at highway speed to clear irritants from your nose!</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="flip-card-wrapper fact-card animate-fade-up" data-delay="160">
+        <div class="flip-card">
+          <div class="flip-front fact-front">
+            <svg viewBox="0 0 80 70" width="72" height="63" aria-hidden="true" style="display:block;margin:0 auto 6px;">
+              <!-- face -->
+              <circle cx="40" cy="38" r="22" fill="#fef3c7" stroke="#FBBF24" stroke-width="2"/>
+              <!-- wide surprised eyes -->
+              <circle cx="32" cy="32" r="4.5" fill="#fff" stroke="#1a1614" stroke-width="1.5"/>
+              <circle cx="48" cy="32" r="4.5" fill="#fff" stroke="#1a1614" stroke-width="1.5"/>
+              <circle cx="33" cy="33" r="2" fill="#1a1614"/>
+              <circle cx="49" cy="33" r="2" fill="#1a1614"/>
+              <!-- O mouth -->
+              <ellipse cx="40" cy="44" rx="5" ry="6" fill="#FB7185" stroke="#1a1614" stroke-width="1.5"/>
+              <!-- HIC! burst -->
+              <path d="M58,14 L74,10 L72,24 L62,20 Z" fill="#FBBF24" stroke="#92400e" stroke-width="1.5"/>
+              <text x="65" y="21" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="7.5" font-weight="800" fill="#92400e">HIC!</text>
+            </svg>
+            <div class="card-title">What are hiccups?</div>
+            <div class="card-hint">tap for the answer ↩</div>
+          </div>
+          <div class="flip-back fact-back">
+            <div class="fact-emoji-big">😵</div>
+            <div class="fact-answer" style="color:var(--coral-exhale);">A diaphragm spasm!</div>
+            <div class="fact-detail">Your diaphragm suddenly contracts, snapping your vocal cords shut &mdash; making that hiccup sound!</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="flip-card-wrapper fact-card animate-fade-up" data-delay="240">
+        <div class="flip-card">
+          <div class="flip-front fact-front">
+            <svg viewBox="0 0 80 70" width="72" height="63" aria-hidden="true" style="display:block;margin:0 auto 6px;">
+              <!-- face -->
+              <circle cx="40" cy="36" r="22" fill="#fef3c7" stroke="#FBBF24" stroke-width="2"/>
+              <!-- sleepy half-closed eyes -->
+              <path d="M28,28 Q32,24 36,28" fill="none" stroke="#1a1614" stroke-width="2" stroke-linecap="round"/>
+              <line x1="28" y1="28" x2="36" y2="28" stroke="#1a1614" stroke-width="2" stroke-linecap="round"/>
+              <path d="M44,28 Q48,24 52,28" fill="none" stroke="#1a1614" stroke-width="2" stroke-linecap="round"/>
+              <line x1="44" y1="28" x2="52" y2="28" stroke="#1a1614" stroke-width="2" stroke-linecap="round"/>
+              <!-- wide-open yawning mouth -->
+              <path d="M30,40 Q40,56 50,40" fill="#FB7185" stroke="#1a1614" stroke-width="1.5" stroke-linejoin="round"/>
+              <ellipse cx="40" cy="44" rx="7" ry="5" fill="#c2185b" opacity="0.4"/>
+              <!-- ZZZ -->
+              <text x="58" y="18" font-family="Baloo 2,sans-serif" font-size="9" font-weight="800" fill="#A78BFA">Z</text>
+              <text x="64" y="12" font-family="Baloo 2,sans-serif" font-size="7" font-weight="800" fill="#A78BFA">Z</text>
+              <text x="70" y="7" font-family="Baloo 2,sans-serif" font-size="5.5" font-weight="800" fill="#A78BFA">Z</text>
+            </svg>
+            <div class="card-title">Why do you yawn?</div>
+            <div class="card-hint">tap for the answer ↩</div>
+          </div>
+          <div class="flip-back fact-back">
+            <div class="fact-emoji-big">🥱</div>
+            <div class="fact-answer" style="color:var(--purple-accent);">A big gulp of extra oxygen!</div>
+            <div class="fact-detail">When you&#39;re tired, your breathing slows &mdash; a yawn is your body&#39;s way of getting a deep breath fast!</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="flip-card-wrapper fact-card animate-fade-up" data-delay="320">
+        <div class="flip-card">
+          <div class="flip-front fact-front">
+            <svg viewBox="0 0 80 70" width="72" height="63" aria-hidden="true" style="display:block;margin:0 auto 6px;">
+              <!-- airway tube -->
+              <rect x="18" y="28" width="44" height="18" rx="9" fill="rgba(20,184,166,0.2)" stroke="#14B8A6" stroke-width="2"/>
+              <!-- cilia hairs along bottom of tube -->
+              <line x1="26" y1="46" x2="24" y2="58" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="32" y1="46" x2="32" y2="60" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="38" y1="46" x2="38" y2="62" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="44" y1="46" x2="46" y2="60" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <line x1="50" y1="46" x2="52" y2="58" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <!-- wavy tips -->
+              <path d="M24,58 Q22,62 26,63" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M32,60 Q30,64 34,65" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M38,62 Q36,66 40,67" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M46,60 Q44,64 48,65" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M52,58 Q50,62 54,63" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- particles being swept -->
+              <circle cx="58" cy="34" r="3.5" fill="#FB7185" opacity="0.85"/>
+              <circle cx="65" cy="31" r="2.5" fill="#FB7185" opacity="0.7"/>
+              <circle cx="72" cy="29" r="2" fill="#FB7185" opacity="0.5"/>
+              <!-- sweep arrow -->
+              <path d="M56,36 L70,36" stroke="#FBBF24" stroke-width="1.8" stroke-linecap="round" marker-end="url(#arr)"/>
+              <path d="M68,33 L72,36 L68,39" fill="none" stroke="#FBBF24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- label -->
+              <text x="40" y="22" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="7.5" font-weight="700" fill="#14B8A6">AIRWAY</text>
+            </svg>
+            <div class="card-title">What do cilia do?</div>
+            <div class="card-hint">tap for the answer ↩</div>
+          </div>
+          <div class="flip-back fact-back">
+            <div class="fact-emoji-big">🧹</div>
+            <div class="fact-answer">Sweep germs OUT!</div>
+            <div class="fact-detail">Thousands of tiny hair-like cilia wave constantly to keep your airways clean and clear!</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="flip-card-wrapper fact-card animate-fade-up" data-delay="400">
+        <div class="flip-card">
+          <div class="flip-front fact-front">
+            <svg viewBox="0 0 80 70" width="72" height="63" aria-hidden="true" style="display:block;margin:0 auto 6px;">
+              <!-- spine -->
+              <rect x="37" y="6" width="6" height="56" rx="3" fill="rgba(167,139,250,0.3)" stroke="#A78BFA" stroke-width="1.5"/>
+              <!-- sternum -->
+              <rect x="37" y="14" width="6" height="36" rx="3" fill="rgba(167,139,250,0.5)" stroke="#A78BFA" stroke-width="1.5" transform="translate(3,0)"/>
+              <!-- ribs: 5 pairs -->
+              <path d="M40,16 Q28,16 22,22 Q18,28 22,34 Q28,36 40,36" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <path d="M40,22 Q26,22 20,28 Q16,34 20,40 Q26,42 40,42" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M40,28 Q27,28 22,35 Q19,41 23,46 Q29,48 40,46" fill="none" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M40,16 Q52,16 58,22 Q62,28 58,34 Q52,36 40,36" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+              <path d="M40,22 Q54,22 60,28 Q64,34 60,40 Q54,42 40,42" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M40,28 Q53,28 58,35 Q61,41 57,46 Q51,48 40,46" fill="none" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round"/>
+              <!-- lungs hint inside -->
+              <path d="M40,20 C35,20 29,24 27,30 C25,36 26,42 29,46 C32,49 37,50 40,50" fill="rgba(56,189,248,0.12)" stroke="none"/>
+              <path d="M40,20 C45,20 51,24 53,30 C55,36 54,42 51,46 C48,49 43,50 40,50" fill="rgba(56,189,248,0.12)" stroke="none"/>
+            </svg>
+            <div class="card-title">What protects your lungs?</div>
+            <div class="card-hint">tap for the answer ↩</div>
+          </div>
+          <div class="flip-back fact-back">
+            <div class="fact-emoji-big">🦴</div>
+            <div class="fact-answer" style="color:var(--purple-accent);">Your rib cage!</div>
+            <div class="fact-detail">12 pairs of ribs form a protective cage around your lungs &mdash; most connect to both your spine AND sternum!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE: light → dark mid -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,0 1080,80 1440,40 L1440,80 L0,80 Z" fill="#1E293B"/>
+  </svg>
+</div>
+
+<!-- ==================== SECTION 8 ==================== -->
+<section id="section-8-quiz" style="background:var(--bg-mid); padding:80px 24px;">
+  <div class="section-inner" style="max-width:720px;margin:0 auto;">
+    <div class="section-eyebrow animate-slide-left" style="color:var(--yellow-pop);">Final Challenge</div>
+    <h2 class="section-h2 light animate-slide-left" data-delay="100">Breathing Expert Quiz!</h2>
+
+    <div id="quiz-wrap" class="animate-fade-up" data-delay="200">
+      <!-- Quiz header -->
+      <div id="quiz-header-bar">
+        <span id="qz-counter" style="font-family:'Baloo 2',sans-serif;font-size:0.95rem;color:var(--text-muted);">Question 1 of 10</span>
+        <span id="qz-score-label" style="font-family:'Baloo 2',sans-serif;font-size:0.95rem;color:var(--yellow-pop);font-weight:700;">Score: 0</span>
+      </div>
+      <div class="progress-bar-track" style="margin-bottom:24px;">
+        <div id="qz-progress" style="height:6px;background:linear-gradient(90deg,var(--yellow-pop),var(--teal-primary));border-radius:99px;width:10%;transition:width 0.4s;"></div>
+      </div>
+
+      <!-- Question area -->
+      <div id="qz-question-area">
+        <div id="qz-question" style="font-family:'Baloo 2',sans-serif;font-size:1.3rem;color:var(--text-light);margin-bottom:24px;line-height:1.4;"></div>
+        <div id="qz-options" class="quiz-options"></div>
+        <div id="qz-explanation" style="display:none;margin-top:16px;padding:16px 20px;border-radius:14px;font-family:'Quicksand',sans-serif;font-size:0.95rem;line-height:1.6;"></div>
+        <button id="qz-next-btn" onclick="quizNext()" style="display:none;margin-top:16px;background:linear-gradient(135deg,var(--teal-primary),var(--teal-dark));color:#fff;border:none;border-radius:14px;padding:14px 32px;font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:1px;">Next &rarr;</button>
+      </div>
+
+      <!-- Results area (hidden) -->
+      <div id="qz-results" style="display:none;text-align:center;padding:32px 16px;">
+        <div id="qz-result-emoji" style="font-size:4rem;margin-bottom:12px;"></div>
+        <div id="qz-result-title" style="font-family:'Baloo 2',sans-serif;font-size:1.8rem;color:var(--yellow-pop);margin-bottom:8px;"></div>
+        <div id="qz-result-score" style="font-family:'Quicksand',sans-serif;font-size:1.1rem;color:var(--text-muted);margin-bottom:28px;"></div>
+        <button onclick="retakeQuiz()" style="background:linear-gradient(135deg,var(--teal-primary),var(--teal-dark));color:#fff;border:none;border-radius:14px;padding:16px 36px;font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer;letter-spacing:1px;">🔄 Retake Quiz</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE: dark mid → dark -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,0 1080,80 1440,40 L1440,80 L0,80 Z" fill="#0F172A"/>
+  </svg>
+</div>
+
+<footer id="site-footer" style="background:var(--bg-dark); padding:60px 24px 40px; text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <svg viewBox="0 0 120 80" width="80" height="54" style="display:block;margin:0 auto 20px;">
+      <path d="M60,10 C46,10 32,18 24,32 C16,46 16,62 24,74 C32,80 46,84 60,84" fill="rgba(56,189,248,0.3)" stroke="#38BDF8" stroke-width="2" style="animation:lung-breathe 4s ease-in-out infinite;transform-origin:60px 50px;"/>
+      <path d="M60,10 C74,10 88,18 96,32 C104,46 104,62 96,74 C88,80 74,84 60,84" fill="rgba(56,189,248,0.3)" stroke="#38BDF8" stroke-width="2" style="animation:lung-breathe 4s ease-in-out infinite;transform-origin:60px 50px;"/>
+      <rect x="56" y="2" width="8" height="12" rx="4" fill="rgba(20,184,166,0.7)" stroke="#14B8A6" stroke-width="1.5"/>
+    </svg>
+    <div style="font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text-light);margin-bottom:6px;">Body Explorer: The Respiratory System</div>
+    <div style="font-family:'Quicksand',sans-serif;font-size:0.9rem;color:var(--text-muted);margin-bottom:28px;">An interactive lesson by Ange Valenti &middot; 5th Grade Science</div>
+    <a href="circulatory_system.html" style="font-family:'Baloo 2',sans-serif;font-size:0.95rem;color:var(--teal-primary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;background:rgba(20,184,166,0.1);padding:10px 20px;border-radius:50px;border:1px solid rgba(20,184,166,0.3);">&larr; Circulatory System</a>
+  </div>
+</footer>
+
+<script>
+/* ===================== SOUND MANAGER ===================== */
+class SoundManager {
+  constructor() {
+    this.muted = false;
+    this.ctx = null;
+  }
+  _init() {
+    if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  _noise(duration, startFreq, endFreq, type, vol) {
+    type = type || 'sine'; vol = vol || 0.3;
+    if (this.muted) return;
+    this._init();
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.connect(gain); gain.connect(this.ctx.destination);
+    osc.type = type;
+    osc.frequency.setValueAtTime(startFreq, this.ctx.currentTime);
+    if (endFreq) osc.frequency.exponentialRampToValueAtTime(endFreq, this.ctx.currentTime + duration);
+    gain.gain.setValueAtTime(vol, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+    osc.start(); osc.stop(this.ctx.currentTime + duration);
+  }
+  _whiteNoise(duration, volStart, volEnd) {
+    if (this.muted) return;
+    this._init();
+    const bufferSize = Math.floor(this.ctx.sampleRate * duration);
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    const source = this.ctx.createBufferSource();
+    source.buffer = buffer;
+    const gain = this.ctx.createGain();
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'bandpass'; filter.frequency.value = 2000;
+    source.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
+    gain.gain.setValueAtTime(volStart, this.ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(volEnd, this.ctx.currentTime + duration);
+    source.start(); source.stop(this.ctx.currentTime + duration);
+  }
+  whoosh()    { this._whiteNoise(0.35, 0.15, 0.001); }
+  pop()       { this._noise(0.08, 800, 400, 'sine', 0.25); }
+  ding()      { this._noise(0.15, 880, 880, 'sine', 0.3); setTimeout(() => this._noise(0.2, 1100, 1100, 'sine', 0.25), 150); }
+  buzz()      { this._noise(0.2, 100, 80, 'sawtooth', 0.3); }
+  inhale()    { this._whiteNoise(0.8, 0.001, 0.2); }
+  exhale()    { this._whiteNoise(0.8, 0.2, 0.001); }
+  heartbeat() { this._noise(0.1, 60, 40, 'sine', 0.4); setTimeout(() => this._noise(0.1, 60, 40, 'sine', 0.3), 180); }
+  levelup()   {
+    const notes = [523, 659, 784, 1047];
+    notes.forEach((freq, i) => setTimeout(() => this._noise(0.2, freq, freq, 'sine', 0.25), i * 120));
+  }
+  click()     { this._noise(0.04, 1200, 800, 'square', 0.1); }
+  toggle() {
+    this.muted = !this.muted;
+    document.getElementById('sound-toggle').textContent = this.muted ? '🔇' : '🔊';
+  }
+}
+
+/* ===================== PARTICLE SYSTEM ===================== */
+class ParticleSystem {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.particles = [];
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+    this.spawnParticles();
+    this.animate();
+  }
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+  spawnParticles() {
+    for (let i = 0; i < 35; i++) {
+      this.particles.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 3 + 3,
+        type: i < 20 ? 'O2' : 'CO2',
+        vy: i < 20 ? -(Math.random() * 0.4 + 0.2) : (Math.random() * 0.4 + 0.2),
+        vx: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.4 + 0.1,
+      });
+    }
+  }
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y < -20) p.y = this.canvas.height + 20;
+      if (p.y > this.canvas.height + 20) p.y = -20;
+      if (p.x < -20) p.x = this.canvas.width + 20;
+      if (p.x > this.canvas.width + 20) p.x = -20;
+      const color = p.type === 'O2' ? '56,189,248' : '251,113,133';
+      this.ctx.beginPath();
+      this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      this.ctx.fillStyle = 'rgba(' + color + ',' + p.opacity + ')';
+      this.ctx.fill();
+      this.ctx.fillStyle = 'rgba(' + color + ',' + (p.opacity * 1.5) + ')';
+      this.ctx.font = (p.r * 1.8) + 'px sans-serif';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillText(p.type, p.x, p.y + p.r + 8);
+    });
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+/* ===================== SCROLL PROGRESS ===================== */
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0) bar.style.width = (scrollTop / docHeight * 100) + '%';
+  });
+}
+
+/* ===================== SCORE ===================== */
+let score = 0;
+function addScore(pts) {
+  score += pts;
+  const badge = document.getElementById('score-badge');
+  badge.textContent = '⭐ ' + score;
+  badge.style.display = 'flex';
+  badge.classList.add('pop');
+  setTimeout(() => badge.classList.remove('pop'), 400);
+}
+
+/* ===================== SCROLL ANIMATIONS ===================== */
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.delay || 0;
+        entry.target.style.transitionDelay = delay + 'ms';
+        entry.target.classList.add('animated');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.animate-slide-left, .animate-fade-up').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+/* ===================== SECTION 2 — DIAGRAM ===================== */
+const partData = {
+  nose:        { emoji: '👃', name: 'Nose & Mouth',       nick: 'The Entry Gates',       desc: 'Air enters here! Your nose filters out dust and germs, warms the air to body temperature, and adds moisture before it goes deeper.' },
+  pharynx:     { emoji: '🫀', name: 'Pharynx (Throat)',    nick: 'The Hallway',           desc: "The shared passage behind your nose and mouth. Air and food both travel through here — that's why you can't breathe and swallow at the same time!" },
+  larynx:      { emoji: '🎵', name: 'Larynx (Voice Box)', nick: 'The Music Maker',       desc: 'Your vocal cords live here! When air passes through, they vibrate to make your voice. The epiglottis flap covers it when you swallow.' },
+  trachea:     { emoji: '🛣️', name: 'Trachea (Windpipe)', nick: 'The Main Highway',      desc: 'A 12cm tube held open by C-shaped cartilage rings — like a flexible vacuum hose. Tiny hairs called cilia sweep dust and mucus up and out.' },
+  bronchi:     { emoji: '🍴', name: 'Bronchi',             nick: 'The Fork in the Road',  desc: 'At the bottom of the trachea, the airway splits into two bronchi — one leading to your left lung, one to your right.' },
+  bronchioles: { emoji: '🌿', name: 'Bronchioles',         nick: 'The Tiny Branches',     desc: 'Each bronchus branches into thousands of smaller and smaller tubes — bronchioles — that carry air throughout every part of the lung.' },
+  alveoli:     { emoji: '🫧', name: 'Alveoli',             nick: 'The Tiny Balloons',     desc: 'Tiny air sacs at the end of bronchioles — you have about 600 million of them! This is where oxygen passes into your blood and CO₂ passes out.' },
+  diaphragm:   { emoji: '💪', name: 'Diaphragm',           nick: 'The Breathing Muscle',  desc: 'A dome-shaped muscle under your lungs. When it contracts (flattens), your lungs expand and air rushes IN. When it relaxes, it domes up and air is pushed OUT.' },
+};
+
+let discovered = new Set();
+
+function initDiagram() {
+  document.querySelectorAll('#resp-diagram .hotspot').forEach(hs => {
+    hs.addEventListener('click', () => {
+      const part = hs.dataset.part;
+      sounds.pop();
+      const info = partData[part];
+      if (!info) return;
+      document.getElementById('diagram-info-panel').innerHTML =
+        '<div style="font-size:3rem;margin-bottom:12px">' + info.emoji + '</div>' +
+        '<div style="font-family:\'Baloo 2\',sans-serif;font-size:1.3rem;color:var(--teal-primary);font-weight:700">' + info.name + '</div>' +
+        '<div style="font-family:\'Baloo 2\',sans-serif;font-size:1rem;color:var(--yellow-pop);margin:4px 0 12px">"' + info.nick + '"</div>' +
+        '<div style="font-family:\'Quicksand\',sans-serif;font-size:0.95rem;color:var(--text-light);line-height:1.6">' + info.desc + '</div>';
+      if (!discovered.has(part)) {
+        discovered.add(part);
+        hs.classList.add('discovered');
+        addScore(5);
+        updatePartsProgress();
+        if (discovered.size === 8) {
+          setTimeout(() => sounds.levelup(), 200);
+        }
+      }
+    });
+  });
+}
+
+function updatePartsProgress() {
+  const n = discovered.size;
+  const countEl = document.getElementById('parts-count');
+  const barEl = document.getElementById('parts-progress-bar');
+  if (countEl) countEl.textContent = n;
+  if (barEl) barEl.style.width = (n / 8 * 100) + '%';
+}
+
+/* ===================== SECTION 3 — BREATHING ===================== */
+let breathingTimer = null;
+let breathingActive = false;
+
+function showInhale() {
+  sounds.inhale();
+  document.getElementById('panel-inhale').classList.add('active-panel');
+  document.getElementById('panel-exhale').classList.remove('active-panel');
+}
+
+function showExhale() {
+  sounds.exhale();
+  document.getElementById('panel-exhale').classList.add('active-panel');
+  document.getElementById('panel-inhale').classList.remove('active-panel');
+}
+
+function initBreathing() {
+  document.getElementById('btn-inhale').addEventListener('click', showInhale);
+  document.getElementById('btn-exhale').addEventListener('click', showExhale);
+
+  document.getElementById('btn-breathe-along').addEventListener('click', () => {
+    breathingActive = !breathingActive;
+    const btn = document.getElementById('btn-breathe-along');
+    if (breathingActive) {
+      btn.textContent = '⏸ Stop';
+      runBreatheCycle();
+    } else {
+      btn.textContent = '▶ Start Breathing';
+      clearTimeout(breathingTimer);
+      const circle = document.getElementById('breathe-circle');
+      circle.classList.remove('inhale-state', 'exhale-state');
+      circle.querySelector('.breathe-text').textContent = 'Press start...';
+    }
+  });
+}
+
+function runBreatheCycle() {
+  if (!breathingActive) return;
+  const circle = document.getElementById('breathe-circle');
+  const label = circle.querySelector('.breathe-text');
+  circle.classList.remove('exhale-state');
+  circle.classList.add('inhale-state');
+  label.textContent = 'BREATHE IN...';
+  sounds.inhale();
+  breathingTimer = setTimeout(() => {
+    if (!breathingActive) return;
+    circle.classList.remove('inhale-state');
+    circle.classList.add('exhale-state');
+    label.textContent = 'BREATHE OUT...';
+    sounds.exhale();
+    breathingTimer = setTimeout(runBreatheCycle, 4200);
+  }, 4200);
+}
+
+/* ===================== SECTION 4 — JOURNEY ===================== */
+const journeyStops = [
+  { icon: '👃', label: 'Nose & Mouth',     sound: 'whoosh', desc: 'Air enters! Your nose filters, warms, and moistens it — getting it ready for the journey.' },
+  { icon: '🗣️', label: 'Pharynx & Larynx', sound: 'whoosh', desc: 'Past the throat and voice box. The epiglottis flap makes sure air goes the right way!' },
+  { icon: '🛣️', label: 'Trachea',          sound: 'whoosh', desc: 'Down the windpipe! Cilia (tiny hairs) are sweeping dust up and out while you travel.' },
+  { icon: '🍴', label: 'Bronchi',          sound: 'pop',    desc: 'The road splits! One tube leads to your left lung, one to your right lung.' },
+  { icon: '🌿', label: 'Bronchioles',      sound: 'pop',    desc: 'Getting smaller and smaller — thousands of tiny branches spreading air throughout the lungs.' },
+  { icon: '🫧', label: 'Alveoli',          sound: 'ding',   desc: '🎉 Oxygen passes from the air sac into the bloodstream! CO₂ swaps out to be exhaled.' },
+  { icon: '💨', label: 'Exhale — CO₂ Out', sound: 'exhale', desc: 'Mission complete! CO₂ travels back up the same path and exits when you breathe out.' },
+];
+
+let currentStep = -1;
+
+function initJourney() {
+  const track = document.getElementById('journey-track');
+  // Add vertical connecting line
+  const line = document.createElement('div');
+  line.className = 'journey-line';
+  track.appendChild(line);
+
+  journeyStops.forEach((stop, i) => {
+    const stopEl = document.createElement('div');
+    stopEl.className = 'journey-stop';
+    stopEl.dataset.step = i;
+    stopEl.id = 'stop-' + i;
+    stopEl.innerHTML =
+      '<div class="stop-dot">' + stop.icon + '</div>' +
+      '<div class="stop-label">' + stop.label + '</div>';
+    track.appendChild(stopEl);
+  });
+
+  // Add molecule
+  const mol = document.createElement('div');
+  mol.id = 'o2-molecule';
+  mol.innerHTML = '<span>O₂</span><span class="mol-face">😊</span>';
+  track.appendChild(mol);
+
+  document.getElementById('btn-next-stop').addEventListener('click', advanceJourney);
+}
+
+function advanceJourney() {
+  currentStep++;
+  if (currentStep >= journeyStops.length) return;
+
+  const stop = journeyStops[currentStep];
+
+  // Play sound
+  if (stop.sound && sounds[stop.sound]) {
+    sounds[stop.sound]();
+  } else {
+    sounds.whoosh();
+  }
+
+  // Update stop states
+  for (let i = 0; i < journeyStops.length; i++) {
+    const el = document.getElementById('stop-' + i);
+    if (!el) continue;
+    el.classList.remove('active', 'completed');
+    if (i < currentStep) el.classList.add('completed');
+    if (i === currentStep) el.classList.add('active');
+  }
+
+  // Move molecule
+  const activeStop = document.getElementById('stop-' + currentStep);
+  const mol = document.getElementById('o2-molecule');
+  if (activeStop && mol) {
+    const trackRect = document.getElementById('journey-track').getBoundingClientRect();
+    const stopRect = activeStop.getBoundingClientRect();
+    const relativeTop = stopRect.top - trackRect.top;
+    mol.style.top = relativeTop + 'px';
+  }
+
+  // Update info box
+  document.getElementById('journey-info-box').innerHTML =
+    '<div style="font-size:2.5rem">' + stop.icon + '</div>' +
+    '<div style="font-family:\'Baloo 2\',sans-serif;font-size:1.2rem;font-weight:700;color:var(--teal-primary)">' + stop.label + '</div>' +
+    '<div style="font-family:\'Quicksand\',sans-serif;font-size:0.95rem;color:var(--text-light);margin-top:8px;line-height:1.6">' + stop.desc + '</div>';
+
+  // Check completion
+  if (currentStep === journeyStops.length - 1) {
+    setTimeout(() => {
+      document.getElementById('journey-complete').style.display = 'block';
+      document.getElementById('btn-next-stop').style.display = 'none';
+      addScore(10);
+      sounds.levelup();
+      confetti();
+    }, 800);
+  }
+}
+
+function confetti() {
+  const colors = ['#14B8A6', '#38BDF8', '#FBBF24', '#34D399', '#FB7185', '#A78BFA'];
+  for (let i = 0; i < 50; i++) {
+    const el = document.createElement('div');
+    el.style.cssText =
+      'position:fixed;top:-10px;left:' + (Math.random() * 100) + 'vw;' +
+      'width:8px;height:8px;' +
+      'background:' + colors[Math.floor(Math.random() * colors.length)] + ';' +
+      'border-radius:' + (Math.random() > 0.5 ? '50%' : '2px') + ';' +
+      'z-index:9999;pointer-events:none;' +
+      'animation:confetti-fall ' + (1.5 + Math.random() * 2) + 's ease-in forwards;' +
+      'animation-delay:' + (Math.random() * 0.8) + 's;';
+    document.body.appendChild(el);
+    setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, 4000);
+  }
+}
+
+/* ── FLIP CARDS ── */
+function initFlipCards() {
+  const groupFlipped = {};
+  document.querySelectorAll('.flip-card-wrapper').forEach(wrapper => {
+    wrapper.addEventListener('click', () => {
+      const card = wrapper.querySelector('.flip-card');
+      sounds.pop();
+      card.classList.toggle('flipped');
+
+      const groupEl = wrapper.closest('[data-group]');
+      if (groupEl && card.classList.contains('flipped')) {
+        const gid = groupEl.dataset.group;
+        if (!groupFlipped[gid]) groupFlipped[gid] = new Set();
+        groupFlipped[gid].add(wrapper);
+        const total = groupEl.querySelectorAll('.flip-card-wrapper').length;
+        if (groupFlipped[gid].size === total) {
+          setTimeout(() => {
+            showToast('Nice! You got them all! 🎉');
+            sounds.levelup();
+          }, 350);
+        }
+      }
+    });
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+/* ── SECTION 5: ZOOM + GAS EXCHANGE ── */
+let zoomStep = 0;
+function initZoom() {
+  const btn = document.getElementById('btn-zoom');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    sounds.click();
+    zoomStep = (zoomStep + 1) % 3;
+    document.querySelectorAll('.zoom-stage').forEach((s, i) => s.classList.toggle('active-stage', i === zoomStep));
+    document.querySelectorAll('.zoom-pip').forEach((p, i) => p.classList.toggle('active', i === zoomStep));
+    if (zoomStep === 2) btn.textContent = '🔄 Start Over';
+    else if (zoomStep === 0) btn.textContent = '🔬 Zoom In!';
+    else btn.textContent = '🔬 Zoom In More!';
+  });
+  initGasExchange();
+}
+
+function initGasExchange() {
+  let transferred = 0;
+  document.querySelectorAll('.ge-mol').forEach(mol => {
+    mol.addEventListener('click', () => {
+      if (mol.classList.contains('gone')) return;
+      sounds.pop();
+      mol.classList.add('gone');
+      transferred++;
+      if (transferred === 8) {
+        setTimeout(() => {
+          document.getElementById('ge-complete').style.display = 'block';
+          showToast('Gas exchange complete! 🎉');
+          addScore(10);
+          sounds.levelup();
+        }, 600);
+      }
+    });
+  });
+}
+
+/* ── SECTION 6: CYCLE ANIMATION ── */
+let cycleRaf = null;
+let cycleAngle = 0;
+function startCycleAnim() {
+  if (cycleRaf) return;
+  const svg = document.getElementById('cycle-svg');
+  if (!svg) return;
+  const dots = svg.querySelectorAll('.cdot');
+  const CX = 220, CY = 150, RX = 165, RY = 118;
+  const n = dots.length;
+  (function frame() {
+    cycleAngle = (cycleAngle + 0.008) % (2 * Math.PI);
+    dots.forEach((dot, i) => {
+      const a = cycleAngle + (i / n) * 2 * Math.PI;
+      const x = CX + RX * Math.cos(a - Math.PI / 2);
+      const y = CY + RY * Math.sin(a - Math.PI / 2);
+      dot.setAttribute('cx', x.toFixed(1));
+      dot.setAttribute('cy', y.toFixed(1));
+    });
+    cycleRaf = requestAnimationFrame(frame);
+  })();
+}
+
+function initTeamwork() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { startCycleAnim(); observer.disconnect(); } });
+  }, { threshold: 0.3 });
+  const sec = document.getElementById('section-6-teamwork');
+  if (sec) observer.observe(sec);
+}
+
+/* ── SECTION 8: QUIZ ── */
+const QUIZ = [
+  { q:"What does the respiratory system bring INTO your body?", opts:["Carbon dioxide","Oxygen","Food","Water"], correct:1, exp:"Oxygen is the fuel your cells need to make energy!" },
+  { q:"What is the main muscle that helps you breathe?", opts:["Heart muscle","Bicep","Diaphragm","Stomach"], correct:2, exp:"This dome-shaped muscle contracts to pull air in!" },
+  { q:"What is the trachea also called?", opts:["Air sac","Food pipe","Voice box","Windpipe"], correct:3, exp:"It's the main highway for air heading to your lungs!" },
+  { q:"Where does gas exchange happen in the lungs?", opts:["Trachea","Bronchi","Nose","Alveoli"], correct:3, exp:"These tiny air sacs are where oxygen meets your blood!" },
+  { q:"What are cilia?", opts:["Tiny blood vessels","Tiny hairs that sweep out dirt","Small air sacs","Rib bones"], correct:1, exp:"They wave back and forth to keep your airways clean!" },
+  { q:"About how many alveoli are in your lungs?", opts:["30 billion","3,000","300 million","300"], correct:2, exp:"Enough to cover a tennis court if spread flat!" },
+  { q:"What happens to your diaphragm when you INHALE?", opts:["It relaxes and domes up","It stops moving","It contracts and flattens","It expands sideways"], correct:2, exp:"This gives your lungs room to expand and fill with air!" },
+  { q:"Which system works with the respiratory system to deliver oxygen?", opts:["Digestive system","Circulatory system","Nervous system","Skeletal system"], correct:1, exp:"Blood carries oxygen from your lungs to every cell!" },
+  { q:"What do the bronchi do?", opts:["Make your voice","Filter the air","Exchange gases","Split the airway into two paths to each lung"], correct:3, exp:"The trachea forks into two bronchi — one per lung!" },
+  { q:"What gas do you breathe OUT?", opts:["Oxygen","Nitrogen","Carbon dioxide","Helium"], correct:2, exp:"It's the waste product from your cells using energy!" }
+];
+let qzIdx = 0, qzScore = 0, qzAnswered = false;
+
+function initQuiz() {
+  renderQuestion(0);
+}
+
+function renderQuestion(idx) {
+  qzAnswered = false;
+  const q = QUIZ[idx];
+  document.getElementById('qz-counter').textContent = 'Question ' + (idx + 1) + ' of ' + QUIZ.length;
+  document.getElementById('qz-progress').style.width = ((idx / QUIZ.length) * 100 + 10) + '%';
+  document.getElementById('qz-question').textContent = q.q;
+  const opts = document.getElementById('qz-options');
+  opts.innerHTML = q.opts.map((o, i) =>
+    '<button class="quiz-opt-btn" onclick="handleAnswer(' + i + ')">' + o + '</button>'
+  ).join('');
+  document.getElementById('qz-explanation').style.display = 'none';
+  document.getElementById('qz-next-btn').style.display = 'none';
+  document.getElementById('qz-question-area').style.display = '';
+  document.getElementById('qz-results').style.display = 'none';
+}
+
+function handleAnswer(selected) {
+  if (qzAnswered) return;
+  qzAnswered = true;
+  const q = QUIZ[qzIdx];
+  const btns = document.querySelectorAll('.quiz-opt-btn');
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.correct) b.classList.add('correct');
+  });
+  const exp = document.getElementById('qz-explanation');
+  if (selected === q.correct) {
+    sounds.ding();
+    qzScore++;
+    addScore(5);
+    document.getElementById('qz-score-label').textContent = 'Score: ' + qzScore * 5;
+    exp.innerHTML = '✅ Correct! ' + q.exp;
+    exp.style.borderLeftColor = 'var(--green-go)';
+    exp.style.background = 'rgba(52,211,153,0.1)';
+    exp.style.color = '#34D399';
+  } else {
+    sounds.buzz();
+    btns[selected].classList.add('wrong');
+    exp.innerHTML = '❌ Not quite — ' + q.exp;
+    exp.style.borderLeftColor = 'var(--coral-exhale)';
+    exp.style.background = 'rgba(251,113,133,0.08)';
+    exp.style.color = 'var(--coral-exhale)';
+  }
+  exp.style.display = 'block';
+  document.getElementById('qz-next-btn').style.display = (qzIdx < QUIZ.length - 1) ? 'inline-block' : 'none';
+  if (qzIdx === QUIZ.length - 1) {
+    setTimeout(showResults, 800);
+  }
+}
+
+function quizNext() {
+  qzIdx++;
+  if (qzIdx < QUIZ.length) renderQuestion(qzIdx);
+  else showResults();
+}
+
+function showResults() {
+  document.getElementById('qz-question-area').style.display = 'none';
+  document.getElementById('qz-results').style.display = 'block';
+  const pct = qzScore;
+  let emoji, title;
+  if (pct === 10)      { emoji = '🌟'; title = 'BREATHING MASTER! Perfect score!'; }
+  else if (pct >= 8)   { emoji = '🫁'; title = 'LUNG LEGEND! Almost perfect!'; }
+  else if (pct >= 6)   { emoji = '💨'; title = 'GOOD BREATHER! Nice work!'; }
+  else if (pct >= 4)   { emoji = '🌬️'; title = 'KEEP GOING! Review and try again!'; }
+  else                  { emoji = '📚'; title = 'TAKE A DEEP BREATH & TRY AGAIN!'; }
+  document.getElementById('qz-result-emoji').textContent = emoji;
+  document.getElementById('qz-result-title').textContent = title;
+  document.getElementById('qz-result-score').textContent = 'You got ' + qzScore + ' out of ' + QUIZ.length + ' correct!';
+  document.getElementById('qz-progress').style.width = '100%';
+  sounds.levelup();
+  if (qzScore >= 8) confetti();
+}
+
+function retakeQuiz() {
+  qzIdx = 0; qzScore = 0;
+  document.getElementById('qz-score-label').textContent = 'Score: 0';
+  renderQuestion(0);
+}
+
+/* ===================== INIT ===================== */
+const sounds = new SoundManager();
+
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollProgress();
+  initScrollAnimations();
+  new ParticleSystem(document.getElementById('particles-canvas'));
+  initFlipCards();
+  initDiagram();
+  initZoom();
+  initTeamwork();
+  initQuiz();
+  initBreathing();
+  initJourney();
+
+  // Sound toggle
+  document.getElementById('sound-toggle').addEventListener('click', () => sounds.toggle());
+
+  // CTA hero button
+  document.getElementById('btn-start').addEventListener('click', () => {
+    sounds.inhale();
+    document.getElementById('section-1').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+<div id="toast"></div>
+</body>
+</html>
