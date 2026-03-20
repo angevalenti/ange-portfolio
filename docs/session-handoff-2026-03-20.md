@@ -1,55 +1,63 @@
 # Session Handoff — March 20, 2026
 
-## What Was Built This Session
+## What Was Built
 
 ### Circulatory System Lesson (`projects/lessons/circulatory_system.html`)
 - **Status**: Complete, live
-- **Scope**: 2,107 lines, single-file HTML interactive lesson for 5th graders
-- **Content**: 9 sections covering cells, tissue types, cell history/theory, cell organelles, circulatory system overview, blood vessels, heart chambers, blood flow pathway, final quiz
-- **Features**: Drag-to-order activity, click-to-reveal tissue cards, animated scroll timeline, interactive SVG cell diagram (9 organelles), blood vessel drag-and-match quiz, interactive 4-chamber heart diagram, step-by-step blood flow animation, 8-question final quiz with scoring
-- **Design**: Fredoka + Nunito fonts, bold comic-book energy palette (reds, blues, pinks, yellows), hard drop shadows, comic sound-effect badges
-- **Tech**: Scroll progress bar, IntersectionObserver animations, confetti, responsive, touch+mouse, vanilla JS
+- 2,107 lines, single-file HTML, vanilla JS
+- 9 sections: cells, tissues, cell theory timeline, cell organelles (9 interactive hotspots), circulatory overview, blood vessels (drag-and-match quiz), 4-chamber heart diagram, step-by-step blood flow animation, 8-question final quiz
+- Design: Fredoka + Nunito, comic-book energy, bold reds/blues/pinks, hard drop shadows
+- Features: drag-to-order, scroll animations (IntersectionObserver), confetti, floating score badge, responsive
 
 ### Respiratory System Lesson (`projects/lessons/respiratory_system.html`)
-- **Status**: Complete (sections 1-8 + footer built), minor polish needed
-- **Scope**: ~1,665 lines, single-file HTML interactive lesson for 5th graders
-- **Content**: 8 sections — what is the respiratory system, parts of the system, how breathing works, journey of air, alveoli deep dive with gas exchange mini-game, respiratory+circulatory teamwork, fun facts, 10-question final quiz
-- **Features**: Interactive SVG respiratory diagram (8 clickable hotspots), animated inhale/exhale breathing diagram, "Breathe Along" interactive (expanding/contracting circle synced to sounds), 7-stop animated oxygen journey, zoom-in alveoli sequence with molecule transfer game, animated cycle diagram, flip cards throughout, final quiz with timer
-- **Design**: Baloo 2 + Quicksand fonts, "Breath of Fresh Air" teal/sky-blue/coral palette, glassmorphism cards, soft frosted-glass shadows, wave SVG section dividers
-- **Tech**: Web Audio API sound effects (9 programmatic sounds, default ON), canvas particle system (floating O₂/CO₂), scroll progress bar, IntersectionObserver, score badge, responsive, touch+mouse, vanilla JS
-- **Known issues to revisit**:
-  - Section 2 body diagram SVG — improved from original but could still be more polished/anatomical
-  - Fun facts cards — SVG illustrations + bigger answer text fix may not have been applied (was in progress when session pivoted)
-  - General polish pass not yet done
+- **Status**: Complete, minor polish possible
+- ~1,700+ lines, single-file HTML, vanilla JS
+- 8 sections: respiratory basics, interactive organ diagram (8 hotspots), breathing mechanics + "Breathe Along" exercise, 7-stop animated oxygen journey, alveoli zoom + gas exchange mini-game, respiratory+circulatory teamwork cycle diagram, fun fact flip cards, 10-question final quiz
+- Design: Baloo 2 + Quicksand, teal/sky-blue/coral "Breath of Fresh Air" palette, glassmorphism cards, wave SVG dividers
+- Features: Web Audio API (9 sounds, default ON), canvas particle system (O₂/CO₂), flip cards, scroll progress bar, score badge, responsive
+- **Polish items for later**:
+  - Section 2 body diagram SVG could be more anatomically polished
+  - Fun facts cards — SVG illustration replacements + bigger answer text (was in progress)
+  - General polish pass
+
+### Study Buddies Project Page (`projects/study-buddies.html`)
+- **Status**: Complete, live
+- Overview/case study page following existing portfolio structure
+- Accent color: #C8956C (warm amber)
+- Links to both lesson files via "Launch Lesson" buttons
+- "Coming Soon" strip mentioning the Operation game
+- Tile 06 on homepage grid is wired up and pointing here
 
 ### Operation Game (`projects/lessons/operation_game.html`)
-- **Status**: NOT YET BUILT — first attempt hit CC token limit
-- **Concept**: Standalone Operation-style board game covering organs from both lessons
-- **Design direction**: "Operating Room Neon" dark theme, Lilita One + Nunito fonts, neon glow effects, crosshair cursor
-- **Planned modes**: Respiratory only, Circulatory only, Full Body Challenge
-- **Game mechanics**: Clue cards describe an organ → player clicks correct organ on body SVG → extraction animation. 3 lives, 15-sec timer, score + star rating
-- **Build plan**: Split into 2 passes — Pass 1 (respiratory mode playable) then Pass 2 (add circulatory + full body modes)
-- **Full prompt ready**: The complete Pass 1 prompt is written and ready to paste into CC
+- **Status**: NOT BUILT — CC hit 32k token limit on first attempt
+- **To build**: Set `export CLAUDE_CODE_MAX_OUTPUT_TOKENS=64000` before starting
+- **Build plan**: Split into Pass 1 (respiratory mode only, playable) + Pass 2 (add circulatory + full body modes)
+- Design: "Operating Room Neon" dark theme, Lilita One + Nunito, neon glows, crosshair cursor
+- Mechanics: Clue cards → click correct organ on body SVG → extraction animation. 3 lives, 15-sec timer, scoring + star rating
+- Full Pass 1 prompt is ready (ask chat Claude for it)
 
 ## Next Session: Portfolio Design System
 
-The next conversation will focus on the design system across the portfolio website (angevalenti.github.io/ange-portfolio). This is separate from the course design system (`docs/course-design-system.md`) — it's about the portfolio shell itself (homepage, about page, project pages, navigation).
+Focus: design system consistency across the portfolio shell (NOT the course/lesson design system).
 
-Potential areas to address:
+### Potential areas:
 - Homepage grid redesign
 - About page polish
-- Project page template redesign (Option C was selected but Ange wanted a genuinely new direction)
+- Project page template redesign (Option C was selected previously but Ange wanted a genuinely new direction — follow-up questions about pain points and preferred vibe were unanswered)
 - Raising Humans design pass
-- Consistent typography, color, spacing across the portfolio shell
 - Navigation and overall site cohesion
+- Typography/color/spacing consistency
 
-## Key Context for Future Sessions
+### Portfolio shell design tokens:
+- Fonts: Fraunces (display) + Inter (body)
+- Colors: mauve #B07A8A, dark mauve #8C5F6E, cream #F8F4F4, accent #FF6B81
+- Per-project accents on tiles (amber for Study Buddies, etc.)
 
-- **Three-role system**: Ange = Creative Director, Claude (chat) = Strategist/Prompt Writer, Claude Code = Builder
-- **Workflow**: Strategize in chat → Claude writes copy-paste prompt → Ange pastes into CC → CC builds → Ange reports back → iterate
-- **Dev environment**: `cd ~/Documents/Portfolio && claude --dangerously-skip-permissions` for CC; `python3 -m http.server 8000` for local preview
-- **Git**: Always `git add -A` then commit and push in batches
-- **Portfolio shell fonts**: Fraunces (display) + Inter (body)
-- **Portfolio shell colors**: Mauve/cream palette (#B07A8A, #8C5F6E, #F8F4F4), accent #FF6B81
-- **Course design system fonts**: Manrope (headings) + IBM Plex Sans (body)
-- **New lesson fonts**: Circulatory = Fredoka + Nunito; Respiratory = Baloo 2 + Quicksand
+## Standing Reminders
+- Three-role system: Ange = Creative Director, Chat Claude = Strategist/Prompt Writer, CC = Builder
+- All prompts in copy-paste code blocks, no editing needed
+- Git: `git add -A`, commit in batches, verify images with `git ls-files`
+- Dev: `cd ~/Documents/Portfolio && claude --dangerously-skip-permissions`
+- Local preview: `python3 -m http.server 8000`
+- Browser cache: Cmd+Shift+R or incognito after pushing
+- CC context limits: break big builds into sequential passes
