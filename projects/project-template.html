@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Title — Angela Valenti</title>
+  <title>Language Through Film — Angela Valenti</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css">
   <style>
@@ -37,7 +37,7 @@
       height: 60px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 3rem;
-      background: #F5F0EB;
+      background: #F8F7F2;
       border-bottom: 1px solid transparent;
       transition: border-color 0.3s ease;
     }
@@ -59,24 +59,24 @@
 
     .cs-nav-logo {
       font-family: 'Fraunces', serif;
-      font-weight: 300; font-style: italic;
+      font-weight: 300; font-style: normal;
       font-size: 1rem; color: #0c1618;
     }
+    .cs-nav-logo em { font-style: italic; }
 
     /* ─── HERO ─── */
     .cs-hero {
-      min-height: 85vh;
-      padding: 60px 3rem;
-      display: flex; align-items: center;
+      padding: 80px 3rem 2.5rem;
+      display: flex; align-items: flex-start;
       background: #FFFFFF;
     }
     .cs-hero-inner {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
       width: 100%;
       display: grid;
       grid-template-columns: 55fr 45fr;
-      gap: 5rem;
+      gap: 3rem;
       align-items: center;
     }
 
@@ -122,8 +122,8 @@
     .cs-launch-btn {
       display: inline-flex; align-items: center; gap: 0.6rem;
       padding: 16px 40px;
-      background: var(--accent);
-      color: #fff;
+      background: #FBE9E1;
+      color: #5A3A2A;
       font-family: 'Inter', sans-serif;
       font-size: 0.8rem; font-weight: 600;
       letter-spacing: 0.06em;
@@ -133,7 +133,8 @@
       transition: background 0.3s ease, transform 0.3s ease;
     }
     .cs-launch-btn:hover {
-      background: var(--accent-dark);
+      background: #F5D8CC;
+      color: #3A2A1A;
       transform: translateY(-2px);
     }
 
@@ -153,7 +154,7 @@
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      border: 1px solid #E8E4DF;
+      border: 1px solid #E8E4DE;
     }
     .cs-hero-img-wrap img {
       width: 100%; height: 100%;
@@ -327,7 +328,10 @@
     .footer-left {
       font-size: 13px;
       color: rgba(255,255,255,0.4);
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
     }
+    .footer-left em { font-style: italic; }
     .footer-right {
       display: flex; flex-direction: column;
       align-items: flex-end; gap: 0.15rem;
@@ -350,7 +354,7 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .cs-nav { padding: 0 1.5rem; }
-      .cs-hero { padding: 60px 1.5rem; min-height: auto; }
+      .cs-hero { padding: 80px 1.5rem 3rem; }
       .cs-hero-inner {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -400,10 +404,10 @@
 
         <!-- Left -->
         <div class="cs-hero-left">
-          <div class="cs-hero-eyebrow">E-Learning · Curriculum Design</div>
-          <h1 class="cs-hero-heading">A short, compelling description<br>of what this project is<br><em>and why it matters.</em></h1>
-          <p class="cs-hero-sub">Two sentences of supporting context. Who it's for, what makes it distinctive, what problem it solves.</p>
-          <a class="cs-launch-btn" href="#" target="_blank" rel="noopener noreferrer">Launch Course →</a>
+          <div class="cs-hero-eyebrow">E-Learning · ESL Curriculum</div>
+          <h1 class="cs-hero-heading">Language Through<br><em>Film.</em></h1>
+          <p class="cs-hero-sub">An interactive ESL lesson that uses film as a way into real language — the kind students actually encounter outside the classroom.</p>
+          <a class="cs-launch-btn" href="lessons/pursuit_of_happyness_interactive_lesson.html" target="_blank" rel="noopener noreferrer">Launch Course →</a>
         </div>
 
         <!-- Right -->
@@ -429,8 +433,8 @@
     <div class="cs-glance">
       <div class="cs-glance-inner">
         <div class="cs-glance-item">
-          <div class="cs-glance-label">Role</div>
-          <div class="cs-glance-value">Instructional Designer</div>
+          <div class="cs-glance-label">Audience</div>
+          <div class="cs-glance-value">Secondary ELLs</div>
         </div>
         <div class="cs-glance-item">
           <div class="cs-glance-label">Timeline</div>
@@ -441,18 +445,18 @@
           <div class="cs-glance-value">HTML · CSS · JS</div>
         </div>
         <div class="cs-glance-item">
-          <div class="cs-glance-label">Audience</div>
-          <div class="cs-glance-value">Secondary ELLs</div>
+          <div class="cs-glance-label">Proficiency</div>
+          <div class="cs-glance-value">WIDA 2–4</div>
         </div>
       </div>
     </div>
     <!-- STORY SECTIONS: OVERVIEW -->
-    <div class="cs-story">
+    <div class="cs-story" style="background:#F5F0EB;">
       <div class="cs-section">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Overview</span>
-        <h2 class="cs-section-heading">What this is and who it's for.</h2>
-        <p class="cs-section-body">An overview of the project: what it is, who it's designed for, and the context in which it lives. Two to three sentences that ground the reader before diving into the problem. No jargon — just clarity.</p>
+        <h2 class="cs-section-heading">Real language.<br><em>Not textbook language.</em></h2>
+        <p class="cs-section-body">Language Through Film is a self-paced module for secondary English language learners. Instead of vocabulary lists and grammar drills, students work through curated film scenes — picking up idioms, tone, rhythm, and cultural context from how people actually talk. The module is designed for WIDA levels 2–4, with scaffolding that adjusts the difficulty without changing the experience itself.</p>
         <div class="cs-process-img-frame">
           <div class="cs-process-img">Process Visual</div>
         </div>
@@ -478,8 +482,8 @@
         <div class="cs-challenge-left">
           <div class="cs-section-rule"></div>
           <span class="cs-section-eyebrow">The Challenge</span>
-          <h2 class="cs-section-heading">The problem that made this worth solving.</h2>
-          <p class="cs-section-body">Describe the design or instructional challenge. What constraint, tension, or gap made this project hard? What would a generic solution have missed? Two to four sentences that reveal the thinking behind the work.</p>
+          <h2 class="cs-section-heading">The gap between<br><em>the classroom and the real world.</em></h2>
+          <p class="cs-section-body">A lot of ELL materials teach language like it's a set of rules to memorize. Students end up being able to conjugate a verb but not follow a conversation. The real gap is context — understanding why someone said something a certain way, what the tone means, what's being communicated through body language and not just words. Film was the right medium because it delivers all of that at once. But picking the right clips, building the right scaffolding around them, and making interactions that go deeper than 'watch and answer questions' — that took careful planning.</p>
         </div>
         <!-- Right: image -->
         <div class="cs-challenge-right">
@@ -505,8 +509,8 @@
       <div class="cs-section">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Approach</span>
-        <h2 class="cs-section-heading">The decisions that shaped the solution.</h2>
-        <p class="cs-section-body">Explain the instructional or design strategy. What principles guided the structure? What tradeoffs were made and why? This is where craft shows — describe the how, not just the what.</p>
+        <h2 class="cs-section-heading">Three layers<br><em>around every clip.</em></h2>
+        <p class="cs-section-body">Each module is built around a 60–90 second film clip with three parts: a pre-watch vocabulary primer that introduces key terms with visual support, a guided viewing that pauses at important moments for comprehension checks, and a post-watch reflection that moves from 'what happened' to 'what did it mean.' The scaffolding targets WIDA levels 2–4 — always slightly above where the student is comfortable, but never so far that they're lost. The design is clean and intentional. Nothing about it looks or feels remedial.</p>
         <div class="cs-process-img-frame">
           <div class="cs-process-img">Process Visual</div>
         </div>
@@ -517,7 +521,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-left">Angela Valenti · Portfolio</div>
+    <div class="footer-left">Angela <em>Valenti</em> · Portfolio</div>
     <div class="footer-right">
       <span class="footer-next-label">Next project →</span>
       <a class="footer-next-project" href="whats-next.html">Discover Your Direction</a>

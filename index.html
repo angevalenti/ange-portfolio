@@ -41,7 +41,7 @@
           </div>
 
           <!-- Center: name -->
-          <h1 class="hero-name">Angela<br><em>Valenti<span style="color: #FF6B81;">.</span></em></h1>
+          <h1 class="hero-name">Angela<br><em>Valenti<span style="color: var(--blush);">.</span></em></h1>
 
           <!-- Photo + tagline row -->
           <div class="hero-mid">
@@ -94,143 +94,55 @@
             <button class="filter-btn" onclick="filterCards('elearning',this)">E-Learning</button>
           </div>
         </div>
-        <div class="portfolio-grid" id="pgrid">
-          <div class="p-card" data-cat="elearning">
-            <div class="p-card-thumb">
-              <a href="projects/project-template.html"><img src="assets/images/high-school-minority.png" alt="High school minority students"></a>
-              <span class="p-card-tag">E-Learning</span>
-              <div class="p-card-num">01</div>
+        <div class="portfolio-list" id="pgrid">
+          <a href="projects/project-template.html" class="portfolio-row" data-cat="elearning">
+            <div class="p-row-circle" style="background:#014744;">01</div>
+            <div class="p-row-main">
+              <div class="p-row-title">Language Through Film</div>
+              <div class="p-row-desc">Interactive ESL lesson differentiated across WIDA levels 2–4. Fully coded in HTML/CSS/JS.</div>
             </div>
-            <div class="p-card-body">
-              <a href="projects/project-template.html" class="p-card-title">Language Through Film</a>
-              <div class="p-card-desc">Interactive ESL lesson differentiated across three WIDA-aligned proficiency levels. Fully coded in HTML/CSS/JS.</div>
-              <a href="projects/project-template.html" class="p-card-link">View Project →</a>
+            <span class="p-row-tag">E-Learning</span>
+          </a>
+          <a href="projects/whats-next.html" class="portfolio-row" data-cat="elearning">
+            <div class="p-row-circle" style="background:#2D6A5E;">02</div>
+            <div class="p-row-main">
+              <div class="p-row-title">Discover Your Direction</div>
+              <div class="p-row-desc">Interactive career exploration module guiding high school students from self-discovery to action planning.</div>
             </div>
-          </div>
-          <div class="p-card" data-cat="elearning">
-            <div class="p-card-thumb">
-              <a href="projects/whats-next.html"><img src="assets/images/future-careers.png" alt="Future careers"></a>
-              <span class="p-card-tag">E-Learning</span>
-              <div class="p-card-num">02</div>
+            <span class="p-row-tag">E-Learning</span>
+          </a>
+          <a href="projects/esl-lesson.html" class="portfolio-row" data-cat="elearning">
+            <div class="p-row-circle" style="background:#4A7C6F;">03</div>
+            <div class="p-row-main">
+              <div class="p-row-title">Identity, Language &amp; Belonging</div>
+              <div class="p-row-desc">Multi-week unit plan with differentiated instruction, scaffolded objectives, and formative assessment.</div>
             </div>
-            <div class="p-card-body">
-              <a href="projects/whats-next.html" class="p-card-title">Discover Your Direction</a>
-              <div class="p-card-desc">An interactive career exploration module guiding high school students from self-discovery to action planning</div>
-              <a href="projects/whats-next.html" class="p-card-link">View Project →</a>
+            <span class="p-row-tag">ESL Unit Plan</span>
+          </a>
+          <a href="projects/ready_for_whats_next_case_study.html" class="portfolio-row" data-cat="curriculum">
+            <div class="p-row-circle" style="background:#1B6B6B;">04</div>
+            <div class="p-row-main">
+              <div class="p-row-title">Ready for What's Next</div>
+              <div class="p-row-desc">5-unit digital literacy curriculum for high school ELLs — differentiated across WIDA levels, available in three languages.</div>
             </div>
-          </div>
-          <div class="p-card" data-cat="elearning">
-            <div class="p-card-thumb">
-              <a href="projects/esl-lesson.html"><img src="assets/images/2nd-grader-working.png" alt="2nd grader working"></a>
-              <span class="p-card-tag">Curriculum</span>
-              <div class="p-card-num">03</div>
+            <span class="p-row-tag">Curriculum</span>
+          </a>
+          <a href="projects/raising_humans.html" class="portfolio-row" data-cat="elearning">
+            <div class="p-row-circle" style="background:#2E4057;">05</div>
+            <div class="p-row-main">
+              <div class="p-row-title">Raising Humans in the Age of Algorithms</div>
+              <div class="p-row-desc">8-unit parent education course on technology and child development. Research-backed, Masterclass-inspired design.</div>
             </div>
-            <div class="p-card-body">
-              <a href="projects/esl-lesson.html" class="p-card-title">Identity, Language & Belonging</a>
-              <div class="p-card-desc">Multi-week unit plan with differentiated instruction, scaffolded objectives, and formative assessment.</div>
-              <a href="projects/esl-lesson.html" class="p-card-link">View Project →</a>
+            <span class="p-row-tag">E-Learning</span>
+          </a>
+          <a href="projects/study-buddies.html" class="portfolio-row" data-cat="elearning">
+            <div class="p-row-circle" style="background:#C8956C;">06</div>
+            <div class="p-row-main">
+              <div class="p-row-title">Study Buddies</div>
+              <div class="p-row-desc">Interactive science lessons for elementary learners. Animated diagrams, drag-and-drop activities, no LMS required.</div>
             </div>
-          </div>
-          <div class="p-card" data-cat="curriculum">
-            <div class="p-card-thumb">
-              <a href="projects/ready_for_whats_next_case_study.html"><img src="assets/images/high-school-senior.png" alt="High school student looking toward their future" class="p-card-img"></a>
-              <span class="p-card-tag">Curriculum</span>
-              <div class="p-card-num">04</div>
-            </div>
-            <div class="p-card-body">
-              <a href="projects/ready_for_whats_next_case_study.html" class="p-card-title">Ready for What's Next</a>
-              <div class="p-card-desc">A 5-unit WIDA-differentiated digital literacy curriculum for high school ELLs — built with custom design systems for every grade band.</div>
-              <a href="projects/ready_for_whats_next_case_study.html" class="p-card-link">View Project →</a>
-            </div>
-          </div>
-          <div class="p-card" data-cat="elearning">
-            <div class="p-card-thumb">
-              <a href="projects/raising_humans.html"><img src="assets/images/a-teenager-with-a-dream.png" alt="Raising Humans in the Age of Algorithms"></a>
-              <span class="p-card-tag">E-Learning</span>
-              <div class="p-card-num">05</div>
-            </div>
-            <div class="p-card-body">
-              <a href="projects/raising_humans.html" class="p-card-title">Raising Humans in the Age of Algorithms</a>
-              <div class="p-card-desc">A comprehensive 8-unit parent education course exploring how technology shapes child development — from brain architecture to algorithmic influence. Research-backed, Masterclass-inspired design.</div>
-              <a href="projects/raising_humans.html" class="p-card-link">View Project →</a>
-            </div>
-          </div>
-          <div class="p-card" data-cat="elearning">
-            <div class="p-card-thumb" style="background:#D4880F; display:flex; align-items:center; justify-content:center;">
-              <a href="projects/study-buddies.html" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">
-                <svg viewBox="0 0 120 80" width="120" height="80" aria-hidden="true">
-                  <text x="60" y="32" text-anchor="middle" font-size="28" font-family="sans-serif">📜</text>
-                  <text x="60" y="56" text-anchor="middle" font-size="9" fill="#fff" font-family="sans-serif" font-weight="bold" letter-spacing="1">STUDY BUDDIES</text>
-                </svg>
-              </a>
-              <span class="p-card-tag">E-Learning</span>
-              <div class="p-card-num">06</div>
-            </div>
-            <div class="p-card-body">
-              <a href="projects/study-buddies.html" class="p-card-title">Study Buddies</a>
-              <div class="p-card-desc">Teach-first e-learning with mnemonics, quizzes &amp; custom illustrations</div>
-              <a href="projects/study-buddies.html" class="p-card-link">View Project →</a>
-            </div>
-          </div>
-          <!-- ── Hidden tiles (not yet active) ── -->
-          <div class="p-card" data-cat="curriculum" data-hidden style="display:none">
-            <div class="p-card-thumb">
-              <img src="assets/images/elementary-school-2nd-graders-at-the-whiteboard-in.png" alt="Elementary students working at the whiteboard" />
-              <span class="p-card-tag">Curriculum</span>
-              <div class="p-card-num">05</div>
-            </div>
-            <div class="p-card-body">
-              <div class="p-card-title">Visual Arts Curriculum</div>
-              <div class="p-card-desc">K–12 arts curriculum with cross-curricular connections, standards alignment, and project-based learning.</div>
-              <a href="#" class="p-card-link">View Project →</a>
-            </div>
-          </div>
-          <div class="p-card" data-cat="design" data-hidden style="display:none">
-            <div class="p-card-thumb">
-              <span class="p-card-tag">Visual Design</span>
-              <div class="p-card-num">05</div>
-            </div>
-            <div class="p-card-body">
-              <div class="p-card-title">Instructional Media</div>
-              <div class="p-card-desc">Infographics, visual aids, and instructional graphics combining design clarity with educational content.</div>
-              <a href="#" class="p-card-link">View Project →</a>
-            </div>
-          </div>
-          <div class="p-card" data-cat="design" data-hidden style="display:none">
-            <div class="p-card-thumb">
-              <span class="p-card-tag">Visual Design</span>
-              <div class="p-card-num">06</div>
-            </div>
-            <div class="p-card-body">
-              <div class="p-card-title">Graphic Design Portfolio</div>
-              <div class="p-card-desc">Design and art direction from Penn Foster Group and All About Dance, Inc. — Adobe Creative Suite and Figma.</div>
-              <a href="#" class="p-card-link">View Project →</a>
-            </div>
-          </div>
-          <div class="p-card" data-cat="design" data-hidden style="display:none">
-            <div class="p-card-thumb">
-              <img src="assets/images/web-app-for-township-garbage-collection.png" alt="Township Connect App">
-              <span class="p-card-tag">Visual Design</span>
-              <div class="p-card-num">07</div>
-            </div>
-            <div class="p-card-body">
-              <div class="p-card-title">Township Connect App</div>
-              <div class="p-card-desc">Coming soon.</div>
-              <a href="#" class="p-card-link">View Project →</a>
-            </div>
-          </div>
-          <div class="p-card" data-cat="design" data-hidden style="display:none">
-            <div class="p-card-thumb">
-              <img src="assets/images/brand-identity.png" alt="Super Super">
-              <span class="p-card-tag">Visual Design</span>
-              <div class="p-card-num">08</div>
-            </div>
-            <div class="p-card-body">
-              <div class="p-card-title">Super Super</div>
-              <div class="p-card-desc">Coming soon.</div>
-              <a href="#" class="p-card-link">View Project →</a>
-            </div>
-          </div>
+            <span class="p-row-tag">E-Learning</span>
+          </a>
         </div>
       </div>
     </div>
@@ -280,7 +192,7 @@
       <div class="about-philosophy">
         <div class="about-philosophy-inner">
           <span class="about-philosophy-kicker">Philosophy</span>
-          <p class="about-philosophy-quote">"Good design isn't just beautiful — it's <em style="color:#FF6B81;">accessible</em>, intentional, and built for every learner in the room."</p>
+          <p class="about-philosophy-quote">"Good design isn't just beautiful — it's <em style="color: var(--blush);">accessible</em>, intentional, and built for every learner in the room."</p>
         </div>
       </div>
 
@@ -293,7 +205,7 @@
           </div>
           <div class="about-fact-row">
             <span class="about-fact-label">LinkedIn</span>
-            <a href="https://linkedin.com/in/angelavalenti" class="about-fact-val about-fact-link" style="color:#217a7a;">angelavalenti →</a>
+            <a href="https://linkedin.com/in/angelavalenti" class="about-fact-val about-fact-link" style="color: var(--accent);">angelavalenti →</a>
           </div>
         </div>
       </div>
@@ -305,7 +217,7 @@
       <div class="contact-section">
         <div class="contact-inner">
           <span class="contact-kicker">Get in Touch</span>
-          <h1 class="contact-heading">Say Hello<span style="color:#FF6B81;">.</span></h1>
+          <h1 class="contact-heading">Say Hello<span style="color: var(--blush);">.</span></h1>
           <p class="contact-intro">I'm currently open to full-time roles, freelance projects, and contract work in instructional design and e-learning development.</p>
           <div class="contact-details">
             <div class="contact-detail-row">
@@ -314,14 +226,14 @@
                  href="#"
                  data-u="ange.valenti"
                  data-d="gmail.com"
-                 onclick="this.href='mailto:'+this.dataset.u+'@'+this.dataset.d" style="color:#217a7a;">ange.valenti&#64;gmail.com</a>
+                 onclick="this.href='mailto:'+this.dataset.u+'@'+this.dataset.d" style="color: var(--accent);">ange.valenti&#64;gmail.com</a>
             </div>
             <div class="contact-detail-row">
               <span class="contact-detail-label">LinkedIn</span>
               <a class="contact-detail-val"
                  href="https://www.linkedin.com/in/angelavalenti/"
                  target="_blank"
-                 rel="noopener noreferrer" style="color:#217a7a;">angelavalenti →</a>
+                 rel="noopener noreferrer" style="color: var(--accent);">angelavalenti →</a>
             </div>
             <div class="contact-detail-row">
               <span class="contact-detail-label">Available For</span>
@@ -376,7 +288,7 @@
     function filterCards(cat, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelectorAll('#pgrid .p-card:not([data-hidden])').forEach(card => {
+      document.querySelectorAll('#pgrid .portfolio-row').forEach(card => {
         card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
       });
     }

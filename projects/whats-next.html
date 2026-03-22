@@ -3,183 +3,191 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What's Next? — Angela Valenti</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Discover Your Direction — Angela Valenti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css">
   <style>
 
-    /* ── NAV BACK ── */
-    .nav-back {
-      font-size: 0.72rem; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--mid); transition: color 0.2s;
-      display: flex; align-items: center; gap: 0.5rem;
+    /* ─── ACCENT TOKEN ─── */
+    :root {
+      --accent: #2D6A5E;
+      --accent-dark: #1E4A3F;
+      --accent-secondary: #d1ac00;
+      --dark: #0c1618;
     }
-    .nav-back:hover { color: var(--black); }
-    .nav-back::before {
-      content: '←'; font-size: 0.9rem;
-      transition: transform 0.2s;
-    }
-    .nav-back:hover::before { transform: translateX(-3px); }
 
-    /* ── HERO ── */
-    .project-hero {
-      background: #0e0e0e;
-      padding: 7rem 3rem 5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      text-align: center;
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #FFFFFF; color: #0c1618; margin: 0; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    .cs-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      background: #F8F7F2;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
     }
-    .project-hero-inner { max-width: 900px; margin: 0 auto; }
-    .project-hero-tag {
-      display: inline-block;
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); font-weight: 500;
-      border: 1px solid rgba(200,240,0,0.25);
-      padding: 0.25rem 0.7rem;
-      margin-bottom: 1.5rem;
+    .cs-nav.scrolled { border-color: #E8E4DE; }
+    .cs-nav-back {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.08em; color: #333333;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.3s ease;
     }
-    .project-hero-title {
-      font-family: var(--font-body);
-      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 500;
-      color: rgba(255,255,255,0.3);
-      margin-bottom: 1.75rem;
+    .cs-nav-back:hover { color: var(--accent); }
+    .cs-nav-back-arrow { display: inline-block; transition: transform 0.3s ease; }
+    .cs-nav-back:hover .cs-nav-back-arrow { transform: translateX(-3px); }
+    .cs-nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 300; font-style: normal;
+      font-size: 1rem; color: #0c1618;
     }
-    .project-hero-desc {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4.5vw, 3rem);
+    .cs-nav-logo em { font-style: italic; }
+
+    /* ─── HERO ─── */
+    .cs-hero {
+      padding: 80px 3rem 2.5rem;
+      display: flex; align-items: flex-start; background: #FFFFFF;
+    }
+    .cs-hero-inner {
+      max-width: 900px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 55fr 45fr;
+      gap: 3rem; align-items: center;
+    }
+    .cs-hero-left { display: flex; flex-direction: column; gap: 0; }
+    .cs-hero-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .cs-hero-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 24px; height: 2px; background: var(--accent); flex-shrink: 0;
+    }
+    .cs-hero-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
       font-weight: 300; line-height: 1.15;
-      letter-spacing: -0.01em;
-      color: #f8f8f4;
-      max-width: 700px; margin: 0 auto 2.5rem;
+      letter-spacing: -0.01em; color: #0c1618; margin: 0 0 1.5rem;
+    }
+    .cs-hero-heading em { font-style: italic; }
+    .cs-hero-sub {
+      font-size: 1rem; line-height: 1.7;
+      color: #333333; margin: 0 0 2.5rem; max-width: 480px;
+    }
+    .cs-launch-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 16px 40px; background: #FBE9E1; color: #5A3A2A;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+      border-radius: 8px; border: none; cursor: pointer; align-self: flex-start;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .cs-launch-btn:hover { background: #F5D8CC; color: #3A2A1A; transform: translateY(-2px); }
+    .cs-hero-right { display: flex; align-items: center; justify-content: center; }
+    .cs-hero-img-frame { position: relative; width: 100%; }
+    .cs-hero-img-wrap {
+      position: relative; z-index: 1; width: 100%;
+      aspect-ratio: 4 / 3; background: #FFFFFF;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border: 1px solid #E8E4DE;
+    }
+    .cs-hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+    .cs-hero-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; color: #D0D0D0; }
+    .cs-hero-img-placeholder svg { opacity: 0.5; }
+    .cs-hero-img-placeholder span { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ─── AT A GLANCE ─── */
+    .cs-glance { background: #d1ac00; padding: 28px 3rem; overflow: visible; }
+    .cs-glance-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+    .cs-glance-item { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 2rem; }
+    .cs-glance-item + .cs-glance-item { border-left: 1px solid rgba(255,255,255,0.3); }
+    .cs-glance-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #faf4d3; margin-bottom: 0.35rem; }
+    .cs-glance-value { font-size: 0.9rem; font-weight: 500; color: #FFFFFF; }
+
+    /* ─── STORY SECTIONS ─── */
+    .cs-story { background: #FFFFFF; padding: 0 3rem; }
+    .cs-section { max-width: 900px; margin: 0 auto; padding: 80px 0; border-bottom: 1px solid #E0E0E0; }
+    .cs-section:last-child { border-bottom: none; }
+
+    /* ─── THE CHALLENGE ─── */
+    .cs-challenge { background: #FBE9E1; padding: 0 3rem; }
+    .cs-challenge-inner {
+      max-width: 900px; margin: 0 auto; padding: 80px 0;
+      display: flex; gap: 3rem; align-items: center;
+    }
+    .cs-challenge-left { flex: 1.2; }
+    .cs-challenge-right { flex: 0.8; display: flex; align-items: center; }
+    .cs-challenge-img {
+      width: 100%; min-height: 280px; background: #FFFFFF;
+      border-radius: 12px; border: 1px solid #E8C8BC;
+      display: flex; align-items: center; justify-content: center;
+      color: #D0D0D0; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    @media (max-width: 768px) {
+      .cs-challenge-inner { flex-direction: column; padding: 50px 0; }
+      .cs-challenge-right { width: 100%; }
+      .cs-challenge-img { min-height: 220px; }
     }
 
-    /* ── LAUNCH BUTTON ── */
-    .project-launch-btn {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      padding: 1.1rem 3rem;
-      background: #FF6B81; color: #fff;
-      font-family: var(--font-body);
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .project-launch-btn:hover {
-      background: #c91f50;
-      transform: translateY(-2px);
-    }
+    .cs-section-rule { width: 40px; height: 3px; background: #d1ac00; border-radius: 2px; margin-bottom: 1.5rem; }
+    .cs-section-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #888888; margin-bottom: 0.85rem; display: block; }
+    .cs-section-heading { font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 3.5vw, 2.5rem); font-weight: 300; font-style: italic; line-height: 1.2; color: #0c1618; margin: 0 0 1.25rem; }
+    .cs-section-body { font-size: 1.0625rem; line-height: 1.75; color: #333333; max-width: 680px; }
+    .cs-process-img-frame { position: relative; margin-top: 3rem; }
+    .cs-process-img { position: relative; z-index: 1; width: 100%; height: 300px; background: #FFFFFF; border-radius: 12px; border: 1px solid #E8E4DF; display: flex; align-items: center; justify-content: center; color: #D0D0D0; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
 
-    /* ── STAT BAR ── */
-    .project-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-bottom: 1px solid var(--rule);
-    }
-    .project-stat {
-      padding: 2rem 2.5rem;
-      border-right: 1px solid var(--rule);
-      background: var(--white);
-    }
-    .project-stat:last-child { border-right: none; background: var(--accent); }
-    .project-stat-val {
-      font-family: var(--font-display);
-      font-size: 1.5rem; font-weight: 300;
-      color: var(--black); line-height: 1.1; margin-bottom: 0.4rem;
-    }
-    .project-stat-label {
-      font-size: 0.6rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--mid);
-    }
-    .project-stat:last-child .project-stat-label { color: rgba(0,0,0,0.5); }
+    /* ─── TECH GRID ─── */
+    .cs-tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid #E8E4DF; margin-top: 2rem; }
+    .cs-tech-item { padding: 1.5rem 2rem; border-right: 1px solid #E8E4DF; border-bottom: 1px solid #E8E4DF; }
+    .cs-tech-item:nth-child(3n) { border-right: none; }
+    .cs-tech-item:nth-last-child(-n+3) { border-bottom: none; }
+    .cs-tech-val { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 300; color: #0c1618; margin-bottom: 0.3rem; }
+    .cs-tech-label { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #888888; }
 
-    /* ── CONTENT SECTIONS ── */
-    .ps-section { padding: 6rem 3rem; }
-    .ps-section--light { background: #F8F4F4; }
-    .ps-section--dark  { background: #1a1a1a; }
-    .ps-section-inner  { max-width: 820px; margin: 0 auto; }
+    /* ─── FOOTER ─── */
+    footer {
+      background: #121A1A;
+      padding: 1.5rem clamp(1.5rem, 5vw, 2.5rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-left { font-size: 13px; color: rgba(255,255,255,0.4); font-family: 'Fraunces', serif; font-weight: 400; }
+    .footer-left em { font-style: italic; }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem; }
+    .footer-next-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
+    .footer-next-project { font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: #fff; transition: color 0.2s; }
+    .footer-next-project:hover { color: rgba(255,255,255,0.7); }
 
-    .ps-eyebrow {
-      display: block;
-      font-family: var(--font-body);
-      font-size: 0.8125rem; letter-spacing: 0.15em; text-transform: uppercase;
-      font-weight: 600; margin-bottom: 1rem;
-    }
-    .ps-section--light .ps-eyebrow { color: var(--accent-dark); }
-    .ps-section--dark  .ps-eyebrow { color: #FF6B81; }
-
-    .ps-heading {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-      font-weight: 300; line-height: 1.02;
-      letter-spacing: -0.015em;
-      margin-bottom: 1.75rem;
-    }
-    .ps-section--light .ps-heading { color: #0e0e0e; }
-    .ps-section--dark  .ps-heading { color: #f8f8f4; }
-    .ps-heading em { font-style: italic; }
-
-    .ps-body {
-      font-family: var(--font-body);
-      font-size: 0.95rem; line-height: 1.85;
-      max-width: 580px;
-    }
-    .ps-section--light .ps-body { color: var(--mid); }
-    .ps-section--dark  .ps-body { color: rgba(248,248,244,0.5); }
-
-    /* ── TECH GRID ── */
-    .ps-tech-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0; border: 1px solid var(--rule);
-      margin-top: 1rem;
-    }
-    .ps-tech-item {
-      padding: 1.75rem 2rem;
-      border-right: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-    }
-    .ps-tech-item:nth-child(3n) { border-right: none; }
-    .ps-tech-item:nth-last-child(-n+3) { border-bottom: none; }
-    .ps-tech-val {
-      font-family: var(--font-display);
-      font-size: 1.1rem; font-weight: 400;
-      color: var(--black); margin-bottom: 0.3rem;
-    }
-    .ps-tech-label {
-      font-size: 0.58rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--mid);
-    }
-
-    /* ── BOTTOM LAUNCH CTA ── */
-    .ps-cta {
-      padding: 7rem 3rem;
-      background: #0e0e0e;
-      text-align: center;
-    }
-    .ps-cta-note {
-      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-bottom: 2rem; display: block;
-    }
-    .ps-cta .project-launch-btn {
-      padding: 1.4rem 4.5rem;
-      font-size: 0.75rem;
-    }
-
-    /* ── RESPONSIVE ── */
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      .project-hero { padding: 5rem 1.5rem 3.5rem; }
-      .project-stats { grid-template-columns: repeat(2, 1fr); }
-      .project-stat { border-bottom: 1px solid var(--rule); }
-      .project-stat:nth-child(2) { border-right: none; }
-      .project-stat:nth-child(4) { border-right: none; }
-      .project-stat:nth-child(3),
-      .project-stat:nth-child(4) { border-bottom: none; }
-      .ps-section { padding: 4rem 1.5rem; }
-      .ps-tech-grid { grid-template-columns: repeat(2, 1fr); }
-      .ps-cta { padding: 5rem 1.5rem; }
-      .ps-cta .project-launch-btn { width: 100%; justify-content: center; }
+      .cs-nav { padding: 0 1.5rem; }
+      .cs-hero { padding: 80px 1.5rem 3rem; }
+      .cs-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .cs-hero-right { order: -1; }
+      .cs-hero-img-wrap { max-height: 260px; }
+      .cs-glance { padding: 20px 1.5rem; }
+      .cs-glance-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+      .cs-glance-item { padding: 1rem; border-left: none !important; }
+      .cs-glance-item:nth-child(2n) { border-left: 1px solid rgba(255,255,255,0.3) !important; }
+      .cs-glance-item:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.3); }
+      .cs-story { padding: 0 1.5rem; }
+      .cs-challenge { padding: 0 1.5rem; }
+      .cs-section { padding: 50px 0; }
+      .cs-tech-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 1.25rem 1.5rem; }
+      .footer-right { align-items: flex-start; }
     }
     @media (max-width: 600px) {
-      .ps-tech-grid { grid-template-columns: 1fr; }
-      .ps-tech-item { border-right: none; border-bottom: 1px solid var(--rule); }
-      .ps-tech-item:last-child { border-bottom: none; }
+      .cs-hero-heading { font-size: 2rem; }
+      .cs-section-heading { font-size: 1.75rem; }
+      .cs-launch-btn { width: 100%; justify-content: center; }
+      .cs-tech-grid { grid-template-columns: 1fr; }
     }
 
   </style>
@@ -187,125 +195,175 @@
 <body>
 
   <!-- NAV -->
-  <nav id="nav">
-    <a class="nav-back" href="../index.html#portfolio">Back to Portfolio</a>
-    <a class="nav-logo" href="../index.html">Angela <em>Valenti</em></a>
+  <nav class="cs-nav" id="cs-nav">
+    <a class="cs-nav-back" href="../index.html#portfolio">
+      <span class="cs-nav-back-arrow">←</span> Portfolio
+    </a>
+    <a class="cs-nav-logo" href="../index.html">Angela <em>Valenti</em></a>
   </nav>
-
   <main>
 
     <!-- HERO -->
-    <section class="project-hero">
-      <div class="project-hero-inner">
-        <span class="project-hero-tag">E-Learning · ESL</span>
-        <h1 class="project-hero-title">Career Exploration</h1>
-        <p class="project-hero-desc">An interactive ESL module guiding secondary ELLs through the language of goal-setting, future planning, and expressed intention.</p>
-        <a class="project-launch-btn" href="lessons/whats-next-v2.html" target="_blank" rel="noopener noreferrer">Launch Course →</a>
-      </div>
-    </section>
-
-    <!-- STAT BAR -->
-    <div class="project-stats">
-      <div class="project-stat">
-        <div class="project-stat-val">HTML/CSS/JS</div>
-        <div class="project-stat-label">Format</div>
-      </div>
-      <div class="project-stat">
-        <div class="project-stat-val">Browser-based</div>
-        <div class="project-stat-label">Delivery</div>
-      </div>
-      <div class="project-stat">
-        <div class="project-stat-val">WIDA 3–4</div>
-        <div class="project-stat-label">Level</div>
-      </div>
-      <div class="project-stat">
-        <div class="project-stat-val">30–45 min</div>
-        <div class="project-stat-label">Duration</div>
-      </div>
-    </div>
-
-    <!-- OVERVIEW -->
-    <section class="ps-section ps-section--light">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">Overview</span>
-        <h2 class="ps-heading">Future thinking,<br><em>in their own words.</em></h2>
-        <p class="ps-body">A browser-based ESL module for intermediate-level secondary ELLs. Students build the language of future thinking — goal-setting, sequencing, expressing hopes and intentions — through scaffolded activities and a culminating reflection that asks for something real.</p>
-      </div>
-    </section>
-
-    <!-- THE CHALLENGE -->
-    <section class="ps-section ps-section--dark">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">The Challenge</span>
-        <h2 class="ps-heading">Enough English<br><em>to get by. Not enough<br>to dream out loud.</em></h2>
-        <p class="ps-body">At WIDA Levels 3–4, students can navigate daily life but struggle to express complex, forward-looking thought. The language of planning — conditionals, future modals, expressed intention — is exactly where that gap shows up. Existing materials offered grammar drills or open-ended prompts, rarely both. This lesson had to occupy the space between.</p>
-      </div>
-    </section>
-
-    <!-- APPROACH -->
-    <section class="ps-section ps-section--light">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">Approach</span>
-        <h2 class="ps-heading">Ask something real.<br><em>Get something real.</em></h2>
-        <p class="ps-body">The lesson opens with the question directly — not as a grammar prompt but as a genuine invitation. Vocabulary and sentence frames are embedded in the activity flow where they're needed. Scaffolds release gradually across the lesson. The final screen holds a single open field: one real next step, in the student's own words.</p>
-      </div>
-    </section>
-
-    <!-- TECHNICAL DETAILS -->
-    <section class="ps-section ps-section--light" style="padding-top: 0;">
-      <div class="ps-section-inner">
-        <span class="ps-eyebrow">Technical Details</span>
-        <div class="ps-tech-grid">
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">HTML / CSS / JS</div>
-            <div class="ps-tech-label">Languages</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">Browser-based</div>
-            <div class="ps-tech-label">Delivery</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">No LMS Required</div>
-            <div class="ps-tech-label">Dependencies</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">WIDA 3–4</div>
-            <div class="ps-tech-label">Proficiency Level</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">VS Code · GitHub Pages</div>
-            <div class="ps-tech-label">Tools &amp; Hosting</div>
-          </div>
-          <div class="ps-tech-item">
-            <div class="ps-tech-val">Secondary ELLs</div>
-            <div class="ps-tech-label">Audience</div>
+    <section class="cs-hero">
+      <div class="cs-hero-inner">
+        <div class="cs-hero-left">
+          <div class="cs-hero-eyebrow">E-Learning · Career Exploration</div>
+          <h1 class="cs-hero-heading">Discover Your<br><em>Direction.</em></h1>
+          <p class="cs-hero-sub">An interactive career exploration module guiding high school students from self-discovery to action planning.</p>
+          <a class="cs-launch-btn" href="lessons/whats-next-v2.html" target="_blank" rel="noopener noreferrer">Launch Course →</a>
+        </div>
+        <div class="cs-hero-right">
+          <div class="cs-hero-img-frame">
+            <div class="cs-hero-img-wrap">
+              <div class="cs-hero-img-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>Project Screenshot</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- LAUNCH CTA -->
-    <section class="ps-cta">
-      <span class="ps-cta-note">Interactive Lesson</span>
-      <a class="project-launch-btn" href="lessons/whats-next-v2.html" target="_blank" rel="noopener noreferrer">Launch Course →</a>
-    </section>
+    <!-- AT A GLANCE -->
+    <div class="cs-glance">
+      <div class="cs-glance-inner">
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Audience</div>
+          <div class="cs-glance-value">High School</div>
+        </div>
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Format</div>
+          <div class="cs-glance-value">Self-paced</div>
+        </div>
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Tools</div>
+          <div class="cs-glance-value">HTML · CSS · JS</div>
+        </div>
+        <div class="cs-glance-item">
+          <div class="cs-glance-label">Modality</div>
+          <div class="cs-glance-value">Interactive</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="cs-story" style="background:#F5F0EB;">
+      <div class="cs-section">
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">Overview</span>
+        <h2 class="cs-section-heading">Figure out what's next.<br><em>On your own terms.</em></h2>
+        <p class="cs-section-body">A lot of career exploration tools hand students a quiz and a list of job titles. That's not exploration — that's sorting. Discover Your Direction takes a different approach. Students move through a series of reflections, self-assessments, and real-world scenarios that help them understand what they're actually drawn to — not just what sounds good on paper. The module is self-paced and fully interactive, designed for students who might not have a clear plan yet and aren't sure where to start.</p>
+        <div class="cs-process-img-frame">
+          <div class="cs-process-img">Process Visual</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE: TOP SCALLOP -->
+    <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
+      <rect width="800" height="20" fill="#FBE9E1"/>
+      <rect width="800" height="10" fill="#fff"/>
+      <defs>
+        <pattern id="challenge-scallop-top" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="10" cy="10" r="10" fill="#FBE9E1"/>
+        </pattern>
+      </defs>
+      <rect width="800" height="20" fill="url(#challenge-scallop-top)"/>
+    </svg>
+
+    <!-- THE CHALLENGE -->
+    <div class="cs-challenge">
+      <div class="cs-challenge-inner">
+        <div class="cs-challenge-left">
+          <div class="cs-section-rule"></div>
+          <span class="cs-section-eyebrow">The Challenge</span>
+          <h2 class="cs-section-heading">Career planning<br><em>without the pressure.</em></h2>
+          <p class="cs-section-body">Most high schoolers freeze when you ask 'what do you want to do with your life.' The challenge was designing something that takes that pressure off — an experience that feels more like a conversation than a test. Students needed space to explore without being locked into an answer. The module had to feel low-stakes enough to be honest with, but structured enough to actually lead somewhere useful.</p>
+        </div>
+        <div class="cs-challenge-right">
+          <div class="cs-challenge-img">Process Visual</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE: BOTTOM SCALLOP -->
+    <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
+      <rect width="800" height="20" fill="#fff"/>
+      <rect width="800" height="10" fill="#FBE9E1"/>
+      <defs>
+        <pattern id="challenge-scallop-bot" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="10" cy="10" r="10" fill="#fff"/>
+        </pattern>
+      </defs>
+      <rect width="800" height="20" fill="url(#challenge-scallop-bot)"/>
+    </svg>
+
+    <!-- APPROACH -->
+    <div class="cs-story">
+      <div class="cs-section">
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">Approach</span>
+        <h2 class="cs-section-heading">Reflection first.<br><em>Planning second.</em></h2>
+        <p class="cs-section-body">The module starts with self-discovery — interests, values, strengths — before introducing any career paths. Each section builds on the last, so by the time students reach the action planning stage, they've already done the thinking. Interactive scenarios let them test-drive decisions in a safe environment. Nothing about it feels like a worksheet.</p>
+        <div class="cs-process-img-frame">
+          <div class="cs-process-img">Process Visual</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNICAL DETAILS -->
+    <div class="cs-story">
+      <div class="cs-section">
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">Technical Details</span>
+        <h2 class="cs-section-heading">Built to run anywhere.</h2>
+        <div class="cs-tech-grid">
+          <div class="cs-tech-item">
+            <div class="cs-tech-val">HTML / CSS / JS</div>
+            <div class="cs-tech-label">Languages</div>
+          </div>
+          <div class="cs-tech-item">
+            <div class="cs-tech-val">Browser-based</div>
+            <div class="cs-tech-label">Delivery</div>
+          </div>
+          <div class="cs-tech-item">
+            <div class="cs-tech-val">No LMS Required</div>
+            <div class="cs-tech-label">Dependencies</div>
+          </div>
+          <div class="cs-tech-item">
+            <div class="cs-tech-val">WIDA 3–4</div>
+            <div class="cs-tech-label">Proficiency Level</div>
+          </div>
+          <div class="cs-tech-item">
+            <div class="cs-tech-val">VS Code · GitHub Pages</div>
+            <div class="cs-tech-label">Tools &amp; Hosting</div>
+          </div>
+          <div class="cs-tech-item">
+            <div class="cs-tech-val">Secondary ELLs</div>
+            <div class="cs-tech-label">Audience</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Angela <em>Valenti</em></div>
-    <div class="footer-links">
-      <a href="../index.html">Portfolio</a>
-      <a href="../index.html">About</a>
-      <a href="../index.html">Contact</a>
+    <div class="footer-left">Angela <em>Valenti</em> · Portfolio</div>
+    <div class="footer-right">
+      <span class="footer-next-label">Next project →</span>
+      <a class="footer-next-project" href="esl-lesson.html">Identity, Language &amp; Belonging</a>
     </div>
-    <p class="footer-copy">© 2025 Angela Valenti</p>
   </footer>
 
   <script>
     window.addEventListener('scroll', () => {
-      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+      document.getElementById('cs-nav').classList.toggle('scrolled', window.scrollY > 10);
     });
   </script>
 
