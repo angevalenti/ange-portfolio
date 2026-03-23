@@ -89,10 +89,6 @@
       <div class="portfolio-section">
         <div class="portfolio-header">
           <h1 class="portfolio-title">Portfolio</h1>
-          <div class="filter-row">
-            <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
-            <button class="filter-btn" onclick="filterCards('elearning',this)">E-Learning</button>
-          </div>
         </div>
         <div class="portfolio-list" id="pgrid">
           <a href="projects/project-template.html" class="portfolio-row" data-cat="elearning">
@@ -150,13 +146,25 @@
     <!-- ══ ABOUT ══ -->
     <div id="page-about" class="page">
 
-      <!-- Hero -->
-      <div class="about-hero">
-        <div class="about-hero-inner">
-          <span class="about-hero-tag">About</span>
-          <h1 class="about-hero-headline">Educator by training,<br><em>designer by nature.</em></h1>
+      <!-- Philosophy (opening statement) -->
+      <div class="about-philosophy">
+        <div class="about-philosophy-inner">
+          <span class="about-philosophy-kicker">Philosophy</span>
+          <p class="about-philosophy-quote">"Good design isn't just beautiful — it's <em style="color: var(--accent);">accessible</em>, intentional, and built for every learner in the room."</p>
         </div>
       </div>
+
+      <!-- Scallop: white → blush -->
+      <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
+        <rect width="800" height="20" fill="#FBE9E1"/>
+        <rect width="800" height="10" fill="#fff"/>
+        <defs>
+          <pattern id="about-scallop-top" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="10" fill="#FBE9E1"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="20" fill="url(#about-scallop-top)"/>
+      </svg>
 
       <!-- Bio + Photo -->
       <div class="about-bio-section">
@@ -167,8 +175,8 @@
           <div class="about-bio-text-col">
             <span class="about-bio-kicker">Who I Am</span>
             <div class="about-bio-body">
-              <p>I'm a certified K–12 educator with credentials in ESL, Art, and Special Education, and a background in graphic design. For years I worked in classrooms — developing curriculum, supporting diverse learners, and building instructional materials from scratch.</p>
-              <p>That foundation, combined with professional design experience at Penn Foster Group and All About Dance, Inc., puts me in a position most instructional designers don't have: I understand both sides of the table. The pedagogical rigor and the visual craft.</p>
+              <p>I'm a certified K–12 educator with credentials in <span style="color:#014744; font-weight:600;">ESL, Art, and Special Education</span>, and a background in graphic design. For years I worked in classrooms — developing curriculum, supporting diverse learners, and building instructional materials from scratch.</p>
+              <p>That foundation, combined with professional design experience at Penn Foster Group and All About Dance, Inc., puts me in a position most instructional designers don't have: I understand both sides of the table. <span style="color:#D49D00; font-weight:600;">The pedagogical rigor</span> and <span style="background:#FBE9E1; color:#5A3A2A; padding: 0 4px; border-radius: 2px;">the visual craft.</span></p>
             </div>
             <div class="about-tags">
               <span class="about-tag featured">ESL Specialist</span>
@@ -188,28 +196,6 @@
         </div>
       </div>
 
-      <!-- Philosophy -->
-      <div class="about-philosophy">
-        <div class="about-philosophy-inner">
-          <span class="about-philosophy-kicker">Philosophy</span>
-          <p class="about-philosophy-quote">"Good design isn't just beautiful — it's <em style="color: var(--blush);">accessible</em>, intentional, and built for every learner in the room."</p>
-        </div>
-      </div>
-
-      <!-- Quick Facts -->
-      <div class="about-facts">
-        <div class="about-facts-inner">
-          <div class="about-fact-row">
-            <span class="about-fact-label">Open to</span>
-            <span class="about-fact-val">Full-time · Freelance · Contract</span>
-          </div>
-          <div class="about-fact-row">
-            <span class="about-fact-label">LinkedIn</span>
-            <a href="https://linkedin.com/in/angelavalenti" class="about-fact-val about-fact-link" style="color: var(--accent);">angelavalenti →</a>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- ══ CONTACT ══ -->
@@ -221,7 +207,7 @@
           <p class="contact-intro">I'm currently open to full-time roles, freelance projects, and contract work in instructional design and e-learning development.</p>
           <div class="contact-details">
             <div class="contact-detail-row">
-              <span class="contact-detail-label">Email</span>
+              <span class="contact-detail-label" style="color:#014744;">Email</span>
               <a class="contact-detail-val"
                  href="#"
                  data-u="ange.valenti"
@@ -229,18 +215,18 @@
                  onclick="this.href='mailto:'+this.dataset.u+'@'+this.dataset.d" style="color: var(--accent);">ange.valenti&#64;gmail.com</a>
             </div>
             <div class="contact-detail-row">
-              <span class="contact-detail-label">LinkedIn</span>
+              <span class="contact-detail-label" style="color:#D49D00;">LinkedIn</span>
               <a class="contact-detail-val"
                  href="https://www.linkedin.com/in/angelavalenti/"
                  target="_blank"
-                 rel="noopener noreferrer" style="color: var(--accent);">angelavalenti →</a>
+                 rel="noopener noreferrer" style="color: #D49D00;">angelavalenti →</a>
             </div>
             <div class="contact-detail-row">
-              <span class="contact-detail-label">Available For</span>
+              <span class="contact-detail-label" style="color:#C8956C;">Available For</span>
               <span class="contact-detail-val">Full-time · Freelance · Contract</span>
             </div>
             <div class="contact-detail-row">
-              <span class="contact-detail-label">Focus</span>
+              <span class="contact-detail-label" style="color:#2E4057;">Focus</span>
               <span class="contact-detail-val">E-Learning · Instructional Design · Curriculum</span>
             </div>
           </div>
@@ -283,14 +269,6 @@
     // Deep-link: show portfolio section if URL contains #portfolio
     if (location.hash === '#portfolio') showPage('portfolio', null);
 
-    // Portfolio filter
-    function filterCards(cat, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('#pgrid .portfolio-row').forEach(card => {
-        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
-      });
-    }
 
   </script>
 </body>
