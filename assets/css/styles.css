@@ -70,11 +70,11 @@ nav.scrolled { box-shadow: 0 1px 0 var(--rule), 0 4px 32px rgba(0,0,0,0.06); }
 .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--black); margin: 5px 0; transition: 0.3s; }
 
 /* ── PAGE WRAPPER ── */
-main { padding-top: var(--nav-h); flex: 1; }
+main { padding-top: var(--nav-h); flex: 1; display: flex; flex-direction: column; }
 
 /* ── PAGE SECTIONS (SPA) ── */
 .page { display: none; }
-.page.active { display: block; }
+.page.active { display: block; flex: 1; }
 
 /* ── BUTTONS ── */
 .btn {
