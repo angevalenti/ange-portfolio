@@ -16,8 +16,6 @@
       <li><a href="#" class="active" onclick="showPage('home',this);return false;">Home</a></li>
       <li><a href="#" onclick="showPage('portfolio',this);return false;">Portfolio</a></li>
       <li><a href="#" onclick="showPage('about',this);return false;">About</a></li>
-
-      <li><a href="#" onclick="showPage('contact',this);return false;">Contact</a></li>
     </ul>
     <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -54,7 +52,7 @@
               <p class="hero-desc">I design learning experiences that are educationally grounded and visually intentional.</p>
               <div class="hero-ctas">
                 <button class="btn btn-primary" onclick="showPage('portfolio',null)">View Work →</button>
-                <button class="btn btn-ghost" onclick="showPage('contact',null)">Get in Touch</button>
+                <button class="btn btn-ghost" onclick="showPage('about',null)">Get in Touch</button>
               </div>
             </div>
           </div>
@@ -196,14 +194,10 @@
         </div>
       </div>
 
-    </div>
-
-    <!-- ══ CONTACT ══ -->
-    <div id="page-contact" class="page">
-      <div class="contact-section">
-        <div class="contact-inner">
-          <h1 class="contact-heading" style="color: var(--black);">Say Hello<span style="color: #D49D00;">.</span></h1>
-          <p class="contact-intro">I'm currently open to full-time roles, freelance projects, and contract work in instructional design and e-learning development.</p>
+      <!-- Say Hello -->
+      <div class="about-say-hello">
+        <div class="about-say-hello-inner">
+          <h2 class="about-say-hello-heading">Say Hello<span style="color:#D49D00;">.</span></h2>
           <div class="contact-details">
             <div class="contact-detail-row">
               <span class="contact-detail-label" style="color:#014744;">Email</span>
@@ -231,6 +225,7 @@
           </div>
         </div>
       </div>
+
     </div>
 
   </main>
@@ -239,7 +234,6 @@
     <div class="footer-links">
       <a href="#" onclick="showPage('portfolio',null);return false;">Portfolio</a>
       <a href="#" onclick="showPage('about',null);return false;">About</a>
-      <a href="#" onclick="showPage('contact',null);return false;">Contact</a>
     </div>
     <p class="footer-copy">© 2025 Angela Valenti</p>
   </footer>
