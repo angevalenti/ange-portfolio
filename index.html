@@ -41,42 +41,57 @@
           <!-- Center: name -->
           <h1 class="hero-name">Angela<br><em>Valenti<span style="color: #D49D00;">.</span></em></h1>
 
-          <!-- Photo + tagline row -->
-          <div class="hero-mid">
-            <div class="hero-tagline-left">"Educator by training,<br>designer by nature."</div>
-            <div class="hero-photo-wrap">
-              <img src="assets/images/bookscopy.jpg" class="hero-photo" alt="Angela Valenti" />
-              <div class="hero-photo-lime"></div>
-            </div>
-            <div class="hero-tagline-right">
-              <p class="hero-desc">I design learning experiences that are educationally grounded and visually intentional.</p>
-              <div class="hero-ctas">
-                <button class="btn btn-primary" onclick="showPage('portfolio',null)">View Work →</button>
-                <button class="btn btn-ghost" onclick="showPage('about',null)">Get in Touch</button>
-              </div>
-            </div>
+          <!-- Photo centered -->
+          <div class="hero-photo-wrap">
+            <img src="assets/images/bookscopy.jpg" class="hero-photo" alt="Angela Valenti" />
+            <div class="hero-photo-lime"></div>
           </div>
 
-          <!-- Stats row -->
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <div class="hero-stat-num">K–12</div>
-              <div class="hero-stat-label">Certified Educator</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat-num">3</div>
-              <div class="hero-stat-label">Teaching Credentials</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat-num">ESL</div>
-              <div class="hero-stat-label">Language Specialist</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat-num">BA</div>
-              <div class="hero-stat-label">Graphic Design</div>
-            </div>
+          <!-- Buttons -->
+          <div class="hero-ctas">
+            <button class="btn btn-primary" onclick="showPage('portfolio',null)">View Work →</button>
+            <button class="btn btn-ghost" onclick="showPage('about',null)">Get in Touch</button>
           </div>
 
+        </div>
+      </div>
+
+      <!-- Big quote -->
+      <div class="hero-quote-section">
+        <p class="hero-quote"><span style="color:#D49D00;">Educator</span> by training, <span style="color:#B07868;">designer</span> by nature.</p>
+      </div>
+
+      <!-- Scallop: white → blush -->
+      <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
+        <rect width="800" height="20" fill="#FBE9E1"/>
+        <rect width="800" height="10" fill="#fff"/>
+        <defs>
+          <pattern id="home-scallop-bottom" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="10" fill="#FBE9E1"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="20" fill="url(#home-scallop-bottom)"/>
+      </svg>
+
+      <!-- Blush credentials band -->
+      <div class="home-blush-band">
+        <div class="home-blush-band-inner">
+          <div class="home-blush-stat">
+            <div class="home-blush-stat-num">K–12</div>
+            <div class="home-blush-stat-label">Certified Educator</div>
+          </div>
+          <div class="home-blush-stat">
+            <div class="home-blush-stat-num">3</div>
+            <div class="home-blush-stat-label">Teaching Credentials</div>
+          </div>
+          <div class="home-blush-stat">
+            <div class="home-blush-stat-num">ESL</div>
+            <div class="home-blush-stat-label">Language Specialist</div>
+          </div>
+          <div class="home-blush-stat">
+            <div class="home-blush-stat-num">BA</div>
+            <div class="home-blush-stat-label">Graphic Design</div>
+          </div>
         </div>
       </div>
 
@@ -164,63 +179,62 @@
         <rect width="800" height="20" fill="url(#about-scallop-top)"/>
       </svg>
 
-      <!-- Bio + Photo -->
+      <!-- Bio: centered photo + text -->
       <div class="about-bio-section">
         <div class="about-bio-inner">
-          <div class="about-bio-photo-col">
-            <img class="about-photo-new" src="assets/images/headshot-2.jpg" alt="Angela Valenti" />
+          <img class="about-photo-new" src="assets/images/headshot-2.jpg" alt="Angela Valenti" />
+          <span class="about-bio-kicker">Who I Am</span>
+          <div class="about-bio-body">
+            <p>Most instructional designers understand the theory; I've lived the practice. With years of experience as a K–12 educator in ESL and Special Ed, I know exactly what it takes to reach a diverse room of learners.</p>
+            <p>My background in graphic design isn't just a hobby—it's the lens through which I build. By merging classroom-tested pedagogy with professional design experience, I create materials that are as intentional as they are beautiful.</p>
           </div>
-          <div class="about-bio-text-col">
-            <span class="about-bio-kicker">Who I Am</span>
-            <div class="about-bio-body">
-              <p>Most instructional designers understand the theory; I've lived the practice. With years of experience as a K–12 educator in <span style="color:#014744; font-weight:600;">ESL and Special Ed</span>, I know exactly what it takes to reach a diverse room of learners.</p>
-              <p>My background in graphic design isn't just a hobby—it's the lens through which I build. By merging <span style="color:#D49D00; font-weight:600;">classroom-tested pedagogy</span> with professional design experience, I create materials that are <span style="background:#FBE9E1; color:#5A3A2A; padding: 0 4px; border-radius: 2px;">as intentional as they are beautiful.</span></p>
-            </div>
-            <div class="about-tags">
-              <span class="about-tag featured">ESL Specialist</span>
-              <span class="about-tag featured">Instructional Design</span>
-              <span class="about-tag">K–12 Certified</span>
-              <span class="about-tag">Special Education</span>
-              <span class="about-tag">Visual Art</span>
-              <span class="about-tag">BA Graphic Design</span>
-              <span class="about-tag">Adobe Creative Suite</span>
-              <span class="about-tag">Figma</span>
-              <span class="about-tag">Canva</span>
-              <span class="about-tag">HTML / CSS</span>
-              <span class="about-tag">WIDA Standards</span>
-              <span class="about-tag">UDL</span>
-            </div>
+          <div class="about-tags">
+            <span class="about-tag">ESL Specialist</span>
+            <span class="about-tag">Instructional Design</span>
+            <span class="about-tag">K–12 Certified</span>
+            <span class="about-tag">Special Education</span>
+            <span class="about-tag">Visual Art</span>
+            <span class="about-tag">BA Graphic Design</span>
+            <span class="about-tag">Adobe Creative Suite</span>
+            <span class="about-tag">Figma</span>
+            <span class="about-tag">Canva</span>
+            <span class="about-tag">HTML / CSS</span>
+            <span class="about-tag">WIDA Standards</span>
+            <span class="about-tag">UDL</span>
           </div>
         </div>
       </div>
 
-      <!-- Say Hello -->
-      <div class="about-say-hello">
-        <div class="about-say-hello-inner">
-          <div class="contact-details">
-            <div class="contact-detail-row">
-              <span class="contact-detail-label" style="color:#014744;">Email</span>
-              <a class="contact-detail-val"
-                 href="#"
-                 data-u="ange.valenti"
-                 data-d="gmail.com"
-                 onclick="this.href='mailto:'+this.dataset.u+'@'+this.dataset.d" style="color: var(--accent);">ange.valenti&#64;gmail.com</a>
-            </div>
-            <div class="contact-detail-row">
-              <span class="contact-detail-label" style="color:#014744;">LinkedIn</span>
-              <a class="contact-detail-val"
-                 href="https://www.linkedin.com/in/angelavalenti/"
-                 target="_blank"
-                 rel="noopener noreferrer" style="color: #014744;">angelavalenti →</a>
-            </div>
-            <div class="contact-detail-row">
-              <span class="contact-detail-label" style="color:#1A1A16;">Available For</span>
-              <span class="contact-detail-val" style="color:#1A1A16;">Full-time · Freelance · Contract</span>
-            </div>
-            <div class="contact-detail-row">
-              <span class="contact-detail-label" style="color:#1A1A16;">Focus</span>
-              <span class="contact-detail-val">E-Learning · Instructional Design · Curriculum</span>
-            </div>
+      <!-- Scallop: blush → white (contact bar) -->
+      <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
+        <rect width="800" height="20" fill="#FFFFFF"/>
+        <rect width="800" height="10" fill="#FBE9E1"/>
+        <defs>
+          <pattern id="about-contact-scallop" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="10" fill="#FFFFFF"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="20" fill="url(#about-contact-scallop)"/>
+      </svg>
+
+      <!-- Contact stat bar -->
+      <div class="about-contact-bar">
+        <div class="about-contact-bar-inner">
+          <div class="about-contact-cell">
+            <div class="about-contact-cell-label">Email</div>
+            <a class="about-contact-cell-val" href="#" data-u="ange.valenti" data-d="gmail.com" onclick="this.href='mailto:'+this.dataset.u+'@'+this.dataset.d">ange.valenti&#64;gmail.com</a>
+          </div>
+          <div class="about-contact-cell">
+            <div class="about-contact-cell-label">LinkedIn</div>
+            <a class="about-contact-cell-val" href="https://www.linkedin.com/in/angelavalenti/" target="_blank" rel="noopener noreferrer">angelavalenti →</a>
+          </div>
+          <div class="about-contact-cell">
+            <div class="about-contact-cell-label">Available For</div>
+            <div class="about-contact-cell-val">Full-time · Freelance · Contract</div>
+          </div>
+          <div class="about-contact-cell">
+            <div class="about-contact-cell-label">Focus</div>
+            <div class="about-contact-cell-val">E-Learning · Instructional Design</div>
           </div>
         </div>
       </div>
@@ -234,7 +248,7 @@
       <a href="#" onclick="showPage('portfolio',null);return false;">Portfolio</a>
       <a href="#" onclick="showPage('about',null);return false;">About</a>
     </div>
-    <p class="footer-copy">© 2025 Angela Valenti</p>
+    <p class="footer-copy">© 2025 <span class="footer-name">Angela <em>Valenti</em></span></p>
   </footer>
 
   <script>
