@@ -18,14 +18,18 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; min-height: 100%; }
     body {
       font-family: 'Inter', sans-serif;
       background: #FFFFFF;
       color: #0c1618;
       margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     a { text-decoration: none; color: inherit; }
+    main { flex: 1; }
 
     /* ─── NAV ─── */
     .cs-nav {
@@ -302,7 +306,7 @@
     footer {
       background: #121A1A;
       padding: 1.5rem clamp(1.5rem, 5vw, 2.5rem);
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: flex-end;
       flex-wrap: wrap; gap: 1rem;
     }
     .footer-left {
@@ -532,7 +536,6 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-left">Angela <em>Valenti</em> · Portfolio</div>
     <div class="footer-right">
       <span class="footer-next-label">Next project →</span>
       <a class="footer-next-project" href="ready_for_whats_next_case_study.html">Ready for What's Next</a>

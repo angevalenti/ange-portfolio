@@ -23,13 +23,16 @@
 
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; min-height: 100%; }
 body {
   font-family: var(--font-body);
   background: var(--white);
   color: var(--black);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
@@ -67,7 +70,7 @@ nav.scrolled { box-shadow: 0 1px 0 var(--rule), 0 4px 32px rgba(0,0,0,0.06); }
 .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--black); margin: 5px 0; transition: 0.3s; }
 
 /* ── PAGE WRAPPER ── */
-main { padding-top: var(--nav-h); }
+main { padding-top: var(--nav-h); flex: 1; }
 
 /* ── PAGE SECTIONS (SPA) ── */
 .page { display: none; }
@@ -541,14 +544,12 @@ a.contact-detail-val:hover { color: var(--accent-dark); }
 footer {
   background: var(--black);
   padding: 2.5rem 3rem;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
 }
-.footer-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.5); }
-.footer-logo em { font-style: italic; color: var(--accent); }
-.footer-links { display: flex; gap: 2rem; justify-content: center; }
+.footer-links { display: flex; gap: 2rem; }
 .footer-links a { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
 .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.2); text-align: right; }

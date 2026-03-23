@@ -18,13 +18,17 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; min-height: 100%; }
     body {
       font-family: 'Inter', sans-serif;
       background: #FFFFFF;
       color: #0c1618;
       margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+    main { flex: 1; }
     a { text-decoration: none; color: inherit; }
 
     /* ─── NAV ─── */
@@ -326,6 +330,22 @@
       background: var(--pt-accent-dark);
       transform: translateY(-2px);
     }
+
+    /* ─── PER-CARD LESSON COLORS ─── */
+    .lesson-card--01 .lesson-card-eyebrow { color: #C25B56; }
+    .lesson-card--01 .lesson-card-features li::before { color: #C25B56; }
+    .lesson-card--01 .lesson-launch-btn { background: #C25B56; }
+    .lesson-card--01 .lesson-launch-btn:hover { background: #a84844; }
+
+    .lesson-card--02 .lesson-card-eyebrow { color: #5B8FA8; }
+    .lesson-card--02 .lesson-card-features li::before { color: #5B8FA8; }
+    .lesson-card--02 .lesson-launch-btn { background: #5B8FA8; }
+    .lesson-card--02 .lesson-launch-btn:hover { background: #4a7a91; }
+
+    .lesson-card--03 .lesson-card-eyebrow { color: #8B7355; }
+    .lesson-card--03 .lesson-card-features li::before { color: #8B7355; }
+    .lesson-card--03 .lesson-launch-btn { background: #8B7355; }
+    .lesson-card--03 .lesson-launch-btn:hover { background: #735e43; }
     .lesson-coming-soon {
       display: inline-flex; align-items: center; gap: 0.5rem;
       padding: 0.85rem 1.75rem;
@@ -390,7 +410,7 @@
     footer {
       background: #121A1A;
       padding: 1.5rem clamp(1.5rem, 5vw, 2.5rem);
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: flex-end;
       flex-wrap: wrap; gap: 1rem;
     }
     .footer-left {
@@ -599,7 +619,7 @@
         <div class="lesson-cards">
 
           <!-- Card 1: Circulatory -->
-          <div class="lesson-card">
+          <div class="lesson-card lesson-card--01">
             <div class="lesson-card-eyebrow">Lesson 01 · Circulatory System</div>
             <div class="lesson-card-title">The Heart &amp; Blood Vessels</div>
             <p class="lesson-card-desc">Heart, blood, and blood vessels — explore how your body's highway system works with interactive diagrams, drag-to-order activities, and a clickable 4-chamber heart.</p>
@@ -615,7 +635,7 @@
           </div>
 
           <!-- Card 2: Respiratory -->
-          <div class="lesson-card">
+          <div class="lesson-card lesson-card--02">
             <div class="lesson-card-eyebrow">Lesson 02 · Respiratory System</div>
             <div class="lesson-card-title">Lungs, Breath &amp; Gas Exchange</div>
             <p class="lesson-card-desc">Follow oxygen from your nose to your alveoli with animated journeys, a breathing exercise, gas exchange mini-games, and Web Audio sound effects throughout.</p>
@@ -631,7 +651,7 @@
           </div>
 
           <!-- Card 3: The 13 Colonies -->
-          <div class="lesson-card">
+          <div class="lesson-card lesson-card--03">
             <div class="lesson-card-eyebrow">Lesson 03 · The 13 Colonies</div>
             <div class="lesson-card-title">The 13 Colonies</div>
             <p class="lesson-card-desc">Explore the founding of America's original colonies with interactive maps, drag-and-drop timelines, and visual storytelling.</p>
@@ -696,7 +716,6 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-left">Angela <em>Valenti</em> · Portfolio</div>
     <div class="footer-right">
       <span class="footer-next-label">Next project →</span>
       <a class="footer-next-project" href="project-template.html">Language Through Film</a>
