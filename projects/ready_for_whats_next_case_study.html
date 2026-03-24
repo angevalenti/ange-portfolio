@@ -209,21 +209,18 @@
       padding: 80px 0;
       display: flex;
       gap: 3rem;
-      align-items: center;
+      align-items: stretch;
     }
     .cs-challenge-left { flex: 1.2; }
-    .cs-challenge-right { flex: 0.8; display: flex; align-items: center; }
+    .cs-challenge-right { flex: 0.8; display: flex; }
     .cs-challenge-img {
       width: 100%;
-      min-height: 280px;
+      height: 100%;
       background: #FFFFFF;
       border-radius: 12px;
       border: 1px solid #E8C8BC;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      object-fit: contain;
+      object-position: left top;
     }
 
     @media (max-width: 768px) {
@@ -450,7 +447,7 @@
         <h2 class="cs-section-heading">Built for the classroom.<br><em>Designed for everyone.</em></h2>
         <p class="cs-section-body">Most digital literacy curricula assume students already speak English well and already know their way around technology. A lot of ELL students don't have either yet. Ready for What's Next covers five things students actually need after graduation: email, job applications, online safety, financial basics, and self-advocacy. Every unit works across all five WIDA proficiency levels — so a newcomer and a near-fluent student can move through the same lesson at their own pace. The whole thing is available in English, Spanish, and Russian. Not translated after the fact — designed that way from the start.</p>
         <div class="cs-process-img-frame">
-          <div class="cs-process-img">Process Visual</div>
+          <img class="cs-process-img" src="../assets/images/wn-career cluster.png" alt="Career cluster explorer with six pathways" style="object-fit: cover; height: auto;">
         </div>
       </div>
     </div>
@@ -479,7 +476,7 @@
         </div>
         <!-- Right: image -->
         <div class="cs-challenge-right">
-          <div class="cs-challenge-img">Process Visual</div>
+          <img class="cs-challenge-img" src="../assets/images/wn-cluster-detail.png" alt="Expanded career cluster showing jobs and education paths" style="object-fit: cover; height: auto; min-height: 0;">
         </div>
       </div>
     </div>
@@ -504,7 +501,10 @@
         <h2 class="cs-section-heading">Design system first.<br><em>Lessons second.</em></h2>
         <p class="cs-section-body">Before writing a single unit, I built out a full design system — over 2,500 lines covering typography, color, page templates, interaction patterns, and accessibility. Each WIDA level has its own color, tied to the Can-Do Descriptors for Grades 9–12. Students and teachers can find the right entry point at a glance. Every activity, prompt, and scaffold is color-coded to match. The multilingual support isn't a toggle bolted on at the end — it's wired into the architecture. Same approach with downloadable resources: they're part of the design, not an afterthought.</p>
         <div class="cs-process-img-frame">
-          <div class="cs-process-img">Process Visual</div>
+          <img class="cs-process-img" src="../assets/images/wn-knowledge- check.png" alt="Knowledge check matching activity with 6/6 score" style="object-fit: cover; height: auto;">
+        </div>
+        <div class="cs-process-img-frame">
+          <img class="cs-process-img" src="../assets/images/wn-report-review.png" alt="Downloadable student action plan report preview" style="object-fit: cover; height: auto;">
         </div>
       </div>
     </div>
