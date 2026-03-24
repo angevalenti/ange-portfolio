@@ -209,21 +209,18 @@
       padding: 80px 0;
       display: flex;
       gap: 3rem;
-      align-items: center;
+      align-items: stretch;
     }
     .cs-challenge-left { flex: 1.2; }
-    .cs-challenge-right { flex: 0.8; display: flex; align-items: center; }
+    .cs-challenge-right { flex: 0.8; display: flex; }
     .cs-challenge-img {
       width: 100%;
-      min-height: 280px;
+      height: 100%;
       background: #FFFFFF;
       border-radius: 12px;
       border: 1px solid #E8C8BC;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      object-fit: contain;
+      object-position: left top;
     }
 
     @media (max-width: 768px) {
@@ -394,13 +391,7 @@
         <div class="cs-hero-right">
           <div class="cs-hero-img-frame">
             <div class="cs-hero-img-wrap">
-              <div class="cs-hero-img-placeholder">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21 15 16 10 5 21"/>
-                </svg>
-                <span>Project Screenshot</span>
-              </div>
+              <img src="../assets/images/rfwn-hero.png" alt="Ready for What's Next course dashboard with 5 units and progress tracking" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
             </div>
           </div>
         </div>
@@ -450,7 +441,7 @@
         <h2 class="cs-section-heading">Built for the classroom.<br><em>Designed for everyone.</em></h2>
         <p class="cs-section-body">Most digital literacy curricula assume students already speak English well and already know their way around technology. A lot of ELL students don't have either yet. Ready for What's Next covers five things students actually need after graduation: email, job applications, online safety, financial basics, and self-advocacy. Every unit works across all five WIDA proficiency levels — so a newcomer and a near-fluent student can move through the same lesson at their own pace. The whole thing is available in English, Spanish, and Russian. Not translated after the fact — designed that way from the start.</p>
         <div class="cs-process-img-frame">
-          <div class="cs-process-img">Process Visual</div>
+          <img class="cs-process-img" src="../assets/images/rfwn-digital-life.png" alt="Money and Digital Life unit with accordion lessons and downloadable resource" style="object-fit: cover; height: auto;">
         </div>
       </div>
     </div>
@@ -479,7 +470,7 @@
         </div>
         <!-- Right: image -->
         <div class="cs-challenge-right">
-          <div class="cs-challenge-img">Process Visual</div>
+          <img class="cs-challenge-img" src="../assets/images/rfnw-spanish1.png" alt="Spanish language toggle showing multilingual WIDA-differentiated content" style="object-fit: cover; height: auto; min-height: 0;">
         </div>
       </div>
     </div>
@@ -504,7 +495,10 @@
         <h2 class="cs-section-heading">Design system first.<br><em>Lessons second.</em></h2>
         <p class="cs-section-body">Before writing a single unit, I built out a full design system — over 2,500 lines covering typography, color, page templates, interaction patterns, and accessibility. Each WIDA level has its own color, tied to the Can-Do Descriptors for Grades 9–12. Students and teachers can find the right entry point at a glance. Every activity, prompt, and scaffold is color-coded to match. The multilingual support isn't a toggle bolted on at the end — it's wired into the architecture. Same approach with downloadable resources: they're part of the design, not an afterthought.</p>
         <div class="cs-process-img-frame">
-          <div class="cs-process-img">Process Visual</div>
+          <img class="cs-process-img" src="../assets/images/rfwn-download.png" alt="Interactive professional communication resource with progress checklist" style="object-fit: cover; height: auto;">
+        </div>
+        <div class="cs-process-img-frame">
+          <img class="cs-process-img" src="../assets/images/rfwn-knowledge-check copy.png" alt="Knowledge check quiz with correct answer feedback" style="object-fit: cover; height: auto;">
         </div>
       </div>
     </div>
