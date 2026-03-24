@@ -328,22 +328,25 @@ main { padding-top: var(--nav-h); flex: 1; display: flex; flex-direction: column
 .about-hero-headline em { font-style: italic; }
 .about-bio-section {
   background: #FBE9E1;
-  padding: 5rem 3rem 4rem;
+  padding: 2.5rem 3rem 4rem;
 }
 .about-bio-inner {
-  max-width: 600px; margin: 0 auto;
-  display: flex; flex-direction: column;
-  align-items: center; text-align: center;
+  max-width: 900px; margin: 0 auto;
+  display: flex; align-items: center;
+  gap: 2.5rem;
 }
 .about-photo-new {
-  width: 180px; height: 180px;
+  width: 200px; height: 200px;
   border-radius: 50%;
   object-fit: cover; object-position: center 0%;
   display: block;
-  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+.about-bio-text {
+  flex: 1;
 }
 .about-bio-kicker {
-  display: flex; align-items: center; justify-content: center; gap: 1.25rem;
+  display: flex; align-items: center; gap: 1.25rem;
   font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 1.5rem;
 }
@@ -352,10 +355,20 @@ main { padding-top: var(--nav-h); flex: 1; display: flex; flex-direction: column
 }
 .about-bio-body {
   font-size: 15px; color: var(--black);
-  line-height: 1.75; margin-bottom: 2.5rem;
-  text-align: center;
+  line-height: 1.75; margin-bottom: 1.5rem;
 }
 .about-bio-body p + p { margin-top: 1rem; }
+.about-skills-pills {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.about-pill {
+  display: inline-flex; align-items: center;
+  font-size: 11px; color: var(--mid);
+  padding: 4px 10px;
+  border: 1px solid #E0DDD5;
+  border-radius: 20px;
+  background: transparent;
+}
 .about-philosophy {
   background: #FFFFFF;
   padding: 6rem 3rem 5rem;
@@ -400,18 +413,6 @@ main { padding-top: var(--nav-h); flex: 1; display: flex; flex-direction: column
   transition: color 0.2s;
 }
 .about-fact-link:hover { color: var(--accent); }
-.about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0; justify-content: center; }
-.about-tag {
-  font-size: 0.72rem; letter-spacing: 0.08em;
-  padding: 0.3rem 0.8rem;
-  border: 1px solid var(--rule);
-  color: var(--mid);
-}
-.about-tag.featured {
-  background: var(--accent); border-color: var(--accent);
-  color: #fff; font-weight: 500;
-}
-
 /* ── ABOUT: CONTACT STAT BAR ── */
 .about-contact-bar {
   background: #FFFFFF;
@@ -597,7 +598,10 @@ footer {
 
   /* Layout sections */
   .about-bio-section { padding: 3rem 1.5rem; }
-  .about-photo-new { width: 140px; height: 140px; }
+  .about-bio-inner { flex-direction: column; align-items: center; text-align: center; }
+  .about-bio-kicker { justify-content: center; }
+  .about-photo-new { width: 160px; height: 160px; }
+  .about-skills-pills { justify-content: center; }
   .about-philosophy { padding: 4rem 1.5rem; }
   .about-facts { padding: 3rem 1.5rem; }
   .contact-section { padding: 4rem 1.5rem; }
