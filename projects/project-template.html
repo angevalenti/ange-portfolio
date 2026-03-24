@@ -237,7 +237,7 @@
       padding: 80px 0;
       display: flex;
       gap: 3rem;
-      align-items: center;
+      align-items: stretch;
     }
     .cs-challenge-left {
       flex: 1.2;
@@ -245,19 +245,13 @@
     .cs-challenge-right {
       flex: 0.8;
       display: flex;
-      align-items: center;
     }
     .cs-challenge-img {
       width: 100%;
-      min-height: 280px;
       background: #FFFFFF;
       border-radius: 12px;
       border: 1px solid #E8C8BC;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      object-fit: cover;
     }
 
     @media (max-width: 768px) {
