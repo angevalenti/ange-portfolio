@@ -125,10 +125,13 @@
     .cs-challenge-left { flex: 1.2; }
     .cs-challenge-right { flex: 0.8; display: flex; align-items: center; }
     .cs-challenge-img {
-      width: 100%; min-height: 280px; background: #FFFFFF;
-      border-radius: 12px; border: 1px solid #E8C8BC;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
+      border-radius: 12px;
+      border: 1px solid #E8C8BC;
+      object-fit: contain;
+      object-position: left top;
     }
     @media (max-width: 768px) {
       .cs-challenge-inner { flex-direction: column; padding: 50px 0; }
@@ -216,13 +219,7 @@
         <div class="cs-hero-right">
           <div class="cs-hero-img-frame">
             <div class="cs-hero-img-wrap">
-              <div class="cs-hero-img-placeholder">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21 15 16 10 5 21"/>
-                </svg>
-                <span>Project Screenshot</span>
-              </div>
+              <img src="../assets/images/wn-hero.png" alt="Discover Your Direction — course landing screen" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
             </div>
           </div>
         </div>
@@ -271,7 +268,7 @@
         <h2 class="cs-section-heading">Figure out what's next.<br><em>On your own terms.</em></h2>
         <p class="cs-section-body">A lot of career exploration tools hand students a quiz and a list of job titles. That's not exploration — that's sorting. Discover Your Direction takes a different approach. Students move through a series of reflections, self-assessments, and real-world scenarios that help them understand what they're actually drawn to — not just what sounds good on paper. The module is self-paced and fully interactive, designed for students who might not have a clear plan yet and aren't sure where to start.</p>
         <div class="cs-process-img-frame">
-          <div class="cs-process-img">Process Visual</div>
+          <img class="cs-process-img" src="../assets/images/wn-career cluster.png" alt="Career cluster exploration interface" style="object-fit: cover; height: auto;">
         </div>
       </div>
     </div>
@@ -298,7 +295,7 @@
           <p class="cs-section-body">Most high schoolers freeze when you ask 'what do you want to do with your life.' The challenge was designing something that takes that pressure off — an experience that feels more like a conversation than a test. Students needed space to explore without being locked into an answer. The module had to feel low-stakes enough to be honest with, but structured enough to actually lead somewhere useful.</p>
         </div>
         <div class="cs-challenge-right">
-          <div class="cs-challenge-img">Process Visual</div>
+          <img class="cs-challenge-img" src="../assets/images/wn-cluster-detail.png" alt="Career cluster detail view" style="object-fit: cover; height: auto; min-height: 0;">
         </div>
       </div>
     </div>
@@ -323,7 +320,7 @@
         <h2 class="cs-section-heading">Reflection first.<br><em>Planning second.</em></h2>
         <p class="cs-section-body">The module starts with self-discovery — interests, values, strengths — before introducing any career paths. Each section builds on the last, so by the time students reach the action planning stage, they've already done the thinking. Interactive scenarios let them test-drive decisions in a safe environment. Nothing about it feels like a worksheet.</p>
         <div class="cs-process-img-frame">
-          <div class="cs-process-img">Process Visual</div>
+          <img class="cs-process-img" src="../assets/images/wn-knowledge- check.png" alt="Knowledge check quiz interaction" style="object-fit: cover; height: auto;">
         </div>
       </div>
     </div>
@@ -359,6 +356,9 @@
             <div class="cs-tech-val">Secondary ELLs</div>
             <div class="cs-tech-label">Audience</div>
           </div>
+        </div>
+        <div class="cs-process-img-frame">
+          <img class="cs-process-img" src="../assets/images/wn-report-review.png" alt="Student report review screen" style="object-fit: cover; height: auto;">
         </div>
       </div>
     </div>
