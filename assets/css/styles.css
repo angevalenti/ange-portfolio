@@ -348,10 +348,10 @@ main { padding-top: var(--nav-h); flex: 1; display: flex; flex-direction: column
 .about-bio-kicker {
   display: flex; align-items: center; gap: 1.25rem;
   font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 1.5rem;
+  color: var(--black); margin-bottom: 1.5rem;
 }
 .about-bio-kicker::before, .about-bio-kicker::after {
-  content: ''; display: block; width: 40px; height: 1px; background: var(--accent);
+  content: ''; display: block; width: 40px; height: 1px; background: var(--black);
 }
 .about-bio-body {
   font-size: 15px; color: var(--black);
