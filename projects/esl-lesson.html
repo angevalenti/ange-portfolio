@@ -150,12 +150,6 @@
       border: 1px solid #E8E4DE;
     }
     .cs-hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-    .cs-hero-img-placeholder {
-      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
-      color: #D0D0D0;
-    }
-    .cs-hero-img-placeholder svg { opacity: 0.5; }
-    .cs-hero-img-placeholder span { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
 
     /* ─── AT A GLANCE ─── */
     .cs-glance {
@@ -194,42 +188,6 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 80px 0;
-      border-bottom: 1px solid #E0E0E0;
-    }
-    .cs-section:nth-child(1) { border-bottom: none; }
-    .cs-section:nth-child(2) { border-bottom: none; }
-    .cs-section:last-child   { border-bottom: none; }
-
-    /* ─── THE CHALLENGE (blush band) ─── */
-    .cs-challenge { background: #FBE9E1; padding: 0 3rem; }
-
-    .cs-challenge-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 0;
-      display: flex;
-      gap: 3rem;
-      align-items: center;
-    }
-    .cs-challenge-left { flex: 1.2; }
-    .cs-challenge-right { flex: 0.8; display: flex; align-items: center; }
-    .cs-challenge-img {
-      width: 100%;
-      min-height: 280px;
-      background: #FFFFFF;
-      border-radius: 12px;
-      border: 1px solid #E8C8BC;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 768px) {
-      .cs-challenge-inner { flex-direction: column; padding: 50px 0; }
-      .cs-challenge-right { width: 100%; }
-      .cs-challenge-img { min-height: 220px; }
     }
 
     .cs-section-rule {
@@ -263,41 +221,111 @@
       max-width: 680px;
     }
 
-    .cs-process-img-frame { position: relative; margin-top: 3rem; }
-    .cs-process-img {
-      position: relative; z-index: 1;
-      width: 100%; height: 300px;
-      background: #FFFFFF;
-      border-radius: 12px;
-      border: 1px solid #E8E4DF;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    /* ─── THE CHALLENGE (blush band) ─── */
+    .cs-challenge { background: #FBE9E1; padding: 0 3rem; }
+
+    .cs-challenge-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
     }
 
-    /* ─── TECH GRID ─── */
-    .cs-tech-grid {
+    /* ─── APPROACH — 3-col cards ─── */
+    .rh-approach { background: #FFFFFF; padding: 0 3rem; }
+    .rh-approach-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+    .rh-card-grid {
+      display: flex;
+      gap: 16px;
+    }
+    .rh-card-item {
+      flex: 1;
+      background: #fff;
+      border: 0.5px solid #E0DDD5;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    .rh-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #FBE9E1;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.85rem;
+    }
+    .rh-card-icon-shape {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+    }
+    .rh-card-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #0c1618;
+      margin-bottom: 0.5rem;
+    }
+    .rh-card-body {
+      font-size: 14px;
+      color: #5A5A52;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .rh-card-grid { flex-direction: column; }
+      .cs-challenge-inner { padding: 50px 0; }
+    }
+
+    /* Technical Details — cream grid */
+    .rh-tech-section {
+      background: #F5F0EB;
+      padding: 0 3rem;
+    }
+    .rh-tech-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    .rh-tech-rule {
+      width: 40px; height: 3px;
+      background: var(--pt-gold);
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+    }
+    .rh-tech-eyebrow {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #888888;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .rh-tech-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.2;
+      color: #0c1618;
+      margin: 0 0 1.25rem;
+    }
+    .rh-tech-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
       border: 1px solid #E0E0E0;
-      margin-top: 2rem;
     }
-    .cs-tech-item {
-      padding: 1.75rem 2rem;
+    .rh-tech-item {
+      padding: 1.25rem 1.5rem;
       border-right: 1px solid #E0E0E0;
       border-bottom: 1px solid #E0E0E0;
     }
-    .cs-tech-item:nth-child(3n) { border-right: none; }
-    .cs-tech-item:nth-last-child(-n+3) { border-bottom: none; }
-    .cs-tech-val {
+    .rh-tech-item:nth-child(3n) { border-right: none; }
+    .rh-tech-item:nth-last-child(-n+3) { border-bottom: none; }
+    .rh-tech-val {
       font-family: 'Fraunces', serif;
       font-size: 1.1rem; font-weight: 400;
       color: #0c1618; margin-bottom: 0.3rem;
     }
-    .cs-tech-label {
+    .rh-tech-label {
       font-size: 0.58rem; letter-spacing: 0.14em;
       text-transform: uppercase; color: #888888;
     }
@@ -350,7 +378,11 @@
       .cs-story { padding: 0 1.5rem; }
       .cs-section { padding: 50px 0; }
       .cs-challenge { padding: 0 1.5rem; }
-      .cs-tech-grid { grid-template-columns: 1fr 1fr; }
+      .rh-approach { padding: 0 1.5rem; }
+      .rh-approach-inner { padding: 50px 0; }
+      .rh-tech-section { padding: 0 1.5rem; }
+      .rh-tech-inner { padding: 30px 0; }
+      .rh-tech-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 1.25rem 1.5rem; }
       .footer-right { align-items: flex-start; }
     }
@@ -359,9 +391,9 @@
       .cs-hero-heading { font-size: 2rem; }
       .cs-section-heading { font-size: 1.75rem; }
       .cs-launch-btn { width: 100%; justify-content: center; }
-      .cs-tech-grid { grid-template-columns: 1fr; }
-      .cs-tech-item { border-right: none; border-bottom: 1px solid #E0E0E0; }
-      .cs-tech-item:last-child { border-bottom: none; }
+      .rh-tech-grid { grid-template-columns: 1fr; }
+      .rh-tech-item { border-right: none; border-bottom: 1px solid #E0E0E0; }
+      .rh-tech-item:last-child { border-bottom: none; }
     }
 
   </style>
@@ -441,12 +473,12 @@
       <div class="cs-section">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Overview</span>
-        <h2 class="cs-section-heading">Language learning<br><em>that starts with identity.</em></h2>
+        <h2 class="cs-section-heading">Language learning <em>that starts with identity.</em></h2>
         <p class="cs-section-body">For English language learners, school isn't just about academics — it's about figuring out who you are in a new context. This unit plan puts identity at the center. Students explore questions about belonging, cultural identity, and self-expression while building English skills along the way. The unit is differentiated across proficiency levels with scaffolded objectives, so every student can engage with the same essential questions at a depth that's right for them.</p>
       </div>
     </div>
 
-    <!-- CHALLENGE: TOP SCALLOP (white → blush) -->
+    <!-- CHALLENGE: TOP SCALLOP (cream → blush) -->
     <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
       <rect width="800" height="20" fill="#FBE9E1"/>
       <rect width="800" height="10" fill="#F5F0EB"/>
@@ -460,11 +492,11 @@
 
     <!-- THE CHALLENGE -->
     <div class="cs-challenge">
-      <div class="cs-challenge-inner" style="display:block; text-align:right; max-width:900px; margin:0 auto; padding:80px 0;">
-        <div class="cs-section-rule" style="margin-left:auto;"></div>
+      <div class="cs-challenge-inner">
+        <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">The Challenge</span>
-        <h2 class="cs-section-heading">Real topics.<br><em>Real conversations.</em></h2>
-        <p class="cs-section-body" style="margin-left:auto;">Identity and belonging aren't typical ELL curriculum topics — they're usually saved for advisory or social-emotional learning. But for students navigating a new language and a new culture at the same time, these themes aren't separate from language learning. They are the language learning. The challenge was building something rigorous enough to meet academic standards while leaving enough room for students to bring their own stories into the work.</p>
+        <h2 class="cs-section-heading">Real topics, <em>real conversations.</em></h2>
+        <p class="cs-section-body">Identity and belonging aren't typical ELL curriculum topics — they're usually saved for advisory or social-emotional learning. But for students navigating a new language and a new culture at the same time, these themes aren't separate from language learning. They are the language learning. The challenge was building something rigorous enough to meet academic standards while leaving enough room for students to bring their own stories into the work.</p>
       </div>
     </div>
 
@@ -480,46 +512,68 @@
       <rect width="800" height="20" fill="url(#esl-scallop-bot)"/>
     </svg>
 
-    <!-- STORY: APPROACH -->
-    <div class="cs-story">
-      <div class="cs-section">
+    <!-- STORY: APPROACH (3-card layout) -->
+    <div class="rh-approach">
+      <div class="rh-approach-inner">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Approach</span>
-        <h2 class="cs-section-heading">Scaffolded structure.<br><em>Open-ended questions.</em></h2>
-        <p class="cs-section-body">Each week builds toward a culminating project where students share a piece of their identity story. Along the way, formative assessments check comprehension without shutting down the conversation. The instruction is scaffolded — sentence frames and visual supports for emerging speakers, open-ended prompts for more advanced students — but the core questions stay the same for everyone.</p>
+        <h2 class="cs-section-heading">Scaffolded structure, <em>open-ended questions.</em></h2>
+        <div class="rh-card-grid">
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #D49D00;"></div>
+            </div>
+            <div class="rh-card-title">Identity at the center</div>
+            <div class="rh-card-body">Each week builds toward a culminating project where students share a piece of their identity story — making language learning personal and meaningful.</div>
+          </div>
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #4A7C6F;"></div>
+            </div>
+            <div class="rh-card-title">Scaffolded instruction</div>
+            <div class="rh-card-body">Sentence frames and visual supports for emerging speakers, open-ended prompts for advanced students — but the core questions stay the same for everyone.</div>
+          </div>
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #B07A8A;"></div>
+            </div>
+            <div class="rh-card-title">Formative assessment</div>
+            <div class="rh-card-body">Comprehension checks woven throughout that measure understanding without shutting down the conversation or making students feel tested.</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- STORY: TECHNICAL DETAILS -->
-    <div class="cs-story" style="background:#F5F0EB;">
-      <div class="cs-section">
-        <div class="cs-section-rule"></div>
-        <span class="cs-section-eyebrow">Technical Details</span>
-        <h2 class="cs-section-heading">Built to be handed off.</h2>
-        <div class="cs-tech-grid">
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">HTML / CSS / JS</div>
-            <div class="cs-tech-label">Languages</div>
+    <!-- TECHNICAL DETAILS -->
+    <div class="rh-tech-section">
+      <div class="rh-tech-inner">
+        <div class="rh-tech-rule"></div>
+        <span class="rh-tech-eyebrow">Technical Details</span>
+        <h2 class="rh-tech-heading">Built to be handed off.</h2>
+        <div class="rh-tech-grid">
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">HTML / CSS / JS</div>
+            <div class="rh-tech-label">Languages</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">Browser-based</div>
-            <div class="cs-tech-label">Delivery</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">Browser-based</div>
+            <div class="rh-tech-label">Delivery</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">No LMS Required</div>
-            <div class="cs-tech-label">Dependencies</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">No LMS Required</div>
+            <div class="rh-tech-label">Dependencies</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">WIDA 1–5</div>
-            <div class="cs-tech-label">Proficiency Range</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">WIDA 1–5</div>
+            <div class="rh-tech-label">Proficiency Range</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">VS Code · GitHub Pages</div>
-            <div class="cs-tech-label">Tools &amp; Hosting</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">VS Code · GitHub Pages</div>
+            <div class="rh-tech-label">Tools &amp; Hosting</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">K–12 ELLs</div>
-            <div class="cs-tech-label">Audience</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">K–12 ELLs</div>
+            <div class="rh-tech-label">Audience</div>
           </div>
         </div>
       </div>

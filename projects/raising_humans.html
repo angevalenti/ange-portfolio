@@ -194,42 +194,6 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 80px 0;
-      border-bottom: 1px solid #E0E0E0;
-    }
-    .cs-section:nth-child(1) { border-bottom: none; }
-    .cs-section:nth-child(2) { border-bottom: none; }
-    .cs-section:last-child   { border-bottom: none; }
-
-    /* ─── THE CHALLENGE (blush band) ─── */
-    .cs-challenge { background: #FBE9E1; padding: 0 3rem; }
-
-    .cs-challenge-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 0;
-      display: flex;
-      gap: 3rem;
-      align-items: center;
-    }
-    .cs-challenge-left { flex: 1.2; }
-    .cs-challenge-right { flex: 0.8; display: flex; align-items: center; }
-    .cs-challenge-img {
-      width: 100%;
-      min-height: 280px;
-      background: #FFFFFF;
-      border-radius: 12px;
-      border: 1px solid #E8C8BC;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 768px) {
-      .cs-challenge-inner { flex-direction: column; padding: 50px 0; }
-      .cs-challenge-right { width: 100%; }
-      .cs-challenge-img { min-height: 220px; }
     }
 
     .cs-section-rule {
@@ -263,41 +227,111 @@
       max-width: 680px;
     }
 
-    .cs-process-img-frame { position: relative; margin-top: 3rem; }
-    .cs-process-img {
-      position: relative; z-index: 1;
-      width: 100%; height: 300px;
-      background: #FFFFFF;
-      border-radius: 12px;
-      border: 1px solid #E8E4DF;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    /* ─── THE CHALLENGE (blush band) ─── */
+    .cs-challenge { background: #FBE9E1; padding: 0 3rem; }
+
+    .cs-challenge-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
     }
 
-    /* ─── TECH GRID ─── */
-    .cs-tech-grid {
+    /* ─── APPROACH — centered heading + 3-col cards ─── */
+    .rh-approach { background: #FFFFFF; padding: 0 3rem; }
+    .rh-approach-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+    .rh-card-grid {
+      display: flex;
+      gap: 16px;
+    }
+    .rh-card-item {
+      flex: 1;
+      background: #fff;
+      border: 0.5px solid #E0DDD5;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    .rh-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #FBE9E1;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.85rem;
+    }
+    .rh-card-icon-shape {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+    }
+    .rh-card-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #0c1618;
+      margin-bottom: 0.5rem;
+    }
+    .rh-card-body {
+      font-size: 14px;
+      color: #5A5A52;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .rh-card-grid { flex-direction: column; }
+      .cs-challenge-inner { padding: 50px 0; }
+    }
+
+    /* Technical Details — cream grid */
+    .rh-tech-section {
+      background: #F5F0EB;
+      padding: 0 3rem;
+    }
+    .rh-tech-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    .rh-tech-rule {
+      width: 40px; height: 3px;
+      background: var(--pt-gold);
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+    }
+    .rh-tech-eyebrow {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #888888;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .rh-tech-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.2;
+      color: #0c1618;
+      margin: 0 0 1.25rem;
+    }
+    .rh-tech-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
       border: 1px solid #E0E0E0;
-      margin-top: 2rem;
     }
-    .cs-tech-item {
-      padding: 1.75rem 2rem;
+    .rh-tech-item {
+      padding: 1.25rem 1.5rem;
       border-right: 1px solid #E0E0E0;
       border-bottom: 1px solid #E0E0E0;
     }
-    .cs-tech-item:nth-child(3n) { border-right: none; }
-    .cs-tech-item:nth-last-child(-n+3) { border-bottom: none; }
-    .cs-tech-val {
+    .rh-tech-item:nth-child(3n) { border-right: none; }
+    .rh-tech-item:nth-last-child(-n+3) { border-bottom: none; }
+    .rh-tech-val {
       font-family: 'Fraunces', serif;
       font-size: 1.1rem; font-weight: 400;
       color: #0c1618; margin-bottom: 0.3rem;
     }
-    .cs-tech-label {
+    .rh-tech-label {
       font-size: 0.58rem; letter-spacing: 0.14em;
       text-transform: uppercase; color: #888888;
     }
@@ -350,7 +384,11 @@
       .cs-story { padding: 0 1.5rem; }
       .cs-section { padding: 50px 0; }
       .cs-challenge { padding: 0 1.5rem; }
-      .cs-tech-grid { grid-template-columns: 1fr 1fr; }
+      .rh-approach { padding: 0 1.5rem; }
+      .rh-approach-inner { padding: 50px 0; }
+      .rh-tech-section { padding: 0 1.5rem; }
+      .rh-tech-inner { padding: 30px 0; }
+      .rh-tech-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 1.25rem 1.5rem; }
       .footer-right { align-items: flex-start; }
     }
@@ -359,9 +397,9 @@
       .cs-hero-heading { font-size: 2rem; }
       .cs-section-heading { font-size: 1.75rem; }
       .cs-launch-btn { width: 100%; justify-content: center; }
-      .cs-tech-grid { grid-template-columns: 1fr; }
-      .cs-tech-item { border-right: none; border-bottom: 1px solid #E0E0E0; }
-      .cs-tech-item:last-child { border-bottom: none; }
+      .rh-tech-grid { grid-template-columns: 1fr; }
+      .rh-tech-item { border-right: none; border-bottom: 1px solid #E0E0E0; }
+      .rh-tech-item:last-child { border-bottom: none; }
     }
 
   </style>
@@ -441,12 +479,12 @@
       <div class="cs-section">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Overview</span>
-        <h2 class="cs-section-heading">What parents actually<br><em>need to know.</em></h2>
+        <h2 class="cs-section-heading">What parents actually <em>need to know.</em></h2>
         <p class="cs-section-body">There's no shortage of opinions about kids and screens. There's a shortage of clear, research-backed guidance that doesn't make parents feel guilty or overwhelmed. Raising Humans breaks the topic into eight manageable units — covering brain development, attention, social media mechanics, digital literacy, and practical family strategies. The course is designed to feel like a conversation, not a lecture. It draws from developmental psychology and media research, but the tone stays accessible and honest throughout.</p>
       </div>
     </div>
 
-    <!-- CHALLENGE: TOP SCALLOP (white → blush) -->
+    <!-- CHALLENGE: TOP SCALLOP (cream → blush) -->
     <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
       <rect width="800" height="20" fill="#FBE9E1"/>
       <rect width="800" height="10" fill="#F5F0EB"/>
@@ -460,11 +498,11 @@
 
     <!-- THE CHALLENGE -->
     <div class="cs-challenge">
-      <div class="cs-challenge-inner" style="display:block; text-align:right; max-width:900px; margin:0 auto; padding:80px 0;">
-        <div class="cs-section-rule" style="margin-left:auto;"></div>
+      <div class="cs-challenge-inner">
+        <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">The Challenge</span>
-        <h2 class="cs-section-heading">Science without<br><em>the scare tactics.</em></h2>
-        <p class="cs-section-body" style="margin-left:auto;">Most content about kids and technology falls into two camps: either it's alarmist or dismissive. Neither is helpful. The challenge was presenting real research — some of it genuinely concerning — without triggering the guilt and anxiety that makes parents tune out. The course needed to inform and empower, not frighten.</p>
+        <h2 class="cs-section-heading">Science without <em>the scare tactics.</em></h2>
+        <p class="cs-section-body">Most content about kids and technology falls into two camps: either it's alarmist or dismissive. Neither is helpful. The challenge was presenting real research — some of it genuinely concerning — without triggering the guilt and anxiety that makes parents tune out. The course needed to inform and empower, not frighten.</p>
       </div>
     </div>
 
@@ -480,46 +518,68 @@
       <rect width="800" height="20" fill="url(#rh-scallop-bot)"/>
     </svg>
 
-    <!-- STORY: APPROACH -->
-    <div class="cs-story">
-      <div class="cs-section">
+    <!-- STORY: APPROACH (3-card layout) -->
+    <div class="rh-approach">
+      <div class="rh-approach-inner">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Approach</span>
-        <h2 class="cs-section-heading">Eight units.<br><em>One honest conversation.</em></h2>
-        <p class="cs-section-body">Each unit follows a consistent structure: introduce the concept with a real-world scenario, present the research clearly, then offer practical takeaways parents can actually use. The visual design is inspired by Masterclass — clean, editorial, and respectful of the audience's intelligence. Five custom SVG infographics make complex research feel approachable without oversimplifying it.</p>
+        <h2 class="cs-section-heading">Built to inform, <em>not overwhelm.</em></h2>
+        <div class="rh-card-grid">
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #D49D00;"></div>
+            </div>
+            <div class="rh-card-title">Real-world scenarios</div>
+            <div class="rh-card-body">Each unit opens with a relatable situation parents recognize — grounding the research in everyday life before introducing data.</div>
+          </div>
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #2E4057;"></div>
+            </div>
+            <div class="rh-card-title">Clear research, honest tone</div>
+            <div class="rh-card-body">Findings are presented directly with visual infographics — no jargon, no guilt trips. The design is inspired by Masterclass: clean, editorial, respectful.</div>
+          </div>
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #B07A8A;"></div>
+            </div>
+            <div class="rh-card-title">Practical takeaways</div>
+            <div class="rh-card-body">Every unit ends with concrete strategies parents can use immediately — conversation starters, boundary-setting frameworks, and family agreements.</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- STORY: TECHNICAL DETAILS -->
-    <div class="cs-story" style="background:#F5F0EB;">
-      <div class="cs-section">
-        <div class="cs-section-rule"></div>
-        <span class="cs-section-eyebrow">Technical Details</span>
-        <h2 class="cs-section-heading">Eight units. One cohesive system.</h2>
-        <div class="cs-tech-grid">
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">HTML / CSS / JS</div>
-            <div class="cs-tech-label">Languages</div>
+    <!-- TECHNICAL DETAILS -->
+    <div class="rh-tech-section">
+      <div class="rh-tech-inner">
+        <div class="rh-tech-rule"></div>
+        <span class="rh-tech-eyebrow">Technical Details</span>
+        <h2 class="rh-tech-heading">Eight units. One cohesive system.</h2>
+        <div class="rh-tech-grid">
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">HTML / CSS / JS</div>
+            <div class="rh-tech-label">Languages</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">Browser-based</div>
-            <div class="cs-tech-label">Delivery</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">Browser-based</div>
+            <div class="rh-tech-label">Delivery</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">No LMS Required</div>
-            <div class="cs-tech-label">Dependencies</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">No LMS Required</div>
+            <div class="rh-tech-label">Dependencies</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">Accordion + Quiz</div>
-            <div class="cs-tech-label">Interactions</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">Accordion + Quiz</div>
+            <div class="rh-tech-label">Interactions</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">Manrope · IBM Plex Sans</div>
-            <div class="cs-tech-label">Typography</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">Manrope · IBM Plex Sans</div>
+            <div class="rh-tech-label">Typography</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">GitHub Pages</div>
-            <div class="cs-tech-label">Hosting</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">GitHub Pages</div>
+            <div class="rh-tech-label">Hosting</div>
           </div>
         </div>
       </div>
