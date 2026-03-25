@@ -377,27 +377,56 @@
     }
     .coming-soon-text strong { color: #0c1618; font-weight: 600; }
 
-    /* ─── TECH GRID ─── */
-    .cs-tech-grid {
+    /* Technical Details — cream grid */
+    .rh-tech-section {
+      background: #F5F0EB;
+      padding: 0 3rem;
+    }
+    .rh-tech-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    .rh-tech-rule {
+      width: 40px; height: 3px;
+      background: var(--pt-gold);
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+    }
+    .rh-tech-eyebrow {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #888888;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .rh-tech-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.2;
+      color: #0c1618;
+      margin: 0 0 1.25rem;
+    }
+    .rh-tech-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
       border: 1px solid #E0E0E0;
-      margin-top: 2rem;
     }
-    .cs-tech-item {
-      padding: 1.75rem 2rem;
+    .rh-tech-item {
+      padding: 1.25rem 1.5rem;
       border-right: 1px solid #E0E0E0;
       border-bottom: 1px solid #E0E0E0;
     }
-    .cs-tech-item:nth-child(3n) { border-right: none; }
-    .cs-tech-item:nth-last-child(-n+3) { border-bottom: none; }
-    .cs-tech-val {
+    .rh-tech-item:nth-child(3n) { border-right: none; }
+    .rh-tech-item:nth-last-child(-n+3) { border-bottom: none; }
+    .rh-tech-val {
       font-family: 'Fraunces', serif;
       font-size: 1.1rem; font-weight: 400;
       color: #0c1618; margin-bottom: 0.3rem;
     }
-    .cs-tech-label {
+    .rh-tech-label {
       font-size: 0.58rem; letter-spacing: 0.14em;
       text-transform: uppercase; color: #888888;
     }
@@ -454,7 +483,9 @@
       .lesson-card:nth-child(2n) { border-right: none; }
       .lesson-card:nth-child(n+3) { border-top: 1px solid #E0DDD5; }
       .lesson-card:last-child { border-right: none; }
-      .cs-tech-grid { grid-template-columns: 1fr 1fr; }
+      .rh-tech-section { padding: 0 1.5rem; }
+      .rh-tech-inner { padding: 30px 0; }
+      .rh-tech-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 1.25rem 1.5rem; }
       .footer-right { align-items: flex-start; }
     }
@@ -463,9 +494,9 @@
       .cs-hero-heading { font-size: 2rem; }
       .cs-section-heading { font-size: 1.75rem; }
       .cs-launch-btn { width: 100%; justify-content: center; }
-      .cs-tech-grid { grid-template-columns: 1fr; }
-      .cs-tech-item { border-right: none; border-bottom: 1px solid #E0E0E0; }
-      .cs-tech-item:last-child { border-bottom: none; }
+      .rh-tech-grid { grid-template-columns: 1fr; }
+      .rh-tech-item { border-right: none; border-bottom: 1px solid #E0E0E0; }
+      .rh-tech-item:last-child { border-bottom: none; }
       .lesson-cards { grid-template-columns: 1fr; }
       .lesson-card { border-right: none; border-bottom: 1px solid #E0DDD5; }
       .lesson-card:last-child { border-bottom: none; }
@@ -683,36 +714,36 @@
       </div>
     </div>
 
-    <!-- STORY: TECHNICAL DETAILS -->
-    <div class="cs-story" style="background:#F5F0EB;">
-      <div class="cs-section">
-        <div class="cs-section-rule"></div>
-        <span class="cs-section-eyebrow">Technical Details</span>
-        <h2 class="cs-section-heading">Single-file. Zero dependencies.</h2>
-        <div class="cs-tech-grid">
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">HTML / CSS / JS</div>
-            <div class="cs-tech-label">Languages</div>
+    <!-- TECHNICAL DETAILS -->
+    <div class="rh-tech-section">
+      <div class="rh-tech-inner">
+        <div class="rh-tech-rule"></div>
+        <span class="rh-tech-eyebrow">Technical Details</span>
+        <h2 class="rh-tech-heading">Single-file. Zero dependencies.</h2>
+        <div class="rh-tech-grid">
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">HTML / CSS / JS</div>
+            <div class="rh-tech-label">Languages</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">SVG · Web Audio API</div>
-            <div class="cs-tech-label">Key Technologies</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">SVG · Web Audio API</div>
+            <div class="rh-tech-label">Key Technologies</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">No Dependencies</div>
-            <div class="cs-tech-label">Framework</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">No Dependencies</div>
+            <div class="rh-tech-label">Framework</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">Ages 10–11</div>
-            <div class="cs-tech-label">Audience</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">Ages 10–11</div>
+            <div class="rh-tech-label">Audience</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">Browser-based</div>
-            <div class="cs-tech-label">Delivery</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">Browser-based</div>
+            <div class="rh-tech-label">Delivery</div>
           </div>
-          <div class="cs-tech-item">
-            <div class="cs-tech-val">VS Code · GitHub Pages</div>
-            <div class="cs-tech-label">Tools &amp; Hosting</div>
+          <div class="rh-tech-item">
+            <div class="rh-tech-val">VS Code · GitHub Pages</div>
+            <div class="rh-tech-label">Tools &amp; Hosting</div>
           </div>
         </div>
       </div>
