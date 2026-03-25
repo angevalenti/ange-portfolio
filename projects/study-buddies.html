@@ -28,8 +28,8 @@
       display: flex;
       flex-direction: column;
     }
-    main { flex: 1; }
     a { text-decoration: none; color: inherit; }
+    main { flex: 1; }
 
     /* ─── NAV ─── */
     .cs-nav {
@@ -150,12 +150,6 @@
       border: 1px solid #E8E4DE;
     }
     .cs-hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-    .cs-hero-img-placeholder {
-      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
-      color: #D0D0D0;
-    }
-    .cs-hero-img-placeholder svg { opacity: 0.5; }
-    .cs-hero-img-placeholder span { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
 
     /* ─── AT A GLANCE ─── */
     .cs-glance {
@@ -194,39 +188,6 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 80px 0;
-      border-bottom: 1px solid #E0E0E0;
-    }
-    .cs-section:nth-child(1) { border-bottom: none; }
-    .cs-section:nth-child(2) { border-bottom: none; }
-    .cs-section:last-child   { border-bottom: none; }
-
-    /* ─── THE CHALLENGE (blush band) ─── */
-    .cs-challenge { background: #FBE9E1; padding: 0 3rem; }
-
-    .cs-challenge-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 0;
-      display: flex;
-      gap: 3rem;
-      align-items: stretch;
-    }
-    .cs-challenge-left { flex: 1.2; }
-    .cs-challenge-right { flex: 0.8; display: flex; }
-    .cs-challenge-img {
-      width: 100%;
-      height: 100%;
-      background: #FFFFFF;
-      border-radius: 12px;
-      border: 1px solid #E8C8BC;
-      object-fit: contain;
-      object-position: left top;
-    }
-
-    @media (max-width: 768px) {
-      .cs-challenge-inner { flex-direction: column; padding: 50px 0; }
-      .cs-challenge-right { width: 100%; }
-      .cs-challenge-img { min-height: 220px; }
     }
 
     .cs-section-rule {
@@ -259,123 +220,71 @@
       color: #333333;
     }
 
-    .cs-process-img-frame { position: relative; margin-top: 3rem; }
-    .cs-process-img {
-      position: relative; z-index: 1;
-      width: 100%; height: 300px;
-      background: #FFFFFF;
+    .cs-overview-img {
+      width: 100%;
       border-radius: 12px;
       border: 1px solid #E8E4DF;
-      display: flex; align-items: center; justify-content: center;
-      color: #D0D0D0;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      margin-top: 3rem;
+      display: block;
     }
 
-    /* ─── LESSON CARDS ─── */
-    .lesson-cards {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0; margin-top: 3rem;
-      border: 1px solid #E0DDD5;
+    /* ─── THE CHALLENGE (blush band) ─── */
+    .cs-challenge { background: #FBE9E1; padding: 0 3rem; }
+
+    .cs-challenge-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
     }
-    .lesson-card {
+
+    @media (max-width: 768px) {
+      .cs-challenge-inner { padding: 50px 0; }
+    }
+
+    /* ─── APPROACH — centered heading + 3-col cards ─── */
+    .rh-approach { background: #FFFFFF; padding: 0 3rem; }
+    .rh-approach-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+    .rh-card-grid {
+      display: flex;
+      gap: 16px;
+    }
+    .rh-card-item {
+      flex: 1;
       background: #fff;
-      padding: 2.5rem 2.25rem;
-      border-right: 1px solid #E0DDD5;
-      display: flex; flex-direction: column;
+      border: 0.5px solid #E0DDD5;
+      border-radius: 10px;
+      padding: 2rem;
     }
-    .lesson-card:last-child { border-right: none; }
-    .lesson-card-eyebrow {
-      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
-      font-weight: 600; color: var(--pt-accent); margin-bottom: 0.75rem;
+    .rh-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #FBE9E1;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.85rem;
     }
-    .lesson-card-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1.55rem; font-weight: 300; line-height: 1.1;
-      letter-spacing: -0.01em; color: #0c1618;
-      margin-bottom: 1rem;
+    .rh-card-icon-shape {
+      width: 14px; height: 14px;
+      border-radius: 50%;
     }
-    .lesson-card-desc {
-      font-size: 0.88rem; line-height: 1.75; color: #5A5A52;
-      margin-bottom: 1.5rem; flex: 1;
+    .rh-card-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #0c1618;
+      margin-bottom: 0.5rem;
     }
-    .lesson-card-features {
-      list-style: none; margin-bottom: 2rem;
-    }
-    .lesson-card-features li {
-      font-size: 0.75rem; line-height: 1.6; color: #5A5A52;
-      padding: 0.3rem 0;
-      border-bottom: 1px solid #E0DDD5;
-      display: flex; align-items: baseline; gap: 0.5rem;
-    }
-    .lesson-card-features li::before {
-      content: '—'; color: var(--pt-accent); flex-shrink: 0;
-    }
-    .lesson-launch-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 1.75rem;
-      background: var(--pt-accent); color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      border-radius: 6px;
-      transition: background 0.2s, transform 0.2s;
-      align-self: flex-start;
-    }
-    .lesson-launch-btn:hover {
-      background: var(--pt-accent-dark);
-      transform: translateY(-2px);
-    }
-
-    /* ─── PER-CARD LESSON COLORS ─── */
-    .lesson-card--01 .lesson-card-eyebrow { color: #C25B56; }
-    .lesson-card--01 .lesson-card-features li::before { color: #C25B56; }
-    .lesson-card--01 .lesson-launch-btn { background: #C25B56; }
-    .lesson-card--01 .lesson-launch-btn:hover { background: #a84844; }
-
-    .lesson-card--02 .lesson-card-eyebrow { color: #5B8FA8; }
-    .lesson-card--02 .lesson-card-features li::before { color: #5B8FA8; }
-    .lesson-card--02 .lesson-launch-btn { background: #5B8FA8; }
-    .lesson-card--02 .lesson-launch-btn:hover { background: #4a7a91; }
-
-    .lesson-card--03 .lesson-card-eyebrow { color: #8B7355; }
-    .lesson-card--03 .lesson-card-features li::before { color: #8B7355; }
-    .lesson-card--03 .lesson-launch-btn { background: #8B7355; }
-    .lesson-card--03 .lesson-launch-btn:hover { background: #735e43; }
-    .lesson-coming-soon {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 1.75rem;
-      background: transparent;
-      border: 1.5px solid #D0CCC5;
-      color: #AAAAAA;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-      border-radius: 6px;
-      align-self: flex-start;
-      cursor: default;
-    }
-
-    /* ─── COMING SOON STRIP ─── */
-    .coming-soon-strip {
-      border-top: 1px solid #E0DDD5;
-      padding: 1.75rem 2.25rem;
-      background: #F8F4F4;
-      display: flex; align-items: center; gap: 1.25rem;
-    }
-    .coming-soon-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--pt-accent); flex-shrink: 0;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%,100%{ opacity:1; transform: scale(1); }
-      50%{ opacity:0.4; transform: scale(0.7); }
-    }
-    .coming-soon-text {
-      font-size: 0.85rem; line-height: 1.6;
+    .rh-card-body {
+      font-size: 14px;
       color: #5A5A52;
+      line-height: 1.6;
     }
-    .coming-soon-text strong { color: #0c1618; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .rh-card-grid { flex-direction: column; }
+    }
 
     /* Technical Details — cream grid */
     .rh-tech-section {
@@ -479,10 +388,8 @@
       .cs-story { padding: 0 1.5rem; }
       .cs-section { padding: 50px 0; }
       .cs-challenge { padding: 0 1.5rem; }
-      .lesson-cards { grid-template-columns: 1fr 1fr; }
-      .lesson-card:nth-child(2n) { border-right: none; }
-      .lesson-card:nth-child(n+3) { border-top: 1px solid #E0DDD5; }
-      .lesson-card:last-child { border-right: none; }
+      .rh-approach { padding: 0 1.5rem; }
+      .rh-approach-inner { padding: 50px 0; }
       .rh-tech-section { padding: 0 1.5rem; }
       .rh-tech-inner { padding: 30px 0; }
       .rh-tech-grid { grid-template-columns: 1fr 1fr; }
@@ -497,10 +404,6 @@
       .rh-tech-grid { grid-template-columns: 1fr; }
       .rh-tech-item { border-right: none; border-bottom: 1px solid #E0E0E0; }
       .rh-tech-item:last-child { border-bottom: none; }
-      .lesson-cards { grid-template-columns: 1fr; }
-      .lesson-card { border-right: none; border-bottom: 1px solid #E0DDD5; }
-      .lesson-card:last-child { border-bottom: none; }
-      .lesson-launch-btn, .lesson-coming-soon { width: 100%; justify-content: center; }
     }
 
   </style>
@@ -526,7 +429,7 @@
           <div class="cs-hero-eyebrow">E-Learning · Interactive Science</div>
           <h1 class="cs-hero-heading">Study<br><em>Buddies.</em></h1>
           <p class="cs-hero-sub">Interactive science lessons that make body systems feel hands-on and memorable for elementary learners. No frameworks, no LMS — just a browser.</p>
-          <a class="cs-launch-btn" href="#lessons">Launch Course →</a>
+          <a class="cs-launch-btn" href="lessons/circulatory_system.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
         </div>
 
         <!-- Right -->
@@ -580,15 +483,13 @@
       <div class="cs-section">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Overview</span>
-        <h2 class="cs-section-heading">Learn by doing.<br><em>Not by clicking next.</em></h2>
+        <h2 class="cs-section-heading">Learn by doing, <em>not by clicking next.</em></h2>
         <p class="cs-section-body">Study Buddies started from a simple idea: kids learn science better when they can interact with it, not just read about it. Each lesson is one HTML file. No logins, no installations, no LMS. Open it in a browser and go. Right now the series covers two body systems — circulatory and respiratory — with animated diagrams, drag-and-drop activities, quizzes, and sound effects built in. Each lesson has its own look and feel, but they share the same level of depth and interactivity.</p>
-        <div class="cs-process-img-frame">
-          <img class="cs-process-img" src="../assets/images/sb-parts-ofa-cell.png" alt="Parts of a Cell — interactive SVG cell diagram with clickable organelles" style="object-fit: cover; height: auto;">
-        </div>
+        <img class="cs-overview-img" src="../assets/images/sb-parts-ofa-cell.png" alt="Parts of a Cell — interactive SVG cell diagram with clickable organelles">
       </div>
     </div>
 
-    <!-- CHALLENGE: TOP SCALLOP (white → blush) -->
+    <!-- CHALLENGE: TOP SCALLOP (cream → blush) -->
     <svg width="100%" height="20" viewBox="0 0 800 20" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
       <rect width="800" height="20" fill="#FBE9E1"/>
       <rect width="800" height="10" fill="#F5F0EB"/>
@@ -603,17 +504,10 @@
     <!-- THE CHALLENGE -->
     <div class="cs-challenge">
       <div class="cs-challenge-inner">
-        <!-- Left: text -->
-        <div class="cs-challenge-left">
-          <div class="cs-section-rule"></div>
-          <span class="cs-section-eyebrow">The Challenge</span>
-          <h2 class="cs-section-heading">Complex systems.<br><em>Young learners.</em></h2>
-          <p class="cs-section-body">Blood flow and gas exchange are invisible. You can't see them happening, which makes them abstract for ten-year-olds. Most textbooks handle this with labeled diagrams — fine for memorization, not great for actual understanding. I wanted to make the invisible visible without dumbing down the science. Every interactive element had to teach something real. The drag-and-drop isn't a game for the sake of it — it's checking whether the student understood the sequence. The animated heart isn't decoration — it's showing which direction blood flows, something a static picture just can't do.</p>
-        </div>
-        <!-- Right: image -->
-        <div class="cs-challenge-right">
-          <img class="cs-challenge-img" src="../assets/images/sb-circulatory-knowledge check.png" alt="Circulatory System knowledge check quiz" style="object-fit: cover; height: auto; min-height: 0;">
-        </div>
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">The Challenge</span>
+        <h2 class="cs-section-heading">Complex systems, <em>young learners.</em></h2>
+        <p class="cs-section-body">Blood flow and gas exchange are invisible. You can't see them happening, which makes them abstract for ten-year-olds. Most textbooks handle this with labeled diagrams — fine for memorization, not great for actual understanding. I wanted to make the invisible visible without dumbing down the science. Every interactive element had to teach something real. The drag-and-drop isn't a game for the sake of it — it's checking whether the student understood the sequence. The animated heart isn't decoration — it's showing which direction blood flows, something a static picture just can't do.</p>
       </div>
     </div>
 
@@ -629,88 +523,36 @@
       <rect width="800" height="20" fill="url(#sb-scallop-bot)"/>
     </svg>
 
-    <!-- STORY: APPROACH -->
-    <div class="cs-story">
-      <div class="cs-section">
+    <!-- STORY: APPROACH (3-card layout) -->
+    <div class="rh-approach">
+      <div class="rh-approach-inner">
         <div class="cs-section-rule"></div>
         <span class="cs-section-eyebrow">Approach</span>
-        <h2 class="cs-section-heading">Teach first.<br><em>Then play.</em></h2>
-        <p class="cs-section-body">Each lesson follows the same rhythm: introduce the concept, let students explore it visually, guide them through an interaction, then check understanding. The circulatory lesson has a clickable 4-chamber heart, a step-by-step blood flow animation, and drag-and-match quizzes across 9 sections. The respiratory lesson traces oxygen from nose to alveoli with a 7-stop animated journey, a breathing exercise with sound, and a gas exchange mini-game. Both end with a scored quiz. The whole thing runs from a single file — a teacher can save it to a USB drive and use it on any device, online or off.</p>
-        <div class="cs-process-img-frame">
-          <img class="cs-process-img" src="../assets/images/sb-respiratory-graphic.png" alt="Respiratory System — animated oxygen journey diagram" style="object-fit: cover; height: auto;">
-        </div>
-      </div>
-    </div>
-
-    <!-- STORY: THE LESSONS -->
-    <div class="cs-story" id="lessons">
-      <div class="cs-section">
-        <div class="cs-section-rule"></div>
-        <span class="cs-section-eyebrow">The Lessons</span>
-        <h2 class="cs-section-heading">Three lessons. Growing series.</h2>
-
-        <div class="lesson-cards">
-
-          <!-- Card 1: Circulatory -->
-          <div class="lesson-card lesson-card--01">
-            <div class="lesson-card-eyebrow">Lesson 01 · Circulatory System</div>
-            <div class="lesson-card-title">The Heart &amp; Blood Vessels</div>
-            <p class="lesson-card-desc">Heart, blood, and blood vessels — explore how your body's highway system works with interactive diagrams, drag-to-order activities, and a clickable 4-chamber heart.</p>
-            <ul class="lesson-card-features">
-              <li>9 interactive sections</li>
-              <li>SVG cell diagram with 9 clickable organelles</li>
-              <li>Drag-to-order &amp; drag-and-match quizzes</li>
-              <li>Animated 4-chamber heart diagram</li>
-              <li>Step-by-step blood flow animation</li>
-              <li>8-question scored final quiz</li>
-            </ul>
-            <a class="lesson-launch-btn" href="lessons/circulatory_system.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+        <h2 class="cs-section-heading">Teach first, <em>then play.</em></h2>
+        <div class="rh-card-grid">
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #D49D00;"></div>
+            </div>
+            <div class="rh-card-title">Introduce, then interact</div>
+            <div class="rh-card-body">Each lesson follows the same rhythm: introduce the concept, let students explore it visually, guide them through an interaction, then check understanding.</div>
           </div>
-
-          <!-- Card 2: Respiratory -->
-          <div class="lesson-card lesson-card--02">
-            <div class="lesson-card-eyebrow">Lesson 02 · Respiratory System</div>
-            <div class="lesson-card-title">Lungs, Breath &amp; Gas Exchange</div>
-            <p class="lesson-card-desc">Follow oxygen from your nose to your alveoli with animated journeys, a breathing exercise, gas exchange mini-games, and Web Audio sound effects throughout.</p>
-            <ul class="lesson-card-features">
-              <li>8 interactive sections</li>
-              <li>Clickable SVG respiratory diagram (8 hotspots)</li>
-              <li>Animated 7-stop oxygen journey</li>
-              <li>Breathe Along exercise synced to sounds</li>
-              <li>Gas exchange molecule mini-game</li>
-              <li>10-question scored final quiz</li>
-            </ul>
-            <a class="lesson-launch-btn" href="lessons/respiratory_system.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #C8956C;"></div>
+            </div>
+            <div class="rh-card-title">Every interaction teaches</div>
+            <div class="rh-card-body">A clickable 4-chamber heart, a 7-stop oxygen journey, drag-and-match quizzes — nothing is decorative. Every element reinforces the science.</div>
           </div>
-
-          <!-- Card 3: The 13 Colonies -->
-          <div class="lesson-card lesson-card--03">
-            <div class="lesson-card-eyebrow">Lesson 03 · The 13 Colonies</div>
-            <div class="lesson-card-title">The 13 Colonies</div>
-            <p class="lesson-card-desc">Explore the founding of America's original colonies with interactive maps, drag-and-drop timelines, and visual storytelling.</p>
-            <ul class="lesson-card-features">
-              <li>Interactive colony map</li>
-              <li>Drag-and-drop timeline</li>
-              <li>Visual region groupings</li>
-              <li>Scored final quiz</li>
-            </ul>
-            <a class="lesson-launch-btn" href="lessons/colonial_america.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          <div class="rh-card-item">
+            <div class="rh-card-icon">
+              <div class="rh-card-icon-shape" style="background: #B07A8A;"></div>
+            </div>
+            <div class="rh-card-title">Single-file, anywhere</div>
+            <div class="rh-card-body">Each lesson runs from one HTML file. A teacher can save it to a USB drive and use it on any device — online or off, no setup required.</div>
           </div>
-
         </div>
-
-        <!-- Coming Soon -->
-        <div class="coming-soon-strip">
-          <div class="coming-soon-dot"></div>
-          <p class="coming-soon-text">
-            <strong>More on the way.</strong> A standalone Operation-style board game covering organs from both body systems is in development — plus additional units planned for the series.
-          </p>
-        </div>
-
-        <div class="cs-process-img-frame">
-          <img class="cs-process-img" src="../assets/images/sb-respiratory-knowledge-check.png" alt="Respiratory System knowledge check quiz" style="object-fit: cover; height: auto;">
-        </div>
-
+        <img class="cs-overview-img" src="../assets/images/sb-respiratory-graphic.png" alt="Respiratory System — animated oxygen journey diagram">
       </div>
     </div>
 
