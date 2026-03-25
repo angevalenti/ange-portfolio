@@ -34,8 +34,34 @@
     font-family: 'DM Sans', sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
-    cursor: default;
   }
+
+  /* ---- SKIP NAV ---- */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    background: var(--gold);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 1000;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .skip-link:focus {
+    top: 16px;
+  }
+
+  /* ---- FOCUS VISIBLE ---- */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+  /* Reset outline for elements that have their own focus style */
+  .response-box:focus-visible { outline: none; }
 
   /* ---- HERO ---- */
   .hero {
@@ -128,6 +154,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     border: 2px solid transparent;
+    font-family: 'DM Sans', sans-serif;
   }
   .level-pill.beginner { background: rgba(76,175,114,0.15); border-color: var(--beginner); color: var(--beginner); }
   .level-pill.intermediate { background: rgba(204,20,20,0.10); border-color: var(--intermediate); color: var(--intermediate); }
@@ -213,6 +240,7 @@
     flex-shrink: 0;
     font-family: 'Space Mono', monospace;
     color: var(--text-muted);
+    padding: 0;
   }
   .step-dot.active { background: var(--gold); border-color: var(--gold); color: #fff; }
   .step-dot.done { background: var(--green); border-color: var(--green); color: #fff; }
@@ -280,6 +308,8 @@
     font-size: 42px;
     line-height: 1;
     color: var(--text);
+    margin: 0;
+    font-weight: 400;
   }
 
   .section-desc {
@@ -342,6 +372,40 @@
 
   .level-content { display: none; }
   .level-content.active { display: block; }
+
+  /* ---- LOCKED LEVEL BADGE ---- */
+  .locked-level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--card2);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+    cursor: default;
+    user-select: none;
+  }
+
+  /* ---- CHANGE LEVEL LINK ---- */
+  .change-level-link {
+    font-size: 11px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    transition: color 0.2s;
+    border: none;
+    background: none;
+    padding: 4px 8px;
+  }
+  .change-level-link:hover { color: var(--gold); }
 
   /* ---- VIDEO EMBED ---- */
   .video-wrapper {
@@ -456,6 +520,9 @@
     min-height: 52px;
     display: flex;
     align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+    width: 100%;
   }
   .match-item.word { font-weight: 700; color: var(--gold-dark); }
   .match-item.def { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
@@ -552,6 +619,10 @@
     display: flex;
     gap: 10px;
     align-items: flex-start;
+    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+    width: 100%;
+    color: var(--text);
   }
   .mc-option-letter {
     width: 24px;
@@ -753,6 +824,7 @@
     border-radius: 100px;
     background: rgba(17,17,17,0.04);
     transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
   }
   .hint-toggle:hover { background: rgba(17,17,17,0.08); }
 
@@ -1024,6 +1096,9 @@
     cursor: pointer;
     transition: all 0.18s;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    text-align: left;
   }
   .beg-tap-btn:hover { border-color: var(--red); background: rgba(204,20,20,0.05); transform: translateY(-2px); }
   .beg-tap-btn.correct { border-color: var(--green); background: rgba(46,158,91,0.12); color: var(--green); pointer-events: none; }
@@ -1052,6 +1127,8 @@
     transition: all 0.2s;
     box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     user-select: none;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
   }
   .beg-happy-tile:hover { border-color: var(--red); transform: translateY(-2px); }
   .beg-happy-tile.selected {
@@ -1141,7 +1218,10 @@
 </head>
 <body>
 
+<a class="skip-link" href="#lessonApp">Skip to lesson content</a>
+
 <!-- ===== HERO ===== -->
+<main>
 <div class="hero" id="hero">
   <div class="hero-grain"></div>
   <div class="hero-badge">📽️ ESL Interactive Lesson • Pennsylvania Standards</div>
@@ -1149,11 +1229,11 @@
     The Pursuit of<br>
     <span>Happyness</span>
   </h1>
-  <p class="hero-subtitle">An immersive film-based English lesson for high school learners. Watch, think, discuss, and grow.</p>
-  <div class="level-pills">
-    <div class="level-pill beginner" onclick="setLevel('beginner', this)">🌱 Beginner</div>
-    <div class="level-pill intermediate active" onclick="setLevel('intermediate', this)">🔥 Intermediate</div>
-    <div class="level-pill advanced" onclick="setLevel('advanced', this)">⚡ Advanced</div>
+  <p class="hero-subtitle">An immersive film-based English lesson for high school learners.<br>Watch, think, discuss, and grow.</p>
+  <div class="level-pills" role="radiogroup" aria-label="Select difficulty level">
+    <button class="level-pill beginner" onclick="setLevel('beginner', this)" aria-label="Select beginner level" role="radio" aria-checked="false">🌱 Beginner</button>
+    <button class="level-pill intermediate active" onclick="setLevel('intermediate', this)" aria-label="Select intermediate level" role="radio" aria-checked="true">🔥 Intermediate</button>
+    <button class="level-pill advanced" onclick="setLevel('advanced', this)" aria-label="Select advanced level" role="radio" aria-checked="false">⚡ Advanced</button>
   </div>
   <div class="hero-cta">
     <button class="btn-primary" onclick="startLesson()">Start Lesson →</button>
@@ -1162,11 +1242,11 @@
 </div>
 
 <!-- OVERVIEW MODAL -->
-<div class="modal-overlay" id="overviewModal" onclick="closeOverviewOnBg(event)">
+<div class="modal-overlay" id="overviewModal" onclick="closeOverviewOnBg(event)" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-box">
     <div class="modal-header">
-      <div class="modal-title">Lesson Overview</div>
-      <button class="modal-close" onclick="closeOverview()">✕</button>
+      <h2 class="modal-title" id="modalTitle">Lesson Overview</h2>
+      <button class="modal-close" onclick="closeOverview()" aria-label="Close overview modal">✕</button>
     </div>
     <div class="modal-body">
       <div class="film-info-card" style="margin-bottom:24px;">
@@ -1220,16 +1300,17 @@
 <div id="lessonApp" style="display:none;">
 
   <!-- PROGRESS BAR -->
-  <div class="progress-bar-wrapper">
+  <nav class="progress-bar-wrapper" aria-label="Lesson progress">
     <div class="progress-steps" id="progressSteps"></div>
-    <div class="progress-label" id="progressLabel">Step 1 of 5</div>
-  </div>
+    <div class="progress-label" id="progressLabel" aria-live="polite">Step 1 of 5</div>
+    <button class="change-level-link" onclick="changeLevel()">Change Level</button>
+  </nav>
 
   <!-- MAIN -->
   <div class="main">
 
     <!-- SCORE -->
-    <div class="score-display" id="scoreDisplay">
+    <div class="score-display" id="scoreDisplay" aria-live="polite" aria-label="Score display">
       <div>
         <div class="score-number" id="scoreNum">0</div>
         <div class="score-label">Points Earned</div>
@@ -1246,15 +1327,15 @@
         <div class="section-number">01</div>
         <div class="section-meta">
           <div class="section-tag">🖼️ Gallery Walk • Warm-Up</div>
-          <div class="section-title">What Do You See?</div>
-          <div class="section-desc">Before watching, explore these images related to the film. Click each image and choose how it makes you feel. There's no wrong answer — just be honest!</div>
+          <h2 class="section-title">🖼️ What Do You See?</h2>
+          <div class="section-desc">Before watching, explore these images related to the film. 👆 Click each image and choose how it makes you feel. There's no wrong answer — just be honest!</div>
         </div>
       </div>
 
       <div class="card">
         <div class="card-title">📌 Instructions</div>
-        <p style="font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:12px;">Click on each image card. React to it using the emotion buttons. After reacting to all 6 images, share your thoughts with a partner using the sentence frames below.</p>
-        <div id="galleryProgress" style="font-size:13px;color:var(--gold);font-family:'Space Mono',monospace;">0 / 6 images reacted to</div>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:12px;">👆 Click on each image card. React to it using the emotion buttons. After reacting to all 6 images, share your thoughts with a partner using the sentence frames below.</p>
+        <div id="galleryProgress" aria-live="polite" style="font-size:13px;color:var(--gold);font-family:'Space Mono',monospace;">0 / 6 images reacted to</div>
       </div>
 
       <div class="gallery-grid" id="galleryGrid">
@@ -1265,34 +1346,35 @@
       <div class="card-title">💬 Share Your Reactions — Use These Sentence Frames</div>
 
       <!-- Level tabs -->
-      <div class="level-tabs" id="galleryTabs">
-        <button class="level-tab b" onclick="switchLevelTab('galleryTabs','galleryLevel','b',this)">🌱 Beginner</button>
-        <button class="level-tab i" onclick="switchLevelTab('galleryTabs','galleryLevel','i',this)">🔥 Intermediate</button>
-        <button class="level-tab a" onclick="switchLevelTab('galleryTabs','galleryLevel','a',this)">⚡ Advanced</button>
+      <div class="locked-level-badge" id="galleryBadge"></div>
+      <div class="level-tabs" id="galleryTabs" style="display:none;">
+        <button class="level-tab b">🌱 Beginner</button>
+        <button class="level-tab i">🔥 Intermediate</button>
+        <button class="level-tab a">⚡ Advanced</button>
       </div>
 
       <div id="galleryLevel">
         <div class="level-content b">
-          <div class="sentence-frame" style="margin-bottom:16px;"><strong>🌱 Beginner Activity</strong>Look at the images above. Drag each feeling word into the correct box — how does each image make you feel?</div>
+          <div class="sentence-frame" style="margin-bottom:16px;"><strong>🌱 Beginner Activity</strong>👀 Look at the images above. ✋ Drag each feeling word into the correct box — how does each image make you feel?</div>
           <div class="beg-sort-wrap">
             <div class="beg-sort-bank" id="emotionBank">
-              <div class="beg-tile" draggable="true" data-word="Happy 😊" ondragstart="begDragStart(event)" onclick="begTileClick(this)">Happy 😊</div>
-              <div class="beg-tile" draggable="true" data-word="Sad 😢" ondragstart="begDragStart(event)" onclick="begTileClick(this)">Sad 😢</div>
-              <div class="beg-tile" draggable="true" data-word="Surprised 😮" ondragstart="begDragStart(event)" onclick="begTileClick(this)">Surprised 😮</div>
-              <div class="beg-tile" draggable="true" data-word="Worried 😟" ondragstart="begDragStart(event)" onclick="begTileClick(this)">Worried 😟</div>
-              <div class="beg-tile" draggable="true" data-word="Hopeful 🌟" ondragstart="begDragStart(event)" onclick="begTileClick(this)">Hopeful 🌟</div>
-              <div class="beg-tile" draggable="true" data-word="Angry 😠" ondragstart="begDragStart(event)" onclick="begTileClick(this)">Angry 😠</div>
+              <div class="beg-tile" role="button" tabindex="0" draggable="true" data-word="Happy 😊" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">Happy 😊</div>
+              <div class="beg-tile" role="button" tabindex="0" draggable="true" data-word="Sad 😢" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">Sad 😢</div>
+              <div class="beg-tile" role="button" tabindex="0" draggable="true" data-word="Surprised 😮" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">Surprised 😮</div>
+              <div class="beg-tile" role="button" tabindex="0" draggable="true" data-word="Worried 😟" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">Worried 😟</div>
+              <div class="beg-tile" role="button" tabindex="0" draggable="true" data-word="Hopeful 🌟" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">Hopeful 🌟</div>
+              <div class="beg-tile" role="button" tabindex="0" draggable="true" data-word="Angry 😠" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">Angry 😠</div>
             </div>
             <div class="beg-sort-zones">
-              <div class="beg-zone" data-zone="image1" ondragover="begDragOver(event)" ondrop="begDrop(event)" onclick="begZoneClick(this)">
+              <div class="beg-zone" tabindex="0" data-zone="image1" ondragover="begDragOver(event)" ondrop="begDrop(event)" onclick="begZoneClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begZoneClick(this);}">
                 <div class="beg-zone-label">🏠 Family on street</div>
                 <div class="beg-zone-drop">Drop feeling here</div>
               </div>
-              <div class="beg-zone" data-zone="image2" ondragover="begDragOver(event)" ondrop="begDrop(event)" onclick="begZoneClick(this)">
+              <div class="beg-zone" tabindex="0" data-zone="image2" ondragover="begDragOver(event)" ondrop="begDrop(event)" onclick="begZoneClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begZoneClick(this);}">
                 <div class="beg-zone-label">💼 Business person</div>
                 <div class="beg-zone-drop">Drop feeling here</div>
               </div>
-              <div class="beg-zone" data-zone="image3" ondragover="begDragOver(event)" ondrop="begDrop(event)" onclick="begZoneClick(this)">
+              <div class="beg-zone" tabindex="0" data-zone="image3" ondragover="begDragOver(event)" ondrop="begDrop(event)" onclick="begZoneClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begZoneClick(this);}">
                 <div class="beg-zone-label">⭐ Achieving a goal</div>
                 <div class="beg-zone-drop">Drop feeling here</div>
               </div>
@@ -1322,39 +1404,40 @@
         <div class="section-number">02</div>
         <div class="section-meta">
           <div class="section-tag">📚 Vocabulary Activity</div>
-          <div class="section-title">Word Match</div>
-          <div class="section-desc">Match each vocabulary word to its definition. Click a word, then click the matching definition. Earn points for each correct match!</div>
+          <h2 class="section-title">📖 Word Match</h2>
+          <div class="section-desc">Match each vocabulary word to its definition. 👆 Click a word, then click the matching definition. Earn points for each correct match!</div>
         </div>
       </div>
 
       <!-- Level tabs -->
-      <div class="level-tabs" id="matchTabs">
-        <button class="level-tab b" onclick="switchLevelTab('matchTabs','matchLevel','b',this);setupMatch('b')">🌱 Beginner</button>
-        <button class="level-tab i" onclick="switchLevelTab('matchTabs','matchLevel','i',this);setupMatch('i')">🔥 Intermediate</button>
-        <button class="level-tab a" onclick="switchLevelTab('matchTabs','matchLevel','a',this);setupMatch('a')">⚡ Advanced</button>
+      <div class="locked-level-badge" id="matchBadge"></div>
+      <div class="level-tabs" id="matchTabs" style="display:none;">
+        <button class="level-tab b">🌱 Beginner</button>
+        <button class="level-tab i">🔥 Intermediate</button>
+        <button class="level-tab a">⚡ Advanced</button>
       </div>
 
       <div id="matchLevel">
         <div class="level-content b">
-          <div class="hint-toggle" onclick="toggleHint('hint-match-b')">💡 Show tip</div>
+          <button class="hint-toggle" onclick="toggleHint('hint-match-b')">💡 Show tip</button>
           <div class="hint-box" id="hint-match-b">Each word has a picture clue! Look at the emoji next to each word to help you figure out the meaning.</div>
-          <div class="card-title">Click a word, then click its definition</div>
+          <div class="card-title">👆 Click a word, then click its definition</div>
           <div id="matchGrid-b" class="match-grid"></div>
-          <div id="matchFeedback-b" class="feedback-msg"></div>
+          <div id="matchFeedback-b" class="feedback-msg" aria-live="polite"></div>
         </div>
         <div class="level-content i">
-          <div class="hint-toggle" onclick="toggleHint('hint-match-i')">💡 Show tip</div>
+          <button class="hint-toggle" onclick="toggleHint('hint-match-i')">💡 Show tip</button>
           <div class="hint-box" id="hint-match-i">Try using context — think about what each word means in daily life before reading the definitions.</div>
           <div class="card-title">Click a word, then click its definition</div>
           <div id="matchGrid-i" class="match-grid"></div>
-          <div id="matchFeedback-i" class="feedback-msg"></div>
+          <div id="matchFeedback-i" class="feedback-msg" aria-live="polite"></div>
         </div>
         <div class="level-content a">
-          <div class="hint-toggle" onclick="toggleHint('hint-match-a')">💡 Show tip</div>
+          <button class="hint-toggle" onclick="toggleHint('hint-match-a')">💡 Show tip</button>
           <div class="hint-box" id="hint-match-a">These are academic/analytical words. Think about how each one might be used to discuss social issues or film criticism.</div>
           <div class="card-title">Click a word, then click its definition</div>
           <div id="matchGrid-a" class="match-grid"></div>
-          <div id="matchFeedback-a" class="feedback-msg"></div>
+          <div id="matchFeedback-a" class="feedback-msg" aria-live="polite"></div>
         </div>
       </div>
 
@@ -1374,8 +1457,8 @@
         <div class="section-number">03</div>
         <div class="section-meta">
           <div class="section-tag">🎬 Video Clip + Comprehension</div>
-          <div class="section-title">Watch &amp; Understand</div>
-          <div class="section-desc">Watch each clip carefully. Then answer the questions at your level. There are three clips — each one explores a different theme from the film.</div>
+          <h2 class="section-title">🎬 Watch &amp; Understand</h2>
+          <div class="section-desc">▶️ Watch each clip carefully. Then answer the questions at your level. There are three clips — each one explores a different theme from the film.</div>
         </div>
       </div>
 
@@ -1383,24 +1466,25 @@
       <div class="card">
         <div class="card-title">🎬 Clip 1 — The Trailer (2:30) · Big Picture</div>
         <div class="video-wrapper">
-          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=pursuit+of+happyness+official+trailer+2006" target="_blank" rel="noopener noreferrer" title="The Pursuit of Happyness — Official Trailer">
+          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=pursuit+of+happyness+official+trailer+2006" target="_blank" rel="noopener noreferrer" title="The Pursuit of Happyness — Official Trailer" aria-label="Watch The Pursuit of Happyness official trailer on YouTube">
             <div class="play-icon"></div>
             <div class="vp-title">The Pursuit of Happyness — Official Trailer</div>
             <div class="vp-link">Watch on YouTube &rarr;</div>
           </a>
         </div>
         <div class="video-ext-note">External video — opens in a new tab</div>
-        <div class="video-caption">Official Trailer — Watch for: Who is the main character? What is his problem? What does he want?</div>
+        <div class="video-caption">Official Trailer — 👀 Watch for: Who is the main character? What is his problem? What does he want?</div>
 
-        <div class="level-tabs" id="clip1Tabs">
-          <button class="level-tab b" onclick="switchLevelTab('clip1Tabs','clip1Level','b',this)">🌱 Beginner</button>
-          <button class="level-tab i" onclick="switchLevelTab('clip1Tabs','clip1Level','i',this)">🔥 Intermediate</button>
-          <button class="level-tab a" onclick="switchLevelTab('clip1Tabs','clip1Level','a',this)">⚡ Advanced</button>
+        <div class="locked-level-badge" id="clip1Badge"></div>
+        <div class="level-tabs" id="clip1Tabs" style="display:none;">
+          <button class="level-tab b">🌱 Beginner</button>
+          <button class="level-tab i">🔥 Intermediate</button>
+          <button class="level-tab a">⚡ Advanced</button>
         </div>
 
         <div id="clip1Level">
           <div class="level-content b">
-            <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Answer by circling / clicking the correct answer:</p>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">🎯 Choose the best answer for each question:</p>
             <div id="mc-clip1-b"></div>
           </div>
           <div class="level-content i">
@@ -1416,19 +1500,20 @@
       <div class="card">
         <div class="card-title">🎬 Clip 2 — "Don't Ever Let Someone Tell You..." (1:46) · Perseverance</div>
         <div class="video-wrapper">
-          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=pursuit+of+happyness+basketball+dreams+scene" target="_blank" rel="noopener noreferrer" title="&quot;Don't Ever Let Someone Tell You...&quot; — Basketball Scene">
+          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=pursuit+of+happyness+basketball+dreams+scene" target="_blank" rel="noopener noreferrer" title="&quot;Don't Ever Let Someone Tell You...&quot; — Basketball Scene" aria-label="Watch the basketball dreams scene on YouTube">
             <div class="play-icon"></div>
             <div class="vp-title">"Don't Ever Let Someone Tell You..." — Basketball Scene</div>
             <div class="vp-link">Watch on YouTube &rarr;</div>
           </a>
         </div>
         <div class="video-ext-note">External video — opens in a new tab</div>
-        <div class="video-caption">One of the most famous scenes — Chris talks to his son about dreams and determination.</div>
+        <div class="video-caption">One of the most famous scenes — 👀 Watch how Chris talks to his son about dreams and determination.</div>
 
-        <div class="level-tabs" id="clip2Tabs">
-          <button class="level-tab b" onclick="switchLevelTab('clip2Tabs','clip2Level','b',this)">🌱 Beginner</button>
-          <button class="level-tab i" onclick="switchLevelTab('clip2Tabs','clip2Level','i',this)">🔥 Intermediate</button>
-          <button class="level-tab a" onclick="switchLevelTab('clip2Tabs','clip2Level','a',this)">⚡ Advanced</button>
+        <div class="locked-level-badge" id="clip2Badge"></div>
+        <div class="level-tabs" id="clip2Tabs" style="display:none;">
+          <button class="level-tab b">🌱 Beginner</button>
+          <button class="level-tab i">🔥 Intermediate</button>
+          <button class="level-tab a">⚡ Advanced</button>
         </div>
 
         <div id="clip2Level">
@@ -1448,46 +1533,47 @@
       <div class="card">
         <div class="card-title">🎬 Clip 3 — Real Chris Gardner Interview · The True Story</div>
         <div class="video-wrapper">
-          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=chris+gardner+interview+pursuit+happyness+real+story" target="_blank" rel="noopener noreferrer" title="Chris Gardner — The Real Story">
+          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=chris+gardner+interview+pursuit+happyness+real+story" target="_blank" rel="noopener noreferrer" title="Chris Gardner — The Real Story" aria-label="Watch the Chris Gardner interview on YouTube">
             <div class="play-icon"></div>
             <div class="vp-title">Chris Gardner — The Real Story</div>
             <div class="vp-link">Watch on YouTube &rarr;</div>
           </a>
         </div>
         <div class="video-ext-note">External video — opens in a new tab</div>
-        <div class="video-caption">The real Chris Gardner speaks — compare his real story to what you see in the film.</div>
+        <div class="video-caption">The real Chris Gardner speaks — 👀 compare his real story to what you see in the film.</div>
 
-        <div class="level-tabs" id="clip3Tabs">
-          <button class="level-tab b" onclick="switchLevelTab('clip3Tabs','clip3Level','b',this)">🌱 Beginner</button>
-          <button class="level-tab i" onclick="switchLevelTab('clip3Tabs','clip3Level','i',this)">🔥 Intermediate</button>
-          <button class="level-tab a" onclick="switchLevelTab('clip3Tabs','clip3Level','a',this)">⚡ Advanced</button>
+        <div class="locked-level-badge" id="clip3Badge"></div>
+        <div class="level-tabs" id="clip3Tabs" style="display:none;">
+          <button class="level-tab b">🌱 Beginner</button>
+          <button class="level-tab i">🔥 Intermediate</button>
+          <button class="level-tab a">⚡ Advanced</button>
         </div>
 
         <div id="clip3Level">
           <div class="level-content b">
-            <div class="sentence-frame"><strong>🌱 Beginner Activity</strong>Watch the clip and tap the best answer for each question.</div>
+            <div class="sentence-frame"><strong>🌱 Beginner Activity</strong>▶️ Watch the clip and 👆 tap the best answer for each question.</div>
             <div class="beg-tap-q">
               <div class="beg-tap-label">Chris Gardner is a…</div>
               <div class="beg-tap-options" data-q="cg1" data-ans="1">
-                <div class="beg-tap-btn" onclick="begTap(this,'cg1',0)">👨‍⚕️ Doctor</div>
-                <div class="beg-tap-btn" onclick="begTap(this,'cg1',1)">💼 Businessman</div>
-                <div class="beg-tap-btn" onclick="begTap(this,'cg1',2)">👨‍🏫 Teacher</div>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg1',0)">👨‍⚕️ Doctor</button>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg1',1)">💼 Businessman</button>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg1',2)">👨‍🏫 Teacher</button>
               </div>
             </div>
             <div class="beg-tap-q">
               <div class="beg-tap-label">How does Chris feel about his life?</div>
               <div class="beg-tap-options" data-q="cg2" data-ans="2">
-                <div class="beg-tap-btn" onclick="begTap(this,'cg2',0)">😊 Easy and happy</div>
-                <div class="beg-tap-btn" onclick="begTap(this,'cg2',1)">😐 Normal and fine</div>
-                <div class="beg-tap-btn" onclick="begTap(this,'cg2',2)">💪 Hard but he never gave up</div>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg2',0)">😊 Easy and happy</button>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg2',1)">😐 Normal and fine</button>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg2',2)">💪 Hard but he never gave up</button>
               </div>
             </div>
             <div class="beg-tap-q">
               <div class="beg-tap-label">What word describes Chris Gardner?</div>
               <div class="beg-tap-options" data-q="cg3" data-ans="0">
-                <div class="beg-tap-btn" onclick="begTap(this,'cg3',0)">🌟 Determined</div>
-                <div class="beg-tap-btn" onclick="begTap(this,'cg3',1)">😴 Lazy</div>
-                <div class="beg-tap-btn" onclick="begTap(this,'cg3',2)">😡 Angry</div>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg3',0)">🌟 Determined</button>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg3',1)">😴 Lazy</button>
+                <button class="beg-tap-btn" onclick="begTap(this,'cg3',2)">😡 Angry</button>
               </div>
             </div>
           </div>
@@ -1514,33 +1600,34 @@
         <div class="section-number">04</div>
         <div class="section-meta">
           <div class="section-tag">✏️ Drag & Drop Activity</div>
-          <div class="section-title">Fill in the Blank</div>
-          <div class="section-desc">Drag the words from the word bank into the correct blanks to complete each sentence. Click a word, then click the blank where it belongs. Click a filled blank to return it.</div>
+          <h2 class="section-title">✏️ Fill in the Blank</h2>
+          <div class="section-desc">✋ Drag the words from the word bank into the correct blanks to complete each sentence. 👆 Click a word, then click the blank where it belongs. Click a filled blank to return it.</div>
         </div>
       </div>
 
-      <div class="level-tabs" id="fillTabs">
-        <button class="level-tab b" onclick="switchLevelTab('fillTabs','fillLevel','b',this);buildFill('b')">🌱 Beginner</button>
-        <button class="level-tab i" onclick="switchLevelTab('fillTabs','fillLevel','i',this);buildFill('i')">🔥 Intermediate</button>
-        <button class="level-tab a" onclick="switchLevelTab('fillTabs','fillLevel','a',this);buildFill('a')">⚡ Advanced</button>
+      <div class="locked-level-badge" id="fillBadge"></div>
+      <div class="level-tabs" id="fillTabs" style="display:none;">
+        <button class="level-tab b">🌱 Beginner</button>
+        <button class="level-tab i">🔥 Intermediate</button>
+        <button class="level-tab a">⚡ Advanced</button>
       </div>
 
       <div id="fillLevel">
         <div class="level-content b">
-          <div class="hint-toggle" onclick="toggleHint('hint-fill-b')">💡 Need a hint?</div>
+          <button class="hint-toggle" onclick="toggleHint('hint-fill-b')">💡 Need a hint?</button>
           <div class="hint-box" id="hint-fill-b">Think about what word makes sense in the sentence. Try saying the sentence out loud with each word to check!</div>
-          <div class="card"><div class="card-title">Word Bank — Click a word to select it, then click a blank</div>
+          <div class="card"><div class="card-title">Word Bank — 👆 Click a word to select it, then click a blank</div>
           <div class="word-bank" id="bank-b"></div></div>
           <div id="sentences-b"></div>
           <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;">
             <button class="btn-check" onclick="checkFill('b')">✓ Check Answers</button>
             <button class="btn-check reset" onclick="resetFill('b')">↺ Reset</button>
           </div>
-          <div id="fill-feedback-b" class="feedback-msg" style="margin-top:12px;"></div>
+          <div id="fill-feedback-b" class="feedback-msg" aria-live="polite" style="margin-top:12px;"></div>
         </div>
 
         <div class="level-content i">
-          <div class="hint-toggle" onclick="toggleHint('hint-fill-i')">💡 Need a hint?</div>
+          <button class="hint-toggle" onclick="toggleHint('hint-fill-i')">💡 Need a hint?</button>
           <div class="hint-box" id="hint-fill-i">Pay attention to grammar — does the blank need a noun, verb, or adjective? Use context clues from the surrounding words.</div>
           <div class="card"><div class="card-title">Word Bank</div>
           <div class="word-bank" id="bank-i"></div></div>
@@ -1549,11 +1636,11 @@
             <button class="btn-check" onclick="checkFill('i')">✓ Check Answers</button>
             <button class="btn-check reset" onclick="resetFill('i')">↺ Reset</button>
           </div>
-          <div id="fill-feedback-i" class="feedback-msg" style="margin-top:12px;"></div>
+          <div id="fill-feedback-i" class="feedback-msg" aria-live="polite" style="margin-top:12px;"></div>
         </div>
 
         <div class="level-content a">
-          <div class="hint-toggle" onclick="toggleHint('hint-fill-a')">💡 Need a hint?</div>
+          <button class="hint-toggle" onclick="toggleHint('hint-fill-a')">💡 Need a hint?</button>
           <div class="hint-box" id="hint-fill-a">These sentences require academic vocabulary. Consider the connotation and register of each word — not just its basic meaning.</div>
           <div class="card"><div class="card-title">Word Bank</div>
           <div class="word-bank" id="bank-a"></div></div>
@@ -1562,7 +1649,7 @@
             <button class="btn-check" onclick="checkFill('a')">✓ Check Answers</button>
             <button class="btn-check reset" onclick="resetFill('a')">↺ Reset</button>
           </div>
-          <div id="fill-feedback-a" class="feedback-msg" style="margin-top:12px;"></div>
+          <div id="fill-feedback-a" class="feedback-msg" aria-live="polite" style="margin-top:12px;"></div>
         </div>
       </div>
 
@@ -1578,7 +1665,7 @@
         <div class="section-number">05</div>
         <div class="section-meta">
           <div class="section-tag">💬 Quote Discussion • Wrap-Up</div>
-          <div class="section-title">What Does It Mean To You?</div>
+          <h2 class="section-title">💭 What Does It Mean To You?</h2>
           <div class="section-desc">Read two powerful quotes from the film. Respond at your level. Then rate your overall learning experience.</div>
         </div>
       </div>
@@ -1589,36 +1676,37 @@
         <div class="quote-speaker">— Chris Gardner, The Pursuit of Happyness (2006)</div>
       </div>
 
-      <div class="level-tabs" id="q1Tabs">
-        <button class="level-tab b" onclick="switchLevelTab('q1Tabs','q1Level','b',this)">🌱 Beginner</button>
-        <button class="level-tab i" onclick="switchLevelTab('q1Tabs','q1Level','i',this)">🔥 Intermediate</button>
-        <button class="level-tab a" onclick="switchLevelTab('q1Tabs','q1Level','a',this)">⚡ Advanced</button>
+      <div class="locked-level-badge" id="q1Badge"></div>
+      <div class="level-tabs" id="q1Tabs" style="display:none;">
+        <button class="level-tab b">🌱 Beginner</button>
+        <button class="level-tab i">🔥 Intermediate</button>
+        <button class="level-tab a">⚡ Advanced</button>
       </div>
 
       <div id="q1Level">
         <div class="level-content b">
-          <div class="sentence-frame"><strong>🌱 Beginner Activity</strong>Read the quote. Then answer by tapping your choice!</div>
+          <div class="sentence-frame"><strong>🌱 Beginner Activity</strong>📖 Read the quote. Then 👆 tap your choice!</div>
           <div class="beg-tap-q">
             <div class="beg-tap-label">Do you agree with Chris?</div>
             <div class="beg-tap-options" data-q="q1agree" data-ans="-1">
-              <div class="beg-tap-btn opinion" onclick="begTapOpinion(this,'q1agree',0)">👍 Yes, I agree!</div>
-              <div class="beg-tap-btn opinion" onclick="begTapOpinion(this,'q1agree',1)">🤔 Sort of...</div>
-              <div class="beg-tap-btn opinion" onclick="begTapOpinion(this,'q1agree',2)">👎 No, I disagree</div>
+              <button class="beg-tap-btn opinion" onclick="begTapOpinion(this,'q1agree',0)">👍 Yes, I agree!</button>
+              <button class="beg-tap-btn opinion" onclick="begTapOpinion(this,'q1agree',1)">🤔 Sort of...</button>
+              <button class="beg-tap-btn opinion" onclick="begTapOpinion(this,'q1agree',2)">👎 No, I disagree</button>
             </div>
           </div>
           <div class="beg-tap-q">
             <div class="beg-tap-label">Drag the words that match YOUR dream into the box below:</div>
             <div class="beg-sort-bank" id="dreamBank" style="margin-bottom:10px;">
-              <div class="beg-tile sm" draggable="true" data-word="family" ondragstart="begDragStart(event)" onclick="begTileClick(this)">👨‍👩‍👧 family</div>
-              <div class="beg-tile sm" draggable="true" data-word="school" ondragstart="begDragStart(event)" onclick="begTileClick(this)">🏫 school</div>
-              <div class="beg-tile sm" draggable="true" data-word="money" ondragstart="begDragStart(event)" onclick="begTileClick(this)">💰 money</div>
-              <div class="beg-tile sm" draggable="true" data-word="music" ondragstart="begDragStart(event)" onclick="begTileClick(this)">🎵 music</div>
-              <div class="beg-tile sm" draggable="true" data-word="sport" ondragstart="begDragStart(event)" onclick="begTileClick(this)">⚽ sport</div>
-              <div class="beg-tile sm" draggable="true" data-word="art" ondragstart="begDragStart(event)" onclick="begTileClick(this)">🎨 art</div>
-              <div class="beg-tile sm" draggable="true" data-word="travel" ondragstart="begDragStart(event)" onclick="begTileClick(this)">✈️ travel</div>
-              <div class="beg-tile sm" draggable="true" data-word="health" ondragstart="begDragStart(event)" onclick="begTileClick(this)">❤️ health</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="family" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">👨‍👩‍👧 family</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="school" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">🏫 school</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="money" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">💰 money</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="music" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">🎵 music</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="sport" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">⚽ sport</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="art" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">🎨 art</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="travel" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">✈️ travel</div>
+              <div class="beg-tile sm" role="button" tabindex="0" draggable="true" data-word="health" ondragstart="begDragStart(event)" onclick="begTileClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begTileClick(this);}">❤️ health</div>
             </div>
-            <div class="beg-zone wide" data-zone="mydream" ondragover="begDragOver(event)" ondrop="begDropMulti(event)" onclick="begZoneClick(this)" style="min-height:70px;">
+            <div class="beg-zone wide" tabindex="0" data-zone="mydream" ondragover="begDragOver(event)" ondrop="begDropMulti(event)" onclick="begZoneClick(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();begZoneClick(this);}" style="min-height:70px;">
               <div class="beg-zone-label">⭐ My Dream is about...</div>
               <div class="beg-zone-drop" id="mydreamDrop">Drop your words here!</div>
             </div>
@@ -1642,30 +1730,31 @@
         <div class="quote-speaker">— Chris Gardner (narration), final scene of the film</div>
       </div>
 
-      <div class="level-tabs" id="q2Tabs">
-        <button class="level-tab b" onclick="switchLevelTab('q2Tabs','q2Level','b',this)">🌱 Beginner</button>
-        <button class="level-tab i" onclick="switchLevelTab('q2Tabs','q2Level','i',this)">🔥 Intermediate</button>
-        <button class="level-tab a" onclick="switchLevelTab('q2Tabs','q2Level','a',this)">⚡ Advanced</button>
+      <div class="locked-level-badge" id="q2Badge"></div>
+      <div class="level-tabs" id="q2Tabs" style="display:none;">
+        <button class="level-tab b">🌱 Beginner</button>
+        <button class="level-tab i">🔥 Intermediate</button>
+        <button class="level-tab a">⚡ Advanced</button>
       </div>
 
       <div id="q2Level">
         <div class="level-content b">
-          <div class="sentence-frame"><strong>🌱 Beginner Activity</strong>"This part of my life is called happiness." Tap all the things that make YOU happy!</div>
+          <div class="sentence-frame"><strong>🌱 Beginner Activity</strong>"This part of my life is called happiness." 👆 Tap all the things that make YOU happy!</div>
           <div class="beg-happy-grid" id="happyGrid">
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">👨‍👩‍👧 Family</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">🎵 Music</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">🍕 Food</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">⚽ Sports</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">🎮 Games</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">🐶 Pets</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">📚 Learning</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">🌿 Nature</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">👯 Friends</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">🎨 Art</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">✈️ Travel</div>
-            <div class="beg-happy-tile" onclick="toggleHappy(this)">💤 Rest</div>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">👨‍👩‍👧 Family</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">🎵 Music</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">🍕 Food</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">⚽ Sports</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">🎮 Games</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">🐶 Pets</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">📚 Learning</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">🌿 Nature</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">👯 Friends</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">🎨 Art</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">✈️ Travel</button>
+            <button class="beg-happy-tile" onclick="toggleHappy(this)">💤 Rest</button>
           </div>
-          <div id="happyMsg" style="margin-top:14px;font-size:14px;color:var(--text-muted);display:none;"></div>
+          <div id="happyMsg" aria-live="polite" style="margin-top:14px;font-size:14px;color:var(--text-muted);display:none;"></div>
         </div>
         <div class="level-content i">
           <div class="sentence-frame"><strong>Discuss:</strong>Why does Chris only call "this part" happiness? What does that word "little" suggest about his journey? Does the ending feel earned?</div>
@@ -1713,7 +1802,7 @@
     <div class="lesson-section" id="section-6">
       <div class="completion-screen">
         <span class="star-burst">🏆</span>
-        <div class="completion-title">Lesson Complete!</div>
+        <div class="completion-title">🎉 Lesson Complete!</div>
         <p style="font-size:18px;color:var(--text-muted);max-width:500px;margin:0 auto 32px;line-height:1.7;">You finished The Pursuit of Happyness interactive lesson. Keep pursuing your own dreams — one word at a time.</p>
         <div class="score-display" style="max-width:400px;margin:0 auto 32px;">
           <div>
@@ -1731,6 +1820,7 @@
 
   </div><!-- /main -->
 </div><!-- /lessonApp -->
+</main>
 
 <script>
 // ============================================================
@@ -1766,6 +1856,7 @@ const matchData = {
 const fillData = {
   b: {
     words: ['happy', 'job', 'dream', 'son', 'hard', 'help'],
+    emojis: { 'happy': '😊', 'job': '💼', 'dream': '💭', 'son': '👦', 'hard': '💪', 'help': '🤝' },
     sentences: [
       { parts: ['Chris wants a better ', null, ' to earn more money.'], answer: 'job' },
       { parts: ['He has a ', null, ' named Christopher.'], answer: 'son' },
@@ -1800,11 +1891,11 @@ const mcData = {
   clip1: {
     b: [{
       q: 'Who is the main character in the film?',
-      opts: ['A doctor', 'Chris Gardner', 'A teacher', 'A police officer'],
+      opts: ['👨‍⚕️ A doctor', '👨‍👦 Chris Gardner', '👨‍🏫 A teacher', '👮 A police officer'],
       ans: 1, exp: 'Correct! Chris Gardner is the main character — a salesman and father.'
     },{
       q: 'What does Chris want in the film?',
-      opts: ['To go to school', 'To move to another country', 'A better job and life for his family', 'To become a famous singer'],
+      opts: ['🏫 To go to school', '✈️ To move to another country', '💼 A better job and life for his family', '🎤 To become a famous singer'],
       ans: 2, exp: 'Yes! Chris wants to get a better job so he can take care of his son.'
     }],
     i: [{
@@ -1825,7 +1916,7 @@ const mcData = {
   clip2: {
     b: [{
       q: 'What does Chris tell his son NOT to do?',
-      opts: ['Go to school', 'Play basketball', 'Let people tell him he can\'t do something', 'Eat too much candy'],
+      opts: ['🏫 Go to school', '🏀 Play basketball', '🚫 Let people tell him he can\'t do something', '🍬 Eat too much candy'],
       ans: 2, exp: 'Correct! Chris tells his son: "Don\'t ever let somebody tell you you can\'t do something."'
     }],
     i: [{
@@ -1848,7 +1939,8 @@ const mcData = {
 // ============================================================
 //  STATE
 // ============================================================
-let currentLevel = 'i';
+let currentLevel = 'intermediate';
+let levelLocked = false;
 let currentSection = 0;
 let score = 0;
 let totalPossible = 100;
@@ -1864,13 +1956,40 @@ let selectedBankWord = null;
 //  INIT
 // ============================================================
 function setLevel(level, el) {
+  if (levelLocked) return;
   currentLevel = level;
-  document.querySelectorAll('.level-pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.level-pill').forEach(p => {
+    p.classList.remove('active');
+    p.setAttribute('aria-checked', 'false');
+  });
   el.classList.add('active');
+  el.setAttribute('aria-checked', 'true');
   document.getElementById('levelBadge').textContent = 'Level: ' + level.charAt(0).toUpperCase() + level.slice(1);
 }
 
+function changeLevel() {
+  // Unlock level selection
+  levelLocked = false;
+
+  // Reset score and progress
+  score = 0;
+  completedSections = new Set();
+  currentSection = 0;
+  matchState = { b: null, i: null, a: null };
+  fillState = { b: {}, i: {}, a: {} };
+  selectedWord = null;
+  selectedBankWord = null;
+
+  // Show hero, hide lesson
+  document.getElementById('lessonApp').style.display = 'none';
+  document.getElementById('hero').style.display = '';
+
+  // Scroll to hero
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function startLesson() {
+  levelLocked = true;
   document.getElementById('hero').style.display = 'none';
   document.getElementById('lessonApp').style.display = 'block';
   buildProgressBar();
@@ -1897,9 +2016,25 @@ const allTabGroups = [
   ['q2Tabs',       'q2Level'],
 ];
 
+const badgeLabels = { beginner: '🌱 Beginner', intermediate: '🔥 Intermediate', advanced: '⚡ Advanced' };
+const badgeIds = ['galleryBadge','matchBadge','clip1Badge','clip2Badge','clip3Badge','fillBadge','q1Badge','q2Badge'];
+
 function applyLevelToAllTabs() {
   const levelMap = { beginner: 'b', intermediate: 'i', advanced: 'a' };
   const lKey = levelMap[currentLevel] || 'i';
+
+  // Update locked badges
+  const label = badgeLabels[currentLevel] || badgeLabels.intermediate;
+  const levelName = currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1);
+  badgeIds.forEach(id => {
+    const badge = document.getElementById(id);
+    if (badge) {
+      badge.textContent = label;
+      badge.setAttribute('aria-label', 'Current level: ' + levelName);
+    }
+  });
+
+  // Apply level to all tab content groups
   allTabGroups.forEach(([tabsId, contentId]) => {
     const tabsEl = document.getElementById(tabsId);
     const contentEl = document.getElementById(contentId);
@@ -1926,10 +2061,11 @@ function buildProgressBar() {
       line.id = `line-${i-1}`;
       container.appendChild(line);
     }
-    const dot = document.createElement('div');
+    const dot = document.createElement('button');
     dot.className = 'step-dot';
     dot.textContent = i;
     dot.id = `dot-${i}`;
+    dot.setAttribute('aria-label', 'Go to section ' + i);
     dot.onclick = () => goToSection(i);
     container.appendChild(dot);
   }
@@ -2145,18 +2281,40 @@ function toggleHappy(tile) {
 // ============================================================
 //  OVERVIEW MODAL
 // ============================================================
+let modalTrigger = null;
 function openOverview() {
-  document.getElementById('overviewModal').classList.add('open');
+  modalTrigger = document.activeElement;
+  const modal = document.getElementById('overviewModal');
+  modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+  // Focus the close button
+  const closeBtn = modal.querySelector('.modal-close');
+  if (closeBtn) setTimeout(() => closeBtn.focus(), 100);
 }
 function closeOverview() {
   document.getElementById('overviewModal').classList.remove('open');
   document.body.style.overflow = '';
+  // Return focus to trigger
+  if (modalTrigger) { modalTrigger.focus(); modalTrigger = null; }
 }
 function closeOverviewOnBg(e) {
   if (e.target === document.getElementById('overviewModal')) closeOverview();
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverview(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeOverview();
+  // Focus trap inside modal
+  const modal = document.getElementById('overviewModal');
+  if (!modal.classList.contains('open') || e.key !== 'Tab') return;
+  const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey) {
+    if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+  } else {
+    if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
 
 // ============================================================
 //  GALLERY WALK
@@ -2178,14 +2336,16 @@ function buildGallery() {
   galleryItems.forEach((item, i) => {
     const card = document.createElement('div');
     card.className = 'gallery-card';
+    card.setAttribute('role', 'img');
+    card.setAttribute('aria-label', item.label);
     card.innerHTML = `
-      <div class="gallery-image">${item.emoji}</div>
+      <div class="gallery-image" aria-hidden="true">${item.emoji}</div>
       <div class="gallery-label">${item.label}</div>
-      <div class="gallery-reactions">
-        <button class="reaction-btn" onclick="react(this, ${i})">😊 Happy</button>
-        <button class="reaction-btn" onclick="react(this, ${i})">😢 Sad</button>
-        <button class="reaction-btn" onclick="react(this, ${i})">😠 Angry</button>
-        <button class="reaction-btn" onclick="react(this, ${i})">😮 Surprised</button>
+      <div class="gallery-reactions" role="group" aria-label="React to: ${item.label}">
+        <button class="reaction-btn" onclick="react(this, ${i})" aria-label="React with thumbs up to ${item.label}">👍 Like</button>
+        <button class="reaction-btn" onclick="react(this, ${i})" aria-label="React with sad to ${item.label}">😢 Sad</button>
+        <button class="reaction-btn" onclick="react(this, ${i})" aria-label="React with strong to ${item.label}">💪 Strong</button>
+        <button class="reaction-btn" onclick="react(this, ${i})" aria-label="React with thinking to ${item.label}">🤔 Thinking</button>
       </div>
     `;
     grid.appendChild(card);
@@ -2228,21 +2388,23 @@ function setupMatch(level) {
   matchState[level] = { selected: null, matched: 0, total: data.length };
 
   data.forEach(item => {
-    const wordEl = document.createElement('div');
+    const wordEl = document.createElement('button');
     wordEl.className = 'match-item word';
     wordEl.textContent = item.word;
     wordEl.dataset.word = item.word;
     wordEl.dataset.level = level;
+    wordEl.setAttribute('aria-label', 'Vocabulary word: ' + item.word);
     wordEl.onclick = () => selectMatchWord(wordEl, level);
     grid.appendChild(wordEl);
   });
 
   shuffledDefs.forEach(def => {
-    const defEl = document.createElement('div');
+    const defEl = document.createElement('button');
     defEl.className = 'match-item def';
     defEl.textContent = def;
     defEl.dataset.def = def;
     defEl.dataset.level = level;
+    defEl.setAttribute('aria-label', 'Definition: ' + def);
     defEl.onclick = () => selectMatchDef(defEl, level);
     grid.appendChild(defEl);
   });
@@ -2268,22 +2430,34 @@ function selectMatchDef(el, level) {
 
   if (defText === correctDef) {
     wordEl.classList.add('matched');
+    wordEl.setAttribute('aria-disabled', 'true');
     el.classList.add('matched');
+    el.setAttribute('aria-disabled', 'true');
     wordEl.classList.remove('selected');
     state.selected = null;
     state.matched++;
     addScore(10);
+    // Announce match
+    const fb = document.getElementById(`matchFeedback-${level}`);
     if (state.matched === state.total) {
-      const fb = document.getElementById(`matchFeedback-${level}`);
       fb.textContent = '🎉 Perfect! You matched all the words!';
       fb.className = 'feedback-msg correct';
+    } else {
+      fb.textContent = '✓ Matched! ' + state.matched + ' of ' + state.total;
+      fb.className = 'feedback-msg correct';
+      // Clear interim feedback after a moment
+      setTimeout(() => { if (state.matched < state.total) { fb.textContent = ''; fb.className = 'feedback-msg'; } }, 1500);
     }
   } else {
     wordEl.classList.add('wrong');
     el.classList.add('wrong');
+    const fb = document.getElementById(`matchFeedback-${level}`);
+    fb.textContent = '✗ Not a match — try again.';
+    fb.className = 'feedback-msg wrong';
     setTimeout(() => {
       wordEl.classList.remove('wrong', 'selected');
       el.classList.remove('wrong');
+      fb.textContent = ''; fb.className = 'feedback-msg';
     }, 800);
     state.selected = null;
   }
@@ -2310,19 +2484,24 @@ function buildAllMC() {
       questions.forEach((q, qi) => {
         const qDiv = document.createElement('div');
         qDiv.className = 'mc-question';
-        qDiv.innerHTML = `<div class="mc-q-text">${q.q}</div>`;
+        const qId = `mc-q-${clip}-${level}-${qi}`;
+        qDiv.innerHTML = `<div class="mc-q-text" id="${qId}">${q.q}</div>`;
         const optDiv = document.createElement('div');
         optDiv.className = 'mc-options';
+        optDiv.setAttribute('role', 'group');
+        optDiv.setAttribute('aria-labelledby', qId);
         q.opts.forEach((opt, oi) => {
-          const btn = document.createElement('div');
+          const btn = document.createElement('button');
           btn.className = 'mc-option';
-          btn.innerHTML = `<span class="mc-option-letter">${String.fromCharCode(65+oi)}</span><span>${opt}</span>`;
+          btn.innerHTML = `<span class="mc-option-letter" aria-hidden="true">${String.fromCharCode(65+oi)}</span><span>${opt}</span>`;
+          btn.setAttribute('aria-label', opt);
           btn.onclick = () => checkMC(btn, oi, q.ans, qDiv, q.exp, `${clip}-${level}-${qi}`);
           optDiv.appendChild(btn);
         });
         qDiv.appendChild(optDiv);
         const fb = document.createElement('div');
         fb.className = 'feedback-msg';
+        fb.setAttribute('aria-live', 'polite');
         fb.id = `mc-fb-${clip}-${level}-${qi}`;
         qDiv.appendChild(fb);
         container.appendChild(qDiv);
@@ -2367,10 +2546,15 @@ function buildFill(level) {
   data.words.forEach(w => {
     const el = document.createElement('div');
     el.className = 'bank-word';
-    el.textContent = w;
+    const displayText = (data.emojis && data.emojis[w]) ? data.emojis[w] + ' ' + w : w;
+    el.textContent = displayText;
     el.dataset.word = w;
     el.draggable = true;
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('aria-label', 'Word: ' + w);
     el.addEventListener('click', () => selectBankWord(el, level));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectBankWord(el, level); } });
     el.addEventListener('dragstart', e => {
       e.dataTransfer.setData('text', w);
       e.dataTransfer.setData('level', level);
@@ -2398,7 +2582,11 @@ function buildFill(level) {
 
     // Attach click handler to blanks
     const blank = document.getElementById(`blank-${level}-${si}`);
+    blank.setAttribute('role', 'button');
+    blank.setAttribute('tabindex', '0');
+    blank.setAttribute('aria-label', 'Blank ' + (si + 1) + ' — click to place selected word');
     blank.addEventListener('click', () => fillBlankClick(blank, level));
+    blank.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fillBlankClick(blank, level); } });
     blank.addEventListener('dragover', e => { e.preventDefault(); blank.classList.add('drag-over'); });
     blank.addEventListener('dragleave', () => blank.classList.remove('drag-over'));
     blank.addEventListener('drop', e => {
