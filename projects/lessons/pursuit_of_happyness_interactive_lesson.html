@@ -360,6 +360,63 @@
     border: none;
   }
 
+  /* ---- VIDEO PLACEHOLDER CARD ---- */
+  .video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    text-decoration: none;
+    transition: filter 0.2s ease;
+  }
+  .video-placeholder:hover {
+    filter: brightness(1.2);
+  }
+  .video-placeholder .play-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .video-placeholder .play-icon::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 0 12px 22px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 4px;
+  }
+  .video-placeholder .vp-title {
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .video-placeholder .vp-link {
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .video-ext-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    margin-bottom: 16px;
+  }
+
   .video-caption {
     font-size: 13px;
     color: var(--text-muted);
@@ -1326,8 +1383,13 @@
       <div class="card">
         <div class="card-title">🎬 Clip 1 — The Trailer (2:30) · Big Picture</div>
         <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/89Kq8SDyvfg" title="The Pursuit of Happyness Official Trailer" allowfullscreen loading="lazy"></iframe>
+          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=pursuit+of+happyness+official+trailer+2006" target="_blank" rel="noopener noreferrer" title="The Pursuit of Happyness — Official Trailer">
+            <div class="play-icon"></div>
+            <div class="vp-title">The Pursuit of Happyness — Official Trailer</div>
+            <div class="vp-link">Watch on YouTube &rarr;</div>
+          </a>
         </div>
+        <div class="video-ext-note">External video — opens in a new tab</div>
         <div class="video-caption">Official Trailer — Watch for: Who is the main character? What is his problem? What does he want?</div>
 
         <div class="level-tabs" id="clip1Tabs">
@@ -1354,8 +1416,13 @@
       <div class="card">
         <div class="card-title">🎬 Clip 2 — "Don't Ever Let Someone Tell You..." (1:46) · Perseverance</div>
         <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/AaXmP7bPCIY" title="Don't Ever Let Someone Tell You That You Can't Do Something" allowfullscreen loading="lazy"></iframe>
+          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=pursuit+of+happyness+basketball+dreams+scene" target="_blank" rel="noopener noreferrer" title="&quot;Don't Ever Let Someone Tell You...&quot; — Basketball Scene">
+            <div class="play-icon"></div>
+            <div class="vp-title">"Don't Ever Let Someone Tell You..." — Basketball Scene</div>
+            <div class="vp-link">Watch on YouTube &rarr;</div>
+          </a>
         </div>
+        <div class="video-ext-note">External video — opens in a new tab</div>
         <div class="video-caption">One of the most famous scenes — Chris talks to his son about dreams and determination.</div>
 
         <div class="level-tabs" id="clip2Tabs">
@@ -1381,8 +1448,13 @@
       <div class="card">
         <div class="card-title">🎬 Clip 3 — Real Chris Gardner Interview · The True Story</div>
         <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/S6mFhXG5QTs" title="Chris Gardner Interview" allowfullscreen loading="lazy"></iframe>
+          <a class="video-placeholder" href="https://www.youtube.com/results?search_query=chris+gardner+interview+pursuit+happyness+real+story" target="_blank" rel="noopener noreferrer" title="Chris Gardner — The Real Story">
+            <div class="play-icon"></div>
+            <div class="vp-title">Chris Gardner — The Real Story</div>
+            <div class="vp-link">Watch on YouTube &rarr;</div>
+          </a>
         </div>
+        <div class="video-ext-note">External video — opens in a new tab</div>
         <div class="video-caption">The real Chris Gardner speaks — compare his real story to what you see in the film.</div>
 
         <div class="level-tabs" id="clip3Tabs">
