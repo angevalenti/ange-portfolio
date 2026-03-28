@@ -105,15 +105,15 @@
   .story-card p { font-size: 0.9rem; line-height: 1.45; }
 
   .workspace { display: grid; gap: 16px; }
-  @media (min-width: 768px) and (orientation: landscape) { .workspace { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 768px) and (orientation: landscape) { .workspace { grid-template-columns: 1fr 1fr; align-items: stretch; } }
 
-  .canvas-panel { background: white; border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); overflow: hidden; }
-  .canvas-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--canvas-border); }
+  .canvas-panel { background: white; border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+  .canvas-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--canvas-border); flex-shrink: 0; }
   .canvas-header span { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.9rem; color: var(--primary); }
   .canvas-tools { display: flex; gap: 5px; }
   .canvas-tool { width: 34px; height: 34px; border: 2px solid var(--canvas-border); border-radius: 9px; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
   .canvas-tool.active { background: var(--primary); border-color: var(--primary); }
-  .scratch-canvas { display: block; width: 100%; height: 280px; background: var(--canvas-bg); cursor: crosshair; touch-action: none; }
+  .scratch-canvas { display: block; width: 100%; flex: 1; min-height: 260px; height: auto; background: var(--canvas-bg); cursor: crosshair; touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 
   .bracket-panel { background: white; border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); padding: 20px 16px; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; min-height: 380px; }
   .bracket-prompt { font-size: 0.88rem; color: var(--text); text-align: center; margin-bottom: 14px; min-height: 40px; font-weight: 600; line-height: 1.4; }
@@ -218,7 +218,7 @@
             <button class="canvas-tool" id="clearBtn" onclick="clearCanvas()">🗑️</button>
           </div>
         </div>
-        <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+        <canvas class="scratch-canvas" id="scratchCanvas" oncontextmenu="return false"></canvas>
       </div>
       <div class="bracket-panel" id="bracket-panel">
         <div class="bracket-prompt" id="prompt"></div>
@@ -671,13 +671,55 @@ function setupCanvas() {
   c.width = r.width * dpr; c.height = r.height * dpr; ctx.scale(dpr, dpr);
   ctx.fillStyle = '#E8D5C4';
   for (let x = 20; x < r.width; x += 24) for (let y = 20; y < r.height; y += 24) { ctx.beginPath(); ctx.arc(x,y,0.8,0,Math.PI*2); ctx.fill(); }
-  const gp = e => { const rc = c.getBoundingClientRect(); return { x: (e.clientX||0)-rc.left, y: (e.clientY||0)-rc.top }; };
-  c.onpointerdown = e => { if(e.pointerType==='touch')return; e.preventDefault(); drawing=true; ctx.beginPath(); const p=gp(e); ctx.moveTo(p.x,p.y); };
-  c.onpointermove = e => { if(!drawing||e.pointerType==='touch')return; e.preventDefault(); const p=gp(e); ctx.strokeStyle=currentTool==='pen'?'#3D2B1F':'#FFFDF9'; ctx.lineWidth=currentTool==='pen'?2.5:20; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineTo(p.x,p.y); ctx.stroke(); };
-  c.onpointerup = () => drawing=false; c.onpointerleave = () => drawing=false;
-  c.onmousedown = e => { drawing=true; ctx.beginPath(); const p=gp(e); ctx.moveTo(p.x,p.y); };
-  c.onmousemove = e => { if(!drawing)return; const p=gp(e); ctx.strokeStyle=currentTool==='pen'?'#3D2B1F':'#FFFDF9'; ctx.lineWidth=currentTool==='pen'?2.5:20; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineTo(p.x,p.y); ctx.stroke(); };
-  c.onmouseup = () => drawing=false;
+  const getPos = e => { const rc = c.getBoundingClientRect(); return { x: (e.clientX||0)-rc.left, y: (e.clientY||0)-rc.top }; };
+
+  // Prevent context menu (long-press / right-click)
+  c.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Allow finger touch to pass through for scrolling — do NOT preventDefault
+  c.addEventListener('touchstart', () => {}, { passive: true });
+  c.addEventListener('touchmove', () => {}, { passive: true });
+
+  // Pointer events — draw with pen or mouse only
+  c.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'pen') {
+      e.preventDefault();
+      e.stopPropagation();
+      drawing = true;
+      ctx.beginPath();
+      const pos = getPos(e);
+      ctx.moveTo(pos.x, pos.y);
+    }
+    if (e.pointerType === 'mouse') {
+      drawing = true;
+      ctx.beginPath();
+      const pos = getPos(e);
+      ctx.moveTo(pos.x, pos.y);
+    }
+  });
+
+  c.addEventListener('pointermove', e => {
+    if (!drawing) return;
+    if (e.pointerType === 'pen' || e.pointerType === 'mouse') {
+      e.preventDefault();
+      e.stopPropagation();
+      const pos = getPos(e);
+      ctx.strokeStyle = currentTool === 'pen' ? '#3D2B1F' : '#FFFDF9';
+      ctx.lineWidth = currentTool === 'pen' ? 2.5 : 20;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+  });
+
+  c.addEventListener('pointerup', e => {
+    if (e.pointerType === 'pen' || e.pointerType === 'mouse') drawing = false;
+  });
+
+  c.addEventListener('pointerleave', e => {
+    if (e.pointerType === 'pen' || e.pointerType === 'mouse') drawing = false;
+  });
 }
 function setTool(t) { currentTool=t; document.getElementById('penBtn')?.classList.toggle('active',t==='pen'); document.getElementById('eraserBtn')?.classList.toggle('active',t==='eraser'); }
 function clearCanvas() {
