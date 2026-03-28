@@ -350,6 +350,99 @@
       text-transform: uppercase; color: #888888;
     }
 
+    /* ─── LESSON CARDS ─── */
+    .sb-lessons { background: #FFFFFF; padding: 0 3rem; }
+    .sb-lessons-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+    .sb-lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .sb-lesson-card {
+      background: #fff;
+      border: 1px solid #E8E4DE;
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .sb-lesson-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+    .sb-lesson-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pt-accent);
+    }
+    .sb-lesson-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #0c1618;
+      line-height: 1.25;
+    }
+    .sb-lesson-desc {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #5A5A52;
+      flex: 1;
+    }
+    .sb-lesson-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0.5rem 0;
+    }
+    .sb-lesson-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #FBE9E1;
+      color: #5A3A2A;
+    }
+    .sb-lesson-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 12px 28px;
+      background: #FBE9E1;
+      color: #5A3A2A;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+      text-decoration: none;
+    }
+    .sb-lesson-launch:hover {
+      background: #F5D8CC;
+      color: #3A2A1A;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .sb-lesson-grid { grid-template-columns: 1fr; }
+      .sb-lessons { padding: 0 1.5rem; }
+      .sb-lessons-inner { padding: 50px 0; }
+    }
+
     /* ─── FOOTER ─── */
     footer {
       background: #121A1A;
@@ -479,7 +572,7 @@
         </div>
         <div class="cs-glance-item">
           <div class="cs-glance-label">Live &amp; Growing</div>
-          <div class="cs-glance-value">2 Lessons</div>
+          <div class="cs-glance-value">4 Lessons</div>
         </div>
         <div class="cs-glance-item">
           <div class="cs-glance-label">Zero Dependencies</div>
@@ -563,6 +656,74 @@
           </div>
         </div>
         <img class="cs-overview-img" src="../assets/images/sb-respiratory-graphic.png" alt="Respiratory System — animated oxygen journey diagram">
+      </div>
+    </div>
+
+    <!-- LESSON LIBRARY -->
+    <div class="sb-lessons">
+      <div class="sb-lessons-inner">
+        <div class="cs-section-rule"></div>
+        <span class="cs-section-eyebrow">Lesson Library</span>
+        <h2 class="cs-section-heading">Each lesson, <em>its own world.</em></h2>
+        <div class="sb-lesson-grid">
+
+          <!-- LESSON 01 -->
+          <div class="sb-lesson-card">
+            <span class="sb-lesson-eyebrow">Lesson 01</span>
+            <h3 class="sb-lesson-title">Circulatory System</h3>
+            <p class="sb-lesson-desc">Explore how blood travels through the heart and body. Animated 4-chamber heart, drag-and-drop blood flow sequencing, and interactive cell diagrams.</p>
+            <div class="sb-lesson-features">
+              <span class="sb-lesson-tag">Animated SVG</span>
+              <span class="sb-lesson-tag">Drag &amp; Drop</span>
+              <span class="sb-lesson-tag">Web Audio</span>
+              <span class="sb-lesson-tag">Quiz</span>
+            </div>
+            <a class="sb-lesson-launch" href="lessons/circulatory_system.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          </div>
+
+          <!-- LESSON 02 -->
+          <div class="sb-lesson-card">
+            <span class="sb-lesson-eyebrow">Lesson 02</span>
+            <h3 class="sb-lesson-title">Respiratory System</h3>
+            <p class="sb-lesson-desc">Follow oxygen on a 7-stop journey from nose to bloodstream. Breathing animations, gas exchange diagrams, and an interactive lung explorer.</p>
+            <div class="sb-lesson-features">
+              <span class="sb-lesson-tag">Particle Canvas</span>
+              <span class="sb-lesson-tag">Breathing Sim</span>
+              <span class="sb-lesson-tag">7-Stop Journey</span>
+              <span class="sb-lesson-tag">Quiz</span>
+            </div>
+            <a class="sb-lesson-launch" href="lessons/respiratory_system.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          </div>
+
+          <!-- LESSON 03 -->
+          <div class="sb-lesson-card">
+            <span class="sb-lesson-eyebrow">Lesson 03</span>
+            <h3 class="sb-lesson-title">Colonial America</h3>
+            <p class="sb-lesson-desc">Step into the 13 colonies through interactive maps, primary source analysis, and timeline activities that bring early American history to life.</p>
+            <div class="sb-lesson-features">
+              <span class="sb-lesson-tag">Interactive Map</span>
+              <span class="sb-lesson-tag">Timeline</span>
+              <span class="sb-lesson-tag">Primary Sources</span>
+              <span class="sb-lesson-tag">Quiz</span>
+            </div>
+            <a class="sb-lesson-launch" href="lessons/colonial_america.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          </div>
+
+          <!-- LESSON 04 -->
+          <div class="sb-lesson-card">
+            <span class="sb-lesson-eyebrow">Lesson 04</span>
+            <h3 class="sb-lesson-title">Cat Treats Division</h3>
+            <p class="sb-lesson-desc">Master long division with remainders through a cat treat sharing game. Three levels with a scratch pad and guided Divide-Multiply-Subtract-Bring Down steps.</p>
+            <div class="sb-lesson-features">
+              <span class="sb-lesson-tag">3 Levels</span>
+              <span class="sb-lesson-tag">30 Interactive Problems</span>
+              <span class="sb-lesson-tag">Apple Pencil Scratch Pad</span>
+              <span class="sb-lesson-tag">DMSB Guided Bracket</span>
+            </div>
+            <a class="sb-lesson-launch" href="lessons/cat_treats_division.html" target="_blank" rel="noopener noreferrer">Launch Lesson →</a>
+          </div>
+
+        </div>
       </div>
     </div>
 

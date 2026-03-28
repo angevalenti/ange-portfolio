@@ -772,16 +772,79 @@ h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
   margin-top: 32px;
   align-items: start;
 }
-.heart-svg-wrap {
+.heart-img-wrap {
   position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  background: transparent;
 }
-.heart-svg-wrap svg { width: 100%; height: auto; display: block; }
-.chamber-btn {
+.heart-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+}
+.heart-hotspot {
+  position: absolute;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 12px;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
 }
-.chamber-btn:hover rect, .chamber-btn:hover path { opacity: 0.85; }
-.chamber-btn:focus rect, .chamber-btn:focus path { stroke: var(--yellow-pop); stroke-width: 3; outline: none; }
+.heart-hotspot:hover, .heart-hotspot:focus {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.9);
+  box-shadow: 0 0 14px rgba(255,255,255,0.25);
+  outline: none;
+}
+.heart-hotspot:focus-visible {
+  border-color: var(--yellow-pop);
+  box-shadow: 0 0 0 3px var(--yellow-pop);
+}
+.heart-hotspot.explored {
+  border-color: var(--green-go);
+  box-shadow: 0 0 8px rgba(74,222,128,0.35);
+}
+.heart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+.heart-legend-btn {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 2px solid #ddd;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.heart-legend-btn:hover {
+  border-color: var(--red-artery);
+  color: var(--red-artery);
+}
+.heart-legend-btn.explored {
+  border-color: var(--green-go);
+  color: var(--green-go);
+  background: rgba(74,222,128,0.08);
+}
+.heart-explore-counter {
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.95rem;
+  color: #777;
+}
+.heart-explore-counter span { color: var(--red-artery); font-weight: 700; }
 .heart-info-panel {
   background: #fff;
   border: 3px solid var(--text-dark);
@@ -793,6 +856,26 @@ h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
 .heart-info-panel h3 { font-family: 'Fredoka', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
 .heart-info-panel p { font-size: 0.95rem; line-height: 1.6; color: #444; }
 .heart-info-panel .chamber-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 6px; font-family: 'Fredoka', sans-serif; }
+.heart-info-panel .blood-type {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.heart-info-panel .fun-fact {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: #FFF8F0;
+  border-left: 4px solid var(--yellow-pop);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #555;
+}
 .lub-dub-box {
   margin-top: 28px;
   background: var(--red-artery);
@@ -1410,56 +1493,37 @@ footer p { font-size: 0.9rem; }
   <div class="section-inner">
     <div class="section-eyebrow" style="color:var(--red-artery)">Section 07</div>
     <h2 class="section-title">The Heart ❤️</h2>
-    <p style="color:#555;line-height:1.7;max-width:640px;margin-bottom:24px;">The heart has <strong>4 chambers</strong>. The right side handles oxygen-poor blood; the left side handles oxygen-rich blood. Click each chamber to learn more!</p>
+    <p style="color:#555;line-height:1.7;max-width:640px;margin-bottom:24px;">The heart has <strong>4 chambers</strong> and major blood vessels. The right side handles oxygen-poor blood; the left side handles oxygen-rich blood. Click each part to explore!</p>
 
     <div class="heart-diagram-wrap">
-      <div class="heart-svg-wrap">
-        <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of the four chambers of the heart">
-          <!-- Heart outline -->
-          <path d="M200 330 C120 280 40 210 40 140 C40 95 75 65 110 65 C140 65 165 80 180 100 C190 85 210 65 240 65 C280 65 320 95 320 140 C320 195 260 255 200 330Z" fill="#ffe4e6" stroke="#FF3B3B" stroke-width="4"/>
+      <div class="heart-img-wrap">
+        <img src="../../assets/images/heart-chambers.svg" alt="Anatomical diagram of the four chambers of the heart and major blood vessels" width="1500" height="1500">
 
-          <!-- Right Atrium (upper right from viewer = left of diagram) -->
-          <g class="chamber-btn" tabindex="0" role="button" aria-label="Right Atrium" onclick="showChamber('ra')" onkeydown="if(event.key==='Enter')showChamber('ra')">
-            <path d="M200 170 C200 170 155 165 140 145 C125 125 130 100 150 90 C165 82 185 85 200 100 Z" fill="#3B82F6" stroke="#1d4ed8" stroke-width="2.5" opacity="0.85"/>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="168" y="130">Right</text>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="168" y="143">Atrium</text>
-          </g>
-
-          <!-- Left Atrium (upper left from viewer = right of diagram) -->
-          <g class="chamber-btn" tabindex="0" role="button" aria-label="Left Atrium" onclick="showChamber('la')" onkeydown="if(event.key==='Enter')showChamber('la')">
-            <path d="M200 170 C200 170 245 165 260 145 C275 125 270 100 250 90 C235 82 215 85 200 100 Z" fill="#FF3B3B" stroke="#b91c1c" stroke-width="2.5" opacity="0.85"/>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="232" y="130">Left</text>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="232" y="143">Atrium</text>
-          </g>
-
-          <!-- Right Ventricle (lower right from viewer = left of diagram) -->
-          <g class="chamber-btn" tabindex="0" role="button" aria-label="Right Ventricle" onclick="showChamber('rv')" onkeydown="if(event.key==='Enter')showChamber('rv')">
-            <path d="M200 175 C180 200 140 230 110 260 C85 230 58 195 55 160 C53 140 80 120 105 120 C135 120 165 145 200 175 Z" fill="#60A5FA" stroke="#2563eb" stroke-width="2.5" opacity="0.85"/>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="128" y="200">Right</text>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="128" y="213">Ventricle</text>
-          </g>
-
-          <!-- Left Ventricle (lower left from viewer = right of diagram) -->
-          <g class="chamber-btn" tabindex="0" role="button" aria-label="Left Ventricle" onclick="showChamber('lv')" onkeydown="if(event.key==='Enter')showChamber('lv')">
-            <path d="M200 175 C220 200 260 230 290 260 C315 230 342 195 345 160 C347 140 320 120 295 120 C265 120 235 145 200 175 Z" fill="#EF4444" stroke="#b91c1c" stroke-width="2.5" opacity="0.85"/>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="272" y="200">Left</text>
-            <text font-family="Fredoka,sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle" x="272" y="213">Ventricle</text>
-          </g>
-
-          <!-- Septum line -->
-          <line x1="200" y1="90" x2="200" y2="290" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-dasharray="6 4"/>
-
-          <!-- Labels -->
-          <text font-family="Fredoka,sans-serif" font-size="10" fill="#6b7280" text-anchor="middle" x="100" y="350">← RIGHT SIDE</text>
-          <text font-family="Fredoka,sans-serif" font-size="10" fill="#6b7280" text-anchor="middle" x="300" y="350">LEFT SIDE →</text>
-        </svg>
+        <!-- Hotspot buttons overlaid on the image -->
+        <button class="heart-hotspot" aria-label="Right Atrium" onclick="showHeartPart('ra')" style="top:28%;left:22%;width:20%;height:18%"></button>
+        <button class="heart-hotspot" aria-label="Left Atrium" onclick="showHeartPart('la')" style="top:22%;left:48%;width:22%;height:18%"></button>
+        <button class="heart-hotspot" aria-label="Valves" onclick="showHeartPart('valves')" style="top:38%;left:35%;width:18%;height:12%"></button>
+        <button class="heart-hotspot" aria-label="Right Ventricle" onclick="showHeartPart('rv')" style="top:48%;left:22%;width:22%;height:25%"></button>
+        <button class="heart-hotspot" aria-label="Left Ventricle" onclick="showHeartPart('lv')" style="top:48%;left:48%;width:22%;height:25%"></button>
       </div>
 
+      <!-- Legend pills below image -->
+      <div class="heart-legend">
+        <button class="heart-legend-btn" data-part="ra" onclick="showHeartPart('ra')">Right Atrium</button>
+        <button class="heart-legend-btn" data-part="la" onclick="showHeartPart('la')">Left Atrium</button>
+        <button class="heart-legend-btn" data-part="valves" onclick="showHeartPart('valves')">Valves</button>
+        <button class="heart-legend-btn" data-part="rv" onclick="showHeartPart('rv')">Right Ventricle</button>
+        <button class="heart-legend-btn" data-part="lv" onclick="showHeartPart('lv')">Left Ventricle</button>
+      </div>
+      <div class="heart-explore-counter">You've explored <span id="heart-explore-count">0</span> of 5 parts!</div>
+
       <div>
-        <div class="heart-info-panel" id="heart-info-panel">
-          <div class="chamber-label" id="chamber-label">Click a chamber to learn more</div>
+        <div class="heart-info-panel" id="heart-info-panel" aria-live="polite">
+          <div class="chamber-label" id="chamber-label">Click a part to learn more</div>
           <h3 id="chamber-name" style="color:#999;">—</h3>
-          <p id="chamber-desc" style="color:#aaa;">Tap any of the four colored chambers on the heart diagram to see what it does.</p>
+          <div id="blood-type-badge"></div>
+          <p id="chamber-desc" style="color:#aaa;">Tap any part of the heart diagram — chambers or vessels — to see what it does.</p>
+          <div id="chamber-fun-fact"></div>
         </div>
 
         <div class="lub-dub-box" style="margin-top:20px;">
@@ -1982,23 +2046,82 @@ function addTouchDragMatch(item) {
 initMatch();
 
 // ══════════════════════════════
-// HEART CHAMBERS (Section 7)
+// HEART PARTS (Section 7)
 // ══════════════════════════════
-const chamberData = {
-  ra: { label:'Right Atrium', color:'#3B82F6', desc:'The collecting chamber on the right side of the heart. Receives oxygen-poor blood from the entire body through the superior and inferior vena cava veins.' },
-  rv: { label:'Right Ventricle', color:'#60A5FA', desc:'Pumps the oxygen-poor blood it receives from the Right Atrium through the pulmonary artery to the lungs, where it will pick up fresh oxygen.' },
-  la: { label:'Left Atrium', color:'#EF4444', desc:'Receives oxygen-rich blood returning from the lungs through the pulmonary veins. This blood is ready to be pumped out to the whole body.' },
-  lv: { label:'Left Ventricle', color:'#FF3B3B', desc:'The hardest-working chamber! Its thick muscular walls pump oxygen-rich blood through the aorta to every part of the body. It\'s the heart\'s main pump.' }
+const heartPartData = {
+  ra: {
+    label: 'Right Atrium', color: '#3B82F6', bloodType: 'deoxygenated',
+    desc: 'The collecting chamber on the right side of the heart. It receives deoxygenated blood from the entire body through the superior and inferior vena cava.',
+    funFact: '💡 Think of it as the "waiting room" — blood arrives here tired and low on oxygen, waiting to get sent to the lungs for a refill.'
+  },
+  la: {
+    label: 'Left Atrium', color: '#EF4444', bloodType: 'oxygenated',
+    desc: 'Receives freshly oxygenated blood returning from the lungs via the pulmonary veins. This bright red blood is ready to be pumped out to the whole body.',
+    funFact: '💡 This is the "arrival gate" for fresh blood — it just came back from the lungs fully loaded with oxygen.'
+  },
+  valves: {
+    label: 'Valves', color: '#A855F7', bloodType: 'none',
+    desc: 'One-way doors between the chambers that keep blood flowing in the right direction. The heart has four valves: tricuspid, pulmonary, mitral, and aortic.',
+    funFact: '💡 Your heart valves open and close over 100,000 times a day — that\'s the "lub-dub" sound you hear with a stethoscope!'
+  },
+  rv: {
+    label: 'Right Ventricle', color: '#60A5FA', bloodType: 'deoxygenated',
+    desc: 'Pumps deoxygenated blood up through the pulmonary artery to the lungs, where it drops off carbon dioxide and picks up fresh oxygen.',
+    funFact: '💡 It\'s like a delivery truck — it pushes tired blood to the lungs so it can pick up fresh oxygen.'
+  },
+  lv: {
+    label: 'Left Ventricle', color: '#FF3B3B', bloodType: 'oxygenated',
+    desc: 'The strongest chamber! Its thick muscular walls pump oxygen-rich blood through the aorta to every part of the body — from your brain to your toes.',
+    funFact: '💡 This is the powerhouse — its walls are 3x thicker than the right ventricle because it has to push blood all the way to your toes!'
+  }
 };
 
-function showChamber(key) {
-  const d = chamberData[key];
-  document.getElementById('chamber-label').textContent = 'Chamber Info';
+const exploredHeartParts = new Set();
+
+function showHeartPart(key) {
+  const d = heartPartData[key];
+  if (!d) return;
+
+  // Update info panel
+  const labelText = d.bloodType === 'oxygenated' ? 'Oxygen-Rich Blood' : d.bloodType === 'deoxygenated' ? 'Oxygen-Poor Blood' : 'Heart Structure';
+  document.getElementById('chamber-label').textContent = labelText;
   const nameEl = document.getElementById('chamber-name');
   nameEl.textContent = d.label;
   nameEl.style.color = d.color;
+
+  // Blood type badge
+  const badge = document.getElementById('blood-type-badge');
+  if (d.bloodType === 'oxygenated') {
+    badge.innerHTML = '<span class="blood-type" style="background:rgba(239,68,68,0.12);color:#DC2626">🔴 Oxygenated</span>';
+  } else if (d.bloodType === 'deoxygenated') {
+    badge.innerHTML = '<span class="blood-type" style="background:rgba(59,130,246,0.12);color:#2563EB">🔵 Deoxygenated</span>';
+  } else {
+    badge.innerHTML = '<span class="blood-type" style="background:rgba(168,85,247,0.12);color:#7C3AED">🟣 Controls Flow</span>';
+  }
+
   document.getElementById('chamber-desc').textContent = d.desc;
   document.getElementById('chamber-desc').style.color = '#333';
+
+  // Fun fact
+  document.getElementById('chamber-fun-fact').innerHTML = '<div class="fun-fact">' + d.funFact + '</div>';
+
+  // Track exploration
+  exploredHeartParts.add(key);
+  document.getElementById('heart-explore-count').textContent = exploredHeartParts.size;
+
+  // Mark hotspot + legend button as explored
+  const hotspots = document.querySelectorAll('.heart-hotspot');
+  hotspots.forEach(btn => {
+    const label = btn.getAttribute('aria-label');
+    const matchKey = Object.keys(heartPartData).find(k => heartPartData[k].label === label);
+    if (matchKey && exploredHeartParts.has(matchKey)) btn.classList.add('explored');
+  });
+  const legendBtn = document.querySelector('.heart-legend-btn[data-part="' + key + '"]');
+  if (legendBtn) legendBtn.classList.add('explored');
+
+  if (exploredHeartParts.size === 5) {
+    showToast('🫀 Heart master! You explored all 5 parts!');
+  }
 }
 
 // ══════════════════════════════

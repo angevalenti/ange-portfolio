@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Cat Treats Division — Full Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8F0;
+    --primary: #D4845A;
+    --secondary: #F2C6A5;
+    --coral: #E8836B;
+    --text: #3D2B1F;
+    --card: #FFF1E6;
+    --success: #7BAE6B;
+    --error: #D4645A;
+    --canvas-bg: #FFFDF9;
+    --canvas-border: #E8D5C4;
+    --shadow: rgba(180, 140, 100, 0.12);
+    --locked: #C4B5A8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Baloo Bhaijaan 2', cursive; }
+
+  .btn { display: inline-block; padding: 14px 36px; background: var(--coral); color: white; border: none; border-radius: 24px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.15rem; cursor: pointer; box-shadow: 0 4px 16px rgba(232,131,107,0.3); text-decoration: none; transition: transform 0.15s; }
+  .btn:active { transform: scale(0.97); }
+  .btn.small { padding: 10px 24px; font-size: 0.95rem; }
+  .btn:disabled { background: var(--locked); box-shadow: none; cursor: not-allowed; opacity: 0.6; }
+
+  /* ═══ SCREENS ═══ */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ═══ HERO ═══ */
+  .hero { text-align: center; padding: 48px 24px 40px; position: relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: var(--secondary); border-radius: 50%; opacity: 0.3; }
+  .hero::after { content: ''; position: absolute; bottom: -40px; left: -30px; width: 140px; height: 140px; background: var(--primary); border-radius: 50%; opacity: 0.12; }
+  .cat-mascot { width: 120px; height: 120px; margin: 0 auto 20px; position: relative; animation: catBounce 3s ease-in-out infinite; }
+  @keyframes catBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .cat-face { width: 96px; height: 86px; background: var(--secondary); border-radius: 50% 50% 45% 45%; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border: 3px solid var(--primary); }
+  .cat-ear { position: absolute; width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-bottom: 28px solid var(--secondary); top: -24px; }
+  .cat-ear::after { content: ''; position: absolute; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 18px solid var(--primary); top: 7px; left: -10px; opacity: 0.4; }
+  .cat-ear.left { left: 6px; transform: rotate(-10deg); }
+  .cat-ear.right { right: 6px; transform: rotate(10deg); }
+  .cat-eye { width: 12px; height: 14px; background: var(--text); border-radius: 50%; position: absolute; top: 28px; }
+  .cat-eye.left { left: 22px; }
+  .cat-eye.right { right: 22px; }
+  .cat-eye::after { content: ''; width: 5px; height: 5px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; }
+  .cat-nose { width: 10px; height: 7px; background: var(--coral); border-radius: 50%; position: absolute; top: 44px; left: 50%; transform: translateX(-50%); }
+  .cat-mouth { position: absolute; top: 50px; left: 50%; transform: translateX(-50%); width: 18px; height: 10px; border-bottom: 2px solid var(--primary); border-radius: 0 0 50% 50%; opacity: 0.5; }
+  .cat-whisker { position: absolute; width: 22px; height: 1.5px; background: var(--primary); opacity: 0.35; top: 46px; }
+  .cat-whisker.l1{left:-16px;transform:rotate(-8deg)} .cat-whisker.l2{left:-18px;top:52px;transform:rotate(5deg)} .cat-whisker.r1{right:-16px;transform:rotate(8deg)} .cat-whisker.r2{right:-18px;top:52px;transform:rotate(-5deg)}
+  .hero h1 { font-size: 2.6rem; color: var(--text); line-height: 1.1; margin-bottom: 6px; position: relative; }
+  .hero .subtitle { font-size: 1.1rem; color: var(--primary); font-weight: 600; margin-bottom: 16px; }
+  .hero p { font-size: 0.95rem; line-height: 1.6; max-width: 460px; margin: 0 auto 28px; opacity: 0.85; }
+
+  /* ═══ LEVEL SELECT ═══ */
+  .levels-screen { padding: 32px 20px; max-width: 560px; margin: 0 auto; }
+  .levels-header { text-align: center; margin-bottom: 28px; }
+  .levels-header h2 { font-size: 1.8rem; margin-bottom: 4px; }
+  .levels-header p { font-size: 0.9rem; opacity: 0.7; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.95rem; color: var(--primary); text-decoration: none; margin-bottom: 16px; cursor: pointer; }
+
+  .level-card { background: white; border-radius: 20px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 16px var(--shadow); border: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden; cursor: pointer; }
+  .level-card.current { border-color: var(--coral); }
+  .level-card.locked { opacity: 0.55; cursor: not-allowed; }
+  .level-card.locked::after { content: '🔒'; position: absolute; top: 24px; right: 24px; font-size: 1.4rem; }
+  .level-card.completed { border-color: var(--success); }
+  .level-card.completed::after { content: '⭐'; position: absolute; top: 24px; right: 24px; font-size: 1.4rem; }
+  .level-num { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 4px; }
+  .level-title { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.4rem; color: var(--text); margin-bottom: 4px; }
+  .level-desc { font-size: 0.85rem; color: var(--text); opacity: 0.7; margin-bottom: 14px; line-height: 1.45; }
+  .progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .progress-bar-bg { flex: 1; height: 10px; background: var(--canvas-border); border-radius: 5px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--coral); border-radius: 5px; transition: width 0.5s ease; }
+  .level-card.completed .progress-bar-fill { background: var(--success); }
+  .progress-text { font-size: 0.75rem; font-weight: 700; color: var(--text); opacity: 0.6; white-space: nowrap; }
+  .unlock-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; background: var(--secondary); color: var(--primary); padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+
+  /* ═══ PROBLEM SCREEN ═══ */
+  .problem-screen { max-width: 700px; margin: 0 auto; padding: 16px; }
+  .prob-topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 0 8px; }
+  .prob-level-tag { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.85rem; color: var(--primary); background: var(--card); padding: 4px 14px; border-radius: 20px; }
+  .prob-counter { font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--text); opacity: 0.6; }
+  .prob-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .prob-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--canvas-border); transition: all 0.3s; }
+  .prob-dot.correct { background: var(--success); }
+  .prob-dot.current { background: var(--coral); transform: scale(1.25); }
+
+  /* DMSB bar */
+  .dmsb-bar { background: var(--card); border-radius: 14px; padding: 10px 14px; margin-bottom: 14px; box-shadow: 0 2px 10px var(--shadow); }
+  .dmsb-steps { display: flex; gap: 4px; justify-content: center; }
+  .dmsb-step { flex: 1; text-align: center; padding: 6px 4px; border-radius: 10px; background: rgba(255,255,255,0.5); border: 2px solid transparent; transition: all 0.3s; }
+  .dmsb-step.active { background: white; border-color: var(--coral); box-shadow: 0 0 12px rgba(232,131,107,0.15); }
+  .dmsb-step.done { background: rgba(123,174,107,0.12); border-color: var(--success); }
+  .dmsb-letter { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.3rem; font-weight: 800; color: var(--primary); line-height: 1; }
+  .dmsb-step.active .dmsb-letter { color: var(--coral); }
+  .dmsb-step.done .dmsb-letter { color: var(--success); }
+  .dmsb-label { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; color: var(--text); opacity: 0.5; margin-top: 1px; }
+
+  .story-card { background: var(--card); border-radius: 16px; padding: 18px; margin-bottom: 14px; box-shadow: 0 2px 10px var(--shadow); border-left: 4px solid var(--primary); }
+  .story-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 4px; }
+  .story-card p { font-size: 0.9rem; line-height: 1.45; }
+
+  .workspace { display: grid; gap: 16px; }
+  @media (min-width: 768px) and (orientation: landscape) { .workspace { grid-template-columns: 1fr 1fr; } }
+
+  .canvas-panel { background: white; border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); overflow: hidden; }
+  .canvas-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--canvas-border); }
+  .canvas-header span { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.9rem; color: var(--primary); }
+  .canvas-tools { display: flex; gap: 5px; }
+  .canvas-tool { width: 34px; height: 34px; border: 2px solid var(--canvas-border); border-radius: 9px; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+  .canvas-tool.active { background: var(--primary); border-color: var(--primary); }
+  .scratch-canvas { display: block; width: 100%; height: 280px; background: var(--canvas-bg); cursor: crosshair; touch-action: none; }
+
+  .bracket-panel { background: white; border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); padding: 20px 16px; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; min-height: 380px; }
+  .bracket-prompt { font-size: 0.88rem; color: var(--text); text-align: center; margin-bottom: 14px; min-height: 40px; font-weight: 600; line-height: 1.4; }
+  .bracket-prompt .hint { display: block; font-size: 0.75rem; color: var(--primary); font-weight: 400; margin-top: 3px; }
+
+  /* Division layout */
+  .div-container { position: relative; margin: 0 auto 16px; }
+  .d-cell { position: absolute; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 2rem; color: var(--text); }
+  .d-cell.place-lbl { height: 20px; font-family: 'Nunito', sans-serif; font-size: 0.55rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); opacity: 0.45; }
+  .bracket-svg { position: absolute; pointer-events: none; }
+  .bracket-svg path { stroke: var(--text); stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .d-line { position: absolute; height: 3px; background: var(--text); }
+  .d-hidden { opacity: 0; transition: opacity 0.4s; }
+  .d-visible { opacity: 1; }
+
+  .math-input { width: 48px; height: 48px; border: 3px dashed var(--canvas-border); border-radius: 12px; background: var(--canvas-bg); font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.6rem; text-align: center; color: var(--text); outline: none; transition: all 0.3s; -webkit-appearance: none; appearance: none; }
+  .math-input:focus { border-color: var(--coral); border-style: solid; box-shadow: 0 0 0 4px rgba(232,131,107,0.15); background: white; }
+  .math-input.correct { border-color: var(--success); border-style: solid; background: rgba(123,174,107,0.08); color: var(--success); }
+  .math-input.wrong { border-color: var(--error); border-style: solid; animation: shake 0.4s ease; }
+  .math-input.locked { pointer-events: none; opacity: 0.85; }
+  .math-input:disabled { opacity: 0.2; cursor: not-allowed; }
+  .math-input.r-input { width: 68px; font-size: 1.3rem; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+
+  .prob-complete { text-align: center; padding: 16px; width: 100%; opacity: 0; transition: all 0.5s; }
+  .prob-complete.visible { opacity: 1; }
+  .prob-complete h3 { color: var(--success); font-size: 1.2rem; margin-bottom: 4px; }
+  .prob-complete p { font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8; }
+
+  /* Unlock toast */
+  .unlock-toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: white; border: 2px solid var(--success); border-radius: 16px; padding: 16px 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); text-align: center; z-index: 200; transition: bottom 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+  .unlock-toast.show { bottom: 32px; }
+  .unlock-toast h4 { font-family: 'Baloo Bhaijaan 2', cursive; color: var(--success); font-size: 1.1rem; margin-bottom: 2px; }
+  .unlock-toast p { font-size: 0.8rem; color: var(--text); opacity: 0.7; }
+
+  @keyframes confettiFall { 0%{transform:translateY(-10px) rotate(0deg);opacity:1} 100%{transform:translateY(120px) rotate(720deg);opacity:0} }
+  .confetti-piece { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: confettiFall 1.5s ease forwards; pointer-events: none; }
+  .lesson-footer { text-align: center; padding: 24px 16px; color: var(--text); opacity: 0.4; font-size: 0.75rem; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="screen active" id="screen-hero">
+  <div class="hero">
+    <div class="cat-mascot">
+      <div class="cat-face">
+        <div class="cat-ear left"></div><div class="cat-ear right"></div>
+        <div class="cat-eye left"></div><div class="cat-eye right"></div>
+        <div class="cat-nose"></div><div class="cat-mouth"></div>
+        <div class="cat-whisker l1"></div><div class="cat-whisker l2"></div>
+        <div class="cat-whisker r1"></div><div class="cat-whisker r2"></div>
+      </div>
+    </div>
+    <h1>The Cat Treats Problem 🐱</h1>
+    <div class="subtitle">Long Division with Remainders</div>
+    <p>Your cats are hungry! Learn to share treats fairly using <strong>Divide, Multiply, Subtract, Bring Down</strong> — and level up from Kitten Kitchen to Big Cat Bakery!</p>
+    <button class="btn" onclick="showScreen('screen-levels')">Choose a Level</button>
+  </div>
+</section>
+
+<!-- ═══ LEVEL SELECT ═══ -->
+<section class="screen" id="screen-levels">
+  <div class="levels-screen">
+    <a class="back-link" onclick="showScreen('screen-hero')">← Back</a>
+    <div class="levels-header">
+      <h2>Pick Your Level</h2>
+      <p>Complete 3 problems to unlock the next level!</p>
+    </div>
+    <div id="level-cards"></div>
+  </div>
+</section>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="screen" id="screen-problem">
+  <div class="problem-screen">
+    <div class="prob-topbar">
+      <a class="back-link" onclick="showScreen('screen-levels')" style="margin:0">← Levels</a>
+      <span class="prob-level-tag" id="prob-level-tag"></span>
+      <span class="prob-counter" id="prob-counter"></span>
+    </div>
+    <div class="prob-dots" id="prob-dots"></div>
+    <div class="dmsb-bar">
+      <div class="dmsb-steps">
+        <div class="dmsb-step" id="step-d"><div class="dmsb-letter">D</div><div class="dmsb-label">Divide</div></div>
+        <div class="dmsb-step" id="step-m"><div class="dmsb-letter">M</div><div class="dmsb-label">Multiply</div></div>
+        <div class="dmsb-step" id="step-s"><div class="dmsb-letter">S</div><div class="dmsb-label">Subtract</div></div>
+        <div class="dmsb-step" id="step-b"><div class="dmsb-letter">B</div><div class="dmsb-label">Bring Down</div></div>
+      </div>
+    </div>
+    <div class="story-card">
+      <h3 id="story-title"></h3>
+      <p id="story-text"></p>
+    </div>
+    <div class="workspace">
+      <div class="canvas-panel">
+        <div class="canvas-header">
+          <span>Scratch pad ✏️</span>
+          <div class="canvas-tools">
+            <button class="canvas-tool active" id="penBtn" onclick="setTool('pen')">✏️</button>
+            <button class="canvas-tool" id="eraserBtn" onclick="setTool('eraser')">🧹</button>
+            <button class="canvas-tool" id="clearBtn" onclick="clearCanvas()">🗑️</button>
+          </div>
+        </div>
+        <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+      </div>
+      <div class="bracket-panel" id="bracket-panel">
+        <div class="bracket-prompt" id="prompt"></div>
+        <div id="div-container-wrap" style="width:100%;display:flex;justify-content:center;"></div>
+        <div class="prob-complete" id="prob-complete">
+          <h3 id="complete-title">🎉 Correct!</h3>
+          <p id="complete-detail"></p>
+          <button class="btn small" onclick="nextProblem()">Next Problem →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="unlock-toast" id="unlock-toast">
+  <h4 id="toast-title"></h4>
+  <p id="toast-text"></p>
+</div>
+<div class="lesson-footer">Cat Treats Division — Study Buddies</div>
+
+<script>
+// ═══════════════════════════════════════
+// PROBLEM DATA — 3 levels × 10 problems
+// ═══════════════════════════════════════
+const LEVELS = [
+  {
+    name: 'Kitten Kitchen',
+    emoji: '🐱',
+    tag: 'Level 1: Kitten Kitchen',
+    desc: 'Small dividends, one-digit divisors. The DMSB basics — no bring-down needed yet.',
+    problems: [
+      { dv: 14, dr: 4, story: '**14 treats** for **4 hungry cats**.' },
+      { dv: 17, dr: 5, story: '**17 treats** for **5 cats** at the door.' },
+      { dv: 20, dr: 6, story: '**20 treats** split between **6 cats**.' },
+      { dv: 23, dr: 3, story: '**23 treats** for **3 very hungry cats**.' },
+      { dv: 19, dr: 4, story: 'You found **19 treats**! **4 cats** waiting.' },
+      { dv: 15, dr: 7, story: '**15 treats** and **7 cats** showed up!' },
+      { dv: 26, dr: 5, story: '**26 treats** in the jar. **5 cats** meowing.' },
+      { dv: 11, dr: 3, story: 'Only **11 treats** left for **3 cats**.' },
+      { dv: 22, dr: 7, story: '**22 treats** and **7 cats** line up.' },
+      { dv: 29, dr: 6, story: 'A big bag of **29 treats**! **6 cats** waiting.' },
+    ]
+  },
+  {
+    name: 'Cat Café',
+    emoji: '☕',
+    tag: 'Level 2: Cat Café',
+    desc: 'Bigger numbers — Bring Down matters now! The full DMSB loop.',
+    problems: [
+      { dv: 52, dr: 4, story: 'The café ordered **52 treats** for **4 cats**.' },
+      { dv: 75, dr: 6, story: '**75 treats** on the counter. **6 café cats**.' },
+      { dv: 87, dr: 5, story: '**87 treats** in the kitchen. **5 cats** on duty.' },
+      { dv: 96, dr: 7, story: 'A delivery of **96 treats**! **7 cats** waiting.' },
+      { dv: 63, dr: 4, story: '**63 treats** in the display. **4 regular cats**.' },
+      { dv: 58, dr: 3, story: '**58 treats** baked fresh for **3 cats**.' },
+      { dv: 84, dr: 5, story: 'The chef made **84 treats** for **5 cats**.' },
+      { dv: 71, dr: 4, story: '**71 treats** left at closing. **4 cats** get a feast.' },
+      { dv: 93, dr: 8, story: 'Party time! **93 treats** for **8 cats**.' },
+      { dv: 67, dr: 3, story: 'Morning batch: **67 treats** for **3 early cats**.' },
+    ]
+  },
+  {
+    name: 'Big Cat Bakery',
+    emoji: '🎂',
+    tag: 'Level 3: Big Cat Bakery',
+    desc: 'Two-digit divisors — the ultimate challenge!',
+    problems: [
+      { dv: 156, dr: 12, story: 'The bakery made **156 treats** for **12 big cats**.' },
+      { dv: 275, dr: 14, story: '**275 treats** ordered by **14 cats**!' },
+      { dv: 189, dr: 15, story: 'A batch of **189 treats** for **15 cats**.' },
+      { dv: 224, dr: 16, story: '**224 treats** fresh from the oven. **16 cats** in line.' },
+      { dv: 310, dr: 13, story: 'Mega order! **310 treats** for **13 bakery cats**.' },
+      { dv: 198, dr: 11, story: '**198 treats** on the cooling rack. **11 cats** watching.' },
+      { dv: 252, dr: 18, story: 'Special event: **252 treats** for **18 cats**.' },
+      { dv: 345, dr: 15, story: 'Catering job: **345 treats** for **15 party cats**.' },
+      { dv: 176, dr: 14, story: 'End of day: **176 treats** for **14 loyal cats**.' },
+      { dv: 289, dr: 17, story: 'Grand opening! **289 treats** for **17 cats**.' },
+    ]
+  }
+];
+
+// State
+let state = {
+  unlocked: [0],
+  results: [
+    new Array(10).fill(null),
+    new Array(10).fill(null),
+    new Array(10).fill(null),
+  ],
+  currentLevel: 0,
+  currentProblem: 0,
+};
+
+// ═══ SCREENS ═══
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'screen-levels') renderLevelCards();
+  window.scrollTo(0, 0);
+}
+
+function renderLevelCards() {
+  const wrap = document.getElementById('level-cards');
+  let html = '';
+  LEVELS.forEach((lv, li) => {
+    const unlocked = state.unlocked.includes(li);
+    const results = state.results[li];
+    const correct = results.filter(r => r === true).length;
+    const isComplete = correct >= 10;
+    const cls = !unlocked ? 'locked' : isComplete ? 'completed' : 'current';
+
+    html += '<div class="level-card ' + cls + '" ' + (unlocked ? 'onclick="startLevel(' + li + ')"' : '') + '>';
+    html += '<div class="level-num">Level ' + (li + 1) + '</div>';
+    html += '<div class="level-title">' + lv.emoji + ' ' + lv.name + '</div>';
+    html += '<div class="level-desc">' + lv.desc + '</div>';
+    if (!unlocked) html += '<div class="unlock-badge">Complete 3 in Level ' + li + ' to unlock</div>';
+    html += '<div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:' + (correct / 10 * 100) + '%"></div></div><span class="progress-text">' + correct + ' / 10</span></div>';
+    html += '<button class="btn small" ' + (!unlocked ? 'disabled' : '') + '>' + (isComplete ? 'Replay' : correct > 0 ? 'Continue' : 'Start') + '</button>';
+    html += '</div>';
+  });
+  wrap.innerHTML = html;
+}
+
+function startLevel(li) {
+  state.currentLevel = li;
+  const idx = state.results[li].findIndex(r => r !== true);
+  state.currentProblem = idx >= 0 ? idx : 0;
+  showScreen('screen-problem');
+  loadProblem();
+}
+
+// ═══ PROBLEM LOADING ═══
+function loadProblem() {
+  const li = state.currentLevel;
+  const pi = state.currentProblem;
+  const lv = LEVELS[li];
+  const prob = lv.problems[pi];
+
+  document.getElementById('prob-level-tag').textContent = lv.tag;
+  document.getElementById('prob-counter').textContent = (pi + 1) + ' / 10';
+  document.getElementById('story-title').textContent = prob.dv + ' ÷ ' + prob.dr;
+  document.getElementById('story-text').innerHTML = prob.story.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  document.getElementById('prob-complete').classList.remove('visible');
+
+  // Dots
+  const dots = document.getElementById('prob-dots');
+  dots.innerHTML = '';
+  for (let i = 0; i < 10; i++) {
+    const d = document.createElement('div');
+    d.className = 'prob-dot';
+    if (i === pi) d.classList.add('current');
+    else if (state.results[li][i] === true) d.classList.add('correct');
+    dots.appendChild(d);
+  }
+
+  buildLayout(prob.dv, prob.dr);
+  setupCanvas();
+}
+
+function completeProblem() {
+  const li = state.currentLevel;
+  const pi = state.currentProblem;
+  state.results[li][pi] = true;
+
+  const correct = state.results[li].filter(r => r === true).length;
+  const { quotient, remainder, dividendStr } = stepData;
+  const divisor = LEVELS[li].problems[pi].dr;
+
+  document.getElementById('complete-title').textContent = '🎉 Correct!';
+  document.getElementById('complete-detail').textContent = dividendStr + ' ÷ ' + divisor + ' = ' + quotient + (remainder > 0 ? ' R' + remainder : '');
+  document.getElementById('prob-complete').classList.add('visible');
+
+  // Update dot
+  const dots = document.getElementById('prob-dots').children;
+  if (dots[pi]) { dots[pi].classList.remove('current'); dots[pi].classList.add('correct'); }
+
+  // Check unlock
+  if (correct === 3 && li < 2 && !state.unlocked.includes(li + 1)) {
+    state.unlocked.push(li + 1);
+    setTimeout(() => {
+      const toast = document.getElementById('unlock-toast');
+      document.getElementById('toast-title').textContent = '🔓 Level ' + (li + 2) + ' Unlocked!';
+      document.getElementById('toast-text').textContent = LEVELS[li + 1].name + ' is now open!';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }, 600);
+  }
+
+  spawnConfetti();
+}
+
+function nextProblem() {
+  const li = state.currentLevel;
+  const results = state.results[li];
+  let next = -1;
+  for (let i = state.currentProblem + 1; i < 10; i++) { if (results[i] !== true) { next = i; break; } }
+  if (next === -1) for (let i = 0; i < state.currentProblem; i++) { if (results[i] !== true) { next = i; break; } }
+  if (next === -1) { showScreen('screen-levels'); return; }
+  state.currentProblem = next;
+  loadProblem();
+}
+
+// ═══════════════════════════════════════
+// DIVISION ENGINE (from v5)
+// ═══════════════════════════════════════
+const CW = 56, CH = 56, GAP = 4, BW = 12;
+let stepData, currentCycle;
+
+function computeSteps(dividend, divisor) {
+  const dStr = String(dividend);
+  const cycles = [];
+  let working = 0;
+  for (let i = 0; i < dStr.length; i++) {
+    working = working * 10 + parseInt(dStr[i]);
+    if (working < divisor && cycles.length === 0 && i < dStr.length - 1) continue;
+    const q = Math.floor(working / divisor);
+    const product = q * divisor;
+    const diff = working - product;
+    cycles.push({
+      col: i, workingNumber: working, quotientDigit: q, product, difference: diff,
+      bringDown: (i + 1 < dStr.length) ? parseInt(dStr[i + 1]) : null,
+      bringDownCol: (i + 1 < dStr.length) ? i + 1 : null,
+    });
+    working = diff;
+  }
+  return { cycles, quotient: parseInt(cycles.map(c => c.quotientDigit).join('')), remainder: working, dividendStr: dStr };
+}
+
+function buildLayout(dividend, divisor) {
+  stepData = computeSteps(dividend, divisor);
+  currentCycle = 0;
+  const { cycles, dividendStr } = stepData;
+  const n = dividendStr.length;
+  const divStr = String(divisor);
+  const divisorWidth = Math.max(divStr.length * 32 + 8, 48);
+  const digitAreaLeft = divisorWidth + BW;
+  const totalWidth = digitAreaLeft + n * CW + 80;
+  const labelH = 24, qTop = labelH, divTop = qTop + CH;
+  const places = ['thousands','hundreds','tens','ones'];
+  const startP = places.length - n;
+
+  let html = '<div class="div-container" style="width:' + totalWidth + 'px;height:600px;">';
+
+  // Place labels
+  for (let i = 0; i < n; i++) html += '<div class="d-cell place-lbl" style="left:' + (digitAreaLeft + i * CW) + 'px;top:0;width:' + CW + 'px;">' + places[startP + i] + '</div>';
+
+  // Quotient inputs
+  const qCols = new Set(cycles.map(c => c.col));
+  for (let i = 0; i < n; i++) {
+    if (qCols.has(i)) html += '<div class="d-cell" style="left:' + (digitAreaLeft + i * CW) + 'px;top:' + qTop + 'px;"><input class="math-input" id="q-' + i + '" type="text" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="1" placeholder="?" disabled></div>';
+  }
+  // Remainder input (only if needed)
+  if (stepData.remainder > 0) {
+    html += '<div class="d-cell d-hidden" id="r-cell" style="left:' + (digitAreaLeft + n * CW + 4) + 'px;top:' + qTop + 'px;width:72px;"><input class="math-input r-input" id="input-r" type="text" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="R?" disabled></div>';
+  }
+
+  // Bracket SVG
+  const bx = divisorWidth;
+  html += '<svg class="bracket-svg" style="left:' + (bx - 2) + 'px;top:' + (qTop + CH - 2) + 'px;width:' + (BW + n * CW + 4) + 'px;height:' + (CH + 8) + 'px;"><path d="M 0 ' + (CH + 4) + ' L 0 6 Q 0 0 6 0 L ' + (BW + n * CW) + ' 0"/></svg>';
+
+  // Divisor
+  html += '<div class="d-cell" style="left:0;top:' + divTop + 'px;width:' + divisorWidth + 'px;font-size:2rem;justify-content:flex-end;padding-right:4px;">' + divisor + '</div>';
+
+  // Dividend
+  for (let i = 0; i < n; i++) html += '<div class="d-cell" id="dvd-' + i + '" style="left:' + (digitAreaLeft + i * CW) + 'px;top:' + divTop + 'px;">' + dividendStr[i] + '</div>';
+
+  // Work rows
+  let yPos = divTop + CH + GAP;
+  cycles.forEach((cyc, ci) => {
+    const workLen = String(cyc.workingNumber).length;
+    const prodStr = String(cyc.product).padStart(workLen, ' ');
+    const endCol = cyc.col;
+    const startCol = endCol - workLen + 1;
+
+    // Minus
+    html += '<div class="d-cell d-hidden" id="minus-' + ci + '" style="left:' + (digitAreaLeft + startCol * CW - 28) + 'px;top:' + yPos + 'px;width:24px;font-size:1.3rem;">−</div>';
+
+    // Multiply digits
+    for (let i = 0; i < workLen; i++) {
+      const ch = prodStr[i], col = startCol + i;
+      if (ch !== ' ') html += '<div class="d-cell d-hidden" id="m-' + ci + '-' + col + '" style="left:' + (digitAreaLeft + col * CW) + 'px;top:' + yPos + 'px;"><input class="math-input" id="mi-' + ci + '-' + col + '" type="text" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="1" placeholder="?" disabled></div>';
+    }
+    yPos += CH;
+
+    // Line
+    html += '<div class="d-line d-hidden" id="line-' + ci + '" style="left:' + (digitAreaLeft + startCol * CW + 4) + 'px;top:' + yPos + 'px;width:' + (workLen * CW - 8) + 'px;"></div>';
+    yPos += 8;
+
+    // Difference
+    const diffStr = String(cyc.difference);
+    const diffEnd = endCol, diffStart = diffEnd - diffStr.length + 1;
+    for (let i = 0; i < diffStr.length; i++) {
+      const col = diffStart + i;
+      html += '<div class="d-cell d-hidden" id="s-' + ci + '-' + col + '" style="left:' + (digitAreaLeft + col * CW) + 'px;top:' + yPos + 'px;"><input class="math-input" id="si-' + ci + '-' + col + '" type="text" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="1" placeholder="?" disabled></div>';
+    }
+
+    // Bring-down digit
+    if (cyc.bringDown !== null) {
+      html += '<div class="d-cell d-hidden" id="bd-' + ci + '" style="left:' + (digitAreaLeft + cyc.bringDownCol * CW) + 'px;top:' + yPos + 'px;color:var(--coral);font-weight:800;">' + cyc.bringDown + '</div>';
+    }
+    yPos += CH + GAP;
+  });
+
+  html = html.replace('height:600px', 'height:' + (yPos + 20) + 'px');
+  html += '</div>';
+  document.getElementById('div-container-wrap').innerHTML = html;
+
+  resetDMSB(); setDMSB('d');
+  promptDivide(cycles[0], divisor);
+  const firstQ = document.getElementById('q-' + cycles[0].col);
+  firstQ.disabled = false;
+  setTimeout(() => firstQ.focus(), 100);
+  wireCycle(0, divisor);
+}
+
+function wireCycle(ci, divisor) {
+  const cyc = stepData.cycles[ci];
+  const workLen = String(cyc.workingNumber).length;
+  const prodStr = String(cyc.product).padStart(workLen, ' ');
+  const endCol = cyc.col, startCol = endCol - workLen + 1;
+  const diffStr = String(cyc.difference);
+
+  const qInput = document.getElementById('q-' + cyc.col);
+  qInput.disabled = false;
+  setTimeout(() => qInput.focus(), 50);
+
+  qInput.oninput = function() {
+    const val = qInput.value.trim();
+    if (!val) return;
+    if (parseInt(val) === cyc.quotientDigit) {
+      qInput.classList.add('correct', 'locked'); qInput.oninput = null;
+      markDone('d'); setDMSB('m');
+      promptMultiply(cyc, divisor);
+      show('minus-' + ci);
+
+      const mInputs = [];
+      for (let i = 0; i < workLen; i++) {
+        const ch = prodStr[i], col = startCol + i;
+        if (ch !== ' ') { const el = document.getElementById('mi-' + ci + '-' + col); if (el) { show('m-' + ci + '-' + col); el.disabled = false; mInputs.push({ el, expected: ch }); } }
+      }
+      if (mInputs.length) mInputs[0].el.focus();
+
+      mInputs.forEach(({ el, expected }) => {
+        el.oninput = function() {
+          const v = el.value.trim(); if (!v) return;
+          if (v === expected) {
+            el.classList.add('correct', 'locked'); el.oninput = null;
+            const next = mInputs.find(m => !m.el.classList.contains('correct'));
+            if (next) { next.el.focus(); return; }
+            markDone('m'); setDMSB('s');
+            promptSubtract(cyc);
+            show('line-' + ci);
+
+            const sInputs = [];
+            const diffEnd = endCol, diffStart = diffEnd - diffStr.length + 1;
+            for (let j = 0; j < diffStr.length; j++) {
+              const col = diffStart + j;
+              const sEl = document.getElementById('si-' + ci + '-' + col);
+              if (sEl) { show('s-' + ci + '-' + col); sEl.disabled = false; sInputs.push({ el: sEl, expected: diffStr[j] }); }
+            }
+            if (sInputs.length) sInputs[0].el.focus();
+
+            sInputs.forEach(({ el: sEl, expected: sExp }) => {
+              sEl.oninput = function() {
+                const sv = sEl.value.trim(); if (!sv) return;
+                if (sv === sExp) {
+                  sEl.classList.add('correct', 'locked'); sEl.oninput = null;
+                  const sNext = sInputs.find(s => !s.el.classList.contains('correct'));
+                  if (sNext) { sNext.el.focus(); return; }
+                  markDone('s'); setDMSB('b');
+
+                  if (cyc.bringDown !== null) {
+                    promptBringDown(cyc);
+                    setTimeout(() => {
+                      show('bd-' + ci);
+                      const origDvd = document.getElementById('dvd-' + cyc.bringDownCol);
+                      if (origDvd) origDvd.style.opacity = '0.3';
+                      setTimeout(() => {
+                        markDone('b'); currentCycle++;
+                        resetDMSB(); setDMSB('d');
+                        promptDivide(stepData.cycles[currentCycle], divisor);
+                        wireCycle(currentCycle, divisor);
+                      }, 700);
+                    }, 300);
+                  } else {
+                    const rem = stepData.remainder;
+                    if (rem === 0) {
+                      markDone('b');
+                      document.getElementById('prompt').innerHTML = '🎉 No remainder!';
+                      completeProblem();
+                    } else {
+                      promptFinish(rem);
+                      show('r-cell');
+                      const rInput = document.getElementById('input-r');
+                      rInput.disabled = false;
+                      setTimeout(() => rInput.focus(), 50);
+                      rInput.oninput = function() {
+                        const rv = rInput.value.trim().toUpperCase(); if (!rv) return;
+                        if (rv === 'R' + rem || rv === 'R ' + rem || rv === String(rem)) {
+                          rInput.classList.add('correct', 'locked'); rInput.value = 'R' + rem; rInput.oninput = null;
+                          markDone('b');
+                          document.getElementById('prompt').innerHTML = '🎉 Perfect!';
+                          completeProblem();
+                        } else {
+                          rInput.classList.add('wrong');
+                          setTimeout(() => { rInput.classList.remove('wrong'); rInput.value = ''; }, 500);
+                        }
+                      };
+                    }
+                  }
+                } else {
+                  sEl.classList.add('wrong');
+                  setTimeout(() => { sEl.classList.remove('wrong'); sEl.value = ''; }, 500);
+                }
+              };
+            });
+          } else {
+            el.classList.add('wrong');
+            setTimeout(() => { el.classList.remove('wrong'); el.value = ''; }, 500);
+          }
+        };
+      });
+    } else {
+      qInput.classList.add('wrong');
+      setTimeout(() => { qInput.classList.remove('wrong'); qInput.value = ''; }, 500);
+    }
+  };
+}
+
+// ═══ PROMPTS ═══
+function promptDivide(cyc, divisor) { setPromptHTML('How many times does ' + divisor + ' fit into ' + cyc.workingNumber + '?', 'Write above the ' + getPlace(cyc.col) + ' place.'); }
+function promptMultiply(cyc, divisor) { setPromptHTML('Multiply: ' + cyc.quotientDigit + ' × ' + divisor + ' = ?', 'Write the product digit by digit.'); }
+function promptSubtract(cyc) { setPromptHTML(cyc.workingNumber + ' − ' + cyc.product + ' = ?', 'Subtract to find what\'s left.'); }
+function promptBringDown(cyc) { setPromptHTML('Bring down the ' + cyc.bringDown + '!', 'Watch it slide into place...'); }
+function promptFinish(rem) { setPromptHTML('The remainder is ' + rem + '!', 'Write R' + rem + ' to finish.'); }
+function setPromptHTML(m, h) { document.getElementById('prompt').innerHTML = m + (h ? '<span class="hint">' + h + '</span>' : ''); }
+function getPlace(col) { const n = stepData.dividendStr.length; const names = ['thousands','hundreds','tens','ones']; return names[names.length - n + col] || ''; }
+
+// ═══ HELPERS ═══
+function show(id) { const el = document.getElementById(id); if (el) { el.classList.remove('d-hidden'); el.classList.add('d-visible'); } }
+function setDMSB(s) { ['d','m','s','b'].forEach(x => document.getElementById('step-' + x)?.classList.remove('active')); if (s) document.getElementById('step-' + s)?.classList.add('active'); }
+function markDone(s) { const el = document.getElementById('step-' + s); if (el) { el.classList.add('done'); el.classList.remove('active'); } }
+function resetDMSB() { ['d','m','s','b'].forEach(x => { const el = document.getElementById('step-' + x); if (el) el.classList.remove('active', 'done'); }); }
+
+// ═══ CANVAS ═══
+let drawing = false, currentTool = 'pen';
+function setupCanvas() {
+  const c = document.getElementById('scratchCanvas'); if (!c) return;
+  const ctx = c.getContext('2d'), r = c.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  c.width = r.width * dpr; c.height = r.height * dpr; ctx.scale(dpr, dpr);
+  ctx.fillStyle = '#E8D5C4';
+  for (let x = 20; x < r.width; x += 24) for (let y = 20; y < r.height; y += 24) { ctx.beginPath(); ctx.arc(x,y,0.8,0,Math.PI*2); ctx.fill(); }
+  const gp = e => { const rc = c.getBoundingClientRect(); return { x: (e.clientX||0)-rc.left, y: (e.clientY||0)-rc.top }; };
+  c.onpointerdown = e => { if(e.pointerType==='touch')return; e.preventDefault(); drawing=true; ctx.beginPath(); const p=gp(e); ctx.moveTo(p.x,p.y); };
+  c.onpointermove = e => { if(!drawing||e.pointerType==='touch')return; e.preventDefault(); const p=gp(e); ctx.strokeStyle=currentTool==='pen'?'#3D2B1F':'#FFFDF9'; ctx.lineWidth=currentTool==='pen'?2.5:20; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineTo(p.x,p.y); ctx.stroke(); };
+  c.onpointerup = () => drawing=false; c.onpointerleave = () => drawing=false;
+  c.onmousedown = e => { drawing=true; ctx.beginPath(); const p=gp(e); ctx.moveTo(p.x,p.y); };
+  c.onmousemove = e => { if(!drawing)return; const p=gp(e); ctx.strokeStyle=currentTool==='pen'?'#3D2B1F':'#FFFDF9'; ctx.lineWidth=currentTool==='pen'?2.5:20; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineTo(p.x,p.y); ctx.stroke(); };
+  c.onmouseup = () => drawing=false;
+}
+function setTool(t) { currentTool=t; document.getElementById('penBtn')?.classList.toggle('active',t==='pen'); document.getElementById('eraserBtn')?.classList.toggle('active',t==='eraser'); }
+function clearCanvas() {
+  const c=document.getElementById('scratchCanvas'); if(!c)return;
+  const ctx=c.getContext('2d'), r=c.getBoundingClientRect();
+  ctx.clearRect(0,0,r.width,r.height); ctx.fillStyle='#E8D5C4';
+  for(let x=20;x<r.width;x+=24) for(let y=20;y<r.height;y+=24){ctx.beginPath();ctx.arc(x,y,0.8,0,Math.PI*2);ctx.fill();}
+}
+
+function spawnConfetti() {
+  const p = document.getElementById('bracket-panel'); if(!p)return;
+  const colors=['#D4845A','#E8836B','#F2C6A5','#7BAE6B','#D49D00'];
+  for(let i=0;i<20;i++){const d=document.createElement('div');d.className='confetti-piece';d.style.left=Math.random()*100+'%';d.style.top='10%';d.style.background=colors[Math.floor(Math.random()*colors.length)];d.style.animationDelay=Math.random()*0.5+'s';d.style.animationDuration=(1+Math.random())+'s';p.appendChild(d);setTimeout(()=>d.remove(),2500);}
+}
+
+// Init
+renderLevelCards();
+</script>
+</body>
+</html>
