@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Cat Treats Division — Full Test</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
+  :root, [data-theme="light"] {
     --cream: #FFF8F0;
     --primary: #D4845A;
     --secondary: #F2C6A5;
@@ -19,12 +19,40 @@
     --canvas-border: #E8D5C4;
     --shadow: rgba(180, 140, 100, 0.12);
     --locked: #C4B5A8;
+    --pen-color: #3D2B1F;
+    --eraser-color: #FFFDF9;
+    --grid-dot: #E8D5C4;
+    --btn-text: #ffffff;
+    --input-bg: #FFFDF9;
+    --bubble-bg: #FFF6ED;
+    --panel-bg: #ffffff;
+  }
+  [data-theme="dark"] {
+    --cream: #1A1A2E;
+    --primary: #FF69B4;
+    --secondary: #2D2D44;
+    --coral: #FF69B4;
+    --text: #F0E6FF;
+    --card: #252540;
+    --success: #7BAE6B;
+    --error: #FF6B6B;
+    --canvas-bg: #1E1E32;
+    --canvas-border: #3D3D5C;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --locked: #4A4A6A;
+    --pen-color: #F0E6FF;
+    --eraser-color: #1E1E32;
+    --grid-dot: #3D3D5C;
+    --btn-text: #1A1A2E;
+    --input-bg: #252540;
+    --bubble-bg: #2D2D44;
+    --panel-bg: #252540;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background 0.4s ease, color 0.4s ease; }
   h1,h2,h3,h4 { font-family: 'Baloo Bhaijaan 2', cursive; }
 
-  .btn { display: inline-block; padding: 14px 36px; background: var(--coral); color: white; border: none; border-radius: 24px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.15rem; cursor: pointer; box-shadow: 0 4px 16px rgba(232,131,107,0.3); text-decoration: none; transition: transform 0.15s; }
+  .btn { display: inline-block; padding: 14px 36px; background: var(--coral); color: var(--btn-text); border: none; border-radius: 24px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.15rem; cursor: pointer; box-shadow: 0 4px 16px rgba(232,131,107,0.3); text-decoration: none; transition: transform 0.15s, background 0.4s ease; }
   .btn:active { transform: scale(0.97); }
   .btn.small { padding: 10px 24px; font-size: 0.95rem; }
   .btn:disabled { background: var(--locked); box-shadow: none; cursor: not-allowed; opacity: 0.6; }
@@ -63,7 +91,7 @@
   .levels-header p { font-size: 0.9rem; opacity: 0.7; }
   .back-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.95rem; color: var(--primary); text-decoration: none; margin-bottom: 16px; cursor: pointer; }
 
-  .level-card { background: white; border-radius: 20px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 16px var(--shadow); border: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden; cursor: pointer; }
+  .level-card { background: var(--panel-bg); border-radius: 20px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 16px var(--shadow); border: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden; cursor: pointer; }
   .level-card.current { border-color: var(--coral); }
   .level-card.locked { opacity: 0.55; cursor: not-allowed; }
   .level-card.locked::after { content: '🔒'; position: absolute; top: 24px; right: 24px; font-size: 1.4rem; }
@@ -93,7 +121,8 @@
   .dmsb-bar { background: var(--card); border-radius: 14px; padding: 10px 14px; margin-bottom: 14px; box-shadow: 0 2px 10px var(--shadow); }
   .dmsb-steps { display: flex; gap: 4px; justify-content: center; }
   .dmsb-step { flex: 1; text-align: center; padding: 6px 4px; border-radius: 10px; background: rgba(255,255,255,0.5); border: 2px solid transparent; transition: all 0.3s; }
-  .dmsb-step.active { background: white; border-color: var(--coral); box-shadow: 0 0 12px rgba(232,131,107,0.15); }
+  [data-theme="dark"] .dmsb-step { background: rgba(255,255,255,0.05); }
+  .dmsb-step.active { background: var(--panel-bg); border-color: var(--coral); box-shadow: 0 0 12px rgba(232,131,107,0.15); }
   .dmsb-step.done { background: rgba(123,174,107,0.12); border-color: var(--success); }
   .dmsb-letter { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.3rem; font-weight: 800; color: var(--primary); line-height: 1; }
   .dmsb-step.active .dmsb-letter { color: var(--coral); }
@@ -105,17 +134,21 @@
   .story-card p { font-size: 0.9rem; line-height: 1.45; }
 
   .workspace { display: grid; gap: 16px; }
-  @media (min-width: 768px) and (orientation: landscape) { .workspace { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+  @media (min-width: 768px) and (orientation: landscape) {
+    .workspace { grid-template-columns: 1fr 1fr; align-items: stretch; }
+    .bracket-panel { order: 1; }
+    .canvas-panel { order: 2; }
+  }
 
-  .canvas-panel { background: white; border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+  .canvas-panel { background: var(--panel-bg); border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); overflow: hidden; display: flex; flex-direction: column; transition: background 0.4s ease; }
   .canvas-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--canvas-border); flex-shrink: 0; }
   .canvas-header span { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.9rem; color: var(--primary); }
   .canvas-tools { display: flex; gap: 5px; }
-  .canvas-tool { width: 34px; height: 34px; border: 2px solid var(--canvas-border); border-radius: 9px; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+  .canvas-tool { width: 34px; height: 34px; border: 2px solid var(--canvas-border); border-radius: 9px; background: var(--panel-bg); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: background 0.3s, border-color 0.3s; }
   .canvas-tool.active { background: var(--primary); border-color: var(--primary); }
   .scratch-canvas { display: block; width: 100%; flex: 1; min-height: 260px; height: auto; background: var(--canvas-bg); cursor: crosshair; touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 
-  .bracket-panel { background: white; border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); padding: 20px 16px; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; min-height: 380px; }
+  .bracket-panel { background: var(--panel-bg); border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); padding: 20px 16px; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; min-height: 380px; transition: background 0.4s ease; }
   .bracket-prompt { font-size: 0.88rem; color: var(--text); text-align: center; margin-bottom: 14px; min-height: 40px; font-weight: 600; line-height: 1.4; }
   .bracket-prompt .hint { display: block; font-size: 0.75rem; color: var(--primary); font-weight: 400; margin-top: 3px; }
 
@@ -129,8 +162,8 @@
   .d-hidden { opacity: 0; transition: opacity 0.4s; }
   .d-visible { opacity: 1; }
 
-  .math-input { width: 48px; height: 48px; border: 3px dashed var(--canvas-border); border-radius: 12px; background: var(--canvas-bg); font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.6rem; text-align: center; color: var(--text); outline: none; transition: all 0.3s; -webkit-appearance: none; appearance: none; }
-  .math-input:focus { border-color: var(--coral); border-style: solid; box-shadow: 0 0 0 4px rgba(232,131,107,0.15); background: white; }
+  .math-input { width: 48px; height: 48px; border: 3px dashed var(--canvas-border); border-radius: 12px; background: var(--input-bg); font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.6rem; text-align: center; color: var(--text); outline: none; transition: all 0.3s; -webkit-appearance: none; appearance: none; }
+  .math-input:focus { border-color: var(--coral); border-style: solid; box-shadow: 0 0 0 4px rgba(232,131,107,0.15); background: var(--panel-bg); }
   .math-input.correct { border-color: var(--success); border-style: solid; background: rgba(123,174,107,0.08); color: var(--success); }
   .math-input.wrong { border-color: var(--error); border-style: solid; animation: shake 0.4s ease; }
   .math-input.locked { pointer-events: none; opacity: 0.85; }
@@ -144,7 +177,7 @@
   .prob-complete p { font-size: 0.9rem; margin-bottom: 12px; opacity: 0.8; }
 
   /* Unlock toast */
-  .unlock-toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: white; border: 2px solid var(--success); border-radius: 16px; padding: 16px 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); text-align: center; z-index: 200; transition: bottom 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+  .unlock-toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: var(--panel-bg); border: 2px solid var(--success); border-radius: 16px; padding: 16px 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); text-align: center; z-index: 200; transition: bottom 0.5s cubic-bezier(0.34,1.56,0.64,1); }
   .unlock-toast.show { bottom: 32px; }
   .unlock-toast h4 { font-family: 'Baloo Bhaijaan 2', cursive; color: var(--success); font-size: 1.1rem; margin-bottom: 2px; }
   .unlock-toast p { font-size: 0.8rem; color: var(--text); opacity: 0.7; }
@@ -195,9 +228,101 @@
   }
   .cue-arrow.bring-down path { stroke-dasharray: 60; stroke-dashoffset: 60; }
   .guide-cue.active .cue-arrow.bring-down path { animation: cueSlideDown 0.8s ease forwards; }
+
+  /* ═══ HINT SPEECH BUBBLE ═══ */
+  .hint-bubble-wrap {
+    width: 100%; position: relative; max-height: 0;
+    overflow: visible; transition: max-height 0.01s; margin-bottom: 0;
+  }
+  .hint-bubble-wrap.visible { max-height: 300px; margin-bottom: 48px; }
+
+  .hint-bubble {
+    position: relative; background: var(--bubble-bg);
+    border: 2.5px solid var(--coral); border-radius: 18px;
+    padding: 16px 18px;
+    box-shadow: 0 6px 24px rgba(232,131,107,0.18), 0 0 0 4px rgba(232,131,107,0.06);
+    opacity: 0; transform: scale(0.7) translateY(-10px); pointer-events: none;
+  }
+  .hint-bubble-wrap.visible .hint-bubble {
+    opacity: 1; transform: scale(1) translateY(0); pointer-events: auto;
+    animation: bubblePop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards,
+               bubbleGlow 2s ease-in-out 0.6s infinite;
+  }
+
+  @keyframes bubblePop {
+    0% { opacity: 0; transform: scale(0.7) translateY(-10px); }
+    50% { transform: scale(1.04) translateY(2px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes bubbleGlow {
+    0%, 100% { box-shadow: 0 6px 24px rgba(232,131,107,0.18), 0 0 0 4px rgba(232,131,107,0.06); }
+    50% { box-shadow: 0 6px 28px rgba(232,131,107,0.3), 0 0 0 7px rgba(232,131,107,0.1); }
+  }
+
+  .hint-bubble::before {
+    content: ''; position: absolute; bottom: -12px; left: 36px;
+    border-left: 12px solid transparent; border-right: 12px solid transparent;
+    border-top: 12px solid var(--coral);
+  }
+  .hint-bubble::after {
+    content: ''; position: absolute; bottom: -8px; left: 38px;
+    border-left: 10px solid transparent; border-right: 10px solid transparent;
+    border-top: 10px solid var(--bubble-bg);
+  }
+
+  .hint-cat {
+    position: absolute; bottom: -42px; left: 18px;
+    width: 44px; height: 40px; background: var(--secondary);
+    border-radius: 50% 50% 45% 45%; border: 2.5px solid var(--primary);
+    box-shadow: 0 3px 8px rgba(180,140,100,0.2);
+  }
+  .hint-cat::before, .hint-cat::after {
+    content: ''; width: 5px; height: 6px; background: var(--text);
+    border-radius: 50%; position: absolute; top: 14px;
+  }
+  .hint-cat::before { left: 11px; }
+  .hint-cat::after { right: 11px; }
+  .hint-bubble-wrap .ear { position: absolute; width: 0; height: 0;
+    border-left: 9px solid transparent; border-right: 9px solid transparent;
+    border-bottom: 15px solid var(--secondary); top: -13px; }
+  .hint-bubble-wrap .ear.l { left: 2px; transform: rotate(-10deg); }
+  .hint-bubble-wrap .ear.r { right: 2px; transform: rotate(10deg); }
+  .hint-bubble-wrap .cat-nose { width: 6px; height: 4px; background: var(--coral);
+    border-radius: 50%; position: absolute; top: 21px; left: 50%; transform: translateX(-50%); }
+
+  .hint-bubble-wrap.visible .hint-cat { animation: catWiggle 0.6s ease 0.3s; }
+  @keyframes catWiggle { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-8deg)} 50%{transform:rotate(8deg)} 75%{transform:rotate(-4deg)} }
+
+  .hint-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .hint-title { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.05rem; font-weight: 700; color: var(--coral); }
+  .hint-step-badge { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.7rem; font-weight: 800; color: var(--btn-text); background: var(--coral); padding: 2px 10px; border-radius: 20px; }
+  .hint-body { font-size: 0.85rem; color: var(--text); line-height: 1.55; }
+  .hint-formula { display: inline-block; background: rgba(232,131,107,0.12); padding: 4px 12px; border-radius: 8px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.1rem; font-weight: 700; color: var(--coral); margin-top: 6px; }
+
+  /* ═══ THEME TOGGLE ═══ */
+  .theme-toggle {
+    position: fixed; top: 14px; right: 14px; z-index: 300;
+    width: 52px; height: 28px; border-radius: 14px;
+    background: var(--card); border: 2px solid var(--canvas-border);
+    cursor: pointer; padding: 0; display: flex; align-items: center;
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+  .theme-toggle-knob {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--primary);
+    margin-left: 3px; transition: transform 0.3s ease, background 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; line-height: 1;
+  }
+  [data-theme="dark"] .theme-toggle-knob { transform: translateX(23px); }
 </style>
 </head>
 <body>
+
+<!-- ═══ THEME TOGGLE ═══ -->
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+  <div class="theme-toggle-knob" id="themeKnob">☀️</div>
+</button>
 
 <!-- ═══ HERO ═══ -->
 <section class="screen active" id="screen-hero">
@@ -254,17 +379,32 @@
     <div class="workspace">
       <div class="canvas-panel">
         <div class="canvas-header">
-          <span>Scratch pad ✏️</span>
+          <span>Scratch Pad</span>
           <div class="canvas-tools">
-            <button class="canvas-tool active" id="penBtn" onclick="setTool('pen')">✏️</button>
-            <button class="canvas-tool" id="eraserBtn" onclick="setTool('eraser')">🧹</button>
-            <button class="canvas-tool" id="clearBtn" onclick="clearCanvas()">🗑️</button>
+            <button class="canvas-tool active" id="penBtn" onclick="setTool('pen')" aria-label="Pen">✏️</button>
+            <button class="canvas-tool" id="eraserBtn" onclick="setTool('eraser')" aria-label="Eraser">🧹</button>
+            <button class="canvas-tool" id="undoBtn" onclick="undoStroke()" aria-label="Undo">↩️</button>
+            <button class="canvas-tool" id="clearBtn" onclick="clearCanvas()" aria-label="Clear">🗑️</button>
           </div>
         </div>
         <canvas class="scratch-canvas" id="scratchCanvas" oncontextmenu="return false"></canvas>
       </div>
       <div class="bracket-panel" id="bracket-panel">
         <div class="bracket-prompt" id="prompt"></div>
+        <div class="hint-bubble-wrap" id="hint-wrap">
+          <div class="hint-bubble">
+            <div class="hint-header">
+              <span class="hint-title">💡 Need a hint?</span>
+              <span class="hint-step-badge" id="hint-badge">DIVIDE</span>
+            </div>
+            <div class="hint-body" id="hint-body"></div>
+            <div class="hint-cat">
+              <div class="ear l"></div>
+              <div class="ear r"></div>
+              <div class="cat-nose"></div>
+            </div>
+          </div>
+        </div>
         <div id="div-container-wrap" style="width:100%;display:flex;justify-content:center;"></div>
         <div class="prob-complete" id="prob-complete">
           <h3 id="complete-title">🎉 Correct!</h3>
@@ -284,72 +424,115 @@
 
 <script>
 // ═══════════════════════════════════════
-// PROBLEM DATA — 3 levels × 10 problems
+// THEME
 // ═══════════════════════════════════════
+function getTV(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue('--' + name).trim();
+}
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeKnob').textContent = next === 'dark' ? '🌙' : '☀️';
+  // Redraw canvas with new colors
+  redrawCanvas();
+}
+
+// ═══════════════════════════════════════
+// PROBLEM DATA — 3 levels × 5 problems (randomly generated)
+// ═══════════════════════════════════════
+const PROBLEMS_PER_LEVEL = 5;
+
 const LEVELS = [
-  {
-    name: 'Kitten Kitchen',
-    emoji: '🐱',
-    tag: 'Level 1: Kitten Kitchen',
-    desc: 'Small dividends, one-digit divisors. The DMSB basics — no bring-down needed yet.',
-    problems: [
-      { dv: 14, dr: 4, story: '**14 treats** for **4 hungry cats**.' },
-      { dv: 17, dr: 5, story: '**17 treats** for **5 cats** at the door.' },
-      { dv: 20, dr: 6, story: '**20 treats** split between **6 cats**.' },
-      { dv: 23, dr: 3, story: '**23 treats** for **3 very hungry cats**.' },
-      { dv: 19, dr: 4, story: 'You found **19 treats**! **4 cats** waiting.' },
-      { dv: 15, dr: 7, story: '**15 treats** and **7 cats** showed up!' },
-      { dv: 26, dr: 5, story: '**26 treats** in the jar. **5 cats** meowing.' },
-      { dv: 11, dr: 3, story: 'Only **11 treats** left for **3 cats**.' },
-      { dv: 22, dr: 7, story: '**22 treats** and **7 cats** line up.' },
-      { dv: 29, dr: 6, story: 'A big bag of **29 treats**! **6 cats** waiting.' },
-    ]
-  },
-  {
-    name: 'Cat Café',
-    emoji: '☕',
-    tag: 'Level 2: Cat Café',
-    desc: 'Bigger numbers — Bring Down matters now! The full DMSB loop.',
-    problems: [
-      { dv: 52, dr: 4, story: 'The café ordered **52 treats** for **4 cats**.' },
-      { dv: 75, dr: 6, story: '**75 treats** on the counter. **6 café cats**.' },
-      { dv: 87, dr: 5, story: '**87 treats** in the kitchen. **5 cats** on duty.' },
-      { dv: 96, dr: 7, story: 'A delivery of **96 treats**! **7 cats** waiting.' },
-      { dv: 63, dr: 4, story: '**63 treats** in the display. **4 regular cats**.' },
-      { dv: 58, dr: 3, story: '**58 treats** baked fresh for **3 cats**.' },
-      { dv: 84, dr: 5, story: 'The chef made **84 treats** for **5 cats**.' },
-      { dv: 71, dr: 4, story: '**71 treats** left at closing. **4 cats** get a feast.' },
-      { dv: 93, dr: 8, story: 'Party time! **93 treats** for **8 cats**.' },
-      { dv: 67, dr: 3, story: 'Morning batch: **67 treats** for **3 early cats**.' },
-    ]
-  },
-  {
-    name: 'Big Cat Bakery',
-    emoji: '🎂',
-    tag: 'Level 3: Big Cat Bakery',
-    desc: 'Two-digit divisors — the ultimate challenge!',
-    problems: [
-      { dv: 156, dr: 12, story: 'The bakery made **156 treats** for **12 big cats**.' },
-      { dv: 275, dr: 14, story: '**275 treats** ordered by **14 cats**!' },
-      { dv: 189, dr: 15, story: 'A batch of **189 treats** for **15 cats**.' },
-      { dv: 224, dr: 16, story: '**224 treats** fresh from the oven. **16 cats** in line.' },
-      { dv: 310, dr: 13, story: 'Mega order! **310 treats** for **13 bakery cats**.' },
-      { dv: 198, dr: 11, story: '**198 treats** on the cooling rack. **11 cats** watching.' },
-      { dv: 252, dr: 18, story: 'Special event: **252 treats** for **18 cats**.' },
-      { dv: 345, dr: 15, story: 'Catering job: **345 treats** for **15 party cats**.' },
-      { dv: 176, dr: 14, story: 'End of day: **176 treats** for **14 loyal cats**.' },
-      { dv: 289, dr: 17, story: 'Grand opening! **289 treats** for **17 cats**.' },
-    ]
-  }
+  { name: 'Kitten Kitchen', emoji: '🐱', tag: 'Level 1: Kitten Kitchen', desc: 'Small dividends, one-digit divisors. The DMSB basics — no bring-down needed yet.', problems: [] },
+  { name: 'Cat Café', emoji: '☕', tag: 'Level 2: Cat Café', desc: 'Bigger numbers — Bring Down matters now! The full DMSB loop.', problems: [] },
+  { name: 'Big Cat Bakery', emoji: '🎂', tag: 'Level 3: Big Cat Bakery', desc: 'Two-digit divisors — the ultimate challenge!', problems: [] }
 ];
+
+// Story templates per level
+const STORIES = [
+  [
+    '**{dv} treats** for **{dr} hungry cats**.',
+    'You found **{dv} treats**! **{dr} cats** are waiting.',
+    '**{dv} treats** in the jar. **{dr} cats** meowing.',
+    'Only **{dv} treats** left for **{dr} cats**.',
+    'A bag of **{dv} treats**! **{dr} cats** at the door.',
+    '**{dv} treats** to share with **{dr} cats**.',
+    '**{dv} treats** on the table. **{dr} cats** showed up!',
+    'You counted **{dv} treats** for **{dr} hungry cats**.',
+    '**{dv} treats** in the box. **{dr} cats** line up.',
+    'Snack time! **{dv} treats** for **{dr} cats**.',
+  ],
+  [
+    'The café ordered **{dv} treats** for **{dr} cats**.',
+    '**{dv} treats** on the counter. **{dr} café cats**.',
+    'The chef made **{dv} treats** for **{dr} cats**.',
+    'Morning batch: **{dv} treats** for **{dr} early cats**.',
+    'Party time! **{dv} treats** for **{dr} cats**.',
+    '**{dv} treats** baked fresh for **{dr} cats**.',
+    '**{dv} treats** in the display. **{dr} regular cats**.',
+    'A delivery of **{dv} treats**! **{dr} cats** waiting.',
+    '**{dv} treats** left at closing. **{dr} cats** get a feast.',
+    'Lunch rush: **{dv} treats** for **{dr} cats**.',
+  ],
+  [
+    'The bakery made **{dv} treats** for **{dr} big cats**.',
+    'Mega order! **{dv} treats** for **{dr} bakery cats**.',
+    'Catering job: **{dv} treats** for **{dr} party cats**.',
+    'Grand opening! **{dv} treats** for **{dr} cats**.',
+    'Special event: **{dv} treats** for **{dr} cats**.',
+    '**{dv} treats** fresh from the oven. **{dr} cats** in line.',
+    '**{dv} treats** on the cooling rack. **{dr} cats** watching.',
+    'Wedding order: **{dv} treats** for **{dr} cats**.',
+    'Holiday batch: **{dv} treats** for **{dr} big cats**.',
+    'Festival supply: **{dv} treats** for **{dr} cats**.',
+  ]
+];
+
+function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+function generateProblems(levelIdx) {
+  const problems = [];
+  const usedPairs = new Set();
+  const templates = STORIES[levelIdx].slice();
+
+  while (problems.length < PROBLEMS_PER_LEVEL) {
+    let dv, dr;
+    if (levelIdx === 0) {
+      // Kitten Kitchen: dividend 10–29, divisor 2–9, single-digit quotient, no bring-down
+      dr = randInt(2, 9);
+      dv = randInt(Math.max(10, dr), 29);
+      const q = Math.floor(dv / dr);
+      if (q < 1 || q > 9) continue;
+    } else if (levelIdx === 1) {
+      // Cat Café: dividend 40–99, divisor 3–8, multi-digit quotient (bring-down)
+      dr = randInt(3, 8);
+      dv = randInt(40, 99);
+      if (Math.floor(dv / dr) < 10) continue;
+    } else {
+      // Big Cat Bakery: dividend 120–399, divisor 11–19
+      dr = randInt(11, 19);
+      dv = randInt(120, 399);
+    }
+    const key = dv + ',' + dr;
+    if (usedPairs.has(key)) continue;
+    usedPairs.add(key);
+
+    const ti = randInt(0, templates.length - 1);
+    const story = templates[ti].replace('{dv}', dv).replace('{dr}', dr);
+    problems.push({ dv, dr, story });
+  }
+  return problems;
+}
 
 // State
 let state = {
   unlocked: [0],
   results: [
-    new Array(10).fill(null),
-    new Array(10).fill(null),
-    new Array(10).fill(null),
+    new Array(PROBLEMS_PER_LEVEL).fill(null),
+    new Array(PROBLEMS_PER_LEVEL).fill(null),
+    new Array(PROBLEMS_PER_LEVEL).fill(null),
   ],
   currentLevel: 0,
   currentProblem: 0,
@@ -370,7 +553,7 @@ function renderLevelCards() {
     const unlocked = state.unlocked.includes(li);
     const results = state.results[li];
     const correct = results.filter(r => r === true).length;
-    const isComplete = correct >= 10;
+    const isComplete = correct >= PROBLEMS_PER_LEVEL;
     const cls = !unlocked ? 'locked' : isComplete ? 'completed' : 'current';
 
     html += '<div class="level-card ' + cls + '" ' + (unlocked ? 'onclick="startLevel(' + li + ')"' : '') + '>';
@@ -378,7 +561,7 @@ function renderLevelCards() {
     html += '<div class="level-title">' + lv.emoji + ' ' + lv.name + '</div>';
     html += '<div class="level-desc">' + lv.desc + '</div>';
     if (!unlocked) html += '<div class="unlock-badge">Complete 3 in Level ' + li + ' to unlock</div>';
-    html += '<div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:' + (correct / 10 * 100) + '%"></div></div><span class="progress-text">' + correct + ' / 10</span></div>';
+    html += '<div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:' + (correct / PROBLEMS_PER_LEVEL * 100) + '%"></div></div><span class="progress-text">' + correct + ' / ' + PROBLEMS_PER_LEVEL + '</span></div>';
     html += '<button class="btn small" ' + (!unlocked ? 'disabled' : '') + '>' + (isComplete ? 'Replay' : correct > 0 ? 'Continue' : 'Start') + '</button>';
     html += '</div>';
   });
@@ -387,8 +570,10 @@ function renderLevelCards() {
 
 function startLevel(li) {
   state.currentLevel = li;
-  const idx = state.results[li].findIndex(r => r !== true);
-  state.currentProblem = idx >= 0 ? idx : 0;
+  // Generate fresh problems and reset results each time a level is entered
+  LEVELS[li].problems = generateProblems(li);
+  state.results[li] = new Array(PROBLEMS_PER_LEVEL).fill(null);
+  state.currentProblem = 0;
   showScreen('screen-problem');
   loadProblem();
 }
@@ -401,7 +586,7 @@ function loadProblem() {
   const prob = lv.problems[pi];
 
   document.getElementById('prob-level-tag').textContent = lv.tag;
-  document.getElementById('prob-counter').textContent = (pi + 1) + ' / 10';
+  document.getElementById('prob-counter').textContent = (pi + 1) + ' / ' + PROBLEMS_PER_LEVEL;
   document.getElementById('story-title').textContent = prob.dv + ' ÷ ' + prob.dr;
   document.getElementById('story-text').innerHTML = prob.story.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   document.getElementById('prob-complete').classList.remove('visible');
@@ -409,7 +594,7 @@ function loadProblem() {
   // Dots
   const dots = document.getElementById('prob-dots');
   dots.innerHTML = '';
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < PROBLEMS_PER_LEVEL; i++) {
     const d = document.createElement('div');
     d.className = 'prob-dot';
     if (i === pi) d.classList.add('current');
@@ -457,7 +642,7 @@ function nextProblem() {
   const li = state.currentLevel;
   const results = state.results[li];
   let next = -1;
-  for (let i = state.currentProblem + 1; i < 10; i++) { if (results[i] !== true) { next = i; break; } }
+  for (let i = state.currentProblem + 1; i < PROBLEMS_PER_LEVEL; i++) { if (results[i] !== true) { next = i; break; } }
   if (next === -1) for (let i = 0; i < state.currentProblem; i++) { if (results[i] !== true) { next = i; break; } }
   if (next === -1) { showScreen('screen-levels'); return; }
   state.currentProblem = next;
@@ -513,7 +698,7 @@ function buildLayout(dividend, divisor) {
   for (let i = 0; i < n; i++) {
     if (qCols.has(i)) html += '<div class="d-cell" style="left:' + (digitAreaLeft + i * CW) + 'px;top:' + qTop + 'px;"><input class="math-input" id="q-' + i + '" type="text" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="1" placeholder="?" disabled></div>';
   }
-  // Remainder input (only if needed)
+  // Remainder input (only if remainder > 0)
   if (stepData.remainder > 0) {
     html += '<div class="d-cell d-hidden" id="r-cell" style="left:' + (digitAreaLeft + n * CW + 4) + 'px;top:' + qTop + 'px;width:72px;"><input class="math-input r-input" id="input-r" type="text" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="R?" disabled></div>';
   }
@@ -558,9 +743,9 @@ function buildLayout(dividend, divisor) {
       html += '<div class="d-cell d-hidden" id="s-' + ci + '-' + col + '" style="left:' + (digitAreaLeft + col * CW) + 'px;top:' + yPos + 'px;"><input class="math-input" id="si-' + ci + '-' + col + '" type="text" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="1" placeholder="?" disabled></div>';
     }
 
-    // Bring-down digit
+    // Bring-down digit — uses var(--success)
     if (cyc.bringDown !== null) {
-      html += '<div class="d-cell d-hidden" id="bd-' + ci + '" style="left:' + (digitAreaLeft + cyc.bringDownCol * CW) + 'px;top:' + yPos + 'px;color:var(--coral);font-weight:800;">' + cyc.bringDown + '</div>';
+      html += '<div class="d-cell d-hidden" id="bd-' + ci + '" style="left:' + (digitAreaLeft + cyc.bringDownCol * CW) + 'px;top:' + yPos + 'px;color:var(--success);font-weight:700;">' + cyc.bringDown + '</div>';
     }
     yPos += CH + GAP;
   });
@@ -581,9 +766,7 @@ function buildLayout(dividend, divisor) {
     const divCueBadgeX = divisorWidth / 2 - 16;
     const divCueBadgeY = divTop + CH + 8;
     const arrowStartX = divisorWidth / 2;
-    const arrowStartY = 36;
     const arrowEndX = qX;
-    const arrowEndY = qTop + 8;
     html += '<div class="guide-cue" id="cue-divide" style="left:0;top:0;width:100%;height:100%;">';
     html += '<div class="cue-symbol" style="position:absolute;left:' + divCueBadgeX + 'px;top:' + divCueBadgeY + 'px;">÷</div>';
     html += '<div class="cue-arrow" style="position:absolute;left:0;top:0;width:100%;height:100%;"><svg style="position:absolute;left:0;top:0;width:100%;height:100%;"><path d="M ' + arrowStartX + ' ' + (divTop - 4) + ' Q ' + (arrowStartX - 20) + ' ' + (qTop + CH/2) + ' ' + (arrowEndX - 4) + ' ' + (qTop + CH - 4) + '"/><polygon points="' + (arrowEndX - 4) + ',' + (qTop + CH - 4) + ' ' + (arrowEndX - 10) + ',' + (qTop + CH + 4) + ' ' + (arrowEndX + 2) + ',' + (qTop + CH + 2) + '"/></svg></div>';
@@ -635,6 +818,7 @@ function wireCycle(ci, divisor) {
   const endCol = cyc.col, startCol = endCol - workLen + 1;
   const diffStr = String(cyc.difference);
 
+  resetWrongCount();
   const qInput = document.getElementById('q-' + cyc.col);
   qInput.disabled = false;
   setTimeout(() => qInput.focus(), 50);
@@ -644,6 +828,8 @@ function wireCycle(ci, divisor) {
     if (!val) return;
     if (parseInt(val) === cyc.quotientDigit) {
       qInput.classList.add('correct', 'locked'); qInput.oninput = null;
+      playCorrectSound();
+      resetWrongCount();
       markDone('d'); setDMSB('m');
       showCue('multiply');
       promptMultiply(cyc, divisor);
@@ -661,8 +847,10 @@ function wireCycle(ci, divisor) {
           const v = el.value.trim(); if (!v) return;
           if (v === expected) {
             el.classList.add('correct', 'locked'); el.oninput = null;
+            playCorrectSound();
             const next = mInputs.find(m => !m.el.classList.contains('correct'));
             if (next) { next.el.focus(); return; }
+            resetWrongCount();
             markDone('m'); setDMSB('s');
             showCue('subtract');
             promptSubtract(cyc);
@@ -682,8 +870,10 @@ function wireCycle(ci, divisor) {
                 const sv = sEl.value.trim(); if (!sv) return;
                 if (sv === sExp) {
                   sEl.classList.add('correct', 'locked'); sEl.oninput = null;
+                  playCorrectSound();
                   const sNext = sInputs.find(s => !s.el.classList.contains('correct'));
                   if (sNext) { sNext.el.focus(); return; }
+                  resetWrongCount();
                   markDone('s'); setDMSB('b');
 
                   if (cyc.bringDown !== null) {
@@ -707,9 +897,11 @@ function wireCycle(ci, divisor) {
                     const rem = stepData.remainder;
                     if (rem === 0) {
                       markDone('b');
+                      playCorrectSound();
                       document.getElementById('prompt').innerHTML = '🎉 No remainder!';
                       completeProblem();
                     } else {
+                      resetWrongCount();
                       promptFinish(rem);
                       show('r-cell');
                       const rInput = document.getElementById('input-r');
@@ -719,31 +911,29 @@ function wireCycle(ci, divisor) {
                         const rv = rInput.value.trim().toUpperCase(); if (!rv) return;
                         if (rv === 'R' + rem || rv === 'R ' + rem || rv === String(rem)) {
                           rInput.classList.add('correct', 'locked'); rInput.value = 'R' + rem; rInput.oninput = null;
+                          playCorrectSound();
+                          resetWrongCount();
                           markDone('b');
                           document.getElementById('prompt').innerHTML = '🎉 Perfect!';
                           completeProblem();
                         } else {
-                          rInput.classList.add('wrong');
-                          setTimeout(() => { rInput.classList.remove('wrong'); rInput.value = ''; }, 500);
+                          handleWrong(rInput, 'r', cyc, divisor);
                         }
                       };
                     }
                   }
                 } else {
-                  sEl.classList.add('wrong');
-                  setTimeout(() => { sEl.classList.remove('wrong'); sEl.value = ''; }, 500);
+                  handleWrong(sEl, 's', cyc, divisor);
                 }
               };
             });
           } else {
-            el.classList.add('wrong');
-            setTimeout(() => { el.classList.remove('wrong'); el.value = ''; }, 500);
+            handleWrong(el, 'm', cyc, divisor);
           }
         };
       });
     } else {
-      qInput.classList.add('wrong');
-      setTimeout(() => { qInput.classList.remove('wrong'); qInput.value = ''; }, 500);
+      handleWrong(qInput, 'd', cyc, divisor);
     }
   };
 }
@@ -778,14 +968,113 @@ function hideAllCues() {
   ['divide','multiply','subtract','bringdown'].forEach(n => hideCue(n));
 }
 
-// ═══ CANVAS ═══
+// ═══ WEB AUDIO ═══
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+function playHintSound() {
+  try {
+    const ctx = getAudioCtx(), now = ctx.currentTime;
+    const g = ctx.createGain(); g.connect(ctx.destination); g.gain.setValueAtTime(0.15, now); g.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.setValueAtTime(587, now); o1.connect(g); o1.start(now); o1.stop(now + 0.15);
+    const o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.setValueAtTime(784, now + 0.12); o2.connect(g); o2.start(now + 0.12); o2.stop(now + 0.3);
+  } catch(e) {}
+}
+function playCorrectSound() {
+  try {
+    const ctx = getAudioCtx(), now = ctx.currentTime;
+    const g = ctx.createGain(); g.connect(ctx.destination); g.gain.setValueAtTime(0.12, now); g.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.setValueAtTime(880, now); o.frequency.linearRampToValueAtTime(1175, now + 0.25); o.connect(g); o.start(now); o.stop(now + 0.35);
+  } catch(e) {}
+}
+function playWrongSound() {
+  try {
+    const ctx = getAudioCtx(), now = ctx.currentTime;
+    const g = ctx.createGain(); g.connect(ctx.destination); g.gain.setValueAtTime(0.1, now); g.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    const o = ctx.createOscillator(); o.type = 'triangle'; o.frequency.setValueAtTime(300, now); o.frequency.linearRampToValueAtTime(200, now + 0.25); o.connect(g); o.start(now); o.stop(now + 0.3);
+  } catch(e) {}
+}
+
+// ═══ HINT SYSTEM ═══
+let wrongCount = 0;
+const STEP_LABELS = { d: 'DIVIDE', m: 'MULTIPLY', s: 'SUBTRACT', r: 'REMAINDER' };
+
+function showHint(step, cyc, divisor) {
+  document.getElementById('hint-badge').textContent = STEP_LABELS[step] || 'HINT';
+  let msg = '';
+  if (step === 'd') {
+    msg = 'How many times does <strong>' + divisor + '</strong> fit into <strong>' + cyc.workingNumber + '</strong> without going over?<br><span class="hint-formula">___ × ' + divisor + ' ≈ ' + cyc.workingNumber + '</span>';
+  } else if (step === 'm') {
+    msg = 'Multiply your answer by the divisor:<br><span class="hint-formula">' + cyc.quotientDigit + ' × ' + divisor + ' = ?</span>';
+  } else if (step === 's') {
+    msg = 'Subtract to find what\'s left:<br><span class="hint-formula">' + cyc.workingNumber + ' − ' + cyc.product + ' = ?</span>';
+  } else if (step === 'r') {
+    msg = 'Write <strong>R</strong> followed by the leftover:<br><span class="hint-formula">R' + stepData.remainder + '</span>';
+  }
+  document.getElementById('hint-body').innerHTML = msg;
+  document.getElementById('hint-wrap').classList.add('visible');
+  playHintSound();
+}
+
+function hideHint() { document.getElementById('hint-wrap').classList.remove('visible'); }
+function resetWrongCount() { wrongCount = 0; hideHint(); }
+
+function handleWrong(el, step, cyc, divisor) {
+  el.classList.add('wrong');
+  playWrongSound();
+  setTimeout(() => { el.classList.remove('wrong'); el.value = ''; }, 500);
+  wrongCount++;
+  if (wrongCount >= 2) showHint(step, cyc, divisor);
+}
+
+// ═══ CANVAS (with undo) ═══
 let drawing = false, currentTool = 'pen';
+let strokes = [];
+
+function drawGrid(ctx, w, h) {
+  ctx.fillStyle = getTV('grid-dot');
+  for (let x = 20; x < w; x += 24) for (let y = 20; y < h; y += 24) { ctx.beginPath(); ctx.arc(x,y,0.8,0,Math.PI*2); ctx.fill(); }
+}
+
+function saveSnapshot() {
+  const c = document.getElementById('scratchCanvas'); if (!c) return;
+  const ctx = c.getContext('2d');
+  strokes.push(ctx.getImageData(0, 0, c.width, c.height));
+}
+
+function undoStroke() {
+  const c = document.getElementById('scratchCanvas'); if (!c) return;
+  const ctx = c.getContext('2d');
+  if (strokes.length > 0) {
+    ctx.putImageData(strokes.pop(), 0, 0);
+  } else {
+    // Nothing to undo — clear to blank grid
+    const r = c.getBoundingClientRect();
+    ctx.clearRect(0, 0, c.width, c.height);
+    drawGrid(ctx, r.width, r.height);
+  }
+}
+
+function redrawCanvas() {
+  const c = document.getElementById('scratchCanvas'); if (!c) return;
+  const ctx = c.getContext('2d');
+  const r = c.getBoundingClientRect();
+  // If we have stroke snapshots, the last one has drawing state — just redraw grid base
+  // For theme switch, we clear and redraw the grid (strokes are lost on theme switch)
+  strokes = [];
+  const dpr = window.devicePixelRatio || 1;
+  ctx.clearRect(0, 0, c.width, c.height);
+  drawGrid(ctx, r.width, r.height);
+}
+
 function setupCanvas() {
   const c = document.getElementById('scratchCanvas'); if (!c) return;
   const ctx = c.getContext('2d'), r = c.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
   c.width = r.width * dpr; c.height = r.height * dpr; ctx.scale(dpr, dpr);
-  ctx.fillStyle = '#E8D5C4';
-  for (let x = 20; x < r.width; x += 24) for (let y = 20; y < r.height; y += 24) { ctx.beginPath(); ctx.arc(x,y,0.8,0,Math.PI*2); ctx.fill(); }
+  strokes = [];
+  drawGrid(ctx, r.width, r.height);
   const getPos = e => { const rc = c.getBoundingClientRect(); return { x: (e.clientX||0)-rc.left, y: (e.clientY||0)-rc.top }; };
 
   // Prevent context menu (long-press / right-click)
@@ -800,12 +1089,14 @@ function setupCanvas() {
     if (e.pointerType === 'pen') {
       e.preventDefault();
       e.stopPropagation();
+      saveSnapshot();
       drawing = true;
       ctx.beginPath();
       const pos = getPos(e);
       ctx.moveTo(pos.x, pos.y);
     }
     if (e.pointerType === 'mouse') {
+      saveSnapshot();
       drawing = true;
       ctx.beginPath();
       const pos = getPos(e);
@@ -819,7 +1110,7 @@ function setupCanvas() {
       e.preventDefault();
       e.stopPropagation();
       const pos = getPos(e);
-      ctx.strokeStyle = currentTool === 'pen' ? '#3D2B1F' : '#FFFDF9';
+      ctx.strokeStyle = currentTool === 'pen' ? getTV('pen-color') : getTV('eraser-color');
       ctx.lineWidth = currentTool === 'pen' ? 2.5 : 20;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -840,13 +1131,14 @@ function setTool(t) { currentTool=t; document.getElementById('penBtn')?.classLis
 function clearCanvas() {
   const c=document.getElementById('scratchCanvas'); if(!c)return;
   const ctx=c.getContext('2d'), r=c.getBoundingClientRect();
-  ctx.clearRect(0,0,r.width,r.height); ctx.fillStyle='#E8D5C4';
-  for(let x=20;x<r.width;x+=24) for(let y=20;y<r.height;y+=24){ctx.beginPath();ctx.arc(x,y,0.8,0,Math.PI*2);ctx.fill();}
+  saveSnapshot();
+  ctx.clearRect(0,0,c.width,c.height);
+  drawGrid(ctx, r.width, r.height);
 }
 
 function spawnConfetti() {
   const p = document.getElementById('bracket-panel'); if(!p)return;
-  const colors=['#D4845A','#E8836B','#F2C6A5','#7BAE6B','#D49D00'];
+  const colors=[getTV('primary'), getTV('coral'), getTV('secondary'), getTV('success'), '#D49D00'];
   for(let i=0;i<20;i++){const d=document.createElement('div');d.className='confetti-piece';d.style.left=Math.random()*100+'%';d.style.top='10%';d.style.background=colors[Math.floor(Math.random()*colors.length)];d.style.animationDelay=Math.random()*0.5+'s';d.style.animationDuration=(1+Math.random())+'s';p.appendChild(d);setTimeout(()=>d.remove(),2500);}
 }
 
