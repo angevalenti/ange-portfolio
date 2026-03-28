@@ -152,6 +152,49 @@
   @keyframes confettiFall { 0%{transform:translateY(-10px) rotate(0deg);opacity:1} 100%{transform:translateY(120px) rotate(720deg);opacity:0} }
   .confetti-piece { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: confettiFall 1.5s ease forwards; pointer-events: none; }
   .lesson-footer { text-align: center; padding: 24px 16px; color: var(--text); opacity: 0.4; font-size: 0.75rem; }
+
+  /* ═══ GUIDE CUES (Level 1 only) ═══ */
+  .guide-cue {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 10;
+  }
+  .guide-cue.active { opacity: 1; }
+
+  .cue-symbol {
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: rgba(232, 131, 107, 0.5);
+    background: rgba(232, 131, 107, 0.08);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px dashed rgba(232, 131, 107, 0.3);
+  }
+
+  .cue-arrow svg { overflow: visible; }
+  .cue-arrow path, .cue-arrow line {
+    stroke: rgba(232, 131, 107, 0.5);
+    stroke-width: 2; fill: none;
+    stroke-dasharray: 6 4; stroke-linecap: round;
+  }
+  .cue-arrow polygon { fill: rgba(232, 131, 107, 0.5); }
+
+  @keyframes cuePulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.55; }
+  }
+  .guide-cue.active.pulse { animation: cuePulse 1.5s ease-in-out infinite; }
+
+  @keyframes cueSlideDown {
+    0% { stroke-dashoffset: 60; opacity: 0.2; }
+    100% { stroke-dashoffset: 0; opacity: 0.5; }
+  }
+  .cue-arrow.bring-down path { stroke-dasharray: 60; stroke-dashoffset: 60; }
+  .guide-cue.active .cue-arrow.bring-down path { animation: cueSlideDown 0.8s ease forwards; }
 </style>
 </head>
 <body>
@@ -522,6 +565,56 @@ function buildLayout(dividend, divisor) {
     yPos += CH + GAP;
   });
 
+  // ── Level 1 guide cues ──
+  if (state.currentLevel === 0) {
+    const cyc0 = cycles[0];
+    const qCol = cyc0.col;
+    const qX = digitAreaLeft + qCol * CW + CW / 2;
+    const workLen0 = String(cyc0.workingNumber).length;
+    const startCol0 = qCol - workLen0 + 1;
+    const mulRowY = divTop + CH + GAP;
+    const lineY0 = mulRowY + CH;
+    const diffRowY = lineY0 + 8;
+    const bdCol = cyc0.bringDownCol;
+
+    // cue-divide: ÷ badge between divisor & dividend, curved arrow up to quotient
+    const divCueBadgeX = divisorWidth / 2 - 16;
+    const divCueBadgeY = divTop + CH + 8;
+    const arrowStartX = divisorWidth / 2;
+    const arrowStartY = 36;
+    const arrowEndX = qX;
+    const arrowEndY = qTop + 8;
+    html += '<div class="guide-cue" id="cue-divide" style="left:0;top:0;width:100%;height:100%;">';
+    html += '<div class="cue-symbol" style="position:absolute;left:' + divCueBadgeX + 'px;top:' + divCueBadgeY + 'px;">÷</div>';
+    html += '<div class="cue-arrow" style="position:absolute;left:0;top:0;width:100%;height:100%;"><svg style="position:absolute;left:0;top:0;width:100%;height:100%;"><path d="M ' + arrowStartX + ' ' + (divTop - 4) + ' Q ' + (arrowStartX - 20) + ' ' + (qTop + CH/2) + ' ' + (arrowEndX - 4) + ' ' + (qTop + CH - 4) + '"/><polygon points="' + (arrowEndX - 4) + ',' + (qTop + CH - 4) + ' ' + (arrowEndX - 10) + ',' + (qTop + CH + 4) + ' ' + (arrowEndX + 2) + ',' + (qTop + CH + 2) + '"/></svg></div>';
+    html += '</div>';
+
+    // cue-multiply: × badge next to quotient, short arrow down to multiply row
+    html += '<div class="guide-cue" id="cue-multiply" style="left:0;top:0;width:100%;height:100%;">';
+    html += '<div class="cue-symbol" style="position:absolute;left:' + (qX + CW/2 + 4) + 'px;top:' + (qTop + 8) + 'px;">×</div>';
+    html += '<div class="cue-arrow" style="position:absolute;left:0;top:0;width:100%;height:100%;"><svg style="position:absolute;left:0;top:0;width:100%;height:100%;"><line x1="' + qX + '" y1="' + (qTop + CH + 4) + '" x2="' + qX + '" y2="' + (mulRowY + 6) + '"/><polygon points="' + qX + ',' + (mulRowY + 10) + ' ' + (qX - 5) + ',' + (mulRowY + 2) + ' ' + (qX + 5) + ',' + (mulRowY + 2) + '"/></svg></div>';
+    html += '</div>';
+
+    // cue-subtract: − badge left of multiply row, short arrow down to difference
+    const subBadgeX = digitAreaLeft + startCol0 * CW - 48;
+    html += '<div class="guide-cue" id="cue-subtract" style="left:0;top:0;width:100%;height:100%;">';
+    html += '<div class="cue-symbol" style="position:absolute;left:' + subBadgeX + 'px;top:' + (mulRowY + 8) + 'px;">−</div>';
+    html += '<div class="cue-arrow" style="position:absolute;left:0;top:0;width:100%;height:100%;"><svg style="position:absolute;left:0;top:0;width:100%;height:100%;"><line x1="' + qX + '" y1="' + (lineY0 + 4) + '" x2="' + qX + '" y2="' + (diffRowY + 6) + '"/><polygon points="' + qX + ',' + (diffRowY + 10) + ' ' + (qX - 5) + ',' + (diffRowY + 2) + ' ' + (qX + 5) + ',' + (diffRowY + 2) + '"/></svg></div>';
+    html += '</div>';
+
+    // cue-bringdown: curved arrow from next dividend digit down to difference row
+    if (bdCol !== null) {
+      const bdX = digitAreaLeft + bdCol * CW + CW / 2;
+      const bdStartY = divTop + CH / 2;
+      const bdEndY = diffRowY + CH / 2;
+      html += '<div class="guide-cue" id="cue-bringdown" style="left:0;top:0;width:100%;height:100%;">';
+      html += '<div class="cue-arrow bring-down" style="position:absolute;left:0;top:0;width:100%;height:100%;"><svg style="position:absolute;left:0;top:0;width:100%;height:100%;"><path d="M ' + bdX + ' ' + bdStartY + ' Q ' + (bdX + 30) + ' ' + ((bdStartY + bdEndY) / 2) + ' ' + bdX + ' ' + (bdEndY - 6) + '"/><polygon points="' + bdX + ',' + bdEndY + ' ' + (bdX - 5) + ',' + (bdEndY - 8) + ' ' + (bdX + 5) + ',' + (bdEndY - 8) + '"/></svg></div>';
+      html += '</div>';
+    } else {
+      html += '<div class="guide-cue" id="cue-bringdown" style="left:0;top:0;width:100%;height:100%;"></div>';
+    }
+  }
+
   html = html.replace('height:600px', 'height:' + (yPos + 20) + 'px');
   html += '</div>';
   document.getElementById('div-container-wrap').innerHTML = html;
@@ -531,6 +624,7 @@ function buildLayout(dividend, divisor) {
   const firstQ = document.getElementById('q-' + cycles[0].col);
   firstQ.disabled = false;
   setTimeout(() => firstQ.focus(), 100);
+  if (state.currentLevel === 0) showCue('divide');
   wireCycle(0, divisor);
 }
 
@@ -551,6 +645,7 @@ function wireCycle(ci, divisor) {
     if (parseInt(val) === cyc.quotientDigit) {
       qInput.classList.add('correct', 'locked'); qInput.oninput = null;
       markDone('d'); setDMSB('m');
+      showCue('multiply');
       promptMultiply(cyc, divisor);
       show('minus-' + ci);
 
@@ -569,6 +664,7 @@ function wireCycle(ci, divisor) {
             const next = mInputs.find(m => !m.el.classList.contains('correct'));
             if (next) { next.el.focus(); return; }
             markDone('m'); setDMSB('s');
+            showCue('subtract');
             promptSubtract(cyc);
             show('line-' + ci);
 
@@ -591,19 +687,23 @@ function wireCycle(ci, divisor) {
                   markDone('s'); setDMSB('b');
 
                   if (cyc.bringDown !== null) {
+                    showCue('bringdown');
                     promptBringDown(cyc);
                     setTimeout(() => {
                       show('bd-' + ci);
+                      hideCue('bringdown');
                       const origDvd = document.getElementById('dvd-' + cyc.bringDownCol);
                       if (origDvd) origDvd.style.opacity = '0.3';
                       setTimeout(() => {
                         markDone('b'); currentCycle++;
                         resetDMSB(); setDMSB('d');
+                        showCue('divide');
                         promptDivide(stepData.cycles[currentCycle], divisor);
                         wireCycle(currentCycle, divisor);
                       }, 700);
                     }, 300);
                   } else {
+                    hideAllCues();
                     const rem = stepData.remainder;
                     if (rem === 0) {
                       markDone('b');
@@ -662,6 +762,21 @@ function show(id) { const el = document.getElementById(id); if (el) { el.classLi
 function setDMSB(s) { ['d','m','s','b'].forEach(x => document.getElementById('step-' + x)?.classList.remove('active')); if (s) document.getElementById('step-' + s)?.classList.add('active'); }
 function markDone(s) { const el = document.getElementById('step-' + s); if (el) { el.classList.add('done'); el.classList.remove('active'); } }
 function resetDMSB() { ['d','m','s','b'].forEach(x => { const el = document.getElementById('step-' + x); if (el) el.classList.remove('active', 'done'); }); }
+
+// ═══ GUIDE CUES (Level 1 only) ═══
+function showCue(name) {
+  if (state.currentLevel !== 0) return;
+  hideAllCues();
+  const el = document.getElementById('cue-' + name);
+  if (el) { el.classList.add('active', 'pulse'); }
+}
+function hideCue(name) {
+  const el = document.getElementById('cue-' + name);
+  if (el) { el.classList.remove('active', 'pulse'); }
+}
+function hideAllCues() {
+  ['divide','multiply','subtract','bringdown'].forEach(n => hideCue(n));
+}
 
 // ═══ CANVAS ═══
 let drawing = false, currentTool = 'pen';
