@@ -3,56 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Cat Treats Division — Full Test</title>
+<title>Division Dash — Full Test</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root, [data-theme="light"] {
-    --cream: #FFF8F0;
-    --primary: #D4845A;
-    --secondary: #F2C6A5;
-    --coral: #E8836B;
-    --text: #3D2B1F;
-    --card: #FFF1E6;
+    --cream: #FFFFFF;
+    --primary: #FF2D78;
+    --secondary: #00B4D8;
+    --coral: #FF2D78;
+    --text: #1A1A16;
+    --card: #F8F8FA;
     --success: #7BAE6B;
     --error: #D4645A;
-    --canvas-bg: #FFFDF9;
-    --canvas-border: #E8D5C4;
-    --shadow: rgba(180, 140, 100, 0.12);
-    --locked: #C4B5A8;
-    --pen-color: #3D2B1F;
-    --eraser-color: #FFFDF9;
-    --grid-dot: #E8D5C4;
+    --canvas-bg: #FFFFFF;
+    --canvas-border: #E0E0E4;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --locked: #B0B0B8;
+    --pen-color: #1A1A16;
+    --eraser-color: #FFFFFF;
+    --grid-dot: #E0E0E4;
     --btn-text: #ffffff;
-    --input-bg: #FFFDF9;
-    --bubble-bg: #FFF6ED;
+    --input-bg: #FFFFFF;
+    --bubble-bg: #FFFDE6;
     --panel-bg: #ffffff;
+    --yellow: #FFD60A;
+    --purple: #9B5DE5;
+    --teal: #00B4D8;
+    --hint-border: #FFD60A;
+    --geo-opacity: 0.10;
   }
   [data-theme="dark"] {
-    --cream: #1A1A2E;
-    --primary: #FF69B4;
-    --secondary: #2D2D44;
-    --coral: #FF69B4;
-    --text: #F0E6FF;
-    --card: #252540;
+    --cream: #1a1a2e;
+    --primary: #FF2D78;
+    --secondary: #00E5FF;
+    --coral: #FF2D78;
+    --text: #F0F0F0;
+    --card: #16213e;
     --success: #7BAE6B;
     --error: #FF6B6B;
-    --canvas-bg: #1E1E32;
-    --canvas-border: #3D3D5C;
+    --canvas-bg: #16213e;
+    --canvas-border: #2A3A5C;
     --shadow: rgba(0, 0, 0, 0.3);
     --locked: #4A4A6A;
-    --pen-color: #F0E6FF;
-    --eraser-color: #1E1E32;
-    --grid-dot: #3D3D5C;
-    --btn-text: #1A1A2E;
-    --input-bg: #252540;
-    --bubble-bg: #2D2D44;
-    --panel-bg: #252540;
+    --pen-color: #F0F0F0;
+    --eraser-color: #16213e;
+    --grid-dot: #2A3A5C;
+    --btn-text: #ffffff;
+    --input-bg: #16213e;
+    --bubble-bg: #1E2A48;
+    --panel-bg: #16213e;
+    --yellow: #FFD60A;
+    --purple: #B388FF;
+    --teal: #00E5FF;
+    --hint-border: #B388FF;
+    --geo-opacity: 0.07;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background 0.4s ease, color 0.4s ease; }
   h1,h2,h3,h4 { font-family: 'Baloo Bhaijaan 2', cursive; }
 
-  .btn { display: inline-block; padding: 14px 36px; background: var(--coral); color: var(--btn-text); border: none; border-radius: 24px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.15rem; cursor: pointer; box-shadow: 0 4px 16px rgba(232,131,107,0.3); text-decoration: none; transition: transform 0.15s, background 0.4s ease; }
+  .btn { display: inline-block; padding: 14px 36px; background: var(--coral); color: var(--btn-text); border: none; border-radius: 24px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.15rem; cursor: pointer; box-shadow: 0 4px 16px rgba(255,45,120,0.3); text-decoration: none; transition: transform 0.15s, background 0.4s ease; }
   .btn:active { transform: scale(0.97); }
   .btn.small { padding: 10px 24px; font-size: 0.95rem; }
   .btn:disabled { background: var(--locked); box-shadow: none; cursor: not-allowed; opacity: 0.6; }
@@ -63,23 +73,8 @@
 
   /* ═══ HERO ═══ */
   .hero { text-align: center; padding: 48px 24px 40px; position: relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: var(--secondary); border-radius: 50%; opacity: 0.3; }
-  .hero::after { content: ''; position: absolute; bottom: -40px; left: -30px; width: 140px; height: 140px; background: var(--primary); border-radius: 50%; opacity: 0.12; }
-  .cat-mascot { width: 120px; height: 120px; margin: 0 auto 20px; position: relative; animation: catBounce 3s ease-in-out infinite; }
-  @keyframes catBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-  .cat-face { width: 96px; height: 86px; background: var(--secondary); border-radius: 50% 50% 45% 45%; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border: 3px solid var(--primary); }
-  .cat-ear { position: absolute; width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-bottom: 28px solid var(--secondary); top: -24px; }
-  .cat-ear::after { content: ''; position: absolute; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 18px solid var(--primary); top: 7px; left: -10px; opacity: 0.4; }
-  .cat-ear.left { left: 6px; transform: rotate(-10deg); }
-  .cat-ear.right { right: 6px; transform: rotate(10deg); }
-  .cat-eye { width: 12px; height: 14px; background: var(--text); border-radius: 50%; position: absolute; top: 28px; }
-  .cat-eye.left { left: 22px; }
-  .cat-eye.right { right: 22px; }
-  .cat-eye::after { content: ''; width: 5px; height: 5px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; }
-  .cat-nose { width: 10px; height: 7px; background: var(--coral); border-radius: 50%; position: absolute; top: 44px; left: 50%; transform: translateX(-50%); }
-  .cat-mouth { position: absolute; top: 50px; left: 50%; transform: translateX(-50%); width: 18px; height: 10px; border-bottom: 2px solid var(--primary); border-radius: 0 0 50% 50%; opacity: 0.5; }
-  .cat-whisker { position: absolute; width: 22px; height: 1.5px; background: var(--primary); opacity: 0.35; top: 46px; }
-  .cat-whisker.l1{left:-16px;transform:rotate(-8deg)} .cat-whisker.l2{left:-18px;top:52px;transform:rotate(5deg)} .cat-whisker.r1{right:-16px;transform:rotate(8deg)} .cat-whisker.r2{right:-18px;top:52px;transform:rotate(-5deg)}
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: var(--teal); border-radius: 50%; opacity: var(--geo-opacity); }
+  .hero::after { content: ''; position: absolute; bottom: -40px; left: -30px; width: 140px; height: 140px; background: var(--yellow); border-radius: 0; opacity: var(--geo-opacity); transform: rotate(45deg); }
   .hero h1 { font-size: 2.6rem; color: var(--text); line-height: 1.1; margin-bottom: 6px; position: relative; }
   .hero .subtitle { font-size: 1.1rem; color: var(--primary); font-weight: 600; margin-bottom: 16px; }
   .hero p { font-size: 0.95rem; line-height: 1.6; max-width: 460px; margin: 0 auto 28px; opacity: 0.85; }
@@ -102,7 +97,7 @@
   .level-desc { font-size: 0.85rem; color: var(--text); opacity: 0.7; margin-bottom: 14px; line-height: 1.45; }
   .progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
   .progress-bar-bg { flex: 1; height: 10px; background: var(--canvas-border); border-radius: 5px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: var(--coral); border-radius: 5px; transition: width 0.5s ease; }
+  .progress-bar-fill { height: 100%; background: var(--yellow); border-radius: 5px; transition: width 0.5s ease; }
   .level-card.completed .progress-bar-fill { background: var(--success); }
   .progress-text { font-size: 0.75rem; font-weight: 700; color: var(--text); opacity: 0.6; white-space: nowrap; }
   .unlock-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; background: var(--secondary); color: var(--primary); padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
@@ -114,7 +109,7 @@
   .prob-counter { font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--text); opacity: 0.6; }
   .prob-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
   .prob-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--canvas-border); transition: all 0.3s; }
-  .prob-dot.correct { background: var(--success); }
+  .prob-dot.correct { background: var(--yellow); }
   .prob-dot.current { background: var(--coral); transform: scale(1.25); }
 
   /* DMSB bar */
@@ -122,14 +117,14 @@
   .dmsb-steps { display: flex; gap: 4px; justify-content: center; }
   .dmsb-step { flex: 1; text-align: center; padding: 6px 4px; border-radius: 10px; background: rgba(255,255,255,0.5); border: 2px solid transparent; transition: all 0.3s; }
   [data-theme="dark"] .dmsb-step { background: rgba(255,255,255,0.05); }
-  .dmsb-step.active { background: var(--panel-bg); border-color: var(--coral); box-shadow: 0 0 12px rgba(232,131,107,0.15); }
+  .dmsb-step.active { background: var(--panel-bg); border-color: var(--coral); box-shadow: 0 0 12px rgba(255,45,120,0.15); }
   .dmsb-step.done { background: rgba(123,174,107,0.12); border-color: var(--success); }
   .dmsb-letter { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.3rem; font-weight: 800; color: var(--primary); line-height: 1; }
   .dmsb-step.active .dmsb-letter { color: var(--coral); }
   .dmsb-step.done .dmsb-letter { color: var(--success); }
   .dmsb-label { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; color: var(--text); opacity: 0.5; margin-top: 1px; }
 
-  .story-card { background: var(--card); border-radius: 16px; padding: 18px; margin-bottom: 14px; box-shadow: 0 2px 10px var(--shadow); border-left: 4px solid var(--primary); }
+  .story-card { background: var(--card); border-radius: 16px; padding: 18px; margin-bottom: 14px; box-shadow: 0 2px 10px var(--shadow); border-left: 4px solid var(--teal); }
   .story-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 4px; }
   .story-card p { font-size: 0.9rem; line-height: 1.45; }
 
@@ -140,15 +135,15 @@
     .canvas-panel { order: 2; }
   }
 
-  .canvas-panel { background: var(--panel-bg); border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); overflow: hidden; display: flex; flex-direction: column; transition: background 0.4s ease; }
+  .canvas-panel { background: var(--panel-bg); border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); overflow: hidden; display: flex; flex-direction: column; transition: background 0.4s ease; border: 2px solid var(--purple); }
   .canvas-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--canvas-border); flex-shrink: 0; }
-  .canvas-header span { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.9rem; color: var(--primary); }
+  .canvas-header span { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.9rem; color: var(--purple); }
   .canvas-tools { display: flex; gap: 5px; }
   .canvas-tool { width: 34px; height: 34px; border: 2px solid var(--canvas-border); border-radius: 9px; background: var(--panel-bg); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: background 0.3s, border-color 0.3s; }
-  .canvas-tool.active { background: var(--primary); border-color: var(--primary); }
+  .canvas-tool.active { background: var(--purple); border-color: var(--purple); }
   .scratch-canvas { display: block; width: 100%; flex: 1; min-height: 260px; height: auto; background: var(--canvas-bg); cursor: crosshair; touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
 
-  .bracket-panel { background: var(--panel-bg); border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); padding: 20px 16px; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; min-height: 380px; transition: background 0.4s ease; }
+  .bracket-panel { background: var(--panel-bg); border-radius: 16px; box-shadow: 0 2px 12px var(--shadow); padding: 20px 16px; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; min-height: 380px; transition: background 0.4s ease; border: 2px solid var(--teal); }
   .bracket-prompt { font-size: 0.88rem; color: var(--text); text-align: center; margin-bottom: 14px; min-height: 40px; font-weight: 600; line-height: 1.4; }
   .bracket-prompt .hint { display: block; font-size: 0.75rem; color: var(--primary); font-weight: 400; margin-top: 3px; }
 
@@ -163,7 +158,7 @@
   .d-visible { opacity: 1; }
 
   .math-input { width: 48px; height: 48px; border: 3px dashed var(--canvas-border); border-radius: 12px; background: var(--input-bg); font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.6rem; text-align: center; color: var(--text); outline: none; transition: all 0.3s; -webkit-appearance: none; appearance: none; }
-  .math-input:focus { border-color: var(--coral); border-style: solid; box-shadow: 0 0 0 4px rgba(232,131,107,0.15); background: var(--panel-bg); }
+  .math-input:focus { border-color: var(--coral); border-style: solid; box-shadow: 0 0 0 4px rgba(255,45,120,0.15); background: var(--panel-bg); }
   .math-input.correct { border-color: var(--success); border-style: solid; background: rgba(123,174,107,0.08); color: var(--success); }
   .math-input.wrong { border-color: var(--error); border-style: solid; animation: shake 0.4s ease; }
   .math-input.locked { pointer-events: none; opacity: 0.85; }
@@ -200,21 +195,21 @@
     font-family: 'Baloo Bhaijaan 2', cursive;
     font-size: 1.1rem;
     font-weight: 800;
-    color: rgba(232, 131, 107, 0.5);
-    background: rgba(232, 131, 107, 0.08);
+    color: rgba(255, 45, 120, 0.5);
+    background: rgba(255, 45, 120, 0.08);
     width: 32px; height: 32px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    border: 2px dashed rgba(232, 131, 107, 0.3);
+    border: 2px dashed rgba(255, 45, 120, 0.3);
   }
 
   .cue-arrow svg { overflow: visible; }
   .cue-arrow path, .cue-arrow line {
-    stroke: rgba(232, 131, 107, 0.5);
+    stroke: rgba(255, 45, 120, 0.5);
     stroke-width: 2; fill: none;
     stroke-dasharray: 6 4; stroke-linecap: round;
   }
-  .cue-arrow polygon { fill: rgba(232, 131, 107, 0.5); }
+  .cue-arrow polygon { fill: rgba(255, 45, 120, 0.5); }
 
   @keyframes cuePulse {
     0%, 100% { opacity: 0.3; }
@@ -238,9 +233,9 @@
 
   .hint-bubble {
     position: relative; background: var(--bubble-bg);
-    border: 2.5px solid var(--coral); border-radius: 18px;
+    border: 2.5px solid var(--hint-border); border-radius: 18px;
     padding: 16px 18px;
-    box-shadow: 0 6px 24px rgba(232,131,107,0.18), 0 0 0 4px rgba(232,131,107,0.06);
+    box-shadow: 0 6px 24px rgba(255,214,10,0.18), 0 0 0 4px rgba(255,214,10,0.06);
     opacity: 0; transform: scale(0.7) translateY(-10px); pointer-events: none;
   }
   .hint-bubble-wrap.visible .hint-bubble {
@@ -255,14 +250,14 @@
     100% { opacity: 1; transform: scale(1) translateY(0); }
   }
   @keyframes bubbleGlow {
-    0%, 100% { box-shadow: 0 6px 24px rgba(232,131,107,0.18), 0 0 0 4px rgba(232,131,107,0.06); }
-    50% { box-shadow: 0 6px 28px rgba(232,131,107,0.3), 0 0 0 7px rgba(232,131,107,0.1); }
+    0%, 100% { box-shadow: 0 6px 24px rgba(255,214,10,0.18), 0 0 0 4px rgba(255,214,10,0.06); }
+    50% { box-shadow: 0 6px 28px rgba(255,214,10,0.3), 0 0 0 7px rgba(255,214,10,0.1); }
   }
 
   .hint-bubble::before {
     content: ''; position: absolute; bottom: -12px; left: 36px;
     border-left: 12px solid transparent; border-right: 12px solid transparent;
-    border-top: 12px solid var(--coral);
+    border-top: 12px solid var(--hint-border);
   }
   .hint-bubble::after {
     content: ''; position: absolute; bottom: -8px; left: 38px;
@@ -270,40 +265,18 @@
     border-top: 10px solid var(--bubble-bg);
   }
 
-  .hint-cat {
-    position: absolute; bottom: -42px; left: 18px;
-    width: 44px; height: 40px; background: var(--secondary);
-    border-radius: 50% 50% 45% 45%; border: 2.5px solid var(--primary);
-    box-shadow: 0 3px 8px rgba(180,140,100,0.2);
-  }
-  .hint-cat::before, .hint-cat::after {
-    content: ''; width: 5px; height: 6px; background: var(--text);
-    border-radius: 50%; position: absolute; top: 14px;
-  }
-  .hint-cat::before { left: 11px; }
-  .hint-cat::after { right: 11px; }
-  .hint-bubble-wrap .ear { position: absolute; width: 0; height: 0;
-    border-left: 9px solid transparent; border-right: 9px solid transparent;
-    border-bottom: 15px solid var(--secondary); top: -13px; }
-  .hint-bubble-wrap .ear.l { left: 2px; transform: rotate(-10deg); }
-  .hint-bubble-wrap .ear.r { right: 2px; transform: rotate(10deg); }
-  .hint-bubble-wrap .cat-nose { width: 6px; height: 4px; background: var(--coral);
-    border-radius: 50%; position: absolute; top: 21px; left: 50%; transform: translateX(-50%); }
-
-  .hint-bubble-wrap.visible .hint-cat { animation: catWiggle 0.6s ease 0.3s; }
-  @keyframes catWiggle { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-8deg)} 50%{transform:rotate(8deg)} 75%{transform:rotate(-4deg)} }
 
   .hint-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .hint-title { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.05rem; font-weight: 700; color: var(--coral); }
   .hint-step-badge { font-family: 'Baloo Bhaijaan 2', cursive; font-size: 0.7rem; font-weight: 800; color: var(--btn-text); background: var(--coral); padding: 2px 10px; border-radius: 20px; }
   .hint-body { font-size: 0.85rem; color: var(--text); line-height: 1.55; }
-  .hint-formula { display: inline-block; background: rgba(232,131,107,0.12); padding: 4px 12px; border-radius: 8px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.1rem; font-weight: 700; color: var(--coral); margin-top: 6px; }
+  .hint-formula { display: inline-block; background: rgba(255,45,120,0.12); padding: 4px 12px; border-radius: 8px; font-family: 'Baloo Bhaijaan 2', cursive; font-size: 1.1rem; font-weight: 700; color: var(--coral); margin-top: 6px; }
 
   /* ═══ THEME TOGGLE ═══ */
   .theme-toggle {
     position: fixed; top: 14px; right: 14px; z-index: 300;
     width: 52px; height: 28px; border-radius: 14px;
-    background: var(--card); border: 2px solid var(--canvas-border);
+    background: var(--card); border: 2px solid var(--purple);
     cursor: pointer; padding: 0; display: flex; align-items: center;
     transition: background 0.4s ease, border-color 0.4s ease;
   }
@@ -315,9 +288,56 @@
     font-size: 0.65rem; line-height: 1;
   }
   [data-theme="dark"] .theme-toggle-knob { transform: translateX(23px); }
+
+  /* ═══ MEMPHIS GEOMETRIC DECORATIONS ═══ */
+  .memphis-geo {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .memphis-geo .geo {
+    position: absolute;
+    opacity: var(--geo-opacity);
+  }
+  /* pink circle — top-right */
+  .geo-circle-1 { width: 120px; height: 120px; border-radius: 50%; border: 6px solid #FF2D78; top: 8%; right: 6%; }
+  /* teal triangle — left */
+  .geo-tri-1 { width: 0; height: 0; border-left: 50px solid transparent; border-right: 50px solid transparent; border-bottom: 86px solid #00B4D8; top: 30%; left: 3%; transform: rotate(15deg); }
+  /* yellow rotated square — bottom-right */
+  .geo-sq-1 { width: 80px; height: 80px; background: #FFD60A; bottom: 15%; right: 8%; transform: rotate(45deg); }
+  /* purple circle — bottom-left */
+  .geo-circle-2 { width: 60px; height: 60px; border-radius: 50%; background: #9B5DE5; bottom: 25%; left: 5%; }
+  /* pink small square — top-left */
+  .geo-sq-2 { width: 40px; height: 40px; border: 5px solid #FF2D78; top: 18%; left: 8%; transform: rotate(20deg); }
+  /* teal circle ring — middle-right */
+  .geo-circle-3 { width: 90px; height: 90px; border-radius: 50%; border: 5px solid #00B4D8; top: 55%; right: 4%; }
+  /* yellow triangle — bottom center */
+  .geo-tri-2 { width: 0; height: 0; border-left: 35px solid transparent; border-right: 35px solid transparent; border-bottom: 60px solid #FFD60A; bottom: 6%; left: 40%; transform: rotate(-10deg); }
+  /* squiggle path — SVG-based */
+  .geo-squiggle { top: 45%; left: 2%; }
+  .geo-squiggle svg { width: 100px; height: 60px; }
+  .geo-squiggle path { stroke: #FF2D78; stroke-width: 4; fill: none; stroke-linecap: round; }
+  /* purple dots cluster — top center */
+  .geo-dots { top: 5%; left: 35%; }
+  .geo-dots span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #9B5DE5; margin: 4px; }
+
+  /* Ensure content sits above decorations */
+  .screen, .theme-toggle, .unlock-toast, .lesson-footer { position: relative; z-index: 1; }
 </style>
 </head>
 <body>
+
+<!-- ═══ MEMPHIS GEOMETRIC DECORATIONS ═══ -->
+<div class="memphis-geo" aria-hidden="true">
+  <div class="geo geo-circle-1"></div>
+  <div class="geo geo-tri-1"></div>
+  <div class="geo geo-sq-1"></div>
+  <div class="geo geo-circle-2"></div>
+  <div class="geo geo-sq-2"></div>
+  <div class="geo geo-circle-3"></div>
+  <div class="geo geo-tri-2"></div>
+  <div class="geo geo-squiggle"><svg viewBox="0 0 100 60"><path d="M5 30 Q15 5 30 30 Q45 55 60 30 Q75 5 95 30"/></svg></div>
+  <div class="geo geo-dots"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
 
 <!-- ═══ THEME TOGGLE ═══ -->
 <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
@@ -327,18 +347,9 @@
 <!-- ═══ HERO ═══ -->
 <section class="screen active" id="screen-hero">
   <div class="hero">
-    <div class="cat-mascot">
-      <div class="cat-face">
-        <div class="cat-ear left"></div><div class="cat-ear right"></div>
-        <div class="cat-eye left"></div><div class="cat-eye right"></div>
-        <div class="cat-nose"></div><div class="cat-mouth"></div>
-        <div class="cat-whisker l1"></div><div class="cat-whisker l2"></div>
-        <div class="cat-whisker r1"></div><div class="cat-whisker r2"></div>
-      </div>
-    </div>
-    <h1>The Cat Treats Problem 🐱</h1>
+    <h1>Division Dash</h1>
     <div class="subtitle">Long Division with Remainders</div>
-    <p>Your cats are hungry! Learn to share treats fairly using <strong>Divide, Multiply, Subtract, Bring Down</strong> — and level up from Kitten Kitchen to Big Cat Bakery!</p>
+    <p>Master long division step by step using <strong>Divide, Multiply, Subtract, Bring Down</strong> — and level up through three increasingly tough challenges!</p>
     <button class="btn" onclick="showScreen('screen-levels')">Choose a Level</button>
   </div>
 </section>
@@ -398,11 +409,6 @@
               <span class="hint-step-badge" id="hint-badge">DIVIDE</span>
             </div>
             <div class="hint-body" id="hint-body"></div>
-            <div class="hint-cat">
-              <div class="ear l"></div>
-              <div class="ear r"></div>
-              <div class="cat-nose"></div>
-            </div>
           </div>
         </div>
         <div id="div-container-wrap" style="width:100%;display:flex;justify-content:center;"></div>
@@ -420,7 +426,7 @@
   <h4 id="toast-title"></h4>
   <p id="toast-text"></p>
 </div>
-<div class="lesson-footer">Cat Treats Division — Study Buddies</div>
+<div class="lesson-footer">Division Dash — Study Buddies</div>
 
 <script>
 // ═══════════════════════════════════════
@@ -445,48 +451,33 @@ function toggleTheme() {
 const PROBLEMS_PER_LEVEL = 5;
 
 const LEVELS = [
-  { name: 'Kitten Kitchen', emoji: '🐱', tag: 'Level 1: Kitten Kitchen', desc: 'Small dividends, one-digit divisors. The DMSB basics — no bring-down needed yet.', problems: [] },
-  { name: 'Cat Café', emoji: '☕', tag: 'Level 2: Cat Café', desc: 'Bigger numbers — Bring Down matters now! The full DMSB loop.', problems: [] },
-  { name: 'Big Cat Bakery', emoji: '🎂', tag: 'Level 3: Big Cat Bakery', desc: 'Two-digit divisors — the ultimate challenge!', problems: [] }
+  { name: 'Level 1', emoji: '', tag: 'Level 1', desc: 'Small dividends, one-digit divisors. The DMSB basics — no bring-down needed yet.', problems: [] },
+  { name: 'Level 2', emoji: '', tag: 'Level 2', desc: 'Bigger numbers — Bring Down matters now! The full DMSB loop.', problems: [] },
+  { name: 'Level 3', emoji: '', tag: 'Level 3', desc: 'Two-digit divisors — the ultimate challenge!', problems: [] }
 ];
 
 // Story templates per level
 const STORIES = [
   [
-    '**{dv} treats** for **{dr} hungry cats**.',
-    'You found **{dv} treats**! **{dr} cats** are waiting.',
-    '**{dv} treats** in the jar. **{dr} cats** meowing.',
-    'Only **{dv} treats** left for **{dr} cats**.',
-    'A bag of **{dv} treats**! **{dr} cats** at the door.',
-    '**{dv} treats** to share with **{dr} cats**.',
-    '**{dv} treats** on the table. **{dr} cats** showed up!',
-    'You counted **{dv} treats** for **{dr} hungry cats**.',
-    '**{dv} treats** in the box. **{dr} cats** line up.',
-    'Snack time! **{dv} treats** for **{dr} cats**.',
+    'Divide **{dv}** into **{dr}** equal groups.',
+    'Split **{dv}** evenly among **{dr}** groups.',
+    'Share **{dv}** items equally between **{dr}** groups.',
+    'How many times does **{dr}** go into **{dv}**?',
+    'Divide **{dv}** by **{dr}**.',
   ],
   [
-    'The café ordered **{dv} treats** for **{dr} cats**.',
-    '**{dv} treats** on the counter. **{dr} café cats**.',
-    'The chef made **{dv} treats** for **{dr} cats**.',
-    'Morning batch: **{dv} treats** for **{dr} early cats**.',
-    'Party time! **{dv} treats** for **{dr} cats**.',
-    '**{dv} treats** baked fresh for **{dr} cats**.',
-    '**{dv} treats** in the display. **{dr} regular cats**.',
-    'A delivery of **{dv} treats**! **{dr} cats** waiting.',
-    '**{dv} treats** left at closing. **{dr} cats** get a feast.',
-    'Lunch rush: **{dv} treats** for **{dr} cats**.',
+    'Divide **{dv}** into **{dr}** equal groups.',
+    'Split **{dv}** evenly among **{dr}** groups.',
+    'Share **{dv}** items equally between **{dr}** groups.',
+    'How many times does **{dr}** go into **{dv}**?',
+    'Divide **{dv}** by **{dr}**.',
   ],
   [
-    'The bakery made **{dv} treats** for **{dr} big cats**.',
-    'Mega order! **{dv} treats** for **{dr} bakery cats**.',
-    'Catering job: **{dv} treats** for **{dr} party cats**.',
-    'Grand opening! **{dv} treats** for **{dr} cats**.',
-    'Special event: **{dv} treats** for **{dr} cats**.',
-    '**{dv} treats** fresh from the oven. **{dr} cats** in line.',
-    '**{dv} treats** on the cooling rack. **{dr} cats** watching.',
-    'Wedding order: **{dv} treats** for **{dr} cats**.',
-    'Holiday batch: **{dv} treats** for **{dr} big cats**.',
-    'Festival supply: **{dv} treats** for **{dr} cats**.',
+    'Divide **{dv}** into **{dr}** equal groups.',
+    'Split **{dv}** evenly among **{dr}** groups.',
+    'Share **{dv}** items equally between **{dr}** groups.',
+    'How many times does **{dr}** go into **{dv}**?',
+    'Divide **{dv}** by **{dr}**.',
   ]
 ];
 
@@ -500,18 +491,18 @@ function generateProblems(levelIdx) {
   while (problems.length < PROBLEMS_PER_LEVEL) {
     let dv, dr;
     if (levelIdx === 0) {
-      // Kitten Kitchen: dividend 10–29, divisor 2–9, single-digit quotient, no bring-down
+      // Level 1: dividend 10–29, divisor 2–9, single-digit quotient, no bring-down
       dr = randInt(2, 9);
       dv = randInt(Math.max(10, dr), 29);
       const q = Math.floor(dv / dr);
       if (q < 1 || q > 9) continue;
     } else if (levelIdx === 1) {
-      // Cat Café: dividend 40–99, divisor 3–8, multi-digit quotient (bring-down)
+      // Level 2: dividend 40–99, divisor 3–8, multi-digit quotient (bring-down)
       dr = randInt(3, 8);
       dv = randInt(40, 99);
       if (Math.floor(dv / dr) < 10) continue;
     } else {
-      // Big Cat Bakery: dividend 120–399, divisor 11–19
+      // Level 3: dividend 120–399, divisor 11–19
       dr = randInt(11, 19);
       dv = randInt(120, 399);
     }
@@ -558,7 +549,7 @@ function renderLevelCards() {
 
     html += '<div class="level-card ' + cls + '" ' + (unlocked ? 'onclick="startLevel(' + li + ')"' : '') + '>';
     html += '<div class="level-num">Level ' + (li + 1) + '</div>';
-    html += '<div class="level-title">' + lv.emoji + ' ' + lv.name + '</div>';
+    html += '<div class="level-title">' + lv.name + '</div>';
     html += '<div class="level-desc">' + lv.desc + '</div>';
     if (!unlocked) html += '<div class="unlock-badge">Complete 3 in Level ' + li + ' to unlock</div>';
     html += '<div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:' + (correct / PROBLEMS_PER_LEVEL * 100) + '%"></div></div><span class="progress-text">' + correct + ' / ' + PROBLEMS_PER_LEVEL + '</span></div>';
@@ -1138,7 +1129,7 @@ function clearCanvas() {
 
 function spawnConfetti() {
   const p = document.getElementById('bracket-panel'); if(!p)return;
-  const colors=[getTV('primary'), getTV('coral'), getTV('secondary'), getTV('success'), '#D49D00'];
+  const colors=[getTV('primary'), getTV('yellow'), getTV('teal'), getTV('purple'), getTV('success')];
   for(let i=0;i<20;i++){const d=document.createElement('div');d.className='confetti-piece';d.style.left=Math.random()*100+'%';d.style.top='10%';d.style.background=colors[Math.floor(Math.random()*colors.length)];d.style.animationDelay=Math.random()*0.5+'s';d.style.animationDuration=(1+Math.random())+'s';p.appendChild(d);setTimeout(()=>d.remove(),2500);}
 }
 
